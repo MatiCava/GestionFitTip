@@ -2,6 +2,7 @@
 ## Proyecto: GestionFit
 
 - Backlog: https://trello.com/b/PpSRi2VA/gestionfit
+- CI en travis: https://travis-ci.org/MatiCava/GestionFitTip [![Build Status](https://travis-ci.org/MatiCava/GestionFitTip.svg?branch=master)](https://travis-ci.org/MatiCava/GestionFitTip)
 
 ### Integrantes
 - Matias Cavallin
