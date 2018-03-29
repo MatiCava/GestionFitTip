@@ -14,21 +14,18 @@ import { NuevoAlumnoPage } from '../pages/nuevo-alumno/nuevo-alumno';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage,
-    AlumnosPage,
-    NuevoAlumnoPage
+    LoginPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage,
-    AlumnosPage,
-    NuevoAlumnoPage
+    LoginPage
   ],
   providers: [
     StatusBar,

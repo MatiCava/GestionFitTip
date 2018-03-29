@@ -1,1 +1,37 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title mode='ios'>
+      <div style=" height: 100%;display: inline;vertical-align: middle;"><p style="font-size: 20px;font-family: 'Times New Roman', Times, serif;"><img src="assets/imgs/icon.png" height="30px" width="35px" *ngIf="isBrowser"> GestionFit</p></div>
+    </ion-title>
+        <ion-buttons end>
+      <button ion-button icon-only (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-menu persistent="true" swipeEnabled="true" [content]="content">
+
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="home()">
+        Inicio
+      </button>
+      <button ion-item (click)="openPage('alumnos')">
+        Alumnos
+      </button>
+      <button ion-item >
+        Rutinas
+      </button>
+      <button ion-item menuToggle>
+        Cerrar
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav id="nav" class="headerContent" #content [root]="rootPage"></ion-nav>

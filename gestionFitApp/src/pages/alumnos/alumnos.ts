@@ -8,12 +8,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'alumnos'
+})
 @Component({
   selector: 'page-alumnos',
   templateUrl: 'alumnos.html',
 })
 export class AlumnosPage {
+
+	alumnos:any = [{"name":"Alfredo"},{"name":"Carlo"},{"name":"Roberto"}];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
