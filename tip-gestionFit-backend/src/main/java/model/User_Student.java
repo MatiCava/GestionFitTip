@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class User_Student extends User {
 	
 	private String pathologies;
@@ -14,7 +20,9 @@ public class User_Student extends User {
 	private String mail;
 	private int age;
 	private float weigth;
+	@OneToOne(cascade = {CascadeType.ALL})
 	private MeasuringTable measurements;
+	@ManyToMany(cascade = {CascadeType.ALL})
 	private List<Routine> rutines;
 	
 

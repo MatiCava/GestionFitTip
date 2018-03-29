@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/vopros</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		
+		<property name="hibernate.hbm2ddl.auto">create-drop</property>
+
+		<mapping class="tk.vopros.backend.model.User" />
+		
+		<mapping class="tk.vopros.backend.model.issue.Issue" />
+		<mapping class="tk.vopros.backend.model.issue.TipoIssue" />
+		<mapping class="tk.vopros.backend.model.issue.TipoGravedad" />
+		<mapping class="tk.vopros.backend.model.issue.TipoPrioridad" />
+		<mapping class="tk.vopros.backend.model.Dibujo" />
+		<mapping class="tk.vopros.backend.model.Task" />
+		<mapping class="tk.vopros.backend.model.NivelDificultad" />
+		<mapping class="tk.vopros.backend.model.Estado" />
+		
+		<mapping class="tk.vopros.backend.model.Proyecto" />
+		
+		<mapping class="tk.vopros.backend.model.Mensaje" />
+		
+		
+	</session-factory>
+</hibernate-configuration>
