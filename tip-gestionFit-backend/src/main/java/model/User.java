@@ -14,12 +14,14 @@ public class User {
 	private String username;
 	private String password;
 	private String nameAndSurname;
+	private String mail;
+
 	
-	public User(String user,String pass,String name) {
+	public User(String user,String pass,String name,String email) {
 		this.username = user;
 		this.password = pass;
 		this.nameAndSurname = name;
-		
+		this.mail = email;
 	}
 
 	public String getUsername() {
@@ -44,6 +46,14 @@ public class User {
 
 	public void setNameAndSurname(String nameAndSurname) {
 		this.nameAndSurname = nameAndSurname;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	
 	

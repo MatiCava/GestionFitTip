@@ -17,7 +17,6 @@ public class User_Student extends User {
 	private String objective;
 	private Date birthday;
 	private String telephone;
-	private String mail;
 	private int age;
 	private float weigth;
 	@OneToOne(cascade = {CascadeType.ALL})
@@ -28,13 +27,12 @@ public class User_Student extends User {
 
 
 	
-	public User_Student(String user, String pass, String name,String pat,
-			String obs,String obj,Date birth,String tel,String email,int ageS,
+	public User_Student(String user, String pass, String name,String email,String pat,
+			String obs,String obj,Date birth,String tel,int ageS,
 			float wS) {
-		super(user,pass,name);
+		super(user,pass,name,email);
 		this.age = ageS;
 		this.birthday = birth;
-		this.mail = email;
 		this.measurements = new MeasuringTable();
 		this.objective = obj;
 		this.observations = obs;
@@ -113,22 +111,6 @@ public class User_Student extends User {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
-
-
-
-	public String getMail() {
-		return mail;
-	}
-
-
-
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-
 
 
 	public int getAge() {
