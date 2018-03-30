@@ -8,3 +8,9 @@ jdk:
 script: 
   - cd tip-gestionFit-backend
   - mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+
+deploy:
+  - provider: heroku
+    skip_cleanup: true
+    api_key: a82fab68-408c-4b23-a9bf-3d14a7f0a5e4
+    app: gestionfit-backend
