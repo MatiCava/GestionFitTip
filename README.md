@@ -1,5 +1,5 @@
 # Trabajo de insercion profesional
-## Proyecto: GestionFit
+## Proyecto: GestionFit <img src="https://github.com/MatiCava/GestionFitTip/blob/master/gestionFitApp/src/assets/imgs/icon.png" height="50" width="50">
 
 - Backlog: https://trello.com/b/PpSRi2VA/gestionfit
 - CI en travis: https://travis-ci.org/MatiCava/GestionFitTip [![Build Status](https://travis-ci.org/MatiCava/GestionFitTip.svg?branch=master)](https://travis-ci.org/MatiCava/GestionFitTip)
