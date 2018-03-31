@@ -12,12 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Routine {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	public Date creationDate;
 	@Enumerated
 	public Routine_Type type;

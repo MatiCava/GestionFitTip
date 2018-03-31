@@ -6,32 +6,32 @@
 			<ion-input type="text" [(ngModel)]="alumno.name"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Usuario</ion-label>
+			<ion-label floating>Usuario</ion-label>
 			<ion-input type="text" [(ngModel)]="alumno.user"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Contraseña</ion-label>
+			<ion-label floating>Contraseña</ion-label>
 			<ion-input type="password" [(ngModel)]="alumno.password"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Fecha de nacimiento</ion-label>
-			<ion-input type="date" [(ngModel)]="alumno.birthday"></ion-input>
+			<ion-label floating>Fecha de nacimiento</ion-label>
+			<ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="alumno.birthday"></ion-datetime>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Telefono</ion-label>
+			<ion-label floating>Telefono</ion-label>
 			<ion-input type="text" [(ngModel)]="alumno.telephone"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Objetivo</ion-label>
-			<ion-input type="textarea" [(ngModel)]="alumno.objective"></ion-input>
+			<ion-label floating>Objetivo</ion-label>
+			<ion-textarea [(ngModel)]="alumno.objective"></ion-textarea>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Patologias</ion-label>
-			<ion-input type="textarea" [(ngModel)]="alumno.pathologies"></ion-input>
+			<ion-label floating>Patologias</ion-label>
+			<ion-textarea [(ngModel)]="alumno.pathologies"></ion-textarea>
 		</ion-item>
 		<ion-item>
-			<ion-label fixed>Observaciones</ion-label>
-			<ion-input type="text-area" [(ngModel)]="alumno.observations"></ion-input>
+			<ion-label floating>Observaciones</ion-label>
+			<ion-textarea [(ngModel)]="alumno.observations"></ion-textarea>
 		</ion-item>
 		
 

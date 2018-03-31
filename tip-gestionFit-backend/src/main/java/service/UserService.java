@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.Measurement;
 import model.User;
+import model.User_Student;
 import persistence.UserDAO;
 
 @Service
@@ -21,6 +23,8 @@ public class UserService {
 	
 	@Transactional
 	public void save(User newUser){
+		ArgumentsValidator.isInvalidFullName(newUser.getNameAndSurname());
+		ArgumentsValidator.isNotAValidMailAddress(newUser.getMail());
 		this.userDAO.save(newUser);
 	}
 	
@@ -43,4 +47,12 @@ public class UserService {
 	public List<User> getAll(){
 		return this.userDAO.getAll();
 	}
+	
+	@Transactional
+	public void newMeasurement(Long idUser,List<Measurement> newMeasurement) {
+		User_Student user = (User_Student) getById(idUser);
+		user.getMeasurements().addNewMeasurement(newMeasurement);
+		update(user);
+	}
+
 }
