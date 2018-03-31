@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the NuevoAlumnoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
+
+@IonicPage(
+	{name:"nuevoAlumno"}
+)
+
 @Component({
   selector: 'page-nuevo-alumno',
   templateUrl: 'nuevo-alumno.html',
 })
 export class NuevoAlumnoPage {
+
+	public alumno:any = {"name":"","email":"","user":"","password":"",
+	"telephone":"","age":"","birthday":"","pathologies":"","observations":"","objective":""
+	,"routines":[],"measures":[]};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
