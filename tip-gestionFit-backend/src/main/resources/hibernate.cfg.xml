@@ -5,13 +5,13 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- Database connection settings -->
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/vopros</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">root</property>
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.url">${JDBC_DATABASE_URL}</property>
+		<property name="connection.username">${JDBC_DATABASE_USERNAME}</property>
+		<property name="connection.password">${JDBC_DATABASE_PASSWORD}</property>
 
 		<!-- SQL dialect -->
-		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
 		<!-- Disable the second-level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
@@ -24,6 +24,7 @@
 		
 		<mapping class="model.Exercise" />
 		<mapping class="model.Measure" />
+		<mapping class="model.Measurement" />
 		<mapping class="model.MeasuringTable" />
 		<mapping class="model.User" />
 		<mapping class="model.User_Student" />
