@@ -6,9 +6,9 @@
 	<session-factory>
 		<!-- Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">${JDBC_DATABASE_URL}</property>
-		<property name="connection.username">${JDBC_DATABASE_USERNAME}</property>
-		<property name="connection.password">${JDBC_DATABASE_PASSWORD}</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/gestionfit</property>
+        <property name="connection.username">fitdb</property>
+        <property name="connection.password">gestionFit</property>
         <!--
          		<property name="connection.url">${JDBC_DATABASE_URL}</property>
 		<property name="connection.username">${JDBC_DATABASE_USERNAME}</property>
