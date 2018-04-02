@@ -23,12 +23,9 @@ import app.service.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService userServ ;
+	private UserService userServ = new UserService() ;
 	
-	public UserController() {
-		
-	}
-	
+
 	@GetMapping(value = "/users", produces = "application/json")   
 	public List<User> getUsers() {
 		return this.userServ.getAll();
