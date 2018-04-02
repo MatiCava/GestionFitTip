@@ -5,11 +5,19 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- Database connection settings -->
-		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="connection.url">${JDBC_DATABASE_URL}</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">${JDBC_DATABASE_URL}</property>
 		<property name="connection.username">${JDBC_DATABASE_USERNAME}</property>
 		<property name="connection.password">${JDBC_DATABASE_PASSWORD}</property>
-
+        <!--
+         		<property name="connection.url">${JDBC_DATABASE_URL}</property>
+		<property name="connection.username">${JDBC_DATABASE_USERNAME}</property>
+		<property name="connection.password">${JDBC_DATABASE_PASSWORD}</property>
+		
+		        <property name="connection.url">jdbc:postgresql://localhost:5432/gestionfit</property>
+        <property name="connection.username">fitdb</property>
+        <property name="connection.password">gestionFit</property>
+        -->
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
@@ -22,16 +30,16 @@
 		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 
 		
-		<mapping class="model.Exercise" />
-		<mapping class="model.Measure" />
-		<mapping class="model.Measurement" />
-		<mapping class="model.MeasuringTable" />
-		<mapping class="model.User" />
-		<mapping class="model.User_Student" />
-		<mapping class="model.User_Instructor" />
-		<mapping class="model.Exercise_Type" />
-		<mapping class="model.Routine_Type" />
-		<mapping class="model.Routine" />
+		<mapping class="app.model.Exercise" />
+		<mapping class="app.model.Measure" />
+		<mapping class="app.model.Measurement" />
+		<mapping class="app.model.MeasuringTable" />
+		<mapping class="app.model.User" />
+		<mapping class="app.model.User_Student" />
+		<mapping class="app.model.User_Instructor" />
+		<mapping class="app.model.Exercise_Type" />
+		<mapping class="app.model.Routine_Type" />
+		<mapping class="app.model.Routine" />
 		
 		
 	</session-factory>

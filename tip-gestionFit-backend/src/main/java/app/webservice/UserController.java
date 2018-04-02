@@ -1,4 +1,4 @@
-package webservice;
+package app.webservice;
 
 import java.util.List;
 
@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.User;
-import model.UserNotFoundException;
-import service.UserService;
+import app.model.User;
+import app.model.UserNotFoundException;
+import app.service.UserService;
 
 @RestController
 @RequestMapping(value="/api")
 public class UserController {
 	
 	@Autowired
-	private UserService userServ = new UserService();
+	private UserService userServ ;
 	
 	public UserController() {
 		

@@ -1,8 +1,8 @@
-package persistence;
+package app.persistence;
 
 import org.springframework.stereotype.Repository;
 
-import model.Routine;
+import app.model.Routine;
 
 @Repository
 public class RoutineDAO extends GenericDAO<Routine> {

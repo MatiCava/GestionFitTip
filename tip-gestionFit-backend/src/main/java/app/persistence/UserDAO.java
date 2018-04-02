@@ -1,8 +1,8 @@
-package persistence;
+package app.persistence;
 
 import org.springframework.stereotype.Repository;
 
-import model.User;
+import app.model.User;
 
 @Repository
 public class UserDAO extends GenericDAO<User> {

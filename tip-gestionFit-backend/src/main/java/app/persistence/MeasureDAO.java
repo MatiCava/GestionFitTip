@@ -1,8 +1,8 @@
-package persistence;
+package app.persistence;
 
 import org.springframework.stereotype.Repository;
 
-import model.Measure;
+import app.model.Measure;
 
 @Repository
 public class MeasureDAO extends GenericDAO<Measure>{

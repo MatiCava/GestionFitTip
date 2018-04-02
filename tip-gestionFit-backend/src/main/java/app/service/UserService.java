@@ -1,4 +1,4 @@
-package service;
+package app.service;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.Measurement;
-import model.User;
-import model.User_Student;
-import persistence.UserDAO;
+import app.model.Measurement;
+import app.model.User;
+import app.model.User_Student;
+import app.persistence.UserDAO;
 
-@Service
+@Service("userService")
 public class UserService {
 
 	@Autowired

@@ -1,4 +1,4 @@
-package webservice;
+package app.webservice;
 
 import org.springframework.web.bind.annotation.RestController;
 
