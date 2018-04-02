@@ -89,7 +89,7 @@
   
      <properties>
         <java.version>1.8</java.version>
-        <jettyVersion>9.3.9.v20160517</jettyVersion>
+        <jettyVersion>9.4.9.v20180320</jettyVersion>
         
     </properties>
     
