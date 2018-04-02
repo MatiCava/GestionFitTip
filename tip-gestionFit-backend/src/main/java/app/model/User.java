@@ -18,6 +18,10 @@ public class User {
 	private String nameAndSurname;
 	private String mail;
 
+	public User() {
+		
+	}
+	
 	
 	public User(String user,String pass,String name,String email) {
 		this.username = user;

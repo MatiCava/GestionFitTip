@@ -25,6 +25,9 @@ public class User_Student extends User {
 	private List<Routine> rutines;
 	
 
+	public User_Student() {
+		super();
+	}
 
 	
 	public User_Student(String user, String pass, String name,String email,String pat,
