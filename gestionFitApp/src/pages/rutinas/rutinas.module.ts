@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { AlumnosPage } from './alumnos';
-import { UserProvider } from '../../providers/user/user'
+import { RutinasPage } from './rutinas';
+import { RoutineProvider } from '../../providers/routine/routine' 
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AlumnosPage,
+    RutinasPage,
   ],
   imports: [
-    IonicPageModule.forChild(AlumnosPage),
+    IonicPageModule.forChild(RutinasPage),
     HttpClientModule,
   ],
   providers: [
-  	UserProvider
+  	RoutineProvider
   ]
 })
-export class AlumnosPageModule {}
+export class RutinasPageModule {}

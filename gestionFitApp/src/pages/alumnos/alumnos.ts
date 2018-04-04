@@ -1,5 +1,7 @@
 import { Component ,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams ,Nav} from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user'
+import { User_Student } from '../../model/user_student'
 
 
 @IonicPage({
@@ -8,13 +10,19 @@ import { IonicPage, NavController, NavParams ,Nav} from 'ionic-angular';
 @Component({
   selector: 'page-alumnos',
   templateUrl: 'alumnos.html',
+  providers: [UserProvider]
 })
 export class AlumnosPage {
 
-	@ViewChild(Nav) nav: Nav;
-	alumnos:any = [{"name":"Alfredo"},{"name":"Carlo"},{"name":"Roberto"}];
+  alumnoProvider: UserProvider;
+  alumnos: User_Student[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	@ViewChild(Nav) nav: Nav;
+	//alumnos:any = [{"nameAndSurname":"Alfredo"},{"nameAndSurname":"Carlo"},{"nameAndSurname":"Roberto"}];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
+    this.alumnoProvider = userProvider;
+    this.traerAlumnos();
   }
 
   ionViewDidLoad() {
@@ -23,6 +31,15 @@ export class AlumnosPage {
 
   nuevoAlumno(){
   	this.navCtrl.push('nuevoAlumno');
+  }
+
+
+  traerAlumnos(){
+    this.alumnoProvider.getUsersStudents().subscribe(
+                    result => this.alumnos = result,
+                    err => console.log(err),
+                    () => console.log(this.alumnos)
+                    )
   }
 
 }

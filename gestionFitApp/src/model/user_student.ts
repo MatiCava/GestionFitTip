@@ -18,7 +18,7 @@ export class User_Student{
 	measurements: MeasuringTable;
 	rutines: Array<Routine>;
 
-	constructor(usernameUS:String,passwordUS:String,nameAndUsernameUS:String,mailUS:String,pathologiesUS:String, observationsUS:String,objectiveUS:String,birthdayUS:Date,telephoneUS:String,ageUS:Number,weigthUS:Number,measurementsUS:MeasuringTable,rutinesUS:Array<Routine>){
+	constructor(usernameUS:String,passwordUS:String,nameAndUsernameUS:String,mailUS:String,pathologiesUS:String, observationsUS:String,objectiveUS:String,birthdayUS:Date,telephoneUS:String,ageUS:Number,weigthUS:Number,measurementsUS:MeasuringTable){
 		this.username = usernameUS;
 		this.password = passwordUS;
 		this.nameAndSurname = nameAndUsernameUS;
@@ -28,7 +28,8 @@ export class User_Student{
 		this.objective = objectiveUS;
 		this.birthday = birthdayUS;
 		this.weigth = weigthUS;
-		this.measurements = measurementsUS;
-		this.rutines = rutinesUS;
+		this.measurements = new MeasuringTable();
+		this.rutines = [];
 	}
+
 }

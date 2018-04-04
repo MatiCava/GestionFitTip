@@ -2,20 +2,32 @@
 
 	<ion-list>
 		<ion-item>
-			<ion-label fixed>Nombre completo</ion-label>
-			<ion-input type="text" [(ngModel)]="alumno.name"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Usuario</ion-label>
-			<ion-input type="text" [(ngModel)]="alumno.user"></ion-input>
+			<ion-label fixed>Usuario</ion-label>
+			<ion-input type="text" [(ngModel)]="alumno.username"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label floating>Contraseña</ion-label>
 			<ion-input type="password" [(ngModel)]="alumno.password"></ion-input>
 		</ion-item>
 		<ion-item>
+			<ion-label floating>Mail</ion-label>
+			<ion-input type="email" [(ngModel)]="alumno.mail"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label floating>Nombre y apellido</ion-label>
+			<ion-input type="text" [(ngModel)]="alumno.nameAndSurname"></ion-input>
+		</ion-item>
+		<ion-item>
 			<ion-label floating>Fecha de nacimiento</ion-label>
 			<ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="alumno.birthday"></ion-datetime>
+		</ion-item>
+		<ion-item>
+			<ion-label floating>Edad</ion-label>
+			<ion-input type="number" [(ngModel)]="alumno.age"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label floating>Peso</ion-label>
+			<ion-input type="number" [(ngModel)]="alumno.weigth"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label floating>Telefono</ion-label>
