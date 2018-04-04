@@ -4,6 +4,9 @@ import java.util.Date;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import app.model.User;
+import app.model.User_Student;
+
 public class ArgumentsValidator {
 	
 	public static boolean isNullOrEmptyString(String... strArr) {
@@ -57,6 +60,20 @@ public class ArgumentsValidator {
 		if(greater < 0 || less >0) 
 			return true;
 		return false;
+	}
+
+	public static void validateStudent(User newUser) {
+		User_Student user = (User_Student) newUser;
+
+		if(isInvalidDate(user.getBirthday()) || isInvalidFullName(user.getNameAndSurname())
+				|| isInvalidTelephone(user.getTelephone()) || isNullOrEmptyString(user.getObjective())) {
+			throw new IllegalArgumentException("Not a valid student");
+		}
+		
+	}
+
+	public static void validateInstructor(User user) {
+		
 	}
 
 }

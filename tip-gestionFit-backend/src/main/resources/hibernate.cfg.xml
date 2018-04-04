@@ -10,13 +10,7 @@
         <property name="connection.username">gestionfitdb</property>
         <property name="connection.password">gestionfitdb1234</property>
          
-         <!-- 
-        <property name="connection.url">jdbc:postgresql://ec2-54-243-54-6.compute-1.amazonaws.com:5432/d7rlk11u6hv4p3</property>
-		<property name="connection.username">mgkzaevyulmewm</property>
-		<property name="connection.password">f46b0e60741d7bbbccdfe31799b1c7be295f19c9988f141709c5bab41313e7db</property>
-         -->
-
-        <!--
+                <!--
          		<property name="connection.url">${JDBC_DATABASE_URL}</property>
 		<property name="connection.username">${JDBC_DATABASE_USERNAME}</property>
 		<property name="connection.password">${JDBC_DATABASE_PASSWORD}</property>
@@ -24,6 +18,11 @@
 		        <property name="connection.url">jdbc:postgresql://localhost:5432/gestionfit</property>
         <property name="connection.username">fitdb</property>
         <property name="connection.password">gestionFit</property>
+        
+        <property name="connection.url">jdbc:postgresql://ec2-54-243-54-6.compute-1.amazonaws.com:5432/d7rlk11u6hv4p3</property>
+		<property name="connection.username">mgkzaevyulmewm</property>
+		<property name="connection.password">f46b0e60741d7bbbccdfe31799b1c7be295f19c9988f141709c5bab41313e7db</property>
+        
         -->
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
