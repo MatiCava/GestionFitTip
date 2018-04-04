@@ -43,6 +43,7 @@ public class User_Student extends User {
 		this.rutines = new ArrayList<Routine>();
 		this.telephone = tel;
 		this.weigth = wS;
+		this.setRole(User_Role.Student);
 	}
 
 

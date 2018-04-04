@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import app.model.Measurement;
 import app.model.User;
+import app.model.User_Instructor;
+import app.model.User_Role;
 import app.model.User_Student;
 import app.persistence.UserDAO;
 
@@ -22,10 +24,16 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void save(User newUser){
-		ArgumentsValidator.isInvalidFullName(newUser.getNameAndSurname());
-		ArgumentsValidator.isNotAValidMailAddress(newUser.getMail());
-		this.userDAO.save(newUser);
+	public void save(User user){
+		if(user.getRole() == User_Role.Student) {
+			ArgumentsValidator.validateStudent(user);
+		}
+		else {
+			ArgumentsValidator.validateInstructor(user);
+
+		}
+
+		this.userDAO.save(user);
 	}
 	
 	@Transactional
@@ -46,6 +54,11 @@ public class UserService {
 	@Transactional
 	public List<User> getAll(){
 		return this.userDAO.getAll();
+	}
+	
+	@Transactional
+	public List<User_Student> getAllStudents(){
+		return this.userDAO.getAllUserRole(User_Role.Student);
 	}
 	
 	@Transactional

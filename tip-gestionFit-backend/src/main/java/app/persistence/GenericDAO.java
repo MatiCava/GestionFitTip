@@ -93,4 +93,7 @@ public class GenericDAO<T> {
 		List<T> result = (List<T>) criteria.list();
 		return result;
 	}
+	
+	
+
 }
