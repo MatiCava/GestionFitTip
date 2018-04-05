@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import app.model.Measurement;
 import app.model.User;
-import app.model.User_Instructor;
 import app.model.User_Role;
 import app.model.User_Student;
 import app.persistence.UserDAO;
@@ -67,5 +66,11 @@ public class UserService {
 		user.getMeasurements().addNewMeasurement(newMeasurement);
 		update(user);
 	}
+	
+	@Transactional
+	public User getByUsername(String username) {
+		return this.userDAO.getByUsername(username);
+	}
+
 
 }

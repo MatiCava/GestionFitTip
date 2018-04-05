@@ -28,4 +28,12 @@ public class UserDAO extends GenericDAO<User> {
 		List<User_Student> result = (List<User_Student>) criteria.add(criterion).list();
 		return result;
 	}
+	
+	@SuppressWarnings("deprecation")
+	public User getByUsername(String username) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(User.class);
+		Criterion criterion = Restrictions.eq("username", username);
+		return (User) criteria.add(criterion).uniqueResult();
+	}
 }

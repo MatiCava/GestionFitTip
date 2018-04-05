@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.model.Credential;
 import app.model.Measurement;
 import app.model.User;
 import app.model.UserNotFoundException;
@@ -34,6 +35,20 @@ public class UserController {
 	public List<User> getUsers() {
 		return this.userServ.getAll();
 
+	}
+	
+	@PostMapping(value = "/login", produces = "application/json")
+	public User login(@RequestBody Credential cred) {
+		User user = this.userServ.getByUsername(cred.username);
+		if(user == null) {
+			throw new UserNotFoundException("No exite usuario con ese username");
+		}
+		if(user.getPassword() != cred.password) {
+			throw new RuntimeException("Password incorrecto");
+		}
+		
+		return user;
+		
 	}
 	
 	@GetMapping(value = "/alumnos", produces = "application/json")   
