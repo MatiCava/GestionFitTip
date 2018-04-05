@@ -17,8 +17,10 @@ export class User_Student{
 	weigth: Number;
 	measurements: MeasuringTable;
 	rutines: Array<Routine>;
+	role: User_Role;
 
-	constructor(usernameUS:String,passwordUS:String,nameAndUsernameUS:String,mailUS:String,pathologiesUS:String, observationsUS:String,objectiveUS:String,birthdayUS:Date,telephoneUS:String,ageUS:Number,weigthUS:Number,measurementsUS:MeasuringTable){
+	constructor(usernameUS:String,passwordUS:String,nameAndUsernameUS:String,mailUS:String,pathologiesUS:String, observationsUS:String,objectiveUS:String,
+		birthdayUS:Date,telephoneUS:String,ageUS:Number,weigthUS:Number,measurementsUS:MeasuringTable,roleUS:User_Role){
 		this.username = usernameUS;
 		this.password = passwordUS;
 		this.nameAndSurname = nameAndUsernameUS;
@@ -30,6 +32,12 @@ export class User_Student{
 		this.weigth = weigthUS;
 		this.measurements = new MeasuringTable();
 		this.rutines = [];
+		this.role = roleUS;
+
 	}
 
+}
+
+export enum User_Role{
+	Student,Instructor
 }

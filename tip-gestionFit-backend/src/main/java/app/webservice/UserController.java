@@ -43,7 +43,10 @@ public class UserController {
 		if(user == null) {
 			throw new UserNotFoundException("No exite usuario con ese username");
 		}
-		if(user.getPassword() != cred.password) {
+		
+		System.out.println(user.getPassword());
+		System.out.println(cred.password);
+		if(!user.getPassword().equals(cred.password)) {
 			throw new RuntimeException("Password incorrecto");
 		}
 		

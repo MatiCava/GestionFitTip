@@ -1,25 +1,44 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginProvider } from '../../providers/login/login';
+import { AlumnosPage } from '../alumnos/alumnos';
+import { RutinasPage } from '../rutinas/rutinas';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
+@IonicPage({name:"/login"})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  providers: [LoginProvider]
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	public credential = {username:"",password:""};
+	public user:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginServ: LoginProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  login(){
+  	this.loginServ.logIn(this.credential).subscribe(
+  		result => {
+  			this.user = result;
+  			console.log(this.user);
+  			if(this.user.role == "Student"){
+  				this.navCtrl.push(RutinasPage);
+  			}
+  			else{
+  				this.navCtrl.push(AlumnosPage);
+  			}
+  		},
+  		error => {
+  			console.log(error);
+  		}
+  		)
   }
 
 }
