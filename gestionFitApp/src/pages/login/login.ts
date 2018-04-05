@@ -28,6 +28,7 @@ export class LoginPage {
   		result => {
   			this.user = result;
   			console.log(this.user);
+  			localStorage.setItem("user_role",this.user.role);
   			if(this.user.role == "Student"){
   				this.navCtrl.push(RutinasPage);
   			}

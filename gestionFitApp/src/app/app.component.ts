@@ -32,6 +32,14 @@ export class MyApp {
     this.nav.popToRoot();
   }
 
+  isStudent(){
+    return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Student";
+  }
+
+  isInstructor(){
+    return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor";
+  }
+
 
 }
 

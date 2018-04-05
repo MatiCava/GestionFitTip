@@ -22,11 +22,14 @@
       <button ion-item (click)="home()">
         Inicio
       </button>
-      <button ion-item (click)="openPage('alumnos')">
+      <button ion-item (click)="openPage('alumnos')" *ngIf="isInstructor()">
         Alumnos
       </button>
-      <button ion-item >
+      <button ion-item *ngIf="isInstructor()">
         Rutinas
+      </button>
+      <button ion-item *ngIf="isStudent()">
+        Mis Rutinas
       </button>
       <button ion-item menuToggle>
         Cerrar
