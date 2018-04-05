@@ -9,7 +9,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AlumnosPage } from '../pages/alumnos/alumnos';
 import { AlumnosPageModule } from '../pages/alumnos/alumnos.module';
-
+import { DashboardAlumnoPage } from '../pages/dashboard-alumno/dashboard-alumno';
+import { DashboardAlumnoPageModule } from '../pages/dashboard-alumno/dashboard-alumno.module';
 import { LoginPage } from '../pages/login/login';
 import { RutinasPage } from '../pages/rutinas/rutinas';
 import { RutinasPageModule} from '../pages/rutinas/rutinas.module';
@@ -23,24 +24,22 @@ import { LoginProvider } from '../providers/login/login';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     RutinasPageModule,
-    AlumnosPageModule
+    AlumnosPageModule,
 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage,
     RutinasPage,
     AlumnosPage
-    
   ],
   providers: [
     StatusBar,

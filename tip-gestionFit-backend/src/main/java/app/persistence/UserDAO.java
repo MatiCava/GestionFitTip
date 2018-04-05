@@ -8,7 +8,9 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import app.model.MeasuringTable;
 import app.model.User;
+import app.model.User_Role;
 import app.model.User_Student;
 
 @Repository
@@ -35,5 +37,13 @@ public class UserDAO extends GenericDAO<User> {
 		Criteria criteria = session.createCriteria(User.class);
 		Criterion criterion = Restrictions.eq("username", username);
 		return (User) criteria.add(criterion).uniqueResult();
+	}
+
+	@SuppressWarnings("deprecation")
+	public User_Student getStudent(Long idUser) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(User.class);
+		Criterion criterion = Restrictions.and(Restrictions.eq("role", User_Role.Student),Restrictions.eq("id",idUser));
+		return (User_Student) criteria.add(criterion).uniqueResult();
 	}
 }

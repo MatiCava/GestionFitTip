@@ -38,4 +38,12 @@ export class UserProvider {
   	return this.http.post<User_Student>(this.apiUrl+"alumno", newUser, httpOptions);
   }
 
+  getUser(id): Observable<any>{
+  	return this.http.get(this.apiUrl+"user/"+id)
+  }
+
+  getTabla(id):Observable<any>{
+  	return this.http.get(this.apiUrl+"user/"+id+"/table");
+  }
+
 }

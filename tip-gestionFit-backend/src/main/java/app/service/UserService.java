@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.model.Measurement;
+import app.model.MeasuringTable;
 import app.model.User;
 import app.model.User_Role;
 import app.model.User_Student;
@@ -65,6 +66,10 @@ public class UserService {
 	@Transactional
 	public User getByUsername(String username) {
 		return this.userDAO.getByUsername(username);
+	}
+
+	public MeasuringTable getStudentTable(Long idUser) {
+		return this.userDAO.getStudent(idUser).getMeasurements();
 	}
 
 
