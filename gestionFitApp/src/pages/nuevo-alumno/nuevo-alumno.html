@@ -1,8 +1,10 @@
 <ion-content padding>
 
+	<button ion-button outline (click)="guardarAlumno()"><ion-icon name="checkmark-circle" class="largeIcon" color="info"> Guardar</ion-icon> </button>
+
 	<ion-list>
 		<ion-item>
-			<ion-label fixed>Usuario</ion-label>
+			<ion-label floating>Usuario</ion-label>
 			<ion-input type="text" [(ngModel)]="alumno.username"></ion-input>
 		</ion-item>
 		<ion-item>
@@ -48,5 +50,7 @@
 		
 
 	</ion-list>
+
+	
 
 </ion-content>

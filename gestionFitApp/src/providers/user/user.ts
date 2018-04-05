@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import { User_Student } from '../../model/user_student';
@@ -24,7 +24,18 @@ export class UserProvider {
   }
 
   addNewUserStudent(newUser): Observable<User_Student>{
-  	return this.http.post<User_Student>(this.apiUrl+"alumno/1", newUser);
+    //{headers: new HttpHeaders().set('Content-Type','application/json')}
+
+    const httpOptions = {
+          headers: new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+                'Accept': 'application/json',
+                'Content-Type':  'application/json'
+          })
+    };
+     
+  	return this.http.post<User_Student>(this.apiUrl+"alumno/1", newUser, httpOptions);
   }
 
 }
