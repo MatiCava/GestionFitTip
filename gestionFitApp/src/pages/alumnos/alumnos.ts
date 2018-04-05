@@ -19,7 +19,6 @@ export class AlumnosPage {
   alumnos: User_Student[];
 
 	@ViewChild(Nav) nav: Nav;
-	//alumnos:any = [{"nameAndSurname":"Alfredo"},{"nameAndSurname":"Carlo"},{"nameAndSurname":"Roberto"}];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private userService: UserProvider) {
     this.alumnoProvider = userService;

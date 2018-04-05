@@ -23,14 +23,9 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void save(User user){
-		if(user.getRole() == User_Role.Student) {
-			ArgumentsValidator.validateStudent(user);
-		}
-		else {
-			ArgumentsValidator.validateInstructor(user);
+	public void save(User_Student user){
+		ArgumentsValidator.validateStudent(user);
 
-		}
 
 		this.userDAO.save(user);
 	}

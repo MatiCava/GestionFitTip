@@ -22,7 +22,7 @@ public class User_Student extends User {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private MeasuringTable measurements;
 	@ManyToMany(cascade = {CascadeType.ALL})
-	private List<Routine> rutines;
+	private List<Routine> routines;
 	
 
 	public User_Student() {
@@ -40,13 +40,16 @@ public class User_Student extends User {
 		this.objective = obj;
 		this.observations = obs;
 		this.pathologies = pat;
-		this.rutines = new ArrayList<Routine>();
+		this.routines = new ArrayList<Routine>();
 		this.telephone = tel;
 		this.weigth = wS;
 		this.setRole(User_Role.Student);
 	}
 
 
+	public void addRoutine(Routine routine) {
+		this.routines.add(routine);
+	}
 
 
 	public String getPathologies() {
@@ -159,15 +162,15 @@ public class User_Student extends User {
 
 
 
-	public List<Routine> getRutines() {
-		return rutines;
+	public List<Routine> getRoutines() {
+		return routines;
 	}
 
 
 
 
-	public void setRutines(List<Routine> rutines) {
-		this.rutines = rutines;
+	public void setRutines(List<Routine> routines) {
+		this.routines = routines;
 	}
 	
 	

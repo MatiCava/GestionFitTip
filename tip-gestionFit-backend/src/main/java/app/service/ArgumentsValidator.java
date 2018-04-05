@@ -5,74 +5,81 @@ import java.util.Date;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import app.model.User;
+import app.model.User_Instructor;
 import app.model.User_Student;
 
 public class ArgumentsValidator {
 	
-	public static boolean isNullOrEmptyString(String... strArr) {
+	public static void isNullOrEmptyString(String... strArr) {
 	    for (String st : strArr) {
 	        if  (st==null || st.isEmpty())
-	           return true;
-	    } 
-	    return false;
+				throw new IllegalArgumentException("Not a valid string");
+	    }
 	}
 	
-	public static boolean isNegativeInt(Integer... intArr) {
+	public static void isNegativeInt(Integer... intArr) {
 	    for (Integer i : intArr) {
 	        if  (i==null || i < 0)
-	           return true;
-	    } 
-	    return false;
+				throw new IllegalArgumentException("Not a valid int");
+	    }
 	}
 	
-	public static boolean isNotAValidMailAddress(String... strArr) {
-	    if(isNullOrEmptyString(strArr))
-	    	return true;
+	public static void isNotAValidMailAddress(String... strArr) {
+		isNullOrEmptyString(strArr);
 	    
 		EmailValidator mailValid = EmailValidator.getInstance();
 		
 		for (String st : strArr) {
 			
 	        if  (!mailValid.isValid(st))
-	           return true;
+				throw new IllegalArgumentException("Not a valid mail");
+
 	    } 
-	    return false;
 	}
 	
-	public static boolean isInvalidFullName(String name) {
-		if(isNullOrEmptyString(name) || (name.length() < 4 || name.length() > 50)) 
-			return true;
-		return false;
+	public static void isInvalidFullName(String name) {
+		isNullOrEmptyString(name);
+		if(name.length() < 4 || name.length() > 50)
+			throw new IllegalArgumentException("Not a valid name");
+
 	}
 	
-	public static boolean isInvalidTelephone(String number) {
-		if(isNullOrEmptyString(number) || number.length() == 8)
-			return true;
-		
-		
-		return false;
+	public static void isInvalidTelephone(String number) {
+		isNullOrEmptyString(number);
+		if( number.length() < 8)
+			throw new IllegalArgumentException("Not a valid telephone");
+
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static boolean isInvalidDate(Date date) {
+	public static void isInvalidDate(Date date) {
 		int greater = date.compareTo(new Date(1910, 01, 01));
 		int less = date.compareTo(new Date(2005,01,01));
 		if(greater < 0 || less >0) 
-			return true;
-		return false;
+			throw new IllegalArgumentException("Not a valid date");
+
 	}
 
-	public static void validateStudent(User newUser) {
-		User_Student user = (User_Student) newUser;
-
-		if(isInvalidDate(user.getBirthday()) || isInvalidFullName(user.getNameAndSurname())
-				|| isInvalidTelephone(user.getTelephone()) || isNullOrEmptyString(user.getObjective())) {
-			throw new IllegalArgumentException("Not a valid student");
-		}
+	public static void validateStudent(User_Student newUser) {
+		System.out.println(newUser.getRole());
+		User_Student user = newUser;
+//		isInvalidDate(user.getBirthday());
+		isInvalidFullName(user.getNameAndSurname());
+		isInvalidTelephone(user.getTelephone());
+		isNullOrEmptyString(user.getObjective(),user.getPassword(),user.getUsername()); 
+		isNegativeInt(user.getAge());
+		if(user.getWeigth() < 30f)
+			throw new IllegalArgumentException("Not a valid weigth");
+		
 		
 	}
 
 	public static void validateInstructor(User user) {
+		User_Instructor newUser = (User_Instructor) user;
+		isInvalidFullName(newUser.getNameAndSurname());
+		isNotAValidMailAddress(newUser.getMail());
+		isNullOrEmptyString(newUser.getUsername(),newUser.getPassword());
+
 		
 	}
 

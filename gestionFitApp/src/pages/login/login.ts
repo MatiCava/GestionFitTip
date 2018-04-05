@@ -30,10 +30,10 @@ export class LoginPage {
   			console.log(this.user);
   			localStorage.setItem("user_role",this.user.role);
   			if(this.user.role == "Student"){
-  				this.navCtrl.push(RutinasPage);
+  				this.navCtrl.push(RutinasPage,{"rol":this.user.role,"id":this.user.id});
   			}
   			else{
-  				this.navCtrl.push(AlumnosPage);
+  				this.navCtrl.push(AlumnosPage,{"rol":this.user.role,"id":this.user.id});
   			}
   		},
   		error => {

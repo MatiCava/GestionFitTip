@@ -66,8 +66,8 @@ public class UserController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/user", produces = "application/json")   
-	public ResponseEntity<Void> createUser(@RequestBody User user) {
+	@PostMapping(value = "/alumno", produces = "application/json")   
+	public ResponseEntity<Void> createUser(@RequestBody User_Student user) {
 			this.userServ.save(user);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 

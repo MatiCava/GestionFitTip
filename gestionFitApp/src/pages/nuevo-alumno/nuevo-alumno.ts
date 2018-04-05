@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
-import { User_Student } from '../../model/user_student'
+import { User_Student,User_Role } from '../../model/user_student'
 
 
 
@@ -19,7 +19,7 @@ export class NuevoAlumnoPage {
 	"telephone":"","age":"","birthday":"","pathologies":"","observations":"","objective":""
 	,"routines":[],"measures":[]};
 */
-  alumno = {username:"", password:"", nameAndSurname:"", mail:"", pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{}};
+  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{}};
   userProvider: UserProvider;
 
   constructor(private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {

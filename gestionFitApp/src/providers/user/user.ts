@@ -35,7 +35,7 @@ export class UserProvider {
           })
     };
      
-  	return this.http.post<User_Student>(this.apiUrl+"user", newUser, httpOptions);
+  	return this.http.post<User_Student>(this.apiUrl+"alumno", newUser, httpOptions);
   }
 
 }

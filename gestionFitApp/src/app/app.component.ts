@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { AlumnosPage } from '../pages/alumnos/alumnos';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,6 +29,7 @@ export class MyApp {
     this.menuCtrl.close();
     this.nav.push(page);
   }
+
 
   home(){
     this.nav.popToRoot();
