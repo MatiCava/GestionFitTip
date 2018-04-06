@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Credential;
 import app.model.Measurement;
+import app.model.MeasuringTable;
 import app.model.User;
 import app.model.UserNotFoundException;
 import app.model.User_Student;
@@ -81,6 +82,15 @@ public class UserController {
 		}
 		
 		return user;
+	}
+	
+	@GetMapping(value="/user/{id}/table",produces= "application/json")
+	public MeasuringTable getTable(@PathVariable("id") Long idUser) {
+		MeasuringTable table = this.userServ.getStudentTable(idUser);
+		if(table == null) {
+			throw new UserNotFoundException("Usuario no encontrado");
+		}
+		return table;
 	}
 	
 	@PutMapping(value = "/user/{id}",produces = "application/json")

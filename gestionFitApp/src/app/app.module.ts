@@ -13,6 +13,9 @@ import { InfoAlumnoPage } from '../pages/info-alumno/info-alumno'
 import { InfoAlumnoPageModule } from '../pages/info-alumno/info-alumno.module'
 
 
+import { DashboardAlumnoPage } from '../pages/dashboard-alumno/dashboard-alumno';
+import { DashboardAlumnoPageModule } from '../pages/dashboard-alumno/dashboard-alumno.module';
+
 import { LoginPage } from '../pages/login/login';
 import { RutinasPage } from '../pages/rutinas/rutinas';
 import { RutinasPageModule} from '../pages/rutinas/rutinas.module';
@@ -26,7 +29,7 @@ import { LoginProvider } from '../providers/login/login';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    
   ],
   imports: [
     BrowserModule,
@@ -35,17 +38,14 @@ import { LoginProvider } from '../providers/login/login';
     RutinasPageModule,
     AlumnosPageModule,
     InfoAlumnoPageModule
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage,
     RutinasPage,
     AlumnosPage,
     InfoAlumnoPage
-    
   ],
   providers: [
     StatusBar,
