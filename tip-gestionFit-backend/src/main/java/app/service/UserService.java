@@ -1,5 +1,6 @@
 package app.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.model.Measurement;
+import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.User;
 import app.model.User_Role;
@@ -19,8 +21,12 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
+//	@Autowired
+//	private MeasuringTableDAO tableDAO;
+//	
 	public UserService(){
 		this.userDAO = new UserDAO();
+//		this.tableDAO = new MeasuringTableDAO();
 	}
 	
 	@Transactional
@@ -57,9 +63,14 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void newMeasurement(Long idUser,List<Measurement> newMeasurement) {
+	public void newMeasurement(Long idUser,MeasurementsAdapter newMeasurement) {
 		User_Student user = (User_Student) getById(idUser);
-		user.getMeasurements().addNewMeasurement(newMeasurement);
+
+		Date day = new Date(newMeasurement.day);
+		for(Measurement measure : newMeasurement.measures) {
+			measure.day = day;
+		}
+		user.addMeasurements(newMeasurement.measures);
 		update(user);
 	}
 	

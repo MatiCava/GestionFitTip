@@ -7,10 +7,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,7 +28,8 @@ public class Routine {
 	public Date creationDate;
 	@Enumerated
 	public Routine_Type type;
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
 	public List<Exercise> exercises;
 	
 	public Routine() {

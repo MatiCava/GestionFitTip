@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Measure {
@@ -17,7 +21,8 @@ public class Measure {
 	public Long id;
 
 	public String name;
-	@OneToMany(cascade= {CascadeType.ALL})
+	@OneToMany(fetch=FetchType.EAGER,cascade= {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
 	public List<Measurement> measures;
 	
 	public Measure(){

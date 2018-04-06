@@ -23,27 +23,61 @@ public class UserDAO extends GenericDAO<User> {
 	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	public List<User_Student> getAllUserRole(Object objt){
+		List<User_Student> result = null;
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(User.class);
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("role", objt));
-		List<User_Student> result = (List<User_Student>) criteria.add(criterion).list();
+		try {
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("role", objt));
+			result = (List<User_Student>) criteria.add(criterion).list();
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
 		return result;
 	}
 	
 	@SuppressWarnings("deprecation")
 	public User getByUsername(String username) {
+		User result = null;
 		Session session = sessionFactory.openSession();
+		try {
 		Criteria criteria = session.createCriteria(User.class);
 		Criterion criterion = Restrictions.eq("username", username);
-		return (User) criteria.add(criterion).uniqueResult();
+		result = (User) criteria.add(criterion).uniqueResult();
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return result;
 	}
 
 	@SuppressWarnings("deprecation")
 	public User_Student getStudent(Long idUser) {
+		User_Student result = null;
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(User.class);
-		Criterion criterion = Restrictions.and(Restrictions.eq("role", User_Role.Student),Restrictions.eq("id",idUser));
-		return (User_Student) criteria.add(criterion).uniqueResult();
+		try {
+			Criteria criteria = session.createCriteria(User.class);
+			Criterion criterion = Restrictions.and(Restrictions.eq("role", User_Role.Student),Restrictions.eq("id",idUser));
+			result = (User_Student) criteria.add(criterion).uniqueResult();
+		}catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return result;
 	}
 }

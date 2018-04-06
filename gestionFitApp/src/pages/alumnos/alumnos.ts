@@ -40,4 +40,8 @@ export class AlumnosPage {
   	this.navCtrl.push('nuevoAlumno');
   }
 
+  medidasAlumno(idUser){
+  	this.navCtrl.push('tablaMedicion',{id:idUser});
+  }
+
 }

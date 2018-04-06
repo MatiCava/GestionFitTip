@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 public class GenericDAO<T> {
 
 	private Class<T> entityType;
-	protected static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-
+	protected static final SessionFactory sessionFactory =new Configuration().configure().buildSessionFactory();
+	
 	@Autowired
 	public GenericDAO() {
 	}
@@ -76,22 +76,48 @@ public class GenericDAO<T> {
 	@SuppressWarnings("unchecked")
 	public T getById(Long id) {
 		Session session = sessionFactory.openSession();
+		T result = null;
+
+		try {
 		@SuppressWarnings("deprecation")
 		Criteria criteria = session.createCriteria(entityType);
 		Criterion criterion = Restrictions.eq("id", id);
 
-	    return (T) criteria.add(criterion).uniqueResult();
+	    result =(T) criteria.add(criterion).uniqueResult();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		finally {
+			if(session!= null) {
+				session.close();
+			}
+		}
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
 		
 		Session session = sessionFactory.openSession();
+		List<T> result = null;
+
+		try {
 		@SuppressWarnings("deprecation")
 		Criteria criteria = session.createCriteria(entityType);
 		criteria.setMaxResults(50);
-		List<T> result = (List<T>) criteria.list();
+		result = (List<T>) criteria.list();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		finally {
+			if(session!= null) {
+				session.close();
+			}
+		}
 		return result;
+
 	}
 	
 	

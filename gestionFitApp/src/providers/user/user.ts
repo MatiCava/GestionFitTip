@@ -46,4 +46,8 @@ export class UserProvider {
   	return this.http.get(this.apiUrl+"user/"+id+"/table");
   }
 
+  updateTable(id,measures):Observable<any>{
+  	return this.http.put(this.apiUrl+"user/"+id+"/nuevaMedicion",measures);
+  }
+
 }

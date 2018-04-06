@@ -1,3 +1,15 @@
 <ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col>Medida</ion-col>
+			<ion-col  *ngFor="let day of dates">{{day}}</ion-col>
+		</ion-row>
+		<ion-row *ngFor="let medida of tabla.measures">
+			<ion-col>{{medida.name}}</ion-col>
+			<ion-col *ngFor="let medicion of medida.measures">{{medicion.measure}}cm Altura: {{medicion.height}}cm</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<button ion-button (click)="nuevaMedicion()" *ngIf="isInstructor()"> Agregar Medicion</button>
 
 </ion-content>

@@ -11,13 +11,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class MeasuringTable {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
 	public List<Measure> measures = new ArrayList<Measure>();
 	
 	public MeasuringTable(){

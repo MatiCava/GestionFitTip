@@ -1,0 +1,19 @@
+<ion-content padding>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>Medida</ion-col>
+			<ion-col>Medicion</ion-col>
+			<ion-col>Altura</ion-col>
+		</ion-row>
+		<ion-row *ngFor="let medida of medidas; index as i">
+			<ion-col>{{medida.name}}</ion-col>
+			<ion-col><ion-input type="number" [(ngModel)]="mediciones[i].measure"></ion-input></ion-col>
+			<ion-col><ion-input type="number" [(ngModel)]="mediciones[i].height"></ion-input></ion-col>
+
+
+		</ion-row>
+	</ion-grid>
+	<button ion-button (click)="guardar()">Guardar</button>
+
+</ion-content>

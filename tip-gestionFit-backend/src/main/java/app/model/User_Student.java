@@ -1,13 +1,18 @@
 package app.model;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class User_Student extends User {
@@ -19,10 +24,12 @@ public class User_Student extends User {
 	private String telephone;
 	private int age;
 	private float weigth;
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
+	//@Fetch(value = FetchMode.SUBSELECT)
 	private MeasuringTable measurements;
-	@ManyToMany(cascade = {CascadeType.ALL})
-	private List<Routine> routines;
+	@ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
+	private Set<Routine> routines;
 	
 
 	public User_Student() {
@@ -40,7 +47,7 @@ public class User_Student extends User {
 		this.objective = obj;
 		this.observations = obs;
 		this.pathologies = pat;
-		this.routines = new ArrayList<Routine>();
+		this.routines = new HashSet<Routine>();
 		this.telephone = tel;
 		this.weigth = wS;
 		this.setRole(User_Role.Student);
@@ -162,17 +169,21 @@ public class User_Student extends User {
 
 
 
-	public List<Routine> getRoutines() {
+	public Set<Routine> getRoutines() {
 		return routines;
 	}
 
 
 
 
-	public void setRutines(List<Routine> routines) {
+	public void setRutines(Set<Routine> routines) {
 		this.routines = routines;
 	}
 	
+	
+	public void addMeasurements(List<Measurement> measurements) {
+		this.measurements.addNewMeasurement(measurements);
+	}
 	
 	
 

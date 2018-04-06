@@ -1,5 +1,6 @@
 package app.webservice;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Credential;
-import app.model.Measurement;
+import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.User;
 import app.model.UserNotFoundException;
@@ -61,9 +62,10 @@ public class UserController {
 
 	}
 	
-	@PostMapping(value = "/user/{id}/nuevaMedicion",produces = "application/json")
-	public ResponseEntity<Void> newMeasurements(@PathVariable("id") Long idUser,@RequestBody List<Measurement> newMeasurements){
+	@PutMapping(value = "/user/{id}/nuevaMedicion",produces = "application/json")
+	public ResponseEntity<Void> newMeasurements(@PathVariable("id") Long idUser,@RequestBody MeasurementsAdapter newMeasurements){
 		this.userServ.newMeasurement(idUser, newMeasurements);
+		System.out.println(new Date(newMeasurements.day));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
