@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user'
+import { User_Student } from '../../model/user_student'
+
 
 /**
  * Generated class for the InfoAlumnoPage page.
@@ -14,14 +17,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-info-alumno',
   templateUrl: 'info-alumno.html',
+  providers:[UserProvider]
 })
 export class InfoAlumnoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	alumnoService: UserProvider;
+	id: any;
+	alumno: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userServ: UserProvider) {
+  	this.alumnoService = userServ;
+  	this.id = this.navParams.get("id");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InfoAlumnoPage');
+    this.getInfoAlumno();
+  }
+
+  getInfoAlumno(){
+  	this.alumnoService.getUser(this.id).subscribe(
+  			user => {this.alumno = user;console.log(this.alumno)},
+  			err => {console.log(err)}
+  			)
   }
 
 }
