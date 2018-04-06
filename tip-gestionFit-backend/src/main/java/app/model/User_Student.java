@@ -1,6 +1,7 @@
 package app.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,8 +35,8 @@ public class User_Student extends User {
 			String obs,String obj,Date birth,String tel,int ageS,
 			float wS) {
 		super(user,pass,name,email);
-		this.age = ageS;
 		this.birthday = birth;
+		this.age = Calendar.getInstance().get(Calendar.YEAR) - this.birthday.getYear();
 		this.measurements = new MeasuringTable();
 		this.objective = obj;
 		this.observations = obs;

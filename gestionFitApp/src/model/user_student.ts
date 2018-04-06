@@ -29,6 +29,7 @@ export class User_Student{
 		this.observations = observationsUS;
 		this.objective = objectiveUS;
 		this.birthday = birthdayUS;
+		this.age = new Date().getFullYear() - this.birthday.getFullYear();
 		this.weigth = weigthUS;
 		this.measurements = new MeasuringTable();
 		this.rutines = [];

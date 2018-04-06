@@ -19,7 +19,7 @@ export class NuevoAlumnoPage {
 	"telephone":"","age":"","birthday":"","pathologies":"","observations":"","objective":""
 	,"routines":[],"measures":[]};
 */
-  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{}};
+  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}};
   userProvider: UserProvider;
 
   constructor(private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {
@@ -28,6 +28,10 @@ export class NuevoAlumnoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NuevoAlumnoPage');
+  }
+
+  volverAtras(){
+    this.navCtrl.push('alumnos');
   }
 
   guardarAlumno(){
@@ -50,6 +54,7 @@ export class NuevoAlumnoPage {
                 console.log(er);
               }
           });
+    this.navCtrl.push('alumnos');
   }
 
 }

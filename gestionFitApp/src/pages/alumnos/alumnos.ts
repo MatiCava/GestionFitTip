@@ -1,7 +1,8 @@
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams ,Nav} from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user'
-import { User_Student } from '../../model/user_student'
+import { IonicPage, NavController, NavParams ,Nav,ModalController} from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
+import { User_Student } from '../../model/user_student';
+import { InfoAlumnoPage } from '../info-alumno/info-alumno'
 
 
 
@@ -20,13 +21,18 @@ export class AlumnosPage {
 
 	@ViewChild(Nav) nav: Nav;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private userService: UserProvider) {
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,private userService: UserProvider) {
     this.alumnoProvider = userService;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlumnosPage');
     this.getAlumnos();
+  }
+
+  abrirInfo(){
+    let infoModal = this.modalCtrl.create(InfoAlumnoPage); //no se como pasar el alumno
+    infoModal.present();
   }
 
   getAlumnos(){

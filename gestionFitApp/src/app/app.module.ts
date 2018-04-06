@@ -9,6 +9,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AlumnosPage } from '../pages/alumnos/alumnos';
 import { AlumnosPageModule } from '../pages/alumnos/alumnos.module';
+import { InfoAlumnoPage } from '../pages/info-alumno/info-alumno'
+import { InfoAlumnoPageModule } from '../pages/info-alumno/info-alumno.module'
+
 
 import { LoginPage } from '../pages/login/login';
 import { RutinasPage } from '../pages/rutinas/rutinas';
@@ -30,7 +33,8 @@ import { LoginProvider } from '../providers/login/login';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     RutinasPageModule,
-    AlumnosPageModule
+    AlumnosPageModule,
+    InfoAlumnoPageModule
 
   ],
   bootstrap: [IonicApp],
@@ -39,7 +43,8 @@ import { LoginProvider } from '../providers/login/login';
     HomePage,
     LoginPage,
     RutinasPage,
-    AlumnosPage
+    AlumnosPage,
+    InfoAlumnoPage
     
   ],
   providers: [
