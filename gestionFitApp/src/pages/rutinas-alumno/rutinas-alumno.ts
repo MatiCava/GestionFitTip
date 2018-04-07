@@ -25,7 +25,7 @@ export class RutinasAlumnoPage {
   rutinas: any[];
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, private userService: UserProvider) {
-  	this.navParams.get("id");
+  	this.id = this.navParams.get("id");
   }
 
   ionViewDidLoad() {
