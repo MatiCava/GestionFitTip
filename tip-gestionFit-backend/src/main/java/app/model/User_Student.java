@@ -2,6 +2,7 @@ package app.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,15 +36,24 @@ public class User_Student extends User {
 
 	public User_Student() {
 		super();
+		this.measurements = new MeasuringTable();
+		this.routines = new HashSet<Routine>();
+
+
 	}
 
 	
 	public User_Student(String user, String pass, String name,String email,String pat,
-			String obs,String obj,Date birth,String tel,int ageS,
+			String obs,String obj,Date birth,String tel,
 			float wS) {
 		super(user,pass,name,email);
 		this.birthday = birth;
-		this.age = Calendar.getInstance().get(Calendar.YEAR) - this.birthday.getYear();
+		
+        Calendar birthCal = GregorianCalendar.getInstance();
+
+        birthCal.setTime(birth);
+		
+		this.age = (GregorianCalendar.getInstance().get(Calendar.YEAR) - birthCal.get(Calendar.YEAR));
 		this.measurements = new MeasuringTable();
 		this.objective = obj;
 		this.observations = obs;
