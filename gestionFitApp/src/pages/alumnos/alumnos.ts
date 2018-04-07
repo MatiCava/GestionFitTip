@@ -50,4 +50,8 @@ export class AlumnosPage {
   	this.navCtrl.push('tablaMedicion',{id:idUser});
   }
 
+  rutinasAlumno(idUser){
+    this.navCtrl.push('rutinasInstructor', {id:idUser});
+  }
+
 }

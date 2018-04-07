@@ -17,8 +17,8 @@ import { DashboardAlumnoPage } from '../pages/dashboard-alumno/dashboard-alumno'
 import { DashboardAlumnoPageModule } from '../pages/dashboard-alumno/dashboard-alumno.module';
 
 import { LoginPage } from '../pages/login/login';
-import { RutinasPage } from '../pages/rutinas/rutinas';
-import { RutinasPageModule} from '../pages/rutinas/rutinas.module';
+import { RutinasInstructorPage } from '../pages/rutinas-instructor/rutinas-instructor';
+import { RutinasInstructorPageModule} from '../pages/rutinas-instructor/rutinas-instructor.module';
 
 import { NuevoAlumnoPage } from '../pages/nuevo-alumno/nuevo-alumno';
 import { UserProvider } from '../providers/user/user';
@@ -35,7 +35,7 @@ import { LoginProvider } from '../providers/login/login';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    RutinasPageModule,
+    RutinasInstructorPageModule,
     AlumnosPageModule,
     InfoAlumnoPageModule
   ],
@@ -43,7 +43,7 @@ import { LoginProvider } from '../providers/login/login';
   entryComponents: [
     MyApp,
     HomePage,
-    RutinasPage,
+    RutinasInstructorPage,
     AlumnosPage,
     InfoAlumnoPage
   ],
