@@ -12,8 +12,12 @@
 		<ion-item>
 			<p>Tipo: <strong>{{rutina.type}}</strong></p>
 		</ion-item>
-		<ion-item>
-			<p>Ejercicios: <strong>{{rutina.exercises}}</strong></p>
+		<ion-item *ngFor="let exercise of rutina.exercises">
+			<ion-row>
+				<ion-col>{{exercise.name}}</ion-col>
+				<ion-col>{{exercise.description}}</ion-col>
+				<ion-col>{{exercise.type}}</ion-col>
+			</ion-row>
 		</ion-item>
 	</ion-list>
 </ion-content>
