@@ -1,4 +1,4 @@
-# Trabajo de insercion profesional
+# Trabajo de inserción profesional
 ## Proyecto: GestionFit <img src="https://github.com/MatiCava/GestionFitTip/blob/master/gestionFitApp/src/assets/imgs/icon.png" height="50" width="50">
 
 - Backlog: https://trello.com/b/PpSRi2VA/gestionfit
