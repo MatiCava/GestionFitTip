@@ -9,11 +9,11 @@
 - Gaston Veliez
 
 ### El proyecto
-GestionFit tiene como objetivo facilitar la tarea de docentes en instructores que trabajan en ambitos relacionados a la educacion fisica.
-Esta provee herramientas para facilitar la administracion de alumnos, tales como:
+GestionFit tiene como objetivo facilitar la tarea de docentes en instructores que trabajan en ámbitos relacionados a la educacion física.
+Ésta provee herramientas para facilitar la administración de alumnos, tales como:
 
-- Seguimiento del estado fisico de cada alumno
+- Seguimiento del estado físico de cada alumno
 - Control de asistencia
-- Creacion de rutinas y asignacion de las mismas
+- Creación de rutinas y asignación de las mismas
 
-Tambien proporciona a los alumnos la posibilidad de ver las rutinas que posean y utilizar herramientas para mantener un control sobre la actividad que realizan.
+También proporciona a los alumnos la posibilidad de ver las rutinas que posean y utilizar herramientas para mantener un control sobre la actividad que realizan.
