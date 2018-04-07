@@ -2,6 +2,7 @@ package app.webservice;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -91,6 +92,12 @@ public class UserController {
 		}
 		
 		return user;
+	}
+	
+	@GetMapping(value="/user/{id}/rutinas",produces= "application/json")
+	public Set<Routine> getRutines(@PathVariable("id") Long idUser) {
+		Set<Routine> rutines = this.userServ.getStudentRutines(idUser);
+		return rutines;
 	}
 	
 	@GetMapping(value="/user/{id}/table",produces= "application/json")

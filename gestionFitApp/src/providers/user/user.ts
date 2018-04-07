@@ -50,6 +50,10 @@ export class UserProvider {
   	return this.http.put(this.apiUrl+"user/"+id+"/nuevaMedicion",measures);
   }
 
+  getRutines(id):Observable<any>{
+    return this.http.get(this.apiUrl+"user/"+id+"/rutinas");
+  }
+
   updateRutines(id, rutines):Observable<any>{
     return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines);
   }

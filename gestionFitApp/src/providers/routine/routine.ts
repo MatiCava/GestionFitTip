@@ -22,4 +22,8 @@ export class RoutineProvider {
   	return this.http.get<Routine[]>(this.apiUrl+"routines");
   }
 
+  getRoutine(id):Observable<any>{
+    return this.http.get(this.apiUrl+"routine/"+id);
+  }
+
 }

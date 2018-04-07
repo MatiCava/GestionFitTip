@@ -42,4 +42,8 @@ export class DashboardAlumnoPage {
   	this.navCtrl.push('tablaMedicion',{id:this.id});
   }
 
+  verRutinas(){
+    this.navCtrl.push('rutinasAlumno',{id:this.id});
+  }
+
 }
