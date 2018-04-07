@@ -1,6 +1,7 @@
 package app.service;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -30,7 +31,6 @@ public class ArgumentsValidator {
 		EmailValidator mailValid = EmailValidator.getInstance();
 		
 		for (String st : strArr) {
-			
 	        if  (!mailValid.isValid(st))
 				throw new IllegalArgumentException("Not a valid mail");
 
@@ -51,23 +51,22 @@ public class ArgumentsValidator {
 
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void isInvalidDate(Date date) {
-		int greater = date.compareTo(new Date(1910, 01, 01));
-		int less = date.compareTo(new Date(2005,01,01));
+		int greater = date.compareTo(new GregorianCalendar(1900,01,01).getTime());
+		int less = date.compareTo(new GregorianCalendar(2006,01,01).getTime());
 		if(greater < 0 || less >0) 
 			throw new IllegalArgumentException("Not a valid date");
 
 	}
 
 	public static void validateStudent(User_Student newUser) {
-		System.out.println(newUser.getRole());
 		User_Student user = newUser;
-//		isInvalidDate(user.getBirthday());
+		isInvalidDate(user.getBirthday());
 		isInvalidFullName(user.getNameAndSurname());
 		isInvalidTelephone(user.getTelephone());
 		isNullOrEmptyString(user.getObjective(),user.getPassword(),user.getUsername()); 
 		isNegativeInt(user.getAge());
+		isNotAValidMailAddress(user.getMail());
 		if(user.getWeigth() < 30f)
 			throw new IllegalArgumentException("Not a valid weigth");
 		

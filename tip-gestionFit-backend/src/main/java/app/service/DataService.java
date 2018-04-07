@@ -30,7 +30,7 @@ public class DataService {
 	public void createInitialData() {
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
 		User_Student alu1 = new User_Student("alumno1","1234","Roberto Robertson","robert@gmail.com","","","",
-				new GregorianCalendar(1990, 5,8).getTime(),"42856456",22,80.2f);
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
 		
 		User_Instructor inst1 = new User_Instructor("instructor1","1234","Fernando Fernandez", "ff@gmail.com");
 		

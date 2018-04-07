@@ -71,7 +71,7 @@ public class UserController {
 
 	@PostMapping(value = "/alumno", produces = "application/json")   
 	public ResponseEntity<Void> createUser(@RequestBody User_Student user) {
-			this.userServ.save(user);
+			this.userServ.saveStudent(user);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 
 	}
@@ -89,6 +89,8 @@ public class UserController {
 	@GetMapping(value="/user/{id}/table",produces= "application/json")
 	public MeasuringTable getTable(@PathVariable("id") Long idUser) {
 		MeasuringTable table = this.userServ.getStudentTable(idUser);
+		User user = this.userServ.getById(idUser);
+		System.out.println(user);
 		if(table == null) {
 			throw new UserNotFoundException("Usuario no encontrado");
 		}
@@ -96,13 +98,13 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/user/{id}",produces = "application/json")
-	public ResponseEntity<Void> updateUser(@PathVariable("id") Long idUser,@RequestBody User user){
+	public ResponseEntity<Void> updateUser(@PathVariable("id") Long idUser,@RequestBody User_Student user){
 		User existingUser = this.userServ.getById(idUser);
 		if(existingUser == null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		user.setId(idUser);
-		this.userServ.update(user);
+		this.userServ.updateStudent(user);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
 	}

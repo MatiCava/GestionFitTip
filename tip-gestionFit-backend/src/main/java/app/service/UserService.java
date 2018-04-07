@@ -30,15 +30,17 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void save(User_Student user){
+	public long saveStudent(User_Student user){
 		ArgumentsValidator.validateStudent(user);
 
 
-		this.userDAO.save(user);
+		return this.userDAO.save(user);
 	}
 	
 	@Transactional
-	public void update(User newUser){
+	public void updateStudent(User_Student newUser){
+		ArgumentsValidator.validateStudent(newUser);
+		
 		this.userDAO.update(newUser);
 	}
 	
@@ -71,7 +73,7 @@ public class UserService {
 			measure.day = day;
 		}
 		user.addMeasurements(newMeasurement.measures);
-		update(user);
+		updateStudent(user);
 	}
 	
 	@Transactional
