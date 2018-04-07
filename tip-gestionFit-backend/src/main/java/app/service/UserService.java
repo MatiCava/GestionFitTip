@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import app.model.Measurement;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
+import app.model.Routine;
 import app.model.User;
 import app.model.User_Role;
 import app.model.User_Student;
@@ -73,6 +74,14 @@ public class UserService {
 			measure.day = day;
 		}
 		user.addMeasurements(newMeasurement.measures);
+		updateStudent(user);
+	}
+	
+	@Transactional
+	public void newRutines(Long idUser,Routine newRutines) {
+		User_Student user = (User_Student) getById(idUser);
+
+		user.addRoutine(newRutines);
 		updateStudent(user);
 	}
 	

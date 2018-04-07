@@ -19,7 +19,7 @@ export class RoutineProvider {
   }
 
   getRutines(): Observable<Routine[]>{
-  	return this.http.get<Routine[]>(this.apiUrl+"rutinas/");
+  	return this.http.get<Routine[]>(this.apiUrl+"routines/");
   }
 
 }

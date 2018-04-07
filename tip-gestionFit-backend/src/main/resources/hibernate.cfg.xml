@@ -9,6 +9,11 @@
         <property name="connection.url">jdbc:postgresql://localhost:5432/gestionfit</property>
         <property name="connection.username">fitdb</property>
         <property name="connection.password">gestionFit</property>
+       
+         <!-- 
+         <property name="connection.url">jdbc:postgresql://localhost:5432/gestionfit</property>
+        <property name="connection.username">gestionfitdb</property>
+        <property name="connection.password">gestionfitdb1234</property> -->
          
                 <!--
          		<property name="connection.url">${JDBC_DATABASE_URL}</property>

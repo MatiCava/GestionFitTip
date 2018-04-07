@@ -21,12 +21,10 @@ import { User_Student } from '../../model/user_student'
 })
 export class InfoAlumnoPage {
 
-	alumnoService: UserProvider;
 	id: any;
-	alumno: any;
+	alumno: User_Student;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userServ: UserProvider) {
-  	this.alumnoService = userServ;
   	this.id = this.navParams.get("id");
   }
 
@@ -36,7 +34,7 @@ export class InfoAlumnoPage {
   }
 
   getInfoAlumno(){
-  	this.alumnoService.getUser(this.id).subscribe(
+  	this.userServ.getUser(this.id).subscribe(
   			user => {this.alumno = user;console.log(this.alumno)},
   			err => {console.log(err)}
   			)

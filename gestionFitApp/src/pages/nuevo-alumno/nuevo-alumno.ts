@@ -19,7 +19,7 @@ export class NuevoAlumnoPage {
 	"telephone":"","age":"","birthday":"","pathologies":"","observations":"","objective":""
 	,"routines":[],"measures":[]};
 */
-  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}};
+  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
   userProvider: UserProvider;
 
   constructor(private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {

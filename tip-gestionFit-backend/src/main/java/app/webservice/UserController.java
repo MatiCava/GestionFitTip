@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import app.model.Credential;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
+import app.model.Routine;
 import app.model.User;
 import app.model.UserNotFoundException;
 import app.model.User_Student;
@@ -66,6 +67,12 @@ public class UserController {
 	public ResponseEntity<Void> newMeasurements(@PathVariable("id") Long idUser,@RequestBody MeasurementsAdapter newMeasurements){
 		this.userServ.newMeasurement(idUser, newMeasurements);
 		System.out.println(new Date(newMeasurements.day));
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/user/{id}/nuevasRutinas",produces = "application/json")
+	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody Routine newRoutine){
+		this.userServ.newRutines(idUser, newRoutine);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
