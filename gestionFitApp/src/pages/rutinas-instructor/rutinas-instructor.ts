@@ -12,7 +12,8 @@ import { UserProvider } from '../../providers/user/user'
  */
 
 @IonicPage({
-	name: 'rutinasInstructor'
+	name: 'rutinasInstructor',
+  segment: 'alumno/:id/nuevaRutina'
 })
 @Component({
   selector: 'page-rutinas-instructor',
@@ -24,7 +25,7 @@ export class RutinasInstructorPage {
 	rutinasProvider: RoutineProvider;
 	id:any;
 	rutinas: any[];
-	rutinasAlumno = [];
+	rutinasAlumno:any = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineProvider: RoutineProvider, private userService: UserProvider) {
   	this.rutinasProvider = routineProvider;
@@ -41,9 +42,10 @@ export class RutinasInstructorPage {
   }
 
   guardarRutinasAlumno(){
+    console.log(this.rutinasAlumno);
   	this.userService.updateRutines(this.id,this.rutinasAlumno).subscribe(
   			res => {console.log(res);},
-  			err => {console.log(err);}
+  			error => {console.log(error);}
   			)
   	this.volverAtras();
   }
@@ -51,8 +53,7 @@ export class RutinasInstructorPage {
   traerRutinas(){
   	this.rutinasProvider.getRutines().subscribe(
   						result => {this.rutinas = result;},
-  						err => {console.log(err);},
-  						() => {console.log(this.rutinas);}
+  						error => {console.log(error);},
   						)
   }
 

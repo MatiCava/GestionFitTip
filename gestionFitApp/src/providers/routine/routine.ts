@@ -12,14 +12,14 @@ import { Routine } from '../../model/routine';
 @Injectable()
 export class RoutineProvider {
 
-	apiUrl : String="localhost:8080/"
+	apiUrl : String="http://localhost:8080/api/"
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');
   }
 
   getRutines(): Observable<Routine[]>{
-  	return this.http.get<Routine[]>(this.apiUrl+"routines/");
+  	return this.http.get<Routine[]>(this.apiUrl+"routines");
   }
 
 }

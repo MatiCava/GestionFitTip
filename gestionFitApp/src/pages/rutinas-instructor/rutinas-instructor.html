@@ -10,8 +10,8 @@
 	<ion-list>
 		<ion-item>
 			<ion-label>Rutinas</ion-label>
-  			<ion-select [(ngModel)]="rutinasAlumno" multiple="true">
-    			<ion-option *ngFor="let rutina of rutinas"> {{rutina.type}} </ion-option>
+  			<ion-select [(ngModel)]="rutinasAlumno" >
+    			<ion-option *ngFor="let rutina of rutinas" [value]="rutina"> {{rutina.type}} </ion-option>
   			</ion-select>
 		</ion-item>
 		<ion-item>
