@@ -13,7 +13,7 @@ import { User_Student } from '../../model/user_student';
 @Injectable()
 export class UserProvider {
 
-	apiUrl : String="http://localhost:8080/api/"
+	apiUrl : String="https://gestionfit-backend.herokuapp.com/api/"
 
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
