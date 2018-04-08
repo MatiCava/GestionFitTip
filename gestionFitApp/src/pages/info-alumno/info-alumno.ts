@@ -22,7 +22,7 @@ import { User_Student } from '../../model/user_student'
 export class InfoAlumnoPage {
 
 	id: any;
-	alumno: User_Student;
+	alumno= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userServ: UserProvider) {
   	this.id = this.navParams.get("id");

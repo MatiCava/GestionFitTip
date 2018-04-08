@@ -38,6 +38,7 @@ export class RutinasAlumnoPage {
   }
 
   abrirInfo(idRoutine){
+    console.log(idRoutine);
     let infoModal = this.modalCtrl.create(InfoRutinaPage,{id:idRoutine}); 
     infoModal.present();
   }

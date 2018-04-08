@@ -8,7 +8,8 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item *ngFor="let rutina of rutinas">
-			{{rutina.type}} <a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information"></ion-icon></a>
+			{{rutina.type}} 
+			<button ion-button (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information"></ion-icon></button>
 		</ion-item>
 	</ion-list>
 </ion-content>

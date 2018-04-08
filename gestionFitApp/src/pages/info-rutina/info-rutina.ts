@@ -21,10 +21,10 @@ import { Routine } from '../../model/routine'
 export class InfoRutinaPage {
 
 	id:any;
-	rutina: Routine;
+	rutina = {creationDate:{},type:0,exercises:[]};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineService: RoutineProvider) {
-  	this.navParams.get("id");
+  	this.id = this.navParams.get("id");
   }
 
   ionViewDidLoad() {

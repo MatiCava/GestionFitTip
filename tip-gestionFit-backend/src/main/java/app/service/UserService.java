@@ -1,6 +1,8 @@
 package app.service;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
@@ -33,6 +35,14 @@ public class UserService {
 	
 	@Transactional
 	public long saveStudent(User_Student user){
+		Calendar birthCal = GregorianCalendar.getInstance();
+
+        birthCal.setTime(user.getBirthday());
+		
+		int age = (GregorianCalendar.getInstance().get(Calendar.YEAR) - birthCal.get(Calendar.YEAR));
+		
+		user.setAge(age);
+		
 		ArgumentsValidator.validateStudent(user);
 
 
