@@ -1,57 +1,86 @@
-<ion-content padding>
+<ion-content style="margin-bottom: 60px;padding-bottom: 60px;" padding>
 
-	<ion-list>
-		<ion-item>
-			<ion-label floating>Usuario</ion-label>
-			<ion-input type="text" [(ngModel)]="alumno.username"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Contraseña</ion-label>
-			<ion-input type="password" [(ngModel)]="alumno.password"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Mail</ion-label>
-			<ion-input type="email" [(ngModel)]="alumno.mail"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Nombre y apellido</ion-label>
-			<ion-input type="text" [(ngModel)]="alumno.nameAndSurname"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Fecha de nacimiento</ion-label>
-			<ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="alumno.birthday"></ion-datetime>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Edad</ion-label>
-			<ion-input type="number" [(ngModel)]="alumno.edad"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Peso</ion-label>
-			<ion-input type="number" [(ngModel)]="alumno.weigth"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Telefono</ion-label>
-			<ion-input type="text" [(ngModel)]="alumno.telephone"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Objetivo</ion-label>
-			<ion-textarea [(ngModel)]="alumno.objective"></ion-textarea>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Patologias</ion-label>
-			<ion-textarea [(ngModel)]="alumno.pathologies"></ion-textarea>
-		</ion-item>
-		<ion-item>
-			<ion-label floating>Observaciones</ion-label>
-			<ion-textarea [(ngModel)]="alumno.observations"></ion-textarea>
-		</ion-item>
-		<ion-item>
-			<button ion-button outline (click)="volverAtras()"><ion-icon name="arrow-back" class="largeIcon" color="info"> Atras</ion-icon> </button>
-			
-			<button ion-button outline (click)="guardarAlumno()"><ion-icon name="checkmark-circle" class="largeIcon" color="info"> Guardar</ion-icon> </button>
-		</ion-item>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Usuario</ion-label>
+					<ion-input type="text" [(ngModel)]="alumno.username"></ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Contraseña</ion-label>
+					<ion-input type="password" [(ngModel)]="alumno.password"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Mail</ion-label>
+					<ion-input type="email" [(ngModel)]="alumno.mail"></ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Nombre y apellido</ion-label>
+					<ion-input type="text" [(ngModel)]="alumno.nameAndSurname"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Fecha de nacimiento</ion-label>
+					<ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="alumno.birthday"></ion-datetime>
+				</ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Telefono</ion-label>
+					<ion-input type="text" [(ngModel)]="alumno.telephone"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Peso</ion-label>
+					<ion-input type="number" [(ngModel)]="alumno.weigth"></ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Observaciones</ion-label>
+					<ion-textarea [(ngModel)]="alumno.observations"></ion-textarea>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Objetivo</ion-label>
+					<ion-textarea [(ngModel)]="alumno.objective"></ion-textarea>
+				</ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label floating>Patologias</ion-label>
+					<ion-textarea [(ngModel)]="alumno.pathologies"></ion-textarea>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row style="margin-top: 20px;">
+			<ion-col>
+				<button ion-button (click)="volverAtras()"><ion-icon name="arrow-back" class="largeIcon" > Atras</ion-icon> </button>
+			</ion-col>
+			<ion-col>
+				<button ion-button (click)="guardarAlumno()"><ion-icon name="checkmark-circle" class="largeIcon" > Guardar</ion-icon> </button>
+			</ion-col>
+		</ion-row>
 
-	</ion-list>
+	</ion-grid>
 
 	
 	
