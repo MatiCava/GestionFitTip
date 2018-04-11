@@ -31,7 +31,7 @@ export class AlumnosPage {
   }
 
   abrirInfo(idUser){
-    let infoModal = this.modalCtrl.create(InfoAlumnoPage,{id:idUser}); //no se como pasar el alumno (Es lo mismo que abrir otra page)
+    let infoModal = this.modalCtrl.create(InfoAlumnoPage,{id:idUser});
     infoModal.present();
   }
 

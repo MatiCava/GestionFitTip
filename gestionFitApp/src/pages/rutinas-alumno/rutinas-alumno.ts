@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { UserProvider } from '../../providers/user/user';
 import { InfoRutinaPage } from '../info-rutina/info-rutina'
 
-/**
- * Generated class for the RutinasAlumnoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage({
 	name: 'rutinasAlumno',
 	segment: 'alumno/:id/rutinas'
@@ -49,5 +42,7 @@ export class RutinasAlumnoPage {
           error => {console.log(error)}
           )
   }
+
+  
 
 }

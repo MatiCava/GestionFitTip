@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
@@ -13,7 +13,7 @@ import { UserProvider } from '../../providers/user/user';
   templateUrl: 'tabla-medicion-alumno.html',
   providers:[UserProvider]
 })
-export class TablaMedicionAlumnoPage {
+export class TablaMedicionAlumnoPage implements OnInit{
 
 	tabla : any = {measures:[]};
 	dates: any = [];
@@ -23,8 +23,12 @@ export class TablaMedicionAlumnoPage {
   	this.id = this.navParams.get("id");
   }
 
-  ionViewDidLoad() {
+  ngOnInit(){
     this.getTabla();
+
+  }
+
+  ionViewDidLoad() {
   }
 
   isInstructor(){

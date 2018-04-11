@@ -4,12 +4,6 @@ import { Observable } from "rxjs/Observable";
 import { User_Student } from '../../model/user_student';
 
 
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
-import { AlumnosPage } from '../alumnos/alumnos';
 
 
 @IonicPage({name:"login"})
@@ -32,7 +31,7 @@ export class LoginPage {
   				this.navCtrl.push("dashboard",{"id":this.user.id});
   			}
   			else{
-  				this.navCtrl.push(AlumnosPage,{"id":this.user.id});
+  				this.navCtrl.push("alumnos",{"id":this.user.id});
   			}
   		},
   		error => {

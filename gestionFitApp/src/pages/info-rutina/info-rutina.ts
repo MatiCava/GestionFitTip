@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { RoutineProvider } from '../../providers/routine/routine'
 import { Routine } from '../../model/routine'
-
-/**
- * Generated class for the InfoRutinaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage({
 	name: 'infoRutina'
@@ -23,7 +16,7 @@ export class InfoRutinaPage {
 	id:any;
 	rutina = {creationDate:{},type:0,exercises:[]};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private routineService: RoutineProvider) {
+  constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private routineService: RoutineProvider) {
   	this.id = this.navParams.get("id");
   }
 
@@ -38,5 +31,11 @@ export class InfoRutinaPage {
   			error => {console.log(error)}
   			)
   }
+
+  cancel(){
+    this.viewCtrl.dismiss();
+  }
+
+
 
 }

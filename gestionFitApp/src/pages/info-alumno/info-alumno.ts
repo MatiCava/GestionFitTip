@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
 import { User_Student } from '../../model/user_student'
 
@@ -24,7 +24,7 @@ export class InfoAlumnoPage {
 	id: any;
 	alumno= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userServ: UserProvider) {
+  constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
   }
 
@@ -38,6 +38,10 @@ export class InfoAlumnoPage {
   			user => {this.alumno = user;console.log(this.alumno)},
   			err => {console.log(err)}
   			)
+  }
+
+  cancel(){
+    this.viewCtrl.dismiss();
   }
 
 }

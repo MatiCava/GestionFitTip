@@ -1,34 +1,72 @@
 
-<ion-content style="margin-top: 30px" padding>
-	<ion-grid>
-  <ion-row>
-    <ion-col>
-      <p> Nombre: {{user.nameAndSurname}}</p>
-    </ion-col>
-    <ion-col>
-      <p> Edad: {{user.age}} </p>
-    </ion-col>
-    <ion-col>
-      <p> Telefono: {{user.telephone}}</p>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-  	<ion-col>
-  		<p> Peso: {{user.weigth}} kg.</p>
-  	</ion-col>
-   	<ion-col>
-   		<p> Objetivo: {{user.objective}}</p><p *ngIf="user.objective == ''" > No definido</p>
-  	</ion-col>
-   	<ion-col>
-   		<p> Patologias: {{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > No definido</p>
-  	</ion-col>
-  </ion-row>
-</ion-grid>
-<ion-grid>
-	<ion-row>
-		<ion-col><button ion-button (click)="verRutinas()">Ver rutinas</button></ion-col>
-		<ion-col><button ion-button (click)="verTabla()">Ver mediciones</button></ion-col>
-	</ion-row>
-</ion-grid>
+<ion-slides initialSlide="1">
+    <ion-slide style="margin-top: 20px;">
+      <ion-content>
+        <ion-grid style="height: 600px">
+          <ion-row>
+            <ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;">Medida</p></ion-col>
+            <ion-col class="colNames" *ngFor="let day of dates"><p style="font-size: 15px">{{day}}</p></ion-col>
+          </ion-row>
+          <ion-row *ngFor="let medida of user.measurements.measures">
+            <ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;">{{medida.name}}</p></ion-col>
+            <ion-col class="colValues" *ngFor="let medicion of medida.measures"><p style="font-size: 15px">     {{medicion.measure}}cm Altura: {{medicion.height}}cm</p></ion-col>
+          </ion-row>
+          <ion-row>
+            <button ion-button (click)="goToSlide(1)"> Mi info</button>
+          </ion-row>
+        </ion-grid>
+        
+      </ion-content>
+    </ion-slide>
+    <ion-slide style="margin-top: 20px;">
+      <ion-content>
+      <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p> Nombre: {{user.nameAndSurname}}</p>
+        </ion-col>
+        <ion-col>
+          <p> Edad: {{user.age}} </p>
+        </ion-col>
+        <ion-col>
+          <p> Telefono: {{user.telephone}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p> Peso: {{user.weigth}} kg.</p>
+        </ion-col>
+        <ion-col>
+          <p> Objetivo: {{user.objective}}</p><p *ngIf="user.objective == ''" > No definido</p>
+        </ion-col>
+        <ion-col>
+          <p> Patologias: {{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > No definido</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col><button ion-button (click)="goToSlide(0)" outline><ion-icon name="arrow-dropleft-circle" float-left></ion-icon> &nbsp; <span> Ver mediciones </span> &nbsp; &nbsp; <ion-icon name="clipboard" float-right></ion-icon></button></ion-col>
+        <ion-col><button ion-button (click)="goToSlide(2)" outline><ion-icon name="calendar"></ion-icon>&nbsp; Rutinas &nbsp; <ion-icon name="arrow-dropright-circle"></ion-icon></button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+    
+  </ion-slide>
+  <ion-slide style="margin-top: 20px;">
+      <h2>Mis rutinas</h2>
+      <ion-list>
+        <ion-item *ngFor="let rutina of user.routines">
+          {{rutina.type}} 
+          <a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
+        </ion-item>
+        <div *ngIf="sinRutinas()">
+          <ion-item>
+            <h3>No tiene ninguna rutina asignada</h3>
+          </ion-item>
+        </div>
+      </ion-list>
+      <button ion-button (click)="goToSlide(1)"> <ion-icon name="arrow-dropleft"></ion-icon> Mi info</button> 
+  </ion-slide>
+</ion-slides>
 
-</ion-content>
