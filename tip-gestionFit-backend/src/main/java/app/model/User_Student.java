@@ -16,12 +16,15 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class User_Student extends User {
 	
 	private String pathologies;
 	private String observations;
 	private String objective;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private String telephone;
 	private int age;

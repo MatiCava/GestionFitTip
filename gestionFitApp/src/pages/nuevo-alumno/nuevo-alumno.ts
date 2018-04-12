@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
 import { User_Student,User_Role } from '../../model/user_student'
-
-
 
 @IonicPage(
 	{name:"nuevoAlumno"}
@@ -15,14 +14,51 @@ import { User_Student,User_Role } from '../../model/user_student'
 })
 export class NuevoAlumnoPage {
 
-	/*public alumno:any = {"name":"","email":"","user":"","password":"",
-	"telephone":"","age":"","birthday":"","pathologies":"","observations":"","objective":""
-	,"routines":[],"measures":[]};
-*/
-  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
+  form:FormGroup = this.formBuilder.group({
+    username: new FormControl('',Validators.compose([
+      Validators.minLength(4),
+      Validators.required
+    ])),
+  password: new FormControl('',Validators.compose([
+      Validators.minLength(4),
+      Validators.required
+    ])),
+  nameAndSurname: new FormControl('',Validators.compose([
+      Validators.minLength(6),
+      Validators.required
+    ])),
+  mail: new FormControl('',Validators.compose([
+      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+      Validators.required
+    ])),
+  weigth: new FormControl('',Validators.compose([
+      Validators.min(30),
+      Validators.max(150),
+      Validators.required
+    ])),
+  birthday: new FormControl('',Validators.compose([
+      Validators.nullValidator,
+      Validators.required
+    ])),
+  objective: new FormControl('',Validators.required),
+  telephone: new FormControl('',Validators.compose([
+      Validators.minLength(8),
+      Validators.required    ])),
+  observations:new FormControl('',Validators.compose([
+      Validators.minLength(5)
+    ])),
+  pathologies: new FormControl('',Validators.compose([
+      Validators.minLength(5)
+    ]))
+  })
+
+
+
+  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
+  
   userProvider: UserProvider;
 
-  constructor(private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {
+  constructor(private formBuilder: FormBuilder,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {
     this.userProvider = serviceUser;
   }
 
@@ -30,11 +66,35 @@ export class NuevoAlumnoPage {
     console.log('ionViewDidLoad NuevoAlumnoPage');
   }
 
+  validForm(){
+    let invalid = false;
+    for(let control in this.form.controls){
+      invalid = invalid || this.form.controls[control].invalid;
+    }
+    return (invalid || !(this.form.dirty));
+  }
+
   volverAtras(){
     this.navCtrl.push('alumnos');
   }
 
+  crearAlumno(){
+    this.alumno.username = this.form.controls['username'].value;
+    this.alumno.password = this.form.controls['password'].value;
+    this.alumno.nameAndSurname = this.form.controls['nameAndSurname'].value;
+    this.alumno.mail = this.form.controls['mail'].value;
+    this.alumno.objective = this.form.controls['objective'].value;
+    this.alumno.telephone = this.form.controls['telephone'].value;
+    this.alumno.weigth = this.form.controls['weigth'].value;
+    this.alumno.observations = this.form.controls['observations'].value;
+    this.alumno.pathologies = this.form.controls['pathologies'].value;
+    this.alumno.birthday = this.form.controls['birthday'].value;
+  }
+
   guardarAlumno(){
+    this.crearAlumno();
+    console.log(this.form.errors);
+    console.log(this.form.errors != null || !(this.form.dirty));
     this.userProvider.addNewUserStudent(this.alumno).subscribe(
     () => { 
               let confirmacion = this.alertCtrl.create({
