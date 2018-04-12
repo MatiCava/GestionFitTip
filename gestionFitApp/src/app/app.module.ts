@@ -27,6 +27,14 @@ import { UserProvider } from '../providers/user/user';
 import { RoutineProvider } from '../providers/routine/routine';
 import { LoginProvider } from '../providers/login/login';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -40,7 +48,14 @@ import { LoginProvider } from '../providers/login/login';
     RutinasInstructorPageModule,
     AlumnosPageModule,
     InfoAlumnoPageModule,
-    InfoRutinaPageModule
+    InfoRutinaPageModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
