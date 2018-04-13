@@ -1,8 +1,8 @@
 # Trabajo de inserción profesional
 ## Proyecto: GestionFit <img src="https://github.com/MatiCava/GestionFitTip/blob/master/gestionFitApp/src/assets/imgs/icon.png" height="50" width="50">
 
-- Backlog: https://trello.com/b/PpSRi2VA/gestionfit
-- CI en travis: https://travis-ci.org/MatiCava/GestionFitTip [![Build Status](https://travis-ci.org/MatiCava/GestionFitTip.svg?branch=master)](https://travis-ci.org/MatiCava/GestionFitTip)
+- Backlog: [Trello](https://trello.com/b/PpSRi2VA/gestionfit)
+- CI en travis: [![Build Status](https://travis-ci.org/MatiCava/GestionFitTip.svg?branch=master)](https://travis-ci.org/MatiCava/GestionFitTip)
 
 ### Integrantes
 - Matias Cavallin
@@ -17,3 +17,13 @@ GestionFit tiene como objetivo facilitar la tarea de docentes en instructores qu
 - Creación de rutinas y asignación de las mismas
 
 También proporciona a los alumnos la posibilidad de ver las rutinas que posean y utilizar herramientas para mantener un control sobre la actividad que realizan.
+
+### Wiki
+[Wiki del proyecto](https://github.com/MatiCava/GestionFitTip/wiki)
+
+### Prueba de concepto
+[Documentación de la prueba de concepto](https://github.com/MatiCava/GestionFitTip/wiki/Prueba-de-concepto)
+
+### Arquitectura
+[Componentes de la arquitectura](https://github.com/MatiCava/GestionFitTip/wiki/Componentes-de-la-arquitectura)
+
