@@ -2,9 +2,9 @@
 
 	<ion-grid>
 		<ion-row>
-			<ion-col>Medida</ion-col>
-			<ion-col>Medicion</ion-col>
-			<ion-col>Altura</ion-col>
+			<ion-col>{{'Medida' | translate}}</ion-col>
+			<ion-col>{{'Medicion' | translate}}</ion-col>
+			<ion-col>{{'Altura' | translate}}</ion-col>
 		</ion-row>
 		<ion-row *ngFor="let medida of medidas; index as i">
 			<ion-col>{{medida.name}}</ion-col>

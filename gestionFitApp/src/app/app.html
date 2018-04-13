@@ -20,19 +20,25 @@
   <ion-content>
     <ion-list>
       <button ion-item (click)="home()">
-        Inicio
+        {{'Inicio' | translate}}
       </button>
       <button ion-item (click)="openPage('alumnos')" *ngIf="isInstructor()">
-        Alumnos
+        {{'Alumnos' | translate}}
       </button>
       <button ion-item *ngIf="isInstructor()">
-        Rutinas
+        {{'Rutinas' | translate}}
       </button>
       <!--<button ion-item *ngIf="isStudent()">
         Mis Rutinas
       </button>-->
+      <button ion-item (click)="changeLang('es')">
+        {{'Español' | translate}}
+      </button>
+      <button ion-item (click)="changeLang('en')">
+        {{'Ingles' | translate}}
+      </button>
       <button ion-item menuToggle>
-        Cerrar
+        {{'Cerrar' | translate}}
       </button>
     </ion-list>
   </ion-content>

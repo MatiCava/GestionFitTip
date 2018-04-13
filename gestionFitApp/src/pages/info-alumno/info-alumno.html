@@ -12,34 +12,34 @@
 
 	<ion-list inset>
 		<ion-item>
-			<p>Usuario: <strong>{{alumno.username}}</strong></p>	
+			<p>{{'Usuario' | translate}}: <strong>{{alumno.username}}</strong></p>	
 		</ion-item>
 		<ion-item>
-			<p> Contraseña: <strong>{{alumno.password}}</strong> </p>
+			<p> {{'Contraseña' | translate}}: <strong>{{alumno.password}}</strong> </p>
 		</ion-item>
 		<ion-item>
 			<p> Mail: <strong>{{alumno.mail}}</strong> </p>
 		</ion-item>
 		<ion-item>
-			<p> Patologias: <strong> {{alumno.pathologies}} </strong></p><p *ngIf="alumno.pathologies == ''" > <strong> No definido </strong></p>
+			<p> {{'Patologias' | translate}}: <strong> {{alumno.pathologies}} </strong></p><p *ngIf="alumno.pathologies == ''" > <strong> {{'No definido' | translate}} </strong></p>
 		</ion-item>
 		<ion-item>
-			<p> Observaciones: <strong> {{alumno.observations}} </strong> </p><p *ngIf="alumno.observations == ''" > <strong> No definido </strong></p>
+			<p> {{'Observaciones' | translate}}: <strong> {{alumno.observations}} </strong> </p><p *ngIf="alumno.observations == ''" > <strong> {{'No definido' | translate}} </strong></p>
 		</ion-item>
 		<ion-item>
-			<p> Objetivo: <strong>{{alumno.objective}}</strong> </p>
+			<p> {{'Objetivo' | translate}}: <strong>{{alumno.objective}}</strong> </p>
 		</ion-item>
 		<ion-item>
-			<p> Cumpleaños: <strong>{{alumno.birthday}}</strong> </p>
+			<p> {{'Cumpleaños' | translate}}: <strong>{{alumno.birthday}}</strong> </p>
 		</ion-item>
 		<ion-item>
-			<p> Telefono: <strong>{{alumno.telephone}}</strong> </p>
+			<p> {{'Telefono' | translate}}: <strong>{{alumno.telephone}}</strong> </p>
 		</ion-item>
 		<ion-item>
-			<p> Edad: <strong>{{alumno.age}}</strong> </p>
+			<p> {{'Edad' | translate}}: <strong>{{alumno.age}}</strong> </p>
 		</ion-item>
 		<ion-item>
-			<p> Peso: <strong>{{alumno.weigth}}</strong> </p>
+			<p> {{'Peso' | translate}}: <strong>{{alumno.weigth}}</strong> </p>
 		</ion-item>
 	</ion-list>
 </ion-content>

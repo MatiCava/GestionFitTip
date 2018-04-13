@@ -5,29 +5,29 @@
 				<ion-icon name="close"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title>title</ion-title>
+		<br>
 	</ion-navbar>
 </ion-header>
 <ion-content style="margin-top: 30px;" padding>
 	<ion-list inset>
 		<ion-item>
-			<p>Fecha creacion: <strong>{{rutina.creationDate}}</strong></p>
+			<p>{{'Fecha creacion' | translate}}: <strong>{{rutina.creationDate}}</strong></p>
 		</ion-item>
 		<ion-item>
-			<p>Tipo: <strong>{{rutina.type}}</strong></p>
+			<p>{{'Tipo' | translate}}: <strong>{{rutina.type | translate}}</strong></p>
 		</ion-item>
 		<ion-item>
 			<ion-row>
-				<ion-col>Nombre</ion-col>
-				<ion-col>Descripcion</ion-col>
-				<ion-col>Tipo</ion-col>
+				<ion-col>{{'Nombre' | translate}}</ion-col>
+				<ion-col>{{'Descripcion' | translate}}</ion-col>
+				<ion-col>{{'Tipo' | translate}}</ion-col>
 			</ion-row>
 		</ion-item>
 		<ion-item *ngFor="let exercise of rutina.exercises">
 			<ion-row>
 				<ion-col>{{exercise.name}}</ion-col>
 				<ion-col>{{exercise.description}}</ion-col>
-				<ion-col>{{exercise.type}}</ion-col>
+				<ion-col>{{exercise.type | translate}}</ion-col>
 			</ion-row>
 		</ion-item>
 	</ion-list>

@@ -14,8 +14,8 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public menuCtrl: MenuController, private translateService: TranslateService) {
     platform.ready().then(() => {
-      this.translateService.setDefaultLang('en');
-      this.translateService.use('en');
+      this.translateService.setDefaultLang('es');
+      this.translateService.use('es');
       statusBar.styleDefault();
       splashScreen.hide();
     });
@@ -42,6 +42,9 @@ export class MyApp {
     return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor";
   }
 
+  changeLang(lang){
+    this.translateService.use(lang);
+  }
 
 }
 

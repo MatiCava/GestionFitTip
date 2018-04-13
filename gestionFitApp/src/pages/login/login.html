@@ -7,13 +7,13 @@
 	  </ion-item>
 	
 	  <ion-item>
-	    <ion-label fixed>Contraseña</ion-label>
+	    <ion-label fixed>{{'Contraseña' | translate}}</ion-label>
 	    <ion-input type="password" [(ngModel)]="credential.password"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
-	  	<button ion-button full (click)="login()">Ingresar</button>
-	  	<button ion-button full color="secondary" >Registrarse</button>
+	  	<button ion-button full (click)="login()">{{'Ingresar' | translate}}</button>
+	  	<button ion-button full color="secondary" >{{'Registrarse' | translate}}</button>
 	  </ion-item>
 	
 	</ion-list>
