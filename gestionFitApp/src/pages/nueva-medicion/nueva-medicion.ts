@@ -38,7 +38,7 @@ export class NuevaMedicionPage {
 
   guardar(){
   	this.userServ.updateTable(this.id,{day:new Date().getTime(),measures:this.mediciones}).subscribe(
-  		res => {console.log(res);this.navCtrl.pop();},
+  		res => {console.log(res);this.navCtrl.push('tablaMedicion',{id:this.id});},
   		error => {console.log(error);}
   		)
   }
