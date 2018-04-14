@@ -1,7 +1,7 @@
 <ion-row style="margin-top: 35px;">
-<ion-col class="colTab" ><a (click)="goToSlide(0)"><div> {{'Mediciones' | translate}} &nbsp; <ion-icon name="clipboard"></ion-icon></div></a></ion-col> 
-<ion-col class="colTab"><a (click)="goToSlide(1)" ><div> Info &nbsp; <ion-icon name="information-circle"></ion-icon></div></a></ion-col>
-<ion-col class="colTab"><a (click)="goToSlide(2)"><div> {{'Rutinas' | translate}} &nbsp; <ion-icon name="calendar"></ion-icon></div></a></ion-col>
+<ion-col class="colTab" ><a (click)="goToSlide(0)"><div> <ion-label color="{{ inSlide(0) ? 'danger' : 'primary' }}">{{'Mediciones' | translate}} &nbsp; <ion-icon name="clipboard"></ion-icon></ion-label></div></a></ion-col> 
+<ion-col class="colTab"><a (click)="goToSlide(1)" ><div> <ion-label color="{{ inSlide(1) ? 'danger' : 'primary' }}">Info &nbsp; <ion-icon name="information-circle"></ion-icon></ion-label></div></a></ion-col>
+<ion-col class="colTab"><a (click)="goToSlide(2)"><div> <ion-label color="{{ inSlide(2) ? 'danger' : 'primary' }}">{{'Rutinas' | translate}} &nbsp; <ion-icon name="calendar"></ion-icon></ion-label></div></a></ion-col>
 </ion-row>
 <ion-slides initialSlide="1">
     <ion-slide style="margin-top: 20px;">

@@ -5,7 +5,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title mode='ios'>
-      <div style=" height: 100%;display: inline;vertical-align: middle;"><p style="font-size: 20px;font-family: 'Times New Roman', Times, serif;"><img src="assets/imgs/icon.png" height="30px" width="35px" *ngIf="isBrowser"> GestionFit</p></div>
+      <div style=" height: 100%;display: inline;vertical-align: middle;"><p style="font-size: 20px;font-family: 'Times New Roman', Times, serif;" *ngIf="isBrowser"><img src="assets/imgs/icon.png" height="30px" width="35px"> GestionFit</p></div>
     </ion-title>
         <ion-buttons end>
       <button ion-button icon-only (click)="home()">
@@ -15,7 +15,7 @@
   </ion-navbar>
 
 </ion-header>
-<ion-menu persistent="true" swipeEnabled="true" [content]="content">
+<ion-menu persistent="true" swipeEnabled="false" [content]="content" *ngIf="logged()">
 
   <ion-content>
     <ion-list>
@@ -28,19 +28,21 @@
       <button ion-item *ngIf="isInstructor()">
         {{'Rutinas' | translate}}
       </button>
-      <!--<button ion-item *ngIf="isStudent()">
-        Mis Rutinas
-      </button>-->
+      <!--
       <button ion-item (click)="changeLang('es')">
         {{'Español' | translate}}
       </button>
       <button ion-item (click)="changeLang('en')">
         {{'Ingles' | translate}}
       </button>
+  -->
+  	  <button ion-item (click)="logout()">
+  	  	LogOut
+  	  </button>
       <button ion-item menuToggle>
         {{'Cerrar' | translate}}
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
-<ion-nav id="nav" class="headerContent" #content [root]="rootPage"></ion-nav>
+<ion-nav id="nav" class="headerContent" #content [root]="rootPage" [rootParams]="rootPageParams"></ion-nav>

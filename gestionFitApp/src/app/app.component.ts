@@ -1,4 +1,4 @@
-import { Component ,ViewChild} from '@angular/core';
+import { Component ,ViewChild, OnInit} from '@angular/core';
 import { Platform,Nav,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -7,8 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
   rootPage:any = 'login';
+  rootPageParams:any = {};
   @ViewChild(Nav) nav: Nav;
   public isBrowser:boolean = false;
 
@@ -24,14 +25,43 @@ export class MyApp {
     }
   }
 
+  ngOnInit(){
+    if(this.logged()){
+      if(this.isInstructor()){
+        this.rootPage = "alumnos";
+        this.rootPageParams = {id:Number(localStorage.getItem("id"))}
+      }
+      else if(this.isStudent()){
+        this.rootPage = "dashboard";
+        this.rootPageParams = {id:Number(localStorage.getItem("id"))}
+
+      }
+    }
+    else{
+      this.rootPage = "login";
+    }
+  }
+
   openPage(page){
     this.menuCtrl.close();
     this.nav.push(page);
   }
 
+  logout(){
+    this.menuCtrl.close();
+    localStorage.removeItem("user_role");
+    this.nav.push("login");
+
+  }
+
 
   home(){
+    this.menuCtrl.close();
     this.nav.popToRoot();
+  }
+
+  logged(){
+    return localStorage.getItem("user_role") != null;
   }
 
   isStudent(){

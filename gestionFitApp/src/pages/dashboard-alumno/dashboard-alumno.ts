@@ -39,6 +39,10 @@ export class DashboardAlumnoPage implements OnInit{
     }
   }
 
+  inSlide(slideInd){
+    return this.slides.getActiveIndex() == slideInd;
+  }
+
   formatDate(date){
     let newDate = date.split("-",3);
     let day = newDate[0] ;

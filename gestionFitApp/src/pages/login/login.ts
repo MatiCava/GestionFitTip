@@ -19,6 +19,33 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+
+  }
+
+  ionViewDidEnter(){
+  /*  console.log(this.logged);
+    console.log(this.isStudent);
+    console.log(this.isInstructor)
+    
+      if(this.isInstructor()){
+        this.navCtrl.push("alumnos",{"id":localStorage.getItem("id")});
+      }
+      else if(this.isStudent()){
+        this.navCtrl.push("dashboard",localStorage.getItem("id"));
+      }
+    */
+  }
+
+    logged(){
+    return localStorage.getItem("user_role") != null;
+  }
+
+  isStudent(){
+    return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Student";
+  }
+
+  isInstructor(){
+    return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor";
   }
 
   login(){
@@ -27,11 +54,12 @@ export class LoginPage {
   			this.user = result;
   			console.log(this.user);
   			localStorage.setItem("user_role",this.user.role);
+        localStorage.setItem("id",this.user.id);
   			if(this.user.role == "Student"){
-  				this.navCtrl.push("dashboard",{"id":this.user.id});
+  				this.navCtrl.push("dashboard",{id:this.user.id});
   			}
   			else{
-  				this.navCtrl.push("alumnos",{"id":this.user.id});
+  				this.navCtrl.push("alumnos",{id:this.user.id});
   			}
   		},
   		error => {
