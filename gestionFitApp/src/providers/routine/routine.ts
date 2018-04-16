@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import { Routine } from '../../model/routine';
+import { Exercise } from '../../model/exercise'
 
 /*
   Generated class for the RoutineProvider provider.
@@ -22,6 +23,10 @@ export class RoutineProvider {
 
   getRutines(): Observable<Routine[]>{
   	return this.http.get<Routine[]>(this.apiUrl+"routines");
+  }
+
+  getExercises(): Observable<Exercise[]>{
+    return this.http.get<Exercise[]>(this.apiUrl+"exercises");
   }
 
   getRoutine(id):Observable<any>{

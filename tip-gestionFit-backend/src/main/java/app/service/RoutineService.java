@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import app.model.Exercise;
 import app.model.Routine;
+import app.persistence.ExerciseDAO;
 import app.persistence.RoutineDAO;
 
 @Service
@@ -14,6 +16,9 @@ public class RoutineService {
 
 	@Autowired
 	private RoutineDAO routineDAO;
+	
+	@Autowired
+	private ExerciseDAO exerciseDAO;
 	
 	public RoutineService(){
 		this.routineDAO = new RoutineDAO();
@@ -42,5 +47,10 @@ public class RoutineService {
 	@Transactional
 	public List<Routine> getAll(){
 		return this.routineDAO.getAll();
+	}
+
+	@Transactional
+	public List<Exercise> getExercises() {
+		return this.exerciseDAO.getAll();
 	}
 }

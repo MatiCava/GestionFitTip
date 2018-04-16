@@ -2,9 +2,12 @@ package app.service;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import app.model.Exercise;
+import app.model.Routine;
 import app.model.User;
 import app.model.User_Instructor;
 import app.model.User_Student;
@@ -80,6 +83,23 @@ public class ArgumentsValidator {
 		isNullOrEmptyString(newUser.getUsername(),newUser.getPassword());
 
 		
+	}
+
+	public static void validateRoutine(Routine newRutines) {
+		isInvalidCreationDate(newRutines.getCreationDate());
+		isInvalidListExercises(newRutines.getExercises());
+	}
+
+	private static void isInvalidCreationDate(Date creationDate) {
+		if(creationDate.before(new Date())){
+			throw new IllegalArgumentException("Not a valid date");
+		}
+	}
+
+	private static void isInvalidListExercises(List<Exercise> exercises) {
+		if(exercises.isEmpty()){
+			throw new IllegalArgumentException("Not a valid list of exercises");
+		}
 	}
 
 }

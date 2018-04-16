@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RoutineProvider } from '../../providers/routine/routine'
 import { Routine } from '../../model/routine'
+import { Exercise } from '../../model/exercise'
 import { UserProvider } from '../../providers/user/user'
 
 /**
@@ -26,6 +27,9 @@ export class RutinasInstructorPage {
 	id:any;
 	rutinas: any[];
 	rutinasAlumno:any = {};
+  newExercise = {name:"", description:"", typeE:{}};
+  exercises: any[];
+  newRoutine = {creationDate:new Date().getTime(), typeR:{}, exercise:this.exercises};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineProvider: RoutineProvider, private userService: UserProvider) {
   	this.rutinasProvider = routineProvider;
@@ -35,6 +39,7 @@ export class RutinasInstructorPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RutinasInstructorPage');
     this.traerRutinas();
+    this.traerEjercicios();
   }
 
   volverAtras(){
@@ -50,11 +55,22 @@ export class RutinasInstructorPage {
   	this.volverAtras();
   }
 
+  guardarEjercicio(){
+    
+  }
+
   traerRutinas(){
   	this.rutinasProvider.getRutines().subscribe(
   						result => {this.rutinas = result;},
   						error => {console.log(error);},
   						)
+  }
+
+  traerEjercicios(){
+    this.rutinasProvider.getExercises().subscribe(
+              result => {this.exercises = result;},
+              error => {console.log(error);},
+              )
   }
 
 }

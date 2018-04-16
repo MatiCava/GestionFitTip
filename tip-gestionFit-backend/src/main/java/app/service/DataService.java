@@ -64,6 +64,10 @@ public class DataService {
 
 		alu1.addMeasurements(measures);
 		Routine rutina = new Routine(Routine_Type.Strength);
+		Routine rutina2 = new Routine(Routine_Type.Explosive_Force);
+		Routine rutina3 = new Routine(Routine_Type.Muscular_Definition);
+		Routine rutina4 = new Routine(Routine_Type.Resistance);
+		Routine rutina5 = new Routine(Routine_Type.Strength_Resistance);
 		rutina.addExercise(ex4);
 		rutina.addExercise(ex1);
 		rutina.addExercise(ex2);
@@ -76,6 +80,10 @@ public class DataService {
 		this.measureDAO.save(alu1.getMeasurements().measures.get(5));
 		this.measureDAO.save(alu1.getMeasurements().measures.get(6));
 		this.routineDAO.save(rutina);
+		this.routineDAO.save(rutina2);
+		this.routineDAO.save(rutina3);
+		this.routineDAO.save(rutina4);
+		this.routineDAO.save(rutina5);
 		this.tableDAO.save(alu1.getMeasurements());
 		
 //		alu1.addRoutine(rutina);

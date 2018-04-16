@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.model.Exercise;
 import app.model.Routine;
 import app.model.UserNotFoundException;
 import app.service.RoutineService;
@@ -34,6 +35,10 @@ public class RoutineController {
 
 	}
 
+	@GetMapping(value = "/exercises", produces = "application/json")   
+	public List<Exercise> getExercises(){
+		return this.routineServ.getExercises();
+	}
 
 	@PostMapping(value = "/routine", produces = "application/json")   
 	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) {
