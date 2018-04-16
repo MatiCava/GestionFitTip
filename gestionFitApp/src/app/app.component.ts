@@ -48,9 +48,13 @@ export class MyApp implements OnInit{
   }
 
   logout(){
-    this.menuCtrl.close();
-    localStorage.removeItem("user_role");
-    this.nav.push("login");
+    this.menuCtrl.close().then(()=>
+      {localStorage.removeItem("user_role");
+    localStorage.removeItem("id");
+    this.nav.push("login");}
+
+      );
+    
 
   }
 

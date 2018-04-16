@@ -11,7 +11,7 @@
 <ion-content style="margin-top: 30px;" padding>
 	<ion-list inset>
 		<ion-item>
-			<p>{{'Fecha creacion' | translate}}: <strong>{{rutina.creationDate}}</strong></p>
+			<p>{{'Fecha creacion' | translate}}: <strong>{{rutina.creationDate | date:'dd/MM/yyyy'}}</strong></p>
 		</ion-item>
 		<ion-item>
 			<p>{{'Tipo' | translate}}: <strong>{{rutina.type | translate}}</strong></p>

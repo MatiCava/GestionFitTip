@@ -22,10 +22,11 @@ import { User_Student } from '../../model/user_student'
 export class InfoAlumnoPage {
 
 	id: any;
-	alumno= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
+	private alumno;//= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
 
   constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
+    this.alumno={};
   }
 
   ionViewDidLoad() {

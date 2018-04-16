@@ -2,14 +2,14 @@
 
 	<ion-grid>
 		<ion-row>
-			<ion-col>{{'Medida' | translate}}</ion-col>
-			<ion-col>{{'Medicion' | translate}}</ion-col>
-			<ion-col>{{'Altura' | translate}}</ion-col>
+			<ion-col col-3>{{'Medida' | translate}}</ion-col>
+			<ion-col col-3>{{'Medicion' | translate}}</ion-col>
+			<ion-col col-3>{{'Altura' | translate}}</ion-col>
 		</ion-row>
 		<ion-row *ngFor="let medida of medidas; index as i">
-			<ion-col>{{medida.name | translate}}</ion-col>
-			<ion-col><ion-input type="number" [(ngModel)]="mediciones[i].measure"></ion-input></ion-col>
-			<ion-col><ion-input type="number" [(ngModel)]="mediciones[i].height"></ion-input></ion-col>
+			<ion-col col-3>{{medida.name | translate}}</ion-col>
+			<ion-col col-3><ion-input type="number" [(ngModel)]="mediciones[i].measure"></ion-input></ion-col>
+			<ion-col col-3><ion-input type="number" [(ngModel)]="mediciones[i].height"></ion-input></ion-col>
 
 
 		</ion-row>

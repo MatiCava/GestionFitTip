@@ -7,7 +7,7 @@ import { User_Student } from '../../model/user_student';
 @Injectable()
 export class UserProvider {
 
-	apiUrl : String="http://localhost:8080/api/"
+	apiUrl : String="http://localhost:8080/api/";
 
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
@@ -52,5 +52,8 @@ export class UserProvider {
   updateRutines(id, rutines):Observable<any>{
     return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines);
   }
+
+
+ 
 
 }

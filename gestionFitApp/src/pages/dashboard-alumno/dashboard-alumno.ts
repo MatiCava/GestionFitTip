@@ -1,8 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController,Slides } from 'ionic-angular';
 import {UserProvider} from '../../providers/user/user';
-import { InfoRutinaPage } from '../info-rutina/info-rutina'
-
+import { InstagramProvider } from '../../providers/instagram/instagram';
+import { InfoRutinaPage } from '../info-rutina/info-rutina';
+import moment from 'moment';
 
 
 @IonicPage(
@@ -13,7 +14,7 @@ import { InfoRutinaPage } from '../info-rutina/info-rutina'
 @Component({
   selector: 'page-dashboard-alumno',
   templateUrl: 'dashboard-alumno.html',
-  providers:[UserProvider]
+  providers:[UserProvider,InstagramProvider]
 })
 export class DashboardAlumnoPage implements OnInit{
 
@@ -21,13 +22,27 @@ export class DashboardAlumnoPage implements OnInit{
   dates: any = [];
 	id:any;
   user :any= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{},measurements:{measures:["","","","","","",""]},routines:[]};
+  private media;
+  private info;
 
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, private userServ : UserProvider) {
-  	this.id = this.navParams.get("id")
+
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, private userServ : UserProvider, private instagramServ : InstagramProvider) {
+  	this.id = this.navParams.get("id");
+    this.media=[];
+    this.info= {};
   }
 
   ngOnInit(){
     this.getUser();
+    this.instagramServ.getInstagramUserInfo().subscribe(
+      res=> {this.media=res.data;console.log(res)},
+      error=> console.log(error)
+      );
+
+    this.instagramServ.getInstagramProfile().subscribe(
+      res=> {this.info=res.data;console.log(res)},
+      error=> console.log(error));
+
   }
 
    setDates(){
@@ -81,12 +96,20 @@ export class DashboardAlumnoPage implements OnInit{
   }
 
   goToSlide(slide){
-    console.log(this.slides._slides);
     this.slides.slideTo(slide,500);
   }
 
   sinRutinas(){
     return this.user.routines.length == 0;
+  }
+
+  fecha(time){
+    return new Date(time * 1000);
+  }
+
+  hace(fecha){
+    return moment(fecha.toISOString().slice(0,10).replace(/-/g,""),"YYYYMMDD").fromNow();
+  
   }
 
 }

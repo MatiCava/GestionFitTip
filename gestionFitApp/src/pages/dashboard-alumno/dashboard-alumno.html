@@ -1,12 +1,12 @@
 <ion-row style="margin-top: 35px;">
 <ion-col class="colTab" ><a (click)="goToSlide(0)"><div> <ion-label color="{{ inSlide(0) ? 'danger' : 'primary' }}">{{'Mediciones' | translate}} &nbsp; <ion-icon name="clipboard"></ion-icon></ion-label></div></a></ion-col> 
-<ion-col class="colTab"><a (click)="goToSlide(1)" ><div> <ion-label color="{{ inSlide(1) ? 'danger' : 'primary' }}">Info &nbsp; <ion-icon name="information-circle"></ion-icon></ion-label></div></a></ion-col>
-<ion-col class="colTab"><a (click)="goToSlide(2)"><div> <ion-label color="{{ inSlide(2) ? 'danger' : 'primary' }}">{{'Rutinas' | translate}} &nbsp; <ion-icon name="calendar"></ion-icon></ion-label></div></a></ion-col>
+<ion-col class="colTab"><a (click)="goToSlide(1)" ><div> <ion-label color="{{ inSlide(1) ? 'danger' : 'primary' }}">Mi perfil &nbsp; <ion-icon name="information-circle"></ion-icon></ion-label></div></a></ion-col>
+<ion-col class="colTab"><a (click)="goToSlide(2)"><div> <ion-label color="{{ inSlide(2) ? 'danger' : 'primary' }}">Instagram &nbsp; <ion-icon name="logo-instagram"></ion-icon></ion-label></div></a></ion-col>
 </ion-row>
 <ion-slides initialSlide="1">
     <ion-slide style="margin-top: 20px;">
       <ion-content>
-        <ion-grid style="height: 600px">
+        <ion-grid style="height: 100%">
           <ion-row>
             <ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;">{{'Medida' | translate}}</p></ion-col>
             <ion-col class="colNames" *ngFor="let day of dates"><p style="font-size: 15px">{{day}}</p></ion-col>
@@ -31,12 +31,12 @@
           <p> {{'Edad' | translate}}: {{user.age}} </p>
         </ion-col>
         <ion-col>
-          <p> {{'Telefono' | translate}}: {{user.telephone}}</p>
+          <p> {{'Telefono' | translate}}: {{user.telephone.slice(0,4)+"-"+user.telephone.slice(4,8)}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <p> {{'Peso' | translate}}: {{user.weigth}} kg.</p>
+          <p> {{'Peso' | translate}}: {{user.weigth.toString().replace('.',',')}} kg.</p>
         </ion-col>
         <ion-col>
           <p> {{'Objetivo' | translate}}: {{user.objective}}</p><p *ngIf="user.objective == ''" > {{'No definido' | translate}}</p>
@@ -46,11 +46,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-content>
-    
-  </ion-slide>
-  <ion-slide style="margin-top: 20px;">
-      <h2>{{'Mis rutinas' | translate}}</h2>
+          <h2>{{'Mis rutinas' | translate}}</h2>
       <ion-list>
         <ion-item *ngFor="let rutina of user.routines">
           {{rutina.type | translate}} 
@@ -62,6 +58,48 @@
           </ion-item>
         </div>
       </ion-list>
+  </ion-content>
+    
+  </ion-slide>
+  <ion-slide style="margin-top: 20px;">
+    <ion-content style="margin:auto">
+    <ion-grid style="height: 100%">
+      <ion-row justify-content-center align-items-center style="height: 100%;display:block">
+      <ion-card style="margin:auto;width: 650px;" *ngFor="let publicacion of media">
+          <ion-item>
+            <ion-avatar item-start>
+              <a href="https://www.instagram.com/pilateslovemylife/" ><img [src]="publicacion.user.profile_picture"></a>
+            </ion-avatar>
+            <h2><a href="https://www.instagram.com/pilateslovemylife/">{{publicacion.user.full_name}}</a></h2>
+            <p>{{fecha(publicacion.created_time) | date:'dd/MM/yyyy'}}</p>
+          </ion-item>
+          <a [href]="publicacion.link" ><img [src]="publicacion.images.standard_resolution.url"></a>
+          <ion-card-content>
+            <p>{{publicacion.caption.text}}</p>
+          </ion-card-content>
+            <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>{{publicacion.likes.count}} Likes</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>{{publicacion.comments.count}} Comentarios</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+        {{hace(fecha(publicacion.created_time))}}
+      </ion-note>
+    </ion-col>
+  </ion-row>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
 
   </ion-slide>
 </ion-slides>

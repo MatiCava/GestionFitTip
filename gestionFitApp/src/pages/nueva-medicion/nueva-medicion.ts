@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+
 
 
 @IonicPage({
@@ -14,12 +16,15 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class NuevaMedicionPage {
 
+  /*form:FormGroup= this.formBuilder.group({
+
+  });*/
 	medidas = [];
 	mediciones = [];
 	id : any;
 	tabla:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
+  constructor(private formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
   	this.tabla = this.navParams.get("medidas");
   }

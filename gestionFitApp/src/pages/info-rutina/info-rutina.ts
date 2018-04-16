@@ -14,10 +14,11 @@ import { Routine } from '../../model/routine'
 export class InfoRutinaPage {
 
 	id:any;
-	rutina = {creationDate:{},type:0,exercises:[]};
+	private rutina; //= {creationDate:{},type:0,exercises:[]};
 
   constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private routineService: RoutineProvider) {
   	this.id = this.navParams.get("id");
+    this.rutina={};
   }
 
   ionViewDidLoad() {
