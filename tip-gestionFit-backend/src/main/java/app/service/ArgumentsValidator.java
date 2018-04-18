@@ -86,15 +86,9 @@ public class ArgumentsValidator {
 	}
 
 	public static void validateRoutine(Routine newRutines) {
-		isInvalidCreationDate(newRutines.getCreationDate());
 		isInvalidListExercises(newRutines.getExercises());
 	}
 
-	private static void isInvalidCreationDate(Date creationDate) {
-		if(creationDate.before(new Date())){
-			throw new IllegalArgumentException("Not a valid date");
-		}
-	}
 
 	private static void isInvalidListExercises(List<Exercise> exercises) {
 		if(exercises.isEmpty()){

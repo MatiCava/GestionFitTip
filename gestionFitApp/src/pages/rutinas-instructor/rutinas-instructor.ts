@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RoutineProvider } from '../../providers/routine/routine'
-import { Routine } from '../../model/routine'
-import { Exercise } from '../../model/exercise'
-import { UserProvider } from '../../providers/user/user'
+import { RoutineProvider } from '../../providers/routine/routine';
+import { Routine, RoutineType } from '../../model/routine';
+import { Exercise, ExerciseType } from '../../model/exercise';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the RutinasInstructorPage page.
@@ -27,9 +27,12 @@ export class RutinasInstructorPage {
 	id:any;
 	rutinas: any[];
 	rutinasAlumno:any = {};
-  newExercise = {name:"", description:"", typeE:{}};
+  rutinasType=[RoutineType[4], RoutineType[3], RoutineType[2], RoutineType[1], RoutineType[0]];
+  exercisesType=[ExerciseType[1], ExerciseType[0], ExerciseType[3], ExerciseType[2]];
   exercises: any[];
-  newRoutine = {creationDate:new Date().getTime(), typeR:{}, exercise:this.exercises};
+  exercisesAlumno:any[] = [];
+  newExercise = {name:"", description:"", typeE:""};
+  newRoutine = {creationDate:new Date().getTime(), typeR:"", exercise:this.exercisesAlumno};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineProvider: RoutineProvider, private userService: UserProvider) {
   	this.rutinasProvider = routineProvider;
@@ -47,8 +50,10 @@ export class RutinasInstructorPage {
   }
 
   guardarRutinasAlumno(){
-    console.log(this.rutinasAlumno);
-  	this.userService.updateRutines(this.id,this.rutinasAlumno).subscribe(
+    console.log(this.newRoutine);
+    let type = RoutineType[this.newRoutine.typeR];
+    this.newRoutine.typeR = type;
+  	this.userService.updateRutines(this.id,this.newRoutine).subscribe(
   			res => {console.log(res);},
   			error => {console.log(error);}
   			)
@@ -56,7 +61,11 @@ export class RutinasInstructorPage {
   }
 
   guardarEjercicio(){
-    
+    console.log(this.newExercise);
+    let type = ExerciseType[this.newExercise.typeE];
+    this.newExercise.typeE = type;
+    this.exercisesAlumno.push(this.newExercise); 
+    console.log(this.exercisesAlumno);
   }
 
   traerRutinas(){
