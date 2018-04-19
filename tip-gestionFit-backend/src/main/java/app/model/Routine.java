@@ -24,7 +24,7 @@ public class Routine {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date creationDate;
 	@Enumerated
 	public Routine_Type type;
