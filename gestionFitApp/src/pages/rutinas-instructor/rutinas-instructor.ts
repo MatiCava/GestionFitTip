@@ -25,24 +25,23 @@ import { UserProvider } from '../../providers/user/user';
 export class RutinasInstructorPage {
 	rutinasProvider: RoutineProvider;
 	id:any;
-	rutinas: any[];
+	//rutinas: any[];
+  //exercises: any[];
 	rutinasAlumno:any = {};
   rutinasType=[RoutineType[4], RoutineType[3], RoutineType[2], RoutineType[1], RoutineType[0]];
   exercisesType=[ExerciseType[1], ExerciseType[0], ExerciseType[3], ExerciseType[2]];
-  exercises: any[];
   exercisesAlumno:any[] = [];
   newExercise = {name:"", description:"", typeE:""};
   newRoutine = {creationDate:new Date().getTime(), typeR:"", exercise:this.exercisesAlumno};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineProvider: RoutineProvider, private userService: UserProvider) {
-  	this.rutinasProvider = routineProvider;
   	this.id = this.navParams.get("id");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RutinasInstructorPage');
-    this.traerRutinas();
-    this.traerEjercicios();
+    //this.traerRutinas();
+    //this.traerEjercicios();
   }
 
   volverAtras(){
@@ -53,6 +52,7 @@ export class RutinasInstructorPage {
     console.log(this.newRoutine);
     let type = RoutineType[this.newRoutine.typeR];
     this.newRoutine.typeR = type;
+    console.log(this.newRoutine.typeR);
   	this.userService.updateRutines(this.id,this.newRoutine).subscribe(
   			res => {console.log(res);},
   			error => {console.log(error);}
@@ -67,7 +67,7 @@ export class RutinasInstructorPage {
     this.exercisesAlumno.push(this.newExercise); 
     console.log(this.exercisesAlumno);
   }
-
+/*
   traerRutinas(){
   	this.rutinasProvider.getRutines().subscribe(
   						result => {this.rutinas = result;},
@@ -80,6 +80,6 @@ export class RutinasInstructorPage {
               result => {this.exercises = result;},
               error => {console.log(error);},
               )
-  }
+  } */
 
 }
