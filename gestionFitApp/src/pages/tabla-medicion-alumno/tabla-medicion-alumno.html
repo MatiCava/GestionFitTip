@@ -1,10 +1,10 @@
-<ion-content style="margin-top: 50px;" padding>
+<ion-content *ngIf="table != null" padding>
 	<ion-grid style="height: 700px">
 		<ion-row>
 			<ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;">{{'Medida' | translate}}</p></ion-col>
 			<ion-col class="colValues" *ngFor="let day of dates"><p style="font-size: 15px">{{day}}</p></ion-col>
 		</ion-row>
-		<ion-row *ngFor="let medida of tabla.measures">
+		<ion-row *ngFor="let medida of table.measures">
 			<ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;">{{medida.name | translate}}</p></ion-col>
 			<ion-col class="colValues" *ngFor="let medicion of medida.measures"><p style="font-size: 15px">{{medicion.measure}}cm {{'Altura' | translate}}: {{medicion.height}}cm</p></ion-col>
 		</ion-row>

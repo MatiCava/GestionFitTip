@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input ,OnChanges, SimpleChanges} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
@@ -13,7 +13,18 @@ import { UserProvider } from '../../providers/user/user';
   templateUrl: 'tabla-medicion-alumno.html',
   providers:[UserProvider]
 })
-export class TablaMedicionAlumnoPage implements OnInit{
+export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
+  _table:any;
+  @Input() set table(tab){
+    if(tab!= null){
+      console.log(tab);
+      this._table = tab;
+      this.setDates();
+    }
+  }
+  get table(){
+    return this._table;
+  }
 
 	tabla : any = {measures:[]};
 	dates: any = [];
@@ -24,8 +35,13 @@ export class TablaMedicionAlumnoPage implements OnInit{
   }
 
   ngOnInit(){
-    this.getTabla();
+    //this.getTabla();
+  }
 
+  ngOnChanges(changes:SimpleChanges){
+    if(changes['table']){
+      console.log(this.table);
+    }
   }
 
   ionViewDidLoad() {
@@ -37,15 +53,16 @@ export class TablaMedicionAlumnoPage implements OnInit{
 
   getTabla(){
   	this.userServ.getTabla(this.id).subscribe(
-  		table => {this.tabla = table;console.log(table),this.setDates()},
+  		table => {this.tabla = table;console.log(table);
+        this.setDates()},
   		error => {console.log(error)}
   		)
   }
 
   setDates(){
-  	if(this.tabla.measures.length >0){
-  		for(let i = 0 ; i < this.tabla.measures[0].measures.length;i++){
-  			this.dates.push(new Date(this.formatDate(this.tabla.measures[0].measures[i].day)).toUTCString().slice(4,16));
+  	if(this._table.measures.length >0){
+  		for(let i = 0 ; i < this._table.measures[0].measures.length;i++){
+  			this.dates.push(new Date(this.formatDate(this._table.measures[0].measures[i].day)).toUTCString().slice(4,16));
 
   		}
   	}

@@ -34,7 +34,7 @@ public class UserServiceTestCase {
 
 	@Test
 	public void ifAllUsersAreRequestedAfterSavingAValidStudent_itShouldBeAListOfSize1() {
-		User_Student student = new User_Student("instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
+		User_Student student = new User_Student("foto.png","instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
 				"Tendinitis","","Bajar de peso", new GregorianCalendar(1990,01,01).getTime(),"43568793",
 				80.2f);
 		this.userServ.saveStudent(student);
@@ -43,7 +43,7 @@ public class UserServiceTestCase {
 	
 	@Test
 	public void ifAllUsersAreRequestedAfterSavingAValidStudentAndDeletingIt_itShouldBeAListOfSize0() {
-		User_Student student = new User_Student("instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
+		User_Student student = new User_Student("foto.png","instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
 				"Tendinitis","","Bajar de peso", new GregorianCalendar(1990,01,01).getTime(),"43568793",
 				80.2f);
 		this.userServ.saveStudent(student);
@@ -53,7 +53,7 @@ public class UserServiceTestCase {
 	
 	@Test
 	public void ifAValidUserIsSavedAndRequested_itShouldBeTheSame() {
-		User_Student student = new User_Student("instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
+		User_Student student = new User_Student("foto.png","instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
 				"Tendinitis","","Bajar de peso", new GregorianCalendar(1990,01,01).getTime(),"43568793",
 				80.2f);
 		this.userServ.saveStudent(student);
@@ -65,7 +65,7 @@ public class UserServiceTestCase {
 	
 	@Test
 	public void ifAValidUserIsSavedUpdatedAndRequested_itShouldChangeInDB() {
-		User_Student student = new User_Student("instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
+		User_Student student = new User_Student("foto.png","instructor1", "1234", "Fernando Fernandez", "ff@gmail.com",
 				"Tendinitis","","Bajar de peso", new GregorianCalendar(1990,01,01).getTime(),"43568793",
 				80.2f);
 		this.userServ.saveStudent(student);

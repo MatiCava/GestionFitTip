@@ -23,17 +23,6 @@ export class LoginPage {
   }
 
   ionViewDidEnter(){
-  /*  console.log(this.logged);
-    console.log(this.isStudent);
-    console.log(this.isInstructor)
-    
-      if(this.isInstructor()){
-        this.navCtrl.push("alumnos",{"id":localStorage.getItem("id")});
-      }
-      else if(this.isStudent()){
-        this.navCtrl.push("dashboard",localStorage.getItem("id"));
-      }
-    */
   }
 
     logged(){
@@ -66,6 +55,10 @@ export class LoginPage {
   			console.log(error);
   		}
   		)
+  }
+
+  signUp(){
+    this.navCtrl.push("nuevoAlumno");
   }
 
 }

@@ -21,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class User_Student extends User {
 	
+    @Lob
+    @Column( length = 100000 )
+	private String photo;
 	private String pathologies;
 	private String observations;
 	private String objective;
@@ -46,10 +49,11 @@ public class User_Student extends User {
 	}
 
 	
-	public User_Student(String user, String pass, String name,String email,String pat,
+	public User_Student(String photoProfile,String user, String pass, String name,String email,String pat,
 			String obs,String obj,Date birth,String tel,
 			float wS) {
 		super(user,pass,name,email);
+		this.photo=photoProfile;
 		this.birthday = birth;
 		
         Calendar birthCal = GregorianCalendar.getInstance();
@@ -197,6 +201,16 @@ public class User_Student extends User {
 	
 	public void addMeasurements(List<Measurement> measurements) {
 		this.measurements.addNewMeasurement(measurements);
+	}
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	
