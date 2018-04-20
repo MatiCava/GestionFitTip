@@ -19,23 +19,32 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
     if(tab!= null){
       console.log(tab);
       this._table = tab;
-      this.setDates();
+      if(this.dates.length == 0){
+        console.log("AHORA SI");
+        this.setDates();
+      }
+      
     }
   }
   get table(){
     return this._table;
   }
 
-	tabla : any = {measures:[]};
 	dates: any = [];
 	id:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
-  	this.id = this.navParams.get("id");
+    
+    if(this.navParams.get("isInstructor") != null){
+      this.id = this.navParams.get("id");   
+      console.log("ALLAHU AKBAR "+this.id);
+    }
   }
 
   ngOnInit(){
-    //this.getTabla();
+    if(this.id != null){
+      this.getTabla();
+    }
   }
 
   ngOnChanges(changes:SimpleChanges){
@@ -53,7 +62,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
 
   getTabla(){
   	this.userServ.getTabla(this.id).subscribe(
-  		table => {this.tabla = table;console.log(table);
+  		table => {this._table = table;console.log(table);
         this.setDates()},
   		error => {console.log(error)}
   		)
@@ -79,7 +88,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   nuevaMedicion(){
   	this.navCtrl.push("nuevaMedicion",{
   		id:this.id,
-  		medidas:this.tabla
+  		medidas:this._table
   	})
   }
 

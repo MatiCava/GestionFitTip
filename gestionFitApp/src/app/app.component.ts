@@ -17,8 +17,11 @@ export class MyApp implements OnInit{
     platform.ready().then(() => {
       this.translateService.setDefaultLang('es');
       this.translateService.use('es');
-      statusBar.styleDefault();
-      splashScreen.hide();
+      if(!platform.is("core")){
+        statusBar.styleDefault();
+        splashScreen.hide();
+      }
+
     });
     if(platform.is('core')){
       this.isBrowser=true;

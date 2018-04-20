@@ -67,7 +67,7 @@ export class NuevoAlumnoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NuevoAlumnoPage');
+    this.slides.lockSwipes(true);
   }
 
   validForm(){
@@ -103,11 +103,11 @@ export class NuevoAlumnoPage {
     () => { 
               let confirmacion = this.alertCtrl.create({
                     title: 'Confirmacion',
-                    message: 'Se guardo el nuevo alumno',
+                    message: 'Usuario creado',
                     buttons: [{
                       text: 'Ok',
                       handler: () => {
-                        this.navCtrl.push('alumnos');
+                        this.navCtrl.push('login');
                       }
                     }] 
               }
@@ -133,6 +133,10 @@ export class NuevoAlumnoPage {
 
      let base64Image = 'data:image/jpeg;base64,' + imageData;
      this.alumno.photo = base64Image;
+     this.slides.lockSwipes(false);
+     this.slides.slideNext();
+     this.slides.lockSwipes(true);
+
     }, (err) => {
       console.log(err);
     });

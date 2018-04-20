@@ -42,12 +42,9 @@ export class AlumnosPage {
   		);
   }
 
-  nuevoAlumno(){
-  	this.navCtrl.push('nuevoAlumno');
-  }
 
   medidasAlumno(idUser){
-  	this.navCtrl.push('tablaMedicion',{id:idUser});
+  	this.navCtrl.push('tablaMedicion',{id:idUser,isInstructor:true});
   }
 
   rutinasAlumno(idUser){

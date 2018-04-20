@@ -51,44 +51,7 @@
   </ion-slide>
   <ion-slide style="padding-top: 20px;">
 
-    <ion-content style="margin:auto">
-    <ion-grid style="height: 100%">
-      <ion-row justify-content-center align-items-center style="height: 100%;display:block">
-      <ion-card style="margin:auto;width: 650px;" *ngFor="let publicacion of media">
-          <ion-item>
-            <ion-avatar item-start>
-              <a href="https://www.instagram.com/pilateslovemylife/" ><img [src]="publicacion.user.profile_picture"></a>
-            </ion-avatar>
-            <h2><a href="https://www.instagram.com/pilateslovemylife/">{{publicacion.user.full_name}}</a></h2>
-            <p>{{fecha(publicacion.created_time) | date:'dd/MM/yyyy'}}</p>
-          </ion-item>
-          <a [href]="publicacion.link" ><img [src]="publicacion.images.standard_resolution.url"></a>
-          <ion-card-content>
-            <p>{{publicacion.caption.text}}</p>
-          </ion-card-content>
-            <ion-row>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>{{publicacion.likes.count}} Likes</div>
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="text"></ion-icon>
-        <div>{{publicacion.comments.count}} Comentarios</div>
-      </button>
-    </ion-col>
-    <ion-col center text-center>
-      <ion-note>
-        {{hace(fecha(publicacion.created_time))}}
-      </ion-note>
-    </ion-col>
-  </ion-row>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+      <instagram-feed></instagram-feed>
 
   </ion-slide>
 </ion-slides>

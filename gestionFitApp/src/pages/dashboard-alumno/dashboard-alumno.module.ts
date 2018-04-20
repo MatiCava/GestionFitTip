@@ -3,16 +3,20 @@ import { IonicPageModule } from 'ionic-angular';
 import { DashboardAlumnoPage } from './dashboard-alumno';
 import { TranslateModule } from '@ngx-translate/core';
 import { TablaMedicionAlumnoPage } from '../tabla-medicion-alumno/tabla-medicion-alumno';
+import { InstagramFeedPage } from '../instagram-feed/instagram-feed';
+import { TablaMedicionAlumnoPageModule } from '../tabla-medicion-alumno/tabla-medicion-alumno.module';
 
 @NgModule({
   declarations: [
     DashboardAlumnoPage,
-    TablaMedicionAlumnoPage
+    
+    InstagramFeedPage
   ],
   imports: [
     IonicPageModule.forChild(DashboardAlumnoPage),
-    TranslateModule
+    TranslateModule,
+    TablaMedicionAlumnoPageModule
   ],
-  entryComponents: [TablaMedicionAlumnoPage]
+  entryComponents: [TablaMedicionAlumnoPage, InstagramFeedPage]
 })
 export class DashboardAlumnoPageModule {}
