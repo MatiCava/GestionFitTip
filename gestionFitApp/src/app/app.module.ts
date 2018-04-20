@@ -10,10 +10,14 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AlumnosPage } from '../pages/alumnos/alumnos';
 import { AlumnosPageModule } from '../pages/alumnos/alumnos.module';
-import { InfoAlumnoPage } from '../pages/info-alumno/info-alumno'
-import { InfoAlumnoPageModule } from '../pages/info-alumno/info-alumno.module'
-import { InfoRutinaPage } from '../pages/info-rutina/info-rutina'
-import { InfoRutinaPageModule } from '../pages/info-rutina/info-rutina.module'
+import { InfoAlumnoPage } from '../pages/info-alumno/info-alumno';
+import { InfoAlumnoPageModule } from '../pages/info-alumno/info-alumno.module';
+import { InfoRutinaPage } from '../pages/info-rutina/info-rutina';
+import { InfoRutinaPageModule } from '../pages/info-rutina/info-rutina.module';
+import { NuevaRutinaPage } from '../pages/nueva-rutina/nueva-rutina';
+import { NuevaRutinaPageModule } from '../pages/nueva-rutina/nueva-rutina.module';
+import { NuevoEjercicioPage } from '../pages/nuevo-ejercicio/nuevo-ejercicio';
+import { NuevoEjercicioPageModule } from '../pages/nuevo-ejercicio/nuevo-ejercicio.module';
 
 
 import { DashboardAlumnoPage } from '../pages/dashboard-alumno/dashboard-alumno';

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import { Routine } from '../../model/routine';
@@ -33,4 +33,30 @@ export class RoutineProvider {
     return this.http.get(this.apiUrl+"routine/"+id);
   }
 
+  saveRoutine(routine):Observable<any>{
+
+    const httpOptions = {
+          headers: new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+                'Accept': 'application/json',
+                'Content-Type':  'application/json'
+          })
+    };
+
+    return this.http.post<Routine>(this.apiUrl+"routine", routine, httpOptions);
+  }
+
+  saveExercise(exercise):Observable<any>{
+    const httpOptions = {
+          headers: new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+                'Accept': 'application/json',
+                'Content-Type':  'application/json'
+          })
+    };
+
+    return this.http.post<Exercise>(this.apiUrl+"exercise", exercise, httpOptions);
+  }
 }

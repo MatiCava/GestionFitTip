@@ -1,0 +1,24 @@
+
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+			<ion-label>Nombre ejercicio</ion-label>
+			<ion-input type="text" [(ngModel)]="newExercise.name"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label>Tipo ejercicio</ion-label>
+			<ion-select [(ngModel)]="newExercise.type">
+				<ion-option *ngFor="let typeE of exercisesType"> {{typeE | translate}} </ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label>Descripcion ejercicio</ion-label>
+			<ion-input type="text" [(ngModel)]="newExercise.description"></ion-input>
+		</ion-item>
+		<ion-item>
+			<button ion-button outline (click)="volverAtras()"><ion-icon name="arrow-back" class="largeIcon" color="info"> {{'Atras' | translate}}</ion-icon> </button>
+		
+			<button ion-button outline (click)="guardarEjercicio()"><ion-icon name="checkmark-circle" class="largeIcon" color="info"> {{'Guardar' | translate}}</ion-icon> </button>
+		</ion-item>
+	</ion-list>
+</ion-content>
