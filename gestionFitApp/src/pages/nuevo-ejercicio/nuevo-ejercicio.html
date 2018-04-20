@@ -8,7 +8,7 @@
 		<ion-item>
 			<ion-label>Tipo ejercicio</ion-label>
 			<ion-select [(ngModel)]="newExercise.type">
-				<ion-option *ngFor="let typeE of exercisesType"> {{typeE | translate}} </ion-option>
+				<ion-option *ngFor="let typeE of exercisesType" [value]="typeE"> {{typeE | translate}} </ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item>

@@ -4,7 +4,7 @@
 <ion-col class="colTab"><a (click)="goToSlide(2)"><div> <ion-label color="{{ inSlide(2) ? 'danger' : 'primary' }}">Instagram &nbsp; <ion-icon name="logo-instagram"></ion-icon></ion-label></div></a></ion-col>
 </ion-row>
 <ion-slides initialSlide="1">
-    <ion-slide style="padding-top: 20px;">
+    <ion-slide>
       <page-tabla-medicion-alumno [table]="user.measurements"></page-tabla-medicion-alumno>
     </ion-slide>
     <ion-slide style="padding-top: 20px;">
@@ -49,7 +49,7 @@
   </ion-content>
     
   </ion-slide>
-  <ion-slide style="padding-top: 20px;">
+  <ion-slide style="padding-top: 20px;background-color: seashell">
 
       <instagram-feed></instagram-feed>
 

@@ -16,9 +16,8 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 })
 export class NuevaMedicionPage {
 
-  /*form:FormGroup= this.formBuilder.group({
-
-  });*/
+  form:FormGroup= this.formBuilder.group({
+  });
 	medidas = [];
 	mediciones = [];
 	id : any;
@@ -26,7 +25,12 @@ export class NuevaMedicionPage {
 
   constructor(private formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
-  	this.tabla = this.navParams.get("medidas");
+		this.tabla = this.navParams.get("medidas");
+		for(let i;i<this.tabla.measures.length;i++){
+			this.form.addControl(i,new FormControl(Validators.compose([Validators.min(18),
+				Validators.max(250),
+				Validators.nullValidator])));
+		}
   }
 
   ionViewDidLoad() {

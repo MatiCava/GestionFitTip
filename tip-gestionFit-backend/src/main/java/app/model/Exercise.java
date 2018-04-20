@@ -25,4 +25,30 @@ public class Exercise {
 		this.description = desc;
 	}
 
+	public Exercise_Type getType() {
+		return type;
+	}
+
+	public void setType(Exercise_Type type) {
+		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
+
 }

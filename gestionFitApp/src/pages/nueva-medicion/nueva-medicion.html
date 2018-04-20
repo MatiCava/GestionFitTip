@@ -1,4 +1,4 @@
-<ion-content padding>
+<ion-content style="padding-top:20px;" [formGroup]="form">
 
 	<ion-grid>
 		<ion-row>
@@ -7,8 +7,8 @@
 			<ion-col col-3>{{'Altura' | translate}}</ion-col>
 		</ion-row>
 		<ion-row *ngFor="let medida of medidas; index as i">
-			<ion-col col-3>{{medida.name | translate}}</ion-col>
-			<ion-col col-3><ion-input type="number" [(ngModel)]="mediciones[i].measure"></ion-input></ion-col>
+			<ion-col col-3><ion-label color="{{ form.controls.i.errors && form.controls.i.dirty ? 'danger' : 'primary' }}">{{medida.name | translate}}</ion-label></ion-col>
+			<ion-col col-3 ><ion-input type="number" [(ngModel)]="mediciones[i].measure" formControlName="i"></ion-input></ion-col>
 			<ion-col col-3><ion-input type="number" [(ngModel)]="mediciones[i].height"></ion-input></ion-col>
 
 

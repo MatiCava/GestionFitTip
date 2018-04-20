@@ -4,7 +4,7 @@
 		<ion-item>
 			<ion-label>Tipo rutina</ion-label>
 			<ion-select [(ngModel)]="newRoutine.type">
-				<ion-option *ngFor="let typeR of rutinasType"> {{typeR | translate}} </ion-option>
+				<ion-option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </ion-option>
 			</ion-select>
 		</ion-item>
 		<ion-item *ngFor="let exercise of exercises">

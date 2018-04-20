@@ -18,7 +18,7 @@ export class NuevaRutinaPage {
 	newRoutine;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineProvider: RoutineProvider) {
-  	this.newRoutine = {creationDate:new Date().getTime(), type:"", exercise:[]};
+  	this.newRoutine = {creationDate:new Date().getTime(), type:"", exercises:[]};
   }
 
   ionViewDidLoad() {
@@ -40,7 +40,7 @@ export class NuevaRutinaPage {
   guardarEjercicios(){
   	this.exercisesAlumno = this.exercises.filter(ex => ex.checked == true);
   	console.log(this.exercisesAlumno);
-  	this.newRoutine.exercise = this.exercisesAlumno;
+  	this.newRoutine.exercises = this.exercisesAlumno;
   }
 
   guardarRutina(){

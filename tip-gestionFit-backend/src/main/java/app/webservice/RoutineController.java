@@ -42,6 +42,8 @@ public class RoutineController {
 
 	@PostMapping(value = "/routine", produces = "application/json")   
 	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) {
+			System.out.println(routine.getType());
+			System.out.println(routine.getExercises());
 			this.routineServ.save(routine);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 
@@ -70,7 +72,7 @@ public class RoutineController {
 		if(existingRoutine == null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		routine.setId(idRoutine);
+		routine.id = (idRoutine);
 		this.routineServ.update(routine);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
