@@ -12,6 +12,9 @@
 
 	<ion-list inset>
 		<ion-item>
+			<img [src]="alumno.photo" style="max-height: 100px;max-width: 100px;">
+		</ion-item>
+		<ion-item>
 			<p>{{'Usuario' | translate}}: <strong>{{alumno.username}}</strong></p>	
 		</ion-item>
 		<ion-item>

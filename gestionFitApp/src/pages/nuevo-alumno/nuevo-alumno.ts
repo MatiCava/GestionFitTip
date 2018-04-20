@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user'
-import { User_Student,User_Role } from '../../model/user_student'
+import { IonicPage, NavController, NavParams, AlertController,Slides,Slide } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
+import { User_Student,User_Role } from '../../model/user_student';
+import { Camera,CameraOptions } from '@ionic-native/camera'; 
 
 @IonicPage(
 	{name:"nuevoAlumno"}
@@ -13,6 +14,9 @@ import { User_Student,User_Role } from '../../model/user_student'
   templateUrl: 'nuevo-alumno.html',
 })
 export class NuevoAlumnoPage {
+
+    @ViewChild(Slides) slides : Slides;
+
 
   form:FormGroup = this.formBuilder.group({
     username: new FormControl('',Validators.compose([
@@ -54,11 +58,11 @@ export class NuevoAlumnoPage {
 
 
 
-  alumno = {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
+  alumno = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
   
   userProvider: UserProvider;
 
-  constructor(private formBuilder: FormBuilder,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {
+  constructor(private camera: Camera,private formBuilder: FormBuilder,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {
     this.userProvider = serviceUser;
   }
 
@@ -115,6 +119,23 @@ export class NuevoAlumnoPage {
               }
           });
     this.navCtrl.push('alumnos');
+  }
+
+  tomarFoto(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     this.alumno.photo = base64Image;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

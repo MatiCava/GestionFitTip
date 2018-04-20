@@ -4,12 +4,6 @@ import { UserProvider } from '../../providers/user/user'
 import { User_Student } from '../../model/user_student'
 
 
-/**
- * Generated class for the InfoAlumnoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage({
 	name: 'infoAlumno'

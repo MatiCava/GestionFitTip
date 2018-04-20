@@ -21,7 +21,7 @@ export class DashboardAlumnoPage implements OnInit{
   @ViewChild(Slides) slides : Slides;
   dates: any = [];
 	id:any;
-  user :any= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{},measurements:{measures:["","","","","","",""]},routines:[]};
+  private user;
   private media;
   private info;
 
@@ -30,6 +30,7 @@ export class DashboardAlumnoPage implements OnInit{
   	this.id = this.navParams.get("id");
     this.media=[];
     this.info= {};
+    this.user = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{},routines:[]};
   }
 
   ngOnInit(){
@@ -45,25 +46,10 @@ export class DashboardAlumnoPage implements OnInit{
 
   }
 
-   setDates(){
-    if(this.user.measurements.measures.length >0){
-      for(let i = 0 ; i < this.user.measurements.measures[0].measures.length;i++){
-        this.dates.push(new Date(this.formatDate(this.user.measurements.measures[0].measures[i].day)).toUTCString().slice(4,16));
 
-      }
-    }
-  }
 
   inSlide(slideInd){
     return this.slides.getActiveIndex() == slideInd;
-  }
-
-  formatDate(date){
-    let newDate = date.split("-",3);
-    let day = newDate[0] ;
-    let month = newDate[1] ;
-    let year = newDate[2] ;
-    return (year + "-" + month + "-" + day);
   }
 
   ionViewDidLoad() {
@@ -74,10 +60,10 @@ export class DashboardAlumnoPage implements OnInit{
   isInstructor(){
     return ( localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor" );
   }
-
+  
   getUser(){
   	this.userServ.getUser(this.id).subscribe(
-  		alumno => {this.user = alumno;    this.setDates();},
+      alumno => {this.user = alumno;},
   		error => {console.log(error)})
   }
 
