@@ -1,0 +1,20 @@
+
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+			<ion-label>Tipo rutina</ion-label>
+			<ion-select [(ngModel)]="newRoutine.type">
+				<ion-option *ngFor="let typeR of rutinasType"> {{typeR | translate}} </ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item *ngFor="let exercise of exercises">
+			<ion-label> {{exercise.name}} </ion-label>
+			<ion-checkbox [(ngModel)]="exercise.checked"> </ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<button ion-button outline (click)="volverAtras()"><ion-icon name="arrow-back" class="largeIcon" color="info"> {{'Atras' | translate}}</ion-icon> </button>
+		
+			<button ion-button outline (click)="guardarRutina()"><ion-icon name="checkmark-circle" class="largeIcon" color="info"> {{'Guardar' | translate}}</ion-icon> </button>
+		</ion-item>
+	</ion-list>
+</ion-content>

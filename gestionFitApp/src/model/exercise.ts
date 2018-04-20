@@ -1,16 +1,18 @@
 export class Exercise {
 	name: String;
 	description: String;
-	type: ExerciseType;
+	type: Exercise_Type;
+	checked: Boolean;
 
-	constructor(nameE:String,descriptionE:String,typeE:ExerciseType){
+	constructor(nameE:String,descriptionE:String,typeE:Exercise_Type){
 		this.name = nameE;
 		this.description = descriptionE;
 		this.type = typeE;
+		this.checked = false;
 	}
 }
 
-export enum ExerciseType{
+export enum Exercise_Type{
 	Upper_Body,
 	Lower_Body,
 	Arms,

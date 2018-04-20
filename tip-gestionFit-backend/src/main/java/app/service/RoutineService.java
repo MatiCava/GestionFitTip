@@ -30,6 +30,11 @@ public class RoutineService {
 	}
 	
 	@Transactional
+	public void saveExercise(Exercise newExercise){
+		this.exerciseDAO.save(newExercise);
+	}
+	
+	@Transactional
 	public void update(Routine newRoutine){
 		this.routineDAO.update(newRoutine);
 	}

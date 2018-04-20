@@ -28,6 +28,12 @@
       <button ion-item *ngIf="isInstructor()">
         {{'Rutinas' | translate}}
       </button>
+      <button ion-item (click)="openPage('nuevaRutina')" *ngIf="isInstructor()">
+        Nueva rutina
+      </button> 
+      <button ion-item (click)="openPage('nuevoEjercicio')" *ngIf="isInstructor()">
+        Nuevo ejercicio
+      </button>
       <!--
       <button ion-item (click)="changeLang('es')">
         {{'Español' | translate}}

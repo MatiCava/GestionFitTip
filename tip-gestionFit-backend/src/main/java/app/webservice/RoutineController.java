@@ -47,6 +47,13 @@ public class RoutineController {
 
 	}
 	
+	@PostMapping(value = "/exercise", produces = "application/json")   
+	public ResponseEntity<Void> createExercise(@RequestBody Exercise exercise) {
+			this.routineServ.saveExercise(exercise);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+
+	}
+	
 	@GetMapping(value= "/routine/{id}",produces= "application/json")
 	public Routine getRoutine(@PathVariable("id") Long idRoutine){
 		Routine routine = this.routineServ.getById(idRoutine);
