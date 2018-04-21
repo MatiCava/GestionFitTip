@@ -1,4 +1,5 @@
 <ion-content style="margin-top: 35px;" padding>
+	<h1 style="text-align: center">Alumnos</h1>
 	<ion-list>
 		<ion-item *ngFor="let alumno of alumnos">
 			{{alumno.nameAndSurname}} <a (click)="abrirInfo(alumno.id)" item-right><ion-icon name="body"></ion-icon></a><a (click)="rutinasAlumno(alumno.id)" item-right><ion-icon name="calendar" item-right></ion-icon></a> <a (click)="medidasAlumno(alumno.id)" item-right><ion-icon name="clipboard"></ion-icon></a>
