@@ -72,9 +72,9 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/user/{id}/nuevasRutinas",produces = "application/json")
-	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody Routine newRoutine){
-		System.out.println(newRoutine.type);
-		this.userServ.newRutines(idUser, newRoutine);
+	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines){
+		//System.out.println(newRoutines.type);
+		this.userServ.newRutines(idUser, newRoutines);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 

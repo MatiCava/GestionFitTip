@@ -32,10 +32,10 @@
         {{'Rutinas' | translate}}   <ion-icon name="calendar" item-right></ion-icon>
       </button>
       <button ion-item (click)="openPage('nuevaRutina')" *ngIf="isInstructor()">
-        Nueva rutina
+        Nueva rutina <ion-icon name="bookmarks" item-right></ion-icon>
       </button> 
       <button ion-item (click)="openPage('nuevoEjercicio')" *ngIf="isInstructor()">
-        Nuevo ejercicio
+        Nuevo ejercicio <ion-icon name="construct" item-right></ion-icon>
       </button>
       <!--
       <button ion-item (click)="changeLang('es')">

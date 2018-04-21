@@ -74,8 +74,8 @@ public class User_Student extends User {
 	}
 
 
-	public void addRoutine(Routine routine) {
-		this.routines.add(routine);
+	public void addRoutine(List<Routine> routines) {
+		this.routines.addAll(routines);
 	}
 
 

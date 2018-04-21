@@ -52,6 +52,6 @@ export class NuevaRutinaPage {
   			res => {console.log(res);},
   			error => {console.log(error);}
   			)
-  	//this.volverAtras();
+  	this.volverAtras();
   }
 }

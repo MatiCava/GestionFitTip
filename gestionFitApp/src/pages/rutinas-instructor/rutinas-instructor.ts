@@ -18,7 +18,7 @@ import { UserProvider } from '../../providers/user/user';
 export class RutinasInstructorPage {
 	id:any;
 	rutinas: any[];
-	rutinaAlumno:any = {};
+	rutinaAlumno:any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private routineProvider: RoutineProvider, private userService: UserProvider) {
   	this.id = this.navParams.get("id");
@@ -34,6 +34,7 @@ export class RutinasInstructorPage {
   }
 
   guardarRutinasAlumno(){
+    this.rutinaAlumno = this.rutinas.filter(ex => ex.checked == true);
     console.log(this.rutinaAlumno);
   	this.userService.updateRutines(this.id,this.rutinaAlumno).subscribe(
   			res => {console.log(res);},
