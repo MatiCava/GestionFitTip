@@ -11,9 +11,16 @@
 	    <ion-input type="password" [(ngModel)]="credential.password"></ion-input>
 	  </ion-item>
 
-	  <ion-item>
-	  	<button ion-button full (click)="login()">{{'Ingresar' | translate}}</button>
-	  	<button ion-button full (click)="signUp()" color="secondary" >{{'Registrarse' | translate}}</button>
+	  <ion-item >
+			<ion-row>
+				<ion-col style="text-align: center">
+					<button ion-button [full]="isMobile()" (click)="login()">{{'Ingresar' | translate}}</button>
+				</ion-col>
+				<ion-col style="text-align: center">
+					<button ion-button [full]="isMobile()" (click)="signUp()" color="secondary">{{'Registrarse' | translate}}</button>
+				</ion-col>
+			</ion-row>
+	  
 	  </ion-item>
 	
 	</ion-list>

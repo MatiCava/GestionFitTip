@@ -8,7 +8,6 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import app.model.MeasuringTable;
 import app.model.User;
 import app.model.User_Role;
 import app.model.User_Student;

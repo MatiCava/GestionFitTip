@@ -16,7 +16,9 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 })
 export class NuevaMedicionPage {
 
-  form:FormGroup= this.formBuilder.group({
+  formMeasures:FormGroup= this.formBuilder.group({
+	});
+	formHeight:FormGroup= this.formBuilder.group({
   });
 	medidas = [];
 	mediciones = [];
@@ -26,11 +28,26 @@ export class NuevaMedicionPage {
   constructor(private formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
 		this.tabla = this.navParams.get("medidas");
-		for(let i;i<this.tabla.measures.length;i++){
-			this.form.addControl(i,new FormControl(Validators.compose([Validators.min(18),
+		for(let i=0;i<this.tabla.measures.length;i++){
+			this.formMeasures.addControl(i+"",new FormControl("",Validators.compose([Validators.min(18),
 				Validators.max(250),
-				Validators.nullValidator])));
+				Validators.required])));
+			this.formHeight.addControl(i+"",new FormControl("",Validators.compose([Validators.min(0),
+				Validators.max(200),
+				Validators.required])));
+
 		}
+	}
+	
+	validForm(){
+    let invalid = false;
+    for(let control in this.formMeasures.controls){
+      invalid = invalid || this.formMeasures.controls[control].invalid;
+		}
+		for(let control in this.formHeight.controls){
+      invalid = invalid || this.formHeight.controls[control].invalid;
+		}
+    return (invalid || (!(this.formHeight.dirty) && !(this.formMeasures.dirty)));
   }
 
   ionViewDidLoad() {
@@ -41,11 +58,20 @@ export class NuevaMedicionPage {
   setMedidas(){
   	for(let i =0;i<this.tabla.measures.length;i++){
   		this.medidas.push({name:this.tabla.measures[i].name});
-  		this.mediciones.push({day:null,measure:0,height:0})
   	}
-  }
+	}
+	
+	setValores(){
+		for(let i =0;i<this.tabla.measures.length;i++){
+			this.mediciones.push({day:null,measure:this.formMeasures.get(i+"").value,height:this.formHeight.get(i+"").value});
+		
+		}
+		console.log(this.mediciones);
+	}
 
   guardar(){
+		this.setValores();
+
   	this.userServ.updateTable(this.id,{day:new Date().getTime(),measures:this.mediciones}).subscribe(
   		res => {console.log(res);this.navCtrl.push('tablaMedicion',{id:this.id});},
   		error => {console.log(error);}

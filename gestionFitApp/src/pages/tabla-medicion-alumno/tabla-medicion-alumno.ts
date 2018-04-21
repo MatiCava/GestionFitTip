@@ -20,7 +20,6 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
       console.log(tab);
       this._table = tab;
       if(this.dates.length == 0){
-        console.log("AHORA SI");
         this.setDates();
       }
       
@@ -35,9 +34,8 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
     
-    if(this.navParams.get("isInstructor") != null){
+    if(this.isInstructor()){
       this.id = this.navParams.get("id");   
-      console.log("ALLAHU AKBAR "+this.id);
     }
   }
 
@@ -66,6 +64,9 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
         this.setDates()},
   		error => {console.log(error)}
   		)
+  }
+  atras(){
+    this.navCtrl.push("alumnos");
   }
 
   setDates(){

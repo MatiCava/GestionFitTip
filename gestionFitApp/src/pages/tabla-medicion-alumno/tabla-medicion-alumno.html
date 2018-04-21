@@ -11,6 +11,8 @@
 		</ion-row>
 		<ion-row>
 			<button ion-button (click)="nuevaMedicion()" *ngIf="isInstructor()"> {{'Agregar Medicion' | translate}}</button>
+			<button ion-button (click)="atras()" *ngIf="isInstructor()">Atras</button>
+
 		</ion-row>
 	</ion-grid>
 </div>

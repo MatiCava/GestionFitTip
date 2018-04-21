@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { InfoRutinaPage } from '../info-rutina/info-rutina'
 
@@ -17,7 +17,7 @@ export class RutinasAlumnoPage {
 	id:any;
   rutinas: any[];
 
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, private userService: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserProvider) {
   	this.id = this.navParams.get("id");
   }
 
@@ -31,9 +31,8 @@ export class RutinasAlumnoPage {
   }
 
   abrirInfo(idRoutine){
-    console.log(idRoutine);
-    let infoModal = this.modalCtrl.create(InfoRutinaPage,{id:idRoutine}); 
-    infoModal.present();
+    this.navCtrl.push(InfoRutinaPage,{id:idRoutine}); 
+    
   }
 
   getRutines(){

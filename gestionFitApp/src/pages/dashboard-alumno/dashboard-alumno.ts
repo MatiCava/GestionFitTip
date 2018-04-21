@@ -55,8 +55,8 @@ export class DashboardAlumnoPage implements OnInit{
 
    abrirInfo(idRoutine){
     console.log(idRoutine);
-    let infoModal = this.modalCtrl.create(InfoRutinaPage,{id:idRoutine}); 
-    infoModal.present();
+   this.navCtrl.push(InfoRutinaPage,{id:idRoutine}); 
+   
   }
 
   goToSlide(slide){

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
 
 
@@ -14,7 +14,11 @@ export class LoginPage {
 	public credential = {username:"",password:""};
 	public user:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginServ: LoginProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginServ: LoginProvider,private plat: Platform) {
+  }
+
+  isMobile(){
+    return !this.plat.is("core");
   }
 
   ionViewDidLoad() {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Credential;
@@ -65,6 +66,7 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/user/{id}/nuevaMedicion",produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Void> newMeasurements(@PathVariable("id") Long idUser,@RequestBody MeasurementsAdapter newMeasurements){
 		this.userServ.newMeasurement(idUser, newMeasurements);
 		System.out.println(new Date(newMeasurements.day));
@@ -72,6 +74,7 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/user/{id}/nuevasRutinas",produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody Routine newRoutine){
 		System.out.println(newRoutine.type);
 		this.userServ.newRutines(idUser, newRoutine);

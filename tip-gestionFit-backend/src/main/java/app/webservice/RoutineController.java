@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Exercise;
@@ -40,7 +41,7 @@ public class RoutineController {
 		return this.routineServ.getExercises();
 	}
 
-	@PostMapping(value = "/routine", produces = "application/json")   
+	@PostMapping(value = "/routine", produces = "application/json")
 	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) {
 			System.out.println(routine.getType());
 			System.out.println(routine.getExercises());
@@ -67,6 +68,7 @@ public class RoutineController {
 	}
 	
 	@PutMapping(value = "/routine/{id}",produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Void> updateRoutine(@PathVariable("id") Long idRoutine,@RequestBody Routine routine){
 		Routine existingRoutine = this.routineServ.getById(idRoutine);
 		if(existingRoutine == null) {
@@ -79,6 +81,7 @@ public class RoutineController {
 	}
 	
 	@DeleteMapping(value = "/routine/{id}", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Void> deleteRoutine(@PathVariable("id") Long idRoutine){
 		this.routineServ.delete(this.routineServ.getById(idRoutine));
 		return new ResponseEntity<Void>(HttpStatus.OK);

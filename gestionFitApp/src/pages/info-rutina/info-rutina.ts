@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { RoutineProvider } from '../../providers/routine/routine'
-import { Routine } from '../../model/routine'
 
 @IonicPage({
 	name: 'infoRutina'
@@ -14,7 +13,10 @@ import { Routine } from '../../model/routine'
 export class InfoRutinaPage {
 
 	id:any;
-	private rutina; //= {creationDate:{},type:0,exercises:[]};
+  private rutina;
+  private ejercicios;
+  private iniciada=false;
+  private finish=false;
 
   constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private routineService: RoutineProvider) {
   	this.id = this.navParams.get("id");
@@ -26,15 +28,56 @@ export class InfoRutinaPage {
     this.getInfoRutina();
   }
 
+  comenzar(){
+    this.iniciada=true;
+  }
+  
+
+  cancel(){
+    let ex:any;
+    for(ex in this.rutina.exercises){
+     ex.checked =false;
+    }
+    this.iniciada=false;
+  }
+
+  terminada(){
+
+    return this.finish;
+  }
+
+  enCurso(){
+    return this.iniciada;
+  }
+
   getInfoRutina(){
   	this.routineService.getRoutine(this.id).subscribe(
-  			routine => {this.rutina = routine;console.log(this.rutina)},
+        routine => {this.rutina = routine;
+          console.log(this.rutina)},
   			error => {console.log(error)}
   			)
   }
 
-  cancel(){
-    this.viewCtrl.dismiss();
+  isInstructor(){
+    return ( localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor" );
+  }
+
+  checkFinalizo(){
+    let checked = this.rutina.exercises.filter(ex => ex.checked == true)
+    this.finish =checked.length == this.rutina.exercises.length;
+    console.log(this.finish);
+
+  }
+
+
+
+  atras(){
+    if(this.navCtrl.canGoBack()){
+      this.navCtrl.pop();
+    }
+    else{
+      this.navCtrl.push("dashboard",{id:this.id});
+    }
   }
 
 

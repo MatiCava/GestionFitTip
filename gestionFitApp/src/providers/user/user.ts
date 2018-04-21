@@ -34,7 +34,7 @@ export class UserProvider {
 
   getUser(id): Observable<any>{
     console.log("get user");
-  	return this.http.get(this.apiUrl+"user/"+id)
+  	return this.http.get(this.apiUrl+"user/"+id);
   }
 
   getTabla(id):Observable<any>{
