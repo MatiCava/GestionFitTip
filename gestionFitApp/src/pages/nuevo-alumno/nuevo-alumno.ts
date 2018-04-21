@@ -79,7 +79,7 @@ export class NuevoAlumnoPage {
   }
 
   volverAtras(){
-    this.navCtrl.push('alumnos');
+    this.navCtrl.push('login');
   }
 
   crearAlumno(){
