@@ -89,7 +89,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void newRutines(Long idUser,Routine newRutines) {
+	public void newRutines(Long idUser,List<Routine> newRutines) {
 		User_Student user = (User_Student) getById(idUser);
 		
 		//ArgumentsValidator.validateRoutine(newRutines);

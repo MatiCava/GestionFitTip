@@ -2,13 +2,11 @@
 <ion-content padding>
 
 	<ion-list>
-		<ion-item>
-			<ion-label>Seleccionar rutina</ion-label>
-  			<ion-select [(ngModel)]="rutinaAlumno" >
-    			<ion-option *ngFor="let rutina of rutinas" [value]="rutina"> {{rutina.type | translate}} </ion-option>
-  			</ion-select>
+		<ion-label>Seleccionar rutina</ion-label>
+		<ion-item *ngFor="let rutina of rutinas">
+			<ion-label> {{rutina.type | translate}} </ion-label>
+			<ion-checkbox [(ngModel)]="rutina.checked"> </ion-checkbox>
 		</ion-item>
-
 		<ion-item>
 			<button ion-button outline (click)="volverAtras()"><ion-icon name="arrow-back" class="largeIcon" color="info"> {{'Atras' | translate}}</ion-icon> </button>
 		
