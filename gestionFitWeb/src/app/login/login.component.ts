@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../app/login.service';
+import { LoginService } from '../../app/services/login/login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         this.user = result;
         console.log(this.user);
         localStorage.setItem("id", this.user.id);
-        this.routerServ.navigate(['/alumnos', {id: this.user.id}]);
+        this.routerServ.navigate(['/alumnos']);
       },
       error => {
         console.log(error);

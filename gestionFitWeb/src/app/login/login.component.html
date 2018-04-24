@@ -1,5 +1,5 @@
-<div class="form-group">
-  <form>
+<div class="form-group container" style="padding-top: 20px;">
+  <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="inputUser">Usuario</label>
       <input type="text" class="form-control" id="inputUser" placeholder="Ingresa tu usuario" [(ngModel)]="credential.username" name="username">

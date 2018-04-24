@@ -1,3 +1,18 @@
-<p>
-  alumnos works!
-</p>
+<div class="container" style="padding-top: 35px;">
+    <h1 style="text-align: center">Alumnos</h1>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let alumno of alumnos">
+        {{alumno.nameAndSurname}}
+        <span class="badge badge-light badge-pill">
+            <i class="fas fa-address-card"></i>
+        </span>
+        <span class="badge badge-light badge-pill">
+            <i class="fas fa-calendar-alt"></i>
+        </span>
+        <span class="badge badge-light badge-pill">
+            <i class="fas fa-clipboard"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+  

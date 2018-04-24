@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class LoginService {
   apiUrl: String = "http://localhost:8080/api/";
 
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
     console.log('Hello LoginProvider Provider');
   }
 
