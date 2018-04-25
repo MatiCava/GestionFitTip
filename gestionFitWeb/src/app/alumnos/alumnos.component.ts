@@ -8,7 +8,7 @@ import { AlumnosService } from './../services/alumnos/alumnos.service';
 })
 export class AlumnosComponent implements OnInit {
 
-  private alumnos:any;
+  public alumnos:any;
 
   constructor(private userService: AlumnosService) {
     this.alumnos = [];
