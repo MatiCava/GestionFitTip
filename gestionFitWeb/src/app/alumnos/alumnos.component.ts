@@ -9,6 +9,7 @@ import { AlumnosService } from './../services/alumnos/alumnos.service';
 export class AlumnosComponent implements OnInit {
 
   private alumnos:any;
+  //id para pasar a child
 
   constructor(private userService: AlumnosService) {
     this.alumnos = [];
