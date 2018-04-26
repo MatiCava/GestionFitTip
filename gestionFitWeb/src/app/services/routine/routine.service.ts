@@ -13,12 +13,12 @@ export class RoutineService {
     console.log('Hello RoutineProvider Provider');
   }
 
-  getRutines(): Observable<Routine[]>{
-  	return this.http.get<Routine[]>(this.apiUrl+"routines");
+  getRutines(): Observable<any>{
+  	return this.http.get(this.apiUrl+"routines");
   }
 
-  getExercises(): Observable<Exercise[]>{
-    return this.http.get<Exercise[]>(this.apiUrl+"exercises");
+  getExercises(): Observable<any>{
+    return this.http.get(this.apiUrl+"exercises");
   }
 
   getRoutine(id):Observable<any>{
@@ -36,7 +36,7 @@ export class RoutineService {
           })
     };
 
-    return this.http.post<Routine>(this.apiUrl+"routine", routine, httpOptions);
+    return this.http.post(this.apiUrl+"routine", routine, httpOptions);
   }
 
   saveExercise(exercise):Observable<any>{
@@ -49,6 +49,6 @@ export class RoutineService {
           })
     };
 
-    return this.http.post<Exercise>(this.apiUrl+"exercise", exercise, httpOptions);
+    return this.http.post(this.apiUrl+"exercise", exercise, httpOptions);
   }
 }

@@ -1,18 +1,24 @@
 <div class="container" style="padding-top: 35px;">
-    <h1 style="text-align: center">Alumnos</h1>
+    <h1 style="text-align: center"><i class="fas fa-users"></i> Alumnos</h1>
     <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let alumno of alumnos">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let alumno of alumnos" style="font-size: 25px;">
         {{alumno.nameAndSurname}}
-        <span class="badge badge-light badge-pill">
-            <i class="fas fa-address-card"></i>
-        </span>
-        <span class="badge badge-light badge-pill">
-            <i class="fas fa-calendar-alt"></i>
-        </span>
-        <span class="badge badge-light badge-pill">
-            <i class="fas fa-clipboard"></i>
-        </span>
-      </li>
+        <a [routerLink]="" (click)="infoAlumno(alumno.id)">
+            <span class="badge badge-light badge-pill" style="color: #1565C0">
+                <i class="fas fa-address-card"></i>
+            </span>
+        </a>
+        <a [routerLink]="" (click)="rutinasAlumno(alumno.id)">
+            <span class="badge badge-light badge-pill"  style="color: #1565C0">
+                <i class="fas fa-calendar-alt"></i>
+            </span>
+        </a>
+        <a [routerLink]="" (click)="medicionesAlumno(alumno.id)">
+            <span class="badge badge-light badge-pill"  style="color: #1565C0">
+                <i class="fas fa-clipboard"></i>
+            </span>
+        </a>
+        </li>
     </ul>
   </div>
   

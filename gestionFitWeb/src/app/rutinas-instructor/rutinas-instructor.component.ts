@@ -5,7 +5,8 @@ import { RoutineService } from '../services/routine/routine.service';
 @Component({
   selector: 'app-rutinas-instructor',
   templateUrl: './rutinas-instructor.component.html',
-  styleUrls: ['./rutinas-instructor.component.css']
+  styleUrls: ['./rutinas-instructor.component.css'],
+  providers: [RoutineService]
 })
 export class RutinasInstructorComponent implements OnInit {
 
