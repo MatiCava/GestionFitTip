@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { LoginService } from './services/login/login.service';
 import { AlumnosService } from './services/alumnos/alumnos.service';
+import { RutinasInstructorComponent } from './rutinas-instructor/rutinas-instructor.component';
 
 
 const appRoutes: Routes = [
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    AlumnosComponent
+    AlumnosComponent,
+    RutinasInstructorComponent
   ],
   imports: [
     BrowserModule,
