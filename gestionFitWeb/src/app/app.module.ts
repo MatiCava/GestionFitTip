@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { LoginService } from './services/login/login.service';
 import { AlumnosService } from './services/alumnos/alumnos.service';
+import { RoutineService } from './services/routine/routine.service';
 import { RutinasInstructorComponent } from './rutinas-instructor/rutinas-instructor.component';
 
 
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  { path: 'alumnos', component: AlumnosComponent }
+  { path: 'alumnos', component: AlumnosComponent },
+  { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent }
 ];
 
 @NgModule({
@@ -38,7 +40,7 @@ const appRoutes: Routes = [
     )
   ],
   exports: [RouterModule],
-  providers: [LoginService, AlumnosService],
+  providers: [LoginService, AlumnosService, RoutineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

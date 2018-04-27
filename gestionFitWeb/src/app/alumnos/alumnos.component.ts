@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumnos',
@@ -9,9 +10,9 @@ import { AlumnosService } from './../services/alumnos/alumnos.service';
 export class AlumnosComponent implements OnInit {
 
   private alumnos:any;
-  //id para pasar a child
+  
 
-  constructor(private userService: AlumnosService) {
+  constructor(private userService: AlumnosService, private routerServ: Router) {
     this.alumnos = [];
    }
 
@@ -25,6 +26,10 @@ export class AlumnosComponent implements OnInit {
   		res => {this.alumnos = res;console.log(res)},
   		error => {console.log(error)}
   		);
+  }
+
+  rutinasAlumno(idUser){
+    this.routerServ.navigate(['/alumno/nuevaRutina', idUser]);
   }
 
 }
