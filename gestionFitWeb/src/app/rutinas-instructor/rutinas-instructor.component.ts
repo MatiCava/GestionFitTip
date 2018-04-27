@@ -7,7 +7,8 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-rutinas-instructor',
   templateUrl: './rutinas-instructor.component.html',
-  styleUrls: ['./rutinas-instructor.component.css']
+  styleUrls: ['./rutinas-instructor.component.css'],
+  providers: [RoutineService]
 })
 export class RutinasInstructorComponent implements OnInit {
 
@@ -38,7 +39,8 @@ export class RutinasInstructorComponent implements OnInit {
   	this.userService.updateRutines(this.id,this.rutinaAlumno).subscribe(
   			res => {console.log(res);},
   			error => {console.log(error);}
-  			)
+        )
+    this.volverAtras();
   }
 
   traerRutinas(){
@@ -46,5 +48,9 @@ export class RutinasInstructorComponent implements OnInit {
   						result => {this.rutinas = result;},
   						error => {console.log(error);},
   						)
+  }
+
+  volverAtras(){
+    this.router.navigate(['/alumnos']);
   }
 }

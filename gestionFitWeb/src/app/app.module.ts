@@ -11,6 +11,11 @@ import { LoginService } from './services/login/login.service';
 import { AlumnosService } from './services/alumnos/alumnos.service';
 import { RoutineService } from './services/routine/routine.service';
 import { RutinasInstructorComponent } from './rutinas-instructor/rutinas-instructor.component';
+import { InfoAlumnoComponent } from './info-alumno/info-alumno.component';
+import { MedicionesInstructorComponent } from './mediciones-instructor/mediciones-instructor.component';
+import { NuevaMedicionComponent } from './nueva-medicion/nueva-medicion.component';
+import { NuevoEjercicioComponent } from './nuevo-ejercicio/nuevo-ejercicio.component';
+import { NuevaRutinaComponent } from './nueva-rutina/nueva-rutina.component';
 
 
 const appRoutes: Routes = [
@@ -20,7 +25,12 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'alumnos', component: AlumnosComponent },
-  { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent }
+  { path: 'alumno/info/:id', component: InfoAlumnoComponent },
+  { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent },
+  { path: 'alumno/mediciones/:id',component: MedicionesInstructorComponent },
+  { path: 'rutinas/nueva',component: NuevaRutinaComponent },
+  { path: 'alumno/medicion/nueva/:id', component: NuevaMedicionComponent },
+  { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent }
 ];
 
 @NgModule({
@@ -28,15 +38,20 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     AlumnosComponent,
-    RutinasInstructorComponent
+    RutinasInstructorComponent,
+    InfoAlumnoComponent,
+    MedicionesInstructorComponent,
+    NuevaMedicionComponent,
+    NuevoEjercicioComponent,
+    NuevaRutinaComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true }
+      appRoutes
+      ,{ enableTracing: true }
     )
   ],
   exports: [RouterModule],

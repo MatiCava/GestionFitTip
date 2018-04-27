@@ -9,15 +9,22 @@ import { Router } from '@angular/router';
 })
 export class AlumnosComponent implements OnInit {
 
-  private alumnos:any;
-  
+  public alumnos:any;
 
-  constructor(private userService: AlumnosService, private routerServ: Router) {
+  constructor(private userService: AlumnosService,private routerServ: Router) {
     this.alumnos = [];
    }
 
   ngOnInit() {
     this.getAlumnos();
+  }
+
+  infoAlumno(idAl){
+    this.routerServ.navigate(['/alumno/info', idAl]);
+  }
+
+  medicionesAlumno(idAl){
+    this.routerServ.navigate(['/alumno/mediciones',idAl]);
   }
 
 
