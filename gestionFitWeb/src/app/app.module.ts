@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,12 @@ import { MedicionesInstructorComponent } from './mediciones-instructor/medicione
 import { NuevaMedicionComponent } from './nueva-medicion/nueva-medicion.component';
 import { NuevoEjercicioComponent } from './nuevo-ejercicio/nuevo-ejercicio.component';
 import { NuevaRutinaComponent } from './nueva-rutina/nueva-rutina.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 const appRoutes: Routes = [
@@ -26,9 +32,9 @@ const appRoutes: Routes = [
   },
   { path: 'alumnos', component: AlumnosComponent },
   { path: 'alumno/info/:id', component: InfoAlumnoComponent },
-  { path: 'alumno/rutinas/:id',component: RutinasInstructorComponent },
-  { path: 'alumno/mediciones/:id',component: MedicionesInstructorComponent },
-  { path: 'rutinas/nueva',component: NuevaRutinaComponent },
+  { path: 'alumno/rutinas/:id', component: RutinasInstructorComponent },
+  { path: 'alumno/mediciones/:id', component: MedicionesInstructorComponent },
+  { path: 'rutinas/nueva', component: NuevaRutinaComponent },
   { path: 'alumno/medicion/nueva/:id', component: NuevaMedicionComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent }
 ];
@@ -50,12 +56,19 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(
-      appRoutes
-      ,{ enableTracing: true }
-    )
+      appRoutes,
+      { enableTracing: true }
+    ),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [RouterModule],
-  providers: [LoginService, AlumnosService,RoutineService],
+  providers: [LoginService, AlumnosService, RoutineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

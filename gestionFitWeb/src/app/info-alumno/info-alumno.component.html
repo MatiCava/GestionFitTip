@@ -1,3 +1,40 @@
-<p>
-  info-alumno works!
-</p>
+<div class="container" style="font-family: 'Noto Sans', sans-serif;padding-top: 30px">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <img [src]="alumno.photo" style="max-height: 100px;max-width: 100px;">
+    </li>
+    <li class="list-group-item">
+      <p>{{'Usuario' | translate}}: <strong>{{alumno.username}}</strong></p>	
+    </li>
+    <li class="list-group-item">
+      <p> {{'Contraseña' | translate}}: <strong>{{alumno.password}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> Mail: <strong>{{alumno.mail}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Patologias' | translate}}: <strong> {{alumno.pathologies}} </strong><span *ngIf="alumno.pathologies == ''" > <strong> {{'No definido' | translate}} </strong></span></p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Observaciones' | translate}}: <strong> {{alumno.observations}} </strong><span *ngIf="alumno.observations == ''" > <strong> {{'No definido' | translate}} </strong></span></p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Objetivo' | translate}}: <strong>{{alumno.objective}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Cumpleaños' | translate}}: <strong>{{alumno.birthday | date:'dd/MM/yyyy'}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Telefono' | translate}}: <strong>{{alumno.telephone}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Edad' | translate}}: <strong>{{alumno.age}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Peso' | translate}}: <strong>{{alumno.weigth}}</strong> </p>
+    </li>
+  </ul>
+  <div style="padding-top: 25px;padding-bottom: 25px;">
+    <button class="btn btn-primary" (click)="volver()">Atras</button>
+  </div>
+</div>
