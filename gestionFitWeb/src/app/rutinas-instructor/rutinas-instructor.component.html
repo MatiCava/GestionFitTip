@@ -1,3 +1,11 @@
-<p>
-  rutinas-instructor works!
-</p>
+<div class="container" style="padding-top: 35px;">
+  <ul class="list-group">
+    <h1 style="text-align: center">Asignar una rutina</h1>
+    <li class="list-group-item" *ngFor="let rutina of rutinas">
+      <input id="checkboxRutinas" type="checkbox" [(ngModel)]="rutina.checked"> {{rutina.type}}<br>
+    </li>
+    <li>
+      <button (click)="guardarRutinasAlumno()"> Guardar </button>
+    </li>
+  </ul>
+</div>

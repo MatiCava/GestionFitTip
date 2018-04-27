@@ -9,8 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { LoginService } from './services/login/login.service';
 import { AlumnosService } from './services/alumnos/alumnos.service';
-import { RutinasInstructorComponent } from './rutinas-instructor/rutinas-instructor.component';
 import { RoutineService } from './services/routine/routine.service';
+import { RutinasInstructorComponent } from './rutinas-instructor/rutinas-instructor.component';
 import { InfoAlumnoComponent } from './info-alumno/info-alumno.component';
 import { MedicionesInstructorComponent } from './mediciones-instructor/mediciones-instructor.component';
 import { NuevaMedicionComponent } from './nueva-medicion/nueva-medicion.component';
@@ -35,6 +35,7 @@ const appRoutes: Routes = [
   { path: 'alumno/rutinas/:id', component: RutinasInstructorComponent },
   { path: 'alumno/mediciones/:id', component: MedicionesInstructorComponent },
   { path: 'rutinas/nueva', component: NuevaRutinaComponent },
+  { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent },
   { path: 'alumno/medicion/nueva/:id', component: NuevaMedicionComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent }
 ];

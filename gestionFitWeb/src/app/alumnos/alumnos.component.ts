@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class AlumnosComponent implements OnInit {
 
   public alumnos:any;
-  //id para pasar a child
 
   constructor(private userService: AlumnosService,private routerServ: Router) {
     this.alumnos = [];
@@ -24,11 +23,6 @@ export class AlumnosComponent implements OnInit {
     this.routerServ.navigate(['/alumno/info', idAl]);
   }
 
-  rutinasAlumno(idAl){
-    console.log(idAl);
-    this.routerServ.navigate(['/alumno/rutinas/',idAl]);
-  }
-
   medicionesAlumno(idAl){
     this.routerServ.navigate(['/alumno/mediciones',idAl]);
   }
@@ -39,6 +33,10 @@ export class AlumnosComponent implements OnInit {
   		res => {this.alumnos = res;console.log(res)},
   		error => {console.log(error)}
   		);
+  }
+
+  rutinasAlumno(idUser){
+    this.routerServ.navigate(['/alumno/nuevaRutina', idUser]);
   }
 
 }

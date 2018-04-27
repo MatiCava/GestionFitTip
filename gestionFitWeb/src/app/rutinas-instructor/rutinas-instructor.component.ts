@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { RoutineService } from '../services/routine/routine.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-rutinas-instructor',
@@ -10,23 +12,35 @@ import { RoutineService } from '../services/routine/routine.service';
 })
 export class RutinasInstructorComponent implements OnInit {
 
-  @Input() id:any;
+  id:any;
 	rutinas: any[];
-	rutinaAlumno:any[];
+  rutinaAlumno:any[];
+  
 
-  constructor(private routineProvider: RoutineService, private userService: AlumnosService) { }
+  constructor(private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.getId();
     this.traerRutinas();
+  }
+
+  getId(){
+    this.route.paramMap.switchMap((params: ParamMap) => 
+                                  params.get('id')).subscribe(
+                                        res => {this.id = res;},
+                                        error => {console.log(error);},
+                                  );
   }
 
   guardarRutinasAlumno(){
     this.rutinaAlumno = this.rutinas.filter(ex => ex.checked == true);
+    console.log(this.id);
     console.log(this.rutinaAlumno);
   	this.userService.updateRutines(this.id,this.rutinaAlumno).subscribe(
   			res => {console.log(res);},
   			error => {console.log(error);}
-  			)
+        )
+    this.volverAtras();
   }
 
   traerRutinas(){
@@ -34,5 +48,9 @@ export class RutinasInstructorComponent implements OnInit {
   						result => {this.rutinas = result;},
   						error => {console.log(error);},
   						)
+  }
+
+  volverAtras(){
+    this.router.navigate(['/alumnos']);
   }
 }
