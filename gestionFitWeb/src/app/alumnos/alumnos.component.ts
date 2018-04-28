@@ -36,7 +36,7 @@ export class AlumnosComponent implements OnInit {
   }
 
   rutinasAlumno(idUser){
-    this.routerServ.navigate(['/alumno/nuevaRutina', idUser]);
+    this.routerServ.navigate(['/alumno/rutinas', idUser]);
   }
 
 }

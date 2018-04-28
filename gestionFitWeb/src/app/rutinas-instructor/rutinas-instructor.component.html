@@ -5,7 +5,9 @@
       <input id="checkboxRutinas" type="checkbox" [(ngModel)]="rutina.checked"> {{rutina.type}}<br>
     </li>
     <li>
-      <button (click)="guardarRutinasAlumno()"> Guardar </button>
+      <div style="padding-top: 25px;">
+        <button class="btn btn-primary" (click)="guardarRutinasAlumno()"> Guardar </button>
+      </div>  
     </li>
   </ul>
 </div>
