@@ -15,11 +15,9 @@
       <li class="list-group-item" *ngFor="let exercise of exercises">
           <input id="checkboxEjercicios" type="checkbox" [(ngModel)]="exercise.checked"> {{exercise.name}}<br>
       </li>
-      <li>
-          <div class="flex" style="padding-top: 25px;">
-            <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
-            <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
-          </div>  
-      </li>
   </ul>
+  <div class="flex" style="padding-top: 25px;">
+      <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
+      <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+  </div> 
 </div>

@@ -16,11 +16,9 @@
         <h1 style="text-align: left; font-size:25px">Descripcion ejercicio</h1>
         <input type="text" [(ngModel)]="newExercise.description">
     </li>
-    <li>
-        <div class="flex" style="padding-top: 25px;">
-          <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
-          <button class="btn btn-primary" (click)="guardarEjercicio()"> Guardar </button>
-        </div>  
-      </li>
   </ul>
+  <div class="flex" style="padding-top: 25px;">
+      <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+      <button class="btn btn-primary" (click)="guardarEjercicio()"> Guardar </button>
+  </div> 
 </div>
