@@ -2,7 +2,7 @@
 	<h2>Mis rutinas</h2>
 	<ion-list>
 		<ion-item *ngFor="let rutina of rutinas">
-			{{rutina.type}} 
+			{{rutina.name}} 
 			<a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
 		</ion-item>
 	</ion-list>

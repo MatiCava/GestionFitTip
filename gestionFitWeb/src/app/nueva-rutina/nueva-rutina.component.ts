@@ -16,7 +16,7 @@ export class NuevaRutinaComponent implements OnInit {
 	newRoutine;
 
   constructor(private routineServ: RoutineService, private router: Router) {
-    this.newRoutine = {creationDate:new Date().getTime(), type:"", exercises:[]};
+    this.newRoutine = {name:"", creationDate:new Date().getTime(), type:"", exercises:[]};
   }
 
   ngOnInit() {

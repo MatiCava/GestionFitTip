@@ -1,12 +1,14 @@
 import { Exercise } from './exercise'
 
 export class Routine{
+	name: String;
 	creationDate: Date;
 	type: Routine_Type;
 	exercises: Array<Exercise>;
 	checked: Boolean;
 
-	constructor(creationDateR:Date,typeR:Routine_Type,exercisesR:Array<Exercise>){
+	constructor(nameR: String, creationDateR:Date,typeR:Routine_Type,exercisesR:Array<Exercise>){
+		this.name = nameR;
 		this.creationDate = creationDateR;
 		this.type = typeR;
 		this.exercises = exercisesR;

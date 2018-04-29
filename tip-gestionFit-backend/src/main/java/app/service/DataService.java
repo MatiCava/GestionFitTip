@@ -63,11 +63,11 @@ public class DataService {
 		
 
 		alu1.addMeasurements(measures);
-		Routine rutina = new Routine(Routine_Type.Strength);
-		Routine rutina2 = new Routine(Routine_Type.Explosive_Force);
-		Routine rutina3 = new Routine(Routine_Type.Muscular_Definition);
-		Routine rutina4 = new Routine(Routine_Type.Resistance);
-		Routine rutina5 = new Routine(Routine_Type.Strength_Resistance);
+		Routine rutina = new Routine("Rutina de fuerza para pegarle como el diego a la merca",Routine_Type.Strength);
+		Routine rutina2 = new Routine("Rutina de fuerza explosiva", Routine_Type.Explosive_Force);
+		Routine rutina3 = new Routine("Rutina de def muscular para tener la tabla de planchar", Routine_Type.Muscular_Definition);
+		Routine rutina4 = new Routine("Rutina de resistencia para aguantar los pases de cocucha como cesar", Routine_Type.Resistance);
+		Routine rutina5 = new Routine("Rutina de fuerza y resistencia especifica para aguantar porros nevaditos", Routine_Type.Strength_Resistance);
 		rutina.addExercise(ex4);
 		rutina.addExercise(ex1);
 		rutina.addExercise(ex2);

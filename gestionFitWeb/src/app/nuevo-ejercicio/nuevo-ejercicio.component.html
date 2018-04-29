@@ -1,3 +1,26 @@
-<p>
-  nuevo-ejercicio works!
-</p>
+<div class="container" style="padding-top: 35px;">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h1 style="text-align: left; font-size:25px">Nombre ejercicio</h1>
+      <input type="text" [(ngModel)]="newExercise.name">
+    </li>
+    <li class="list-group-item">
+        <h1 style="text-align: left; font-size:25px">Tipo ejercicio</h1>
+        <div class="styled-select rounded">
+            <select [(ngModel)]="newExercise.type">
+              <option *ngFor="let typeE of exercisesType" [value]="typeE"> {{typeE | translate}} </option>
+            </select>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <h1 style="text-align: left; font-size:25px">Descripcion ejercicio</h1>
+        <input type="text" [(ngModel)]="newExercise.description">
+    </li>
+    <li>
+        <div class="flex" style="padding-top: 25px;">
+          <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+          <button class="btn btn-primary" (click)="guardarEjercicio()"> Guardar </button>
+        </div>  
+      </li>
+  </ul>
+</div>

@@ -2,11 +2,12 @@
   <ul class="list-group">
     <h1 style="text-align: center">Asignar una rutina</h1>
     <li class="list-group-item" *ngFor="let rutina of rutinas">
-      <input id="checkboxRutinas" type="checkbox" [(ngModel)]="rutina.checked"> {{rutina.type}}<br>
+      <input id="checkboxRutinas" type="checkbox" [(ngModel)]="rutina.checked"> {{rutina.name}}<br>
     </li>
     <li>
-      <div style="padding-top: 25px;">
+      <div class="flex" style="padding-top: 25px;">
         <button class="btn btn-primary" (click)="guardarRutinasAlumno()"> Guardar </button>
+        <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
       </div>  
     </li>
   </ul>

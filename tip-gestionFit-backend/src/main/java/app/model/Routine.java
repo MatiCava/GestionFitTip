@@ -23,6 +23,7 @@ public class Routine {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
+	public String name;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date creationDate;
@@ -36,7 +37,8 @@ public class Routine {
 		
 	}
 	
-	public Routine( Routine_Type typeR) {
+	public Routine(String nameR, Routine_Type typeR) {
+		this.name = nameR;
 		this.creationDate = new Date();
 		this.type = typeR;
 		this.exercises = new ArrayList<Exercise>();
