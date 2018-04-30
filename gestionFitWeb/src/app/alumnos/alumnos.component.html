@@ -1,7 +1,7 @@
 <div class="container" style="padding-top: 35px;">
-    <h1 style="text-align: center"><i class="fas fa-users"></i> Alumnos</h1>
+    <h1 style="text-align: center;font-family: Poppins, sans-serif;font-weight: 400;"><i class="fas fa-users"></i> Alumnos</h1>
     <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let alumno of alumnos" style="font-size: 25px;">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let alumno of alumnos" style="font-size: 25px;font-family: Poppins, sans-serif;">
         {{alumno.nameAndSurname}}
         <a [routerLink]="" (click)="infoAlumno(alumno.id)">
             <span class="badge badge-light badge-pill" style="color: #1565C0">

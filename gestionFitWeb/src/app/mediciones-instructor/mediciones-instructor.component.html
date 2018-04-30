@@ -1,3 +1,19 @@
-<p>
-  mediciones-instructor works!
-</p>
+<div class="container" style="padding-top: 40px;">
+<div class="table-responsive" style="text-align: center">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Medidas</th>
+        <th scope="col" *ngFor="let day of dates">{{day | date:'dd/MM/yyyy'}}</th>
+      </tr>
+    </thead> 
+    <tbody>
+      <tr class="table-ligth" *ngFor="let medida of _table.measures">
+        <th scope="row">{{medida.name | translate}}</th>
+        <td *ngFor="let medicion of medida.measures">{{medicion.measure}}cm {{'Altura' | translate}}: {{medicion.height}}cm</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button class="btn btn-primary">Nuevo</button>
+</div>
