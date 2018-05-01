@@ -17,9 +17,15 @@
         </li>
         <li>
             <a [routerLink]="" (click)="rutinas()"><p>{{'Rutinas' | translate}} <i class="fas fa-calendar-alt"></i></p></a>
+            <ul>
+                <li><a [routerLink]="" (click)="nuevaRutina()">Nueva</a></li>
+            </ul>
         </li>
         <li>
             <p>Ejercicios <i class="fas fa-file-alt"></i></p>
+            <ul>
+                <li><a [routerLink]="" (click)="nuevoEjercicio()">Nuevo</a></li>
+            </ul>
         </li>
         <li>
             <p>Logout <i class="fas fa-sign-out-alt"></i></p>

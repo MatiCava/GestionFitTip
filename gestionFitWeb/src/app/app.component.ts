@@ -23,4 +23,12 @@ export class AppComponent {
   rutinas(){
     this.routerService.navigate(["/rutinas"]);
   }
+  
+  nuevaRutina(){
+    this.routerService.navigate(["/rutinas/nueva"]);
+  }
+
+  nuevoEjercicio(){
+    this.routerService.navigate(["/ejercicios/nuevo"]);
+  }
 }
