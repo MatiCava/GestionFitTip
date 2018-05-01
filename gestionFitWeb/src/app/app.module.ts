@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,7 @@ import { ListaRutinasComponent } from './lista-rutinas/lista-rutinas.component';
 import { InfoRutinaComponent } from './info-rutina/info-rutina.component';
 import { EditarRutinaComponent } from './editar-rutina/editar-rutina.component';
 import { MedidasService } from './services/medidas/medidas.service';
+import { EliminarRutinaDialogComponent } from './eliminar-rutina-dialog/eliminar-rutina-dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,13 +62,15 @@ const appRoutes: Routes = [
     NuevaRutinaComponent,
     ListaRutinasComponent,
     InfoRutinaComponent,
-    EditarRutinaComponent
+    EditarRutinaComponent,
+    EliminarRutinaDialogComponent
 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    MatDialogModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
@@ -81,6 +85,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
+  entryComponents: [EliminarRutinaDialogComponent],
   exports: [RouterModule],
   providers: [LoginService, AlumnosService, RoutineService,MedidasService],
   bootstrap: [AppComponent]

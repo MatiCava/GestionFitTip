@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Routine } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
+import { EliminarRutinaDialogComponent } from './../eliminar-rutina-dialog/eliminar-rutina-dialog.component';
 
 @Component({
   selector: 'app-lista-rutinas',
@@ -11,8 +13,9 @@ import { Router } from '@angular/router';
 export class ListaRutinasComponent implements OnInit {
 
   rutinas:any[];
+  eliminarRutinaDialogRef: MatDialogRef<EliminarRutinaDialogComponent>;
 
-  constructor(private routineServ: RoutineService, private router: Router) { }
+  constructor(private routineServ: RoutineService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.traerRutinas()
@@ -33,8 +36,16 @@ export class ListaRutinasComponent implements OnInit {
     this.router.navigate(['/rutina/edit', idR]);
   }
 
-  deleteRoutine(idR){
+  openDeleteRoutineDialog(idR){
 
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: idR,
+      title: 'Angular For Beginners'
+  };
+
+    this.eliminarRutinaDialogRef = this.dialog.open(EliminarRutinaDialogComponent, dialogConfig);
   }
 
 }

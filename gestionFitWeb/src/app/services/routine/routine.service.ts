@@ -25,6 +25,10 @@ export class RoutineService {
     return this.http.get(this.apiUrl+"routine/"+id);
   }
 
+  deleteRoutine(id):Observable<any>{
+    return this.http.delete(this.apiUrl+"routine/"+id);
+  }
+
   saveRoutine(routine):Observable<any>{
 
     const httpOptions = {
