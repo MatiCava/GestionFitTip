@@ -1,6 +1,6 @@
 <div class="wrapper">
     <!-- Sidebar Holder -->
-    <nav id="sidebar">
+    <nav id="sidebar" *ngIf="isLogged()">
       <div class="sidebar-header">
         <img src="assets/icon.png" height="60px" width="60px">
       </div>
@@ -9,35 +9,30 @@
         <li class="active">
             <h3>Menu</h3>
         </li>
+        <!--
         <li style="font-family: 'Noto Sans', sans-serif">
             <p>{{'Inicio' | translate}} <i class="fas fa-home"></i></p>
         </li>
+    -->
         <li>
             <a [routerLink]="" (click)="alumnos()"><p>{{'Alumnos' | translate}} <i class="fas fa-users"></i></p></a>
         </li>
         <li>
             <a [routerLink]="" (click)="rutinas()"><p>{{'Rutinas' | translate}} <i class="fas fa-calendar-alt"></i></p></a>
             <ul>
-                <li><a [routerLink]="" (click)="nuevaRutina()">Nueva</a></li>
+                <li><a [routerLink]="" (click)="nuevaRutina()"><p>Nueva <i class="fas fa-calendar-plus"></i></p></a></li>
             </ul>
         </li>
         <li>
             <p>Ejercicios <i class="fas fa-file-alt"></i></p>
             <ul>
-                <li><a [routerLink]="" (click)="nuevoEjercicio()">Nuevo</a></li>
+                <li><a [routerLink]="" (click)="nuevoEjercicio()"><p>Nuevo <i class="fas fa-plus-circle"></i> </p></a></li>
             </ul>
         </li>
 
         <li>
-            <p>Logout <i class="fas fa-sign-out-alt"></i></p>
+            <a [routerLink]="" (click)="logout()"><p>Logout <i class="fas fa-sign-out-alt"></i></p></a>
         </li>
-        <li ><a [routerLink]="" data-toggle="collapse" id="botonCol" aria-expanded="false" aria-controls="options">Dropdown <span class="caret"></span></a>
-            <div class="collapse" id="options">
-                    <ul>
-                        <li>GG</li>
-                    </ul>
-                  </div>
-          </li>
         <li>
             <p>Cerrar <i class="fas fa-times-circle"></i></p>
         </li>
@@ -53,7 +48,7 @@
         <div class="container-fluid">
 
           
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" *ngIf="isLogged()">
                         <li class="nav-item">
                             <a [routerLink]="" id="sidebarCollapse"><span class="navbar-toggler-icon"></span></a>
                         </li>

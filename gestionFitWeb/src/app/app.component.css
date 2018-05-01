@@ -116,7 +116,6 @@ a[aria-expanded="true"]::before {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 10px !important;
-  background: #83aeff;
 }
 
 ul.CTAs {

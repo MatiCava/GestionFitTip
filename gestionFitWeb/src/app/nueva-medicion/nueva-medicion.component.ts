@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { ParamMap, ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { MedidasService } from '../services/medidas/medidas.service';
 
 
@@ -86,7 +87,11 @@ export class NuevaMedicionComponent implements OnInit {
   		res => {console.log(res);this.router.navigate(["/alumno/mediciones",this.id]);},
   		error => {console.log(error);}
   		);
-  }
+	}
+	
+	atras(){
+		this.router.navigate(['/alumno/mediciones', this.id]);
+	}
 
 
 }

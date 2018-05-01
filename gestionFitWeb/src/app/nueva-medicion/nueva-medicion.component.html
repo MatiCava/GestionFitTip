@@ -1,6 +1,7 @@
 <div class="container" style="padding-top:40px !important">
+  <h2 style="font-family: Poppins, sans-serif">Nueva Medicion</h2>
 
-    <div class="table-responsive" style="text-align: center">
+    <div class="table-responsive" style="text-align: center;font-family: Poppins, sans-serif">
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -9,7 +10,7 @@
               <th scope="col">{{'Altura' | translate}}</th>
             </tr>
           </thead> 
-          <tbody>
+          <tbody> 
             <tr class="table-ligth" *ngFor="let medida of nombresMedidas;index as i">
               <th scope="row">{{medida | translate}}</th>
               <td [formGroup]="formMeasures">
@@ -23,7 +24,9 @@
         </table>
       </div>
 
-
-	<button class="btn btn-success" [disabled]="validForm()" (click)="guardar()">Guardar</button>
+<div style="padding-bottom: 40px;">
+	<button class="btn btn-success" [class.buttonInvalid]="validForm()" [disabled]="validForm()" (click)="guardar()">Guardar</button>
+  <button class="btn btn-primary" style="text-align: left;" (click)="atras()">Atras</button>
+</div>
 
 </div>

@@ -34,4 +34,8 @@ export class LoginComponent implements OnInit {
       );
   }
 
+  isLogged(){
+    return localStorage.getItem("id") != null;
+  }
+
 }

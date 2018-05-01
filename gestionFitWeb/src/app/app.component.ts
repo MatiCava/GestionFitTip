@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
@@ -8,12 +8,18 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app';
 
   constructor(private translateService: TranslateService, private routerService: Router) {
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
+  }
+
+  ngOnInit() {
+    if (!this.isLogged()) {
+      this.routerService.navigate(["/login"]);
+    }
   }
 
   alumnos() {
@@ -30,5 +36,14 @@ export class AppComponent {
 
   nuevoEjercicio(){
     this.routerService.navigate(["/ejercicios/nuevo"]);
+  }
+
+  isLogged(){
+    return localStorage.getItem("id") != null;
+  }
+
+  logout(){
+    localStorage.removeItem("id");
+    this.routerService.navigate(["/login"]);
   }
 }
