@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
-import { ParamMap, ActivatedRoute } from '@angular/router';
+import { ParamMap, ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { MedidasService } from '../services/medidas/medidas.service';
 
 
 @Component({
@@ -14,8 +15,9 @@ export class MedicionesInstructorComponent implements OnInit {
   dates: any = [];
   id: any;
   _table: any;
+  nombresMedidas: any = [];
 
-  constructor(private userServ: AlumnosService, private route: ActivatedRoute) {
+  constructor(private userServ: AlumnosService, private route: ActivatedRoute, private router: Router, private medidasServ: MedidasService) {
     this._table = {};
   }
 
@@ -55,5 +57,17 @@ export class MedicionesInstructorComponent implements OnInit {
     const month = newDate[1] ;
     const year = newDate[2] ;
     return (year + "-" + month + "-" + day);
+  }
+
+  getNames(){
+    for(let medida of this._table.measures){
+      this.nombresMedidas.push(medida.name);
+    }
+  }
+
+  nuevaMedicion(){
+    this.getNames();
+    this.medidasServ.saveMedidas(this.nombresMedidas);
+    this.router.navigate(['alumno/medicion/nueva',this.id]);
   }
 }

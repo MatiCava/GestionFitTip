@@ -19,4 +19,16 @@ export class AppComponent {
   alumnos() {
     this.routerService.navigate(["/alumnos"]);
   }
+
+  rutinas(){
+    this.routerService.navigate(["/rutinas"]);
+  }
+  
+  nuevaRutina(){
+    this.routerService.navigate(["/rutinas/nueva"]);
+  }
+
+  nuevoEjercicio(){
+    this.routerService.navigate(["/ejercicios/nuevo"]);
+  }
 }

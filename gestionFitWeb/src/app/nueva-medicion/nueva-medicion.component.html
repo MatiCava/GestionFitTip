@@ -1,3 +1,29 @@
-<p>
-  nueva-medicion works!
-</p>
+<div class="container" style="padding-top:40px !important">
+
+    <div class="table-responsive" style="text-align: center">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">{{'Medida' | translate}}</th>
+              <th scope="col">{{'Medicion' | translate}}</th>
+              <th scope="col">{{'Altura' | translate}}</th>
+            </tr>
+          </thead> 
+          <tbody>
+            <tr class="table-ligth" *ngFor="let medida of nombresMedidas;index as i">
+              <th scope="row">{{medida | translate}}</th>
+              <td [formGroup]="formMeasures">
+                <input type="number" class="form-control" [formControlName]="i" [class.invalid]="formMeasures.controls[i].invalid && formMeasures.controls[i].dirty">
+              </td>
+              <td [formGroup]="formHeight">
+                  <input type="number" class="form-control" [formControlName]="i" [class.invalid]="formHeight.controls[i].invalid && formHeight.controls[i].dirty">
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+	<button class="btn btn-success" [disabled]="validForm()" (click)="guardar()">Guardar</button>
+
+</div>

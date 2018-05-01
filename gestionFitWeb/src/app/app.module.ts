@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +18,10 @@ import { NuevoEjercicioComponent } from './nuevo-ejercicio/nuevo-ejercicio.compo
 import { NuevaRutinaComponent } from './nueva-rutina/nueva-rutina.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ListaRutinasComponent } from './lista-rutinas/lista-rutinas.component';
+import { InfoRutinaComponent } from './info-rutina/info-rutina.component';
+import { EditarRutinaComponent } from './editar-rutina/editar-rutina.component';
+import { MedidasService } from './services/medidas/medidas.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +38,9 @@ const appRoutes: Routes = [
   { path: 'alumno/info/:id', component: InfoAlumnoComponent },
   { path: 'alumno/rutinas/:id', component: RutinasInstructorComponent },
   { path: 'alumno/mediciones/:id', component: MedicionesInstructorComponent },
+  { path: 'rutinas', component: ListaRutinasComponent},
+  { path: 'rutina/info/:id', component: InfoRutinaComponent},
+  { path: 'rutina/edit/:id', component: EditarRutinaComponent},
   { path: 'rutinas/nueva', component: NuevaRutinaComponent },
   { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent },
   { path: 'alumno/medicion/nueva/:id', component: NuevaMedicionComponent },
@@ -50,7 +57,11 @@ const appRoutes: Routes = [
     MedicionesInstructorComponent,
     NuevaMedicionComponent,
     NuevoEjercicioComponent,
-    NuevaRutinaComponent
+    NuevaRutinaComponent,
+    ListaRutinasComponent,
+    InfoRutinaComponent,
+    EditarRutinaComponent
+
   ],
   imports: [
     BrowserModule,
@@ -66,10 +77,12 @@ const appRoutes: Routes = [
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    })
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [RouterModule],
-  providers: [LoginService, AlumnosService, RoutineService],
+  providers: [LoginService, AlumnosService, RoutineService,MedidasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
