@@ -19,4 +19,8 @@ export class AppComponent {
   alumnos() {
     this.routerService.navigate(["/alumnos"]);
   }
+
+  rutinas(){
+    this.routerService.navigate(["/rutinas"]);
+  }
 }

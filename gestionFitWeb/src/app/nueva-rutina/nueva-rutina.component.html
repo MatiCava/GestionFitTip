@@ -1,11 +1,13 @@
 <div class="container" style="padding-top: 35px;">
   <ul class="list-group">
       <li class="list-group-item">
-          <h1 style="text-align: left; font-size:25px">Nombre rutina</h1>
-          <input type="text" [(ngModel)]="newRoutine.name">
+          <div class="form-group">
+            <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">Nombre rutina</h1>
+            <input type="text" class="form-control" [(ngModel)]="newRoutine.name">
+          </div>
       </li>
       <li class="list-group-item">
-          <h1 style="text-align: left; font-size:25px">Tipo rutina</h1>
+          <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">Tipo rutina</h1>
           <div class="styled-select rounded">
               <select [(ngModel)]="newRoutine.type">
                 <option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </option>
@@ -16,8 +18,12 @@
           <input id="checkboxEjercicios" type="checkbox" [(ngModel)]="exercise.checked"> {{exercise.name}}<br>
       </li>
   </ul>
-  <div class="flex" style="padding-top: 25px;">
+  <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
       <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
       <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
-  </div> 
+  </div>
+  <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
+        <button class="btn btn-primary" (click)="actualizarRutina()"> Actualizar </button>
+        <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+    </div>  
 </div>

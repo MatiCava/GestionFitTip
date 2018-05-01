@@ -1,0 +1,35 @@
+<div class="container" style="font-family: 'Noto Sans', sans-serif;padding-top: 30px">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <p>{{'Nombre' | translate}}: <strong>{{rutina.name}}</strong></p>
+    </li>
+    <li class="list-group-item">
+      <p>{{'Fecha creacion' | translate}}: <strong>{{rutina.creationDate | date:'dd/MM/yyyy'}}</strong></p>
+    </li>
+    <li class="list-group-item">
+      <p>{{'Tipo' | translate}}: <strong>{{rutina.type | translate}}</strong></p>
+    </li>
+  </ul>
+  <div class="table-responsive" style="text-align: center">
+    <table class="table table-bordered">
+      <span class="align-left"  style="font-family: 'Noto Sans', sans-serif"><strong>Ejercicios</strong></span>
+      <thead>
+        <tr>
+          <th scope="col">{{Nombre | translate}}</th>
+          <th scope="col">{{Tipo | translate}}</th>
+          <th scope="col">{{Descripcion | translate}}</th>
+        </tr>
+      </thead> 
+      <tbody>
+        <tr class="table-ligth" *ngFor="let exercise of rutina.exercises">
+          <td scope="row">{{exercise.name | translate}}</td>
+          <td scope="row">{{exercise.type | translate}}</td>
+          <td scope="row">{{exercise.description | translate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="padding-top: 25px;padding-bottom: 25px;">
+    <button class="btn btn-primary" (click)="volverAtras()">Atras</button>
+  </div>
+</div>

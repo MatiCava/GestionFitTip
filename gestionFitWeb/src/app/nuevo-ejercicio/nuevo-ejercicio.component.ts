@@ -23,7 +23,7 @@ export class NuevoEjercicioComponent implements OnInit {
   volverAtras(){
     this.router.navigate(['/alumnos']);
   }
-
+//<input type="text" [(ngModel)]="newExercise.description">
   guardarEjercicio(){
   	let type = Exercise_Type[this.newExercise.type];
     this.newExercise.type = type;

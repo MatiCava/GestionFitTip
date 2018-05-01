@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
   selector: 'app-nueva-rutina',
   templateUrl: './nueva-rutina.component.html',
   styleUrls: ['./nueva-rutina.component.css']
-})
+}) //para reutilizar proba hacer nuevo component y poner en templateUrl la de este
 export class NuevaRutinaComponent implements OnInit {
 
   exercises:any[];
 	exercisesAlumno:any[] = [];
 	rutinasType=[Routine_Type[4], Routine_Type[3], Routine_Type[2], Routine_Type[1], Routine_Type[0]];
-	newRoutine;
+  newRoutine;
+  isEdit = false;
+  isNew = true;
 
   constructor(private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"", creationDate:new Date().getTime(), type:"", exercises:[]};

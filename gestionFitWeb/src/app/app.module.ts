@@ -18,6 +18,9 @@ import { NuevoEjercicioComponent } from './nuevo-ejercicio/nuevo-ejercicio.compo
 import { NuevaRutinaComponent } from './nueva-rutina/nueva-rutina.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ListaRutinasComponent } from './lista-rutinas/lista-rutinas.component';
+import { InfoRutinaComponent } from './info-rutina/info-rutina.component';
+import { EditarRutinaComponent } from './editar-rutina/editar-rutina.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +37,9 @@ const appRoutes: Routes = [
   { path: 'alumno/info/:id', component: InfoAlumnoComponent },
   { path: 'alumno/rutinas/:id', component: RutinasInstructorComponent },
   { path: 'alumno/mediciones/:id', component: MedicionesInstructorComponent },
+  { path: 'rutinas', component: ListaRutinasComponent},
+  { path: 'rutina/info/:id', component: InfoRutinaComponent},
+  { path: 'rutina/edit/:id', component: EditarRutinaComponent},
   { path: 'rutinas/nueva', component: NuevaRutinaComponent },
   { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent },
   { path: 'alumno/medicion/nueva/:id', component: NuevaMedicionComponent },
@@ -50,7 +56,10 @@ const appRoutes: Routes = [
     MedicionesInstructorComponent,
     NuevaMedicionComponent,
     NuevoEjercicioComponent,
-    NuevaRutinaComponent
+    NuevaRutinaComponent,
+    ListaRutinasComponent,
+    InfoRutinaComponent,
+    EditarRutinaComponent
   ],
   imports: [
     BrowserModule,
