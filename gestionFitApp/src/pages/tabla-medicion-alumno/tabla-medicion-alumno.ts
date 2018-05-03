@@ -1,6 +1,7 @@
-import { Component, OnInit,Input ,OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit,Input ,OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import { Chart } from 'chart.js';
 
 @IonicPage({
 	name: 'tablaMedicion',
@@ -21,6 +22,8 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
       this._table = tab;
       if(this.dates.length == 0){
         this.setDates();
+        this.defineChartData();
+        this.createLineChart();
       }
       
     }
@@ -28,6 +31,16 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   get table(){
     return this._table;
   }
+
+  @ViewChild("grafico") lineChart;
+
+  public lineChartEl : any;
+  public chartLabels : any    = [];
+  public chartValues : any    = [];
+  public chartColours: any    = [];
+  public chartHoverColours: any    = [];
+  public chartLoadingEl: any;
+  public chartMeasure:any = "";
 
 	dates: any = [];
 	id:any;
@@ -43,6 +56,8 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
     if(this.id != null){
       this.getTabla();
     }
+    
+    
   }
 
   ngOnChanges(changes:SimpleChanges){
@@ -92,5 +107,67 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   		medidas:this._table
   	})
   }
+
+  defineChartData()
+   {
+     this.chartMeasure = this._table.measures[0].name;
+     for(let i = this._table.measures[0].measures.length -1 ; i >= 0;i--){
+      
+         var tech  = this._table.measures[0].measures[i];
+         console.log(tech);
+
+         this.chartLabels.push(tech.day);
+         this.chartValues.push(tech.measure);
+         this.chartColours.push('rgba(192, 192, 192, 0.5)');
+         this.chartHoverColours.push('rgba(220, 220, 220, 0.5)');
+      }
+   }
+
+
+  createLineChart()
+   {
+     console.log(this.chartLabels);
+     console.log(this.chartValues);
+      this.lineChartEl 			= new Chart(this.lineChart.nativeElement,
+      {
+         type: 'line',
+         data: {
+            labels: this.chartLabels,
+             datasets: [{
+                 label                 : this.chartMeasure,
+                 data                  : this.chartValues,
+                 duration              : 2000,
+                 easing                : 'easeInQuart',
+                 backgroundColor       : this.chartColours,
+                 hoverBackgroundColor  : this.chartHoverColours,
+ 				         fill 				   : false
+             }]
+         },
+         options : {
+            maintainAspectRatio: false,
+            legend         : {
+               display     : true,
+               boxWidth    : 80,
+               fontSize    : 15,
+               padding     : 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                       beginAtZero:false,
+                       min: 30,
+                       stepSize: 10,
+                       max : 150
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                       autoSkip: false
+                    }
+                }]
+            }
+         }
+      });
+   }
 
 }

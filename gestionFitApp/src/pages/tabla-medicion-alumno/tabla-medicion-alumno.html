@@ -1,5 +1,8 @@
 <ion-content style="margin-top:10px;">
-	<div style="padding-top: 30px">
+	<canvas #grafico style="height: 300px"></canvas>
+
+	<div style="padding-bottom: 30px">
+	
 	<ion-grid *ngIf="table != null" style="height: 700px;">
 		<ion-row>
 			<ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;text-align: center">{{'Medida' | translate}}</p></ion-col>
