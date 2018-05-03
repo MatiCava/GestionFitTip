@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
 import { User_Student } from '../../model/user_student'
+import { InfoRutinaPage } from '../info-rutina/info-rutina';
 
 
 
@@ -9,34 +10,43 @@ import { User_Student } from '../../model/user_student'
 	name: 'infoAlumno'
 })
 @Component({
-  selector: 'page-info-alumno',
+  selector: 'info-alumno',
   templateUrl: 'info-alumno.html',
   providers:[UserProvider]
 })
 export class InfoAlumnoPage {
 
-	id: any;
-	private alumno;//= {username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, edad:{}};
+  id: any;
+  user:any;
+  @Input() set nUser(nUser){
+    this.user = nUser;
+  }
+
+  get nUser(){
+    return this.user;
+  }
+  
 
   constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
-    this.alumno={};
+    this.user={};
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InfoAlumnoPage');
-    this.getInfoAlumno();
   }
 
-  getInfoAlumno(){
-  	this.userServ.getUser(this.id).subscribe(
-  			user => {this.alumno = user;console.log(this.alumno)},
-  			err => {console.log(err)}
-  			)
+  
+  sinRutinas(){
+    return this.user.routines.length == 0;
   }
 
-  cancel(){
-    this.viewCtrl.dismiss();
+
+  abrirInfo(idRoutine){
+    console.log(idRoutine);
+   this.navCtrl.push(InfoRutinaPage,{id:idRoutine}); 
+   
   }
+
 
 }

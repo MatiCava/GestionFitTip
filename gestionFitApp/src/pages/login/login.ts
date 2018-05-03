@@ -12,14 +12,12 @@ import { LoginProvider } from '../../providers/login/login';
 export class LoginPage {
 
 	public credential = {username:"",password:""};
-	public user:any;
+  public user:any;
+  cantAccess: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginServ: LoginProvider,private plat: Platform) {
   }
 
-  isMobile(){
-    return !this.plat.is("core");
-  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -52,7 +50,7 @@ export class LoginPage {
   				this.navCtrl.push("dashboard",{id:this.user.id});
   			}
   			else{
-  				this.navCtrl.push("alumnos",{id:this.user.id});
+  				this.cantAccess = true;
   			}
   		},
   		error => {

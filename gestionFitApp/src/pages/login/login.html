@@ -12,15 +12,8 @@
 	  </ion-item>
 
 	  <ion-item >
-			<ion-row>
-				<ion-col style="text-align: center">
-					<button ion-button [full]="isMobile()" (click)="login()">{{'Ingresar' | translate}}</button>
-				</ion-col>
-				<ion-col style="text-align: center">
-					<button ion-button [full]="isMobile()" (click)="signUp()" color="secondary">{{'Registrarse' | translate}}</button>
-				</ion-col>
-			</ion-row>
-	  
+					<button ion-button (click)="login()" full>{{'Ingresar' | translate}}</button>
+					<button ion-button (click)="signUp()" color="secondary" full>{{'Registrarse' | translate}}</button>	  
 	  </ion-item>
 	
 	</ion-list>

@@ -19,7 +19,7 @@ export class DashboardAlumnoPage implements OnInit{
   @ViewChild(Slides) slides : Slides;
   dates: any = [];
 	id:any;
-  private user;
+  public user;
 
 
 
@@ -43,9 +43,6 @@ export class DashboardAlumnoPage implements OnInit{
   }
 
 
-  isInstructor(){
-    return ( localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor" );
-  }
   
   getUser(){
   	this.userServ.getUser(this.id).subscribe(
@@ -53,18 +50,8 @@ export class DashboardAlumnoPage implements OnInit{
   		error => {console.log(error)})
   }
 
-   abrirInfo(idRoutine){
-    console.log(idRoutine);
-   this.navCtrl.push(InfoRutinaPage,{id:idRoutine}); 
-   
-  }
-
   goToSlide(slide){
     this.slides.slideTo(slide,500);
-  }
-
-  sinRutinas(){
-    return this.user.routines.length == 0;
   }
 
 

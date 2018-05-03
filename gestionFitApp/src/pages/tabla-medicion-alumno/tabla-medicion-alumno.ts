@@ -72,7 +72,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   setDates(){
   	if(this._table.measures.length >0){
   		for(let i = 0 ; i < this._table.measures[0].measures.length;i++){
-  			this.dates.push(new Date(this.formatDate(this._table.measures[0].measures[i].day)).toUTCString().slice(4,16));
+  			this.dates.push(new Date(this.formatDate(this._table.measures[0].measures[i].day)));
 
   		}
   	}

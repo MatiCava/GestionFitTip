@@ -1,48 +1,39 @@
-  <ion-header>
-	<ion-navbar>
-		<ion-buttons>
-			<button (click)="cancel()">
-				<ion-icon name="close"></ion-icon>
-			</button>
-		</ion-buttons>
-		
-	</ion-navbar>
-</ion-header>
-<ion-content padding>
-
-	<ion-list inset>
+<ion-content>
+	<img [src]="user.photo" style="max-height: 100px;max-width: 100px;">
+	<ion-grid style="font-family: 'Poppins' , sans-serif">
+	<ion-row>
+	  <ion-col>
+		<p> {{'Nombre' | translate}}: {{user.nameAndSurname}}</p>
+	  </ion-col>
+	  <ion-col>
+		<p> {{'Edad' | translate}}: {{user.age}} </p>
+	  </ion-col>
+	  <ion-col>
+		<p> {{'Telefono' | translate}}: {{user.telephone.slice(0,4)+"-"+user.telephone.slice(4,8)}}</p>
+	  </ion-col>
+	</ion-row>
+	<ion-row>
+	  <ion-col>
+		<p> {{'Peso' | translate}}: {{user.weigth.toString().replace('.',',')}} kg.</p>
+	  </ion-col>
+	  <ion-col>
+		<p> {{'Objetivo' | translate}}: {{user.objective}}</p><p *ngIf="user.objective == ''" > {{'No definido' | translate}}</p>
+	  </ion-col>
+	  <ion-col>
+		<p> {{'Patologias' | translate}}: {{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
+	  </ion-col>
+	</ion-row>
+  </ion-grid>
+		<h2>{{'Mis rutinas' | translate}}</h2>
+	<ion-list>
+	  <ion-item *ngFor="let rutina of user.routines">
+		{{rutina.name}} 
+		<a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
+	  </ion-item>
+	  <div *ngIf="sinRutinas()">
 		<ion-item>
-			<img [src]="alumno.photo" style="max-height: 100px;max-width: 100px;">
+		  <h3>{{'No tiene ninguna rutina asignada' | translate}}</h3>
 		</ion-item>
-		<ion-item>
-			<p>{{'Usuario' | translate}}: <strong>{{alumno.username}}</strong></p>	
-		</ion-item>
-		<ion-item>
-			<p> {{'Contraseña' | translate}}: <strong>{{alumno.password}}</strong> </p>
-		</ion-item>
-		<ion-item>
-			<p> Mail: <strong>{{alumno.mail}}</strong> </p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Patologias' | translate}}: <strong> {{alumno.pathologies}} </strong></p><p *ngIf="alumno.pathologies == ''" > <strong> {{'No definido' | translate}} </strong></p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Observaciones' | translate}}: <strong> {{alumno.observations}} </strong> </p><p *ngIf="alumno.observations == ''" > <strong> {{'No definido' | translate}} </strong></p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Objetivo' | translate}}: <strong>{{alumno.objective}}</strong> </p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Cumpleaños' | translate}}: <strong>{{alumno.birthday | date:'dd/MM/yyyy'}}</strong> </p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Telefono' | translate}}: <strong>{{alumno.telephone}}</strong> </p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Edad' | translate}}: <strong>{{alumno.age}}</strong> </p>
-		</ion-item>
-		<ion-item>
-			<p> {{'Peso' | translate}}: <strong>{{alumno.weigth}}</strong> </p>
-		</ion-item>
+	  </div>
 	</ion-list>
 </ion-content>

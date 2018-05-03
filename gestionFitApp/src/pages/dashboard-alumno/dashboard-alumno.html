@@ -1,58 +1,17 @@
 <ion-row style="padding-top: 35px;">
-<ion-col class="colTab" ><a (click)="goToSlide(0)"><div> <ion-label color="{{ inSlide(0) ? 'danger' : 'primary' }}">{{'Mediciones' | translate}} &nbsp; <ion-icon name="clipboard"></ion-icon></ion-label></div></a></ion-col> 
-<ion-col class="colTab"><a (click)="goToSlide(1)" ><div> <ion-label color="{{ inSlide(1) ? 'danger' : 'primary' }}">Mi perfil &nbsp; <ion-icon name="information-circle"></ion-icon></ion-label></div></a></ion-col>
-<ion-col class="colTab"><a (click)="goToSlide(2)"><div> <ion-label color="{{ inSlide(2) ? 'danger' : 'primary' }}">Instagram &nbsp; <ion-icon name="logo-instagram"></ion-icon></ion-label></div></a></ion-col>
+<ion-col class="colTab" ><a (click)="goToSlide(0)"> <ion-label color="{{ inSlide(0) ? 'danger' : 'primary' }}">{{'Mediciones' | translate}} <i class="fas fa-clipboard"></i></ion-label></a></ion-col> 
+<ion-col class="colTab"><a (click)="goToSlide(1)" > <ion-label color="{{ inSlide(1) ? 'danger' : 'primary' }}">Mi perfil <i class="fas fa-address-card"></i></ion-label></a></ion-col>
+<ion-col class="colTab"><a  (click)="goToSlide(2)"> <ion-label color="{{ inSlide(2) ? 'danger' : 'primary' }}">Instagram <i class="fas fa-camera-retro"></i></ion-label></a></ion-col>
 </ion-row>
 <ion-slides initialSlide="1">
     <ion-slide>
       <page-tabla-medicion-alumno [table]="user.measurements"></page-tabla-medicion-alumno>
     </ion-slide>
     <ion-slide style="padding-top: 20px;">
-      <ion-content>
-      <img [src]="user.photo" style="max-height: 100px;max-width: 100px;">
-      <ion-grid>
-      <ion-row>
-        <ion-col>
-          <p> {{'Nombre' | translate}}: {{user.nameAndSurname}}</p>
-        </ion-col>
-        <ion-col>
-          <p> {{'Edad' | translate}}: {{user.age}} </p>
-        </ion-col>
-        <ion-col>
-          <p> {{'Telefono' | translate}}: {{user.telephone.slice(0,4)+"-"+user.telephone.slice(4,8)}}</p>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <p> {{'Peso' | translate}}: {{user.weigth.toString().replace('.',',')}} kg.</p>
-        </ion-col>
-        <ion-col>
-          <p> {{'Objetivo' | translate}}: {{user.objective}}</p><p *ngIf="user.objective == ''" > {{'No definido' | translate}}</p>
-        </ion-col>
-        <ion-col>
-          <p> {{'Patologias' | translate}}: {{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-          <h2>{{'Mis rutinas' | translate}}</h2>
-      <ion-list>
-        <ion-item *ngFor="let rutina of user.routines">
-          {{rutina.name}} 
-          <a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
-        </ion-item>
-        <div *ngIf="sinRutinas()">
-          <ion-item>
-            <h3>{{'No tiene ninguna rutina asignada' | translate}}</h3>
-          </ion-item>
-        </div>
-      </ion-list>
-  </ion-content>
-    
-  </ion-slide>
-  <ion-slide style="padding-top: 20px;background-color: seashell">
-
+      <info-alumno [nUser]="user"></info-alumno>
+    </ion-slide>
+    <ion-slide style="padding-top: 10px;background-color: seashell">
       <instagram-feed></instagram-feed>
-
-  </ion-slide>
+    </ion-slide>
 </ion-slides>
 

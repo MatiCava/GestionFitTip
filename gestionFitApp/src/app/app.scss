@@ -16,22 +16,12 @@
 // automatically applied to the <body> element in the app.
 
 .headerContent{
-	margin-top: 50px;
+	margin-top: 25px;
 }
 
 .largeIcon{
 	font-size: 18px;
 }
-
-ion-header {
-  .toolbar {
-    position: absolute;
-
-    .toolbar-background {
-      background: transparent;
-    }
-    .toolbar-title {
-      color: black;
-    }
-  }
+.toolbar-background {
+  background-color:  #59b6f8;
 }
