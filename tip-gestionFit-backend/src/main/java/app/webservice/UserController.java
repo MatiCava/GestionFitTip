@@ -42,7 +42,14 @@ public class UserController {
 
 	}
 	
-	@PostMapping(value = "/login", produces = "application/json")
+	@GetMapping("/authenticate")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void auth() {
+		//Este metodo sirve solo para validar el token y autorizar o no al cliente
+
+	}
+	
+/*	@PostMapping(value = "/login", produces = "application/json")
 	public User login(@RequestBody Credential cred) {
 		User user = this.userServ.getByUsername(cred.username);
 		if(user == null) {
@@ -57,7 +64,7 @@ public class UserController {
 		
 		return user;
 		
-	}
+	}*/
 	
 	@GetMapping(value = "/alumnos", produces = "application/json")   
 	public List<User_Student> getAlumnos() {

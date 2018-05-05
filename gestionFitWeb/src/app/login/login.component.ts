@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginServ.logIn(this.credential).subscribe(
       result => {
+        console.log(result);
         this.user = result;
         console.log(this.user);
         localStorage.setItem("id", this.user.id);
