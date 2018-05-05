@@ -73,7 +73,7 @@ public class UserService {
 	
 	@Transactional
 	public List<User_Student> getAllStudents(){
-		return this.userDAO.getAllUserRole(User_Role.Student);
+		return this.userDAO.getAllUserRole("STUDENT");
 	}
 	
 	@Transactional

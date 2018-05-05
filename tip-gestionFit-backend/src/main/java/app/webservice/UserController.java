@@ -42,12 +42,7 @@ public class UserController {
 
 	}
 	
-	@GetMapping("/authenticate")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void auth() {
-		//Este metodo sirve solo para validar el token y autorizar o no al cliente
 
-	}
 	
 /*	@PostMapping(value = "/login", produces = "application/json")
 	public User login(@RequestBody Credential cred) {

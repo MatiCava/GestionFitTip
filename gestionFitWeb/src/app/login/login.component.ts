@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  public credential = {username: '', password: ''};
+  public credential = {email: '', password: ''};
   public user: any;
 
   constructor(private loginServ: LoginService, private routerServ: Router) { }
@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
     this.loginServ.logIn(this.credential).subscribe(
       result => {
         console.log(result);
-        this.user = result;
-        console.log(this.user);
-        localStorage.setItem("id", this.user.id);
+        console.log(result.body.token);
+        console.log(result.body.id);
+//        this.user = result;
+//        console.log(this.user);
+        localStorage.setItem("token", result.body.token);
         this.routerServ.navigate(['/alumnos']);
       },
       error => {

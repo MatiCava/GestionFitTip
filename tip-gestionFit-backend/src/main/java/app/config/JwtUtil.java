@@ -20,7 +20,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil {
 
     // metodo para crear el JWT y enviarlo al cliente en el header de la respuesta
-    static void addAuthentication(HttpServletResponse res, String username) throws IOException {
+    static void addAuthentication(HttpServletResponse res,String username, long id) throws IOException {
 
         String token = Jwts.builder()
             .setSubject(username)
@@ -32,7 +32,7 @@ public class JwtUtil {
       //agregamos al encabezado y al cuerpo de la respuesta el token 
         res.addHeader("Authorization", token);
     	PrintWriter writer = res.getWriter();
-		writer.write("{\"token\":\""+ "Bearer " + token +"\"}");
+		writer.write("{\"token\":\""+ "Bearer " + token + "\""+ ",\"id\":\""+ id + "\""+ "}");
         writer.close();
     }
 
@@ -40,6 +40,7 @@ public class JwtUtil {
     static Authentication getAuthentication(HttpServletRequest request) {
 
         // obtenemos el token que viene en el encabezado de la peticion
+    	System.out.println(request.getHeader("Authorization"));
         String token = request.getHeader("Authorization").replace("Bearer ", "");
         System.out.println("TOKEEEEN");
         System.out.print(token);

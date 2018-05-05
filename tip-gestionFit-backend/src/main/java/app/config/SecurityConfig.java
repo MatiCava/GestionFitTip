@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             // Las demás peticiones pasan por este filtro para validar el token
             .addFilterBefore(new JwtFilter(),
-                    UsernamePasswordAuthenticationFilter.class);
+                    UsernamePasswordAuthenticationFilter.class)
+            ;
     }
     
 

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,7 +18,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import app.model.User;
+import app.persistence.UserDAO;
+
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
+	  @Autowired
+	  private UserDAO userDAO = new UserDAO();
 
     public LoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
@@ -54,8 +60,9 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-
+    	System.out.println("EXITOOO");
         // si la autenticacion fue exitosa  agregamos el token a la respuesta
-        JwtUtil.addAuthentication(res, auth.getName());
+    	User user = userDAO.getByUsername(auth.getName());
+        JwtUtil.addAuthentication(res, auth.getName(),user.id);
     }
 }
