@@ -2,6 +2,7 @@ import { Component, OnInit,Input ,OnChanges, SimpleChanges, ViewChild} from '@an
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { Chart } from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage({
 	name: 'tablaMedicion',
@@ -48,7 +49,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
 	dates: any = [];
 	id:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider, private translate: TranslateService) {
     
     if(this.isInstructor()){
       this.id = this.navParams.get("id");   
@@ -123,7 +124,10 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
      this.chartValues = [];
      this.chartHoverColours = [];
 
-     this.chartMeasure = this._table.measures[index].name;
+     this.translate.get(this._table.measures[index].name).subscribe((res: string) => {
+      this.chartMeasure = res;
+      
+  });
      for(let i = this._table.measures[index].measures.length -1 ; i >= 0;i--){
       
          var tech  = this._table.measures[index].measures[i];
