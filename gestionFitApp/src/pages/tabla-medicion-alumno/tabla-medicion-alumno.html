@@ -1,5 +1,12 @@
 <ion-content style="margin-top:10px;">
+	<ion-item>
+	<ion-label>Grafico de medida:</ion-label>
+	<ion-select [(ngModel)]="selected" (ionChange)="updateGraphic()">
+		<ion-option *ngFor="let nombre of names" [value]="nombre">{{nombre | translate}}</ion-option>
+	</ion-select>
+</ion-item>
 	<canvas #grafico style="height: 300px"></canvas>
+	<div style="height: 20px"></div>
 
 	<div style="padding-bottom: 30px">
 	

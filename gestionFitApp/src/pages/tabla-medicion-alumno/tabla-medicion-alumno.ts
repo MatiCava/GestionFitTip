@@ -21,8 +21,10 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
       console.log(tab);
       this._table = tab;
       if(this.dates.length == 0){
+        this.names = this._table.measures.map(m => m.name);
+        this.selected = this.names[0];
         this.setDates();
-        this.defineChartData();
+        this.defineChartData(0);
         this.createLineChart();
       }
       
@@ -41,7 +43,8 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   public chartHoverColours: any    = [];
   public chartLoadingEl: any;
   public chartMeasure:any = "";
-
+  public names:any = [];
+  public selected:any;
 	dates: any = [];
 	id:any;
 
@@ -108,18 +111,28 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   	})
   }
 
-  defineChartData()
+  updateGraphic(){
+    this.defineChartData(this.names.indexOf(this.selected));
+    this.createLineChart();
+  }
+
+  defineChartData(index)
    {
-     this.chartMeasure = this._table.measures[0].name;
-     for(let i = this._table.measures[0].measures.length -1 ; i >= 0;i--){
+     this.chartLabels = [];
+     this.chartColours = [];
+     this.chartValues = [];
+     this.chartHoverColours = [];
+
+     this.chartMeasure = this._table.measures[index].name;
+     for(let i = this._table.measures[index].measures.length -1 ; i >= 0;i--){
       
-         var tech  = this._table.measures[0].measures[i];
+         var tech  = this._table.measures[index].measures[i];
          console.log(tech);
 
          this.chartLabels.push(tech.day);
          this.chartValues.push(tech.measure);
-         this.chartColours.push('rgba(192, 192, 192, 0.5)');
-         this.chartHoverColours.push('rgba(220, 220, 220, 0.5)');
+         this.chartColours.push('#3949AB');
+         this.chartHoverColours.push('#9FA8DA');
       }
    }
 
@@ -156,7 +169,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
                     ticks: {
                        beginAtZero:false,
                        min: 30,
-                       stepSize: 10,
+                       stepSize: 20,
                        max : 150
                     }
                 }],
