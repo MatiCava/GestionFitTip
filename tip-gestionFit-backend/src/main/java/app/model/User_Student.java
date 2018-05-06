@@ -1,6 +1,7 @@
 package app.model;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -70,7 +71,7 @@ public class User_Student extends User {
 		this.routines = new HashSet<Routine>();
 		this.telephone = tel;
 		this.weigth = wS;
-		this.setRole(User_Role.Student);
+		this.setRole("STUDENT");
 	}
 
 

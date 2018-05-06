@@ -73,7 +73,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }
+      { enableTracing: false }
     ),
     TranslateModule.forRoot({
       loader: {

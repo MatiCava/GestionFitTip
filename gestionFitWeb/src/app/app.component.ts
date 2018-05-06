@@ -39,11 +39,11 @@ export class AppComponent implements OnInit{
   }
 
   isLogged(){
-    return localStorage.getItem("id") != null;
+    return localStorage.getItem("token") != null;
   }
 
   logout(){
-    localStorage.removeItem("id");
+    localStorage.removeItem("token");
     this.routerService.navigate(["/login"]);
   }
 }

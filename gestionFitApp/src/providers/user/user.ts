@@ -7,50 +7,35 @@ import { User_Student } from '../../model/user_student';
 @Injectable()
 export class UserProvider {
 
-	apiUrl : String="http://localhost:8080/api/";
+  apiUrl : String="http://localhost:8080/api/";
+  httpOptions: any;
 
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
   }
 
   getUsersStudents(): Observable<User_Student[]>{
   	return this.http.get<User_Student[]>(this.apiUrl+"alumnos/");
   }
 
-  addNewUserStudent(newUser): Observable<User_Student>{
-    //{headers: new HttpHeaders().set('Content-Type','application/json')}
-
-    const httpOptions = {
-          headers: new HttpHeaders({
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
-                'Accept': 'application/json',
-                'Content-Type':  'application/json'
-          })
-    };
-     
-  	return this.http.post<User_Student>(this.apiUrl+"alumno", newUser, httpOptions);
+  addNewUserStudent(newUser): Observable<any>{
+ 
+  	return this.http.post(this.apiUrl+"alumno", newUser, this.httpOptions);
   }
 
   getUser(id): Observable<any>{
     console.log("get user");
-  	return this.http.get(this.apiUrl+"user/"+id);
+  	return this.http.get(this.apiUrl+"user/"+id, this.httpOptions);
   }
 
   getTabla(id):Observable<any>{
-  	return this.http.get(this.apiUrl+"user/"+id+"/table");
+  	return this.http.get(this.apiUrl+"user/"+id+"/table", this.httpOptions);
   }
 
-  updateTable(id,measures):Observable<any>{
-  	return this.http.put(this.apiUrl+"user/"+id+"/nuevaMedicion",measures);
-  }
 
   getRutines(id):Observable<any>{
-    return this.http.get(this.apiUrl+"user/"+id+"/rutinas");
-  }
-
-  updateRutines(id, rutines):Observable<any>{
-    return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines);
+    return this.http.get(this.apiUrl+"user/"+id+"/rutinas", this.httpOptions);
   }
 
 
