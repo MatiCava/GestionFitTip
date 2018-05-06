@@ -17,6 +17,10 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
+import app.model.User;
+import app.model.User_Instructor;
+import app.model.User_Student;
+
 public class EmailService {
 	
 	/* no funca
@@ -40,7 +44,24 @@ public class EmailService {
 		           post(ClientResponse.class, form);
 		} */
 	
-	public static JsonNode sendComplexMessage() throws UnirestException {
+	
+	
+	public static String buildHtml(User user, String text){
+		
+		String html ="<html>"
+			+ "	   		<div class='container' padding-top: 30px'> "
+			+ "				<img src='/assets/icon.png' width='40' height='35' style='display: block; margin-left: auto; margin-right: auto'> "
+			+ "				<br> "
+			+ "				<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + "Buenas " + user.getNameAndSurname() + "</h1> "
+			+ "				<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> " + text + "</h1> "
+			+ "			</div>  "
+			+ "		  </html>";
+		
+		return html;
+		
+	}
+	
+	public static JsonNode sendComplexMessage(User user, String text) throws UnirestException {
 		
         HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
                 .basicAuth("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9")
@@ -48,7 +69,7 @@ public class EmailService {
                 .queryString("to", "matiascavallin96@gmail.com")
                 .queryString("subject", "Hello")
                 .queryString("text", "Testing out some Mailgun awesomeness!")
-                .queryString("html", "<html> <div> <h1> HTML version</h1> </div>  </html>")
+                .queryString("html", buildHtml(user, text))
                 .asJson();
 
         return request.getBody();
