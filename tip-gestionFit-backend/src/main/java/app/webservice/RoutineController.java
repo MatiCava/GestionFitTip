@@ -23,6 +23,7 @@ import app.model.Routine;
 import app.model.UserNotFoundException;
 import app.service.EmailService;
 import app.service.RoutineService;
+import app.service.UserService;
 
 @RestController
 @RequestMapping("/api")
@@ -31,8 +32,6 @@ public class RoutineController {
 	
 	@Autowired
 	private RoutineService routineServ = new RoutineService();
-	
-	private EmailService emailServ = new EmailService();
 	
 
 	@GetMapping(value = "/routines", produces = "application/json")   
@@ -47,11 +46,10 @@ public class RoutineController {
 	}
 
 	@PostMapping(value = "/routine", produces = "application/json")
-	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) throws UnirestException {
+	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) {
 			System.out.println(routine.getType());
 			System.out.println(routine.getExercises());
 			this.routineServ.save(routine);
-			this.emailServ.sendComplexMessage();
 			
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 
