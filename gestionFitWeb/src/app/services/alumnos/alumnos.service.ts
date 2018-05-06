@@ -11,19 +11,20 @@ export class AlumnosService {
 
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
-    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
   }
 
 
 
   getUsersStudents(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
 
   	return this.http.get(this.apiUrl+"alumnos", this.httpOptions);
   }
 
   addNewUserStudent(newUser): Observable<any>{
-    //{headers: new HttpHeaders().set('Content-Type','application/json')}
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
    
      
@@ -31,23 +32,31 @@ export class AlumnosService {
   }
 
   getUser(id): Observable<any>{
-    console.log("get user");
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
   	return this.http.get(this.apiUrl+"user/"+id, this.httpOptions);
   }
 
   getTabla(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
   	return this.http.get(this.apiUrl+"user/"+id+"/table", this.httpOptions);
   }
 
   updateTable(id,measures):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
   	return this.http.put(this.apiUrl+"user/"+id+"/nuevaMedicion",measures,this.httpOptions);
   }
 
   getRutines(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
     return this.http.get(this.apiUrl+"user/"+id+"/rutinas",this.httpOptions);
   }
 
   updateRutines(id, rutines):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
     return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines, this.httpOptions);
   }
 

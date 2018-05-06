@@ -37,7 +37,7 @@ public class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdap
 
             
               if(password != null) {
-            	  System.out.println(password);
+            	  System.out.println(role);
                   return  User.withUsername(username).password(password).roles(role).build();
               } else {
                   throw new UsernameNotFoundException("No existe el usuario '"

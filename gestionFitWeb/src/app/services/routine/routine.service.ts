@@ -13,31 +13,42 @@ export class RoutineService {
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');
-    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
   }
 
   getRutines(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
   	return this.http.get(this.apiUrl+"routines", this.httpOptions);
   }
 
   getExercises(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
     return this.http.get(this.apiUrl+"exercises" , this.httpOptions);
   }
 
   getRoutine(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
     return this.http.get(this.apiUrl+"routine/"+id, this.httpOptions);
   }
 
   deleteRoutine(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
     return this.http.delete(this.apiUrl+"routine/"+id, this.httpOptions);
   }
 
   saveRoutine(routine):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
 
     return this.http.post(this.apiUrl+"routine", routine, this.httpOptions);
   }
 
   saveExercise(exercise):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
 
     return this.http.post(this.apiUrl+"exercise", exercise, this.httpOptions);
   }
