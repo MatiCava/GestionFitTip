@@ -49,6 +49,10 @@ public class Routine {
 	public Long getId() {
 		return id;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	public void addExercise(Exercise newExercise) {
 		this.exercises.add(newExercise);

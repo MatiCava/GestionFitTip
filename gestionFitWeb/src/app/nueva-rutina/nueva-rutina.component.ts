@@ -2,13 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
+import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-nueva-rutina',
   templateUrl: './nueva-rutina.component.html',
   styleUrls: ['./nueva-rutina.component.css']
-}) //para reutilizar proba hacer nuevo component y poner en templateUrl la de este
+}) 
 export class NuevaRutinaComponent implements OnInit {
+
+  form:FormGroup = this.formBuilder.group({
+    name: new FormControl('', Validators.compose([
+      Validators.minLength(4),
+      Validators.required
+    ])),
+    type: new FormControl('', Validators.compose([
+      Validators.nullValidator,
+      Validators.required
+    ])),
+    exercises: new FormControl('', Validators.compose([
+      Validators.nullValidator,
+      Validators.required
+    ]))
+  })
 
   exercises:any[];
 	exercisesAlumno:any[] = [];
@@ -17,7 +33,7 @@ export class NuevaRutinaComponent implements OnInit {
   isEdit = false;
   isNew = true;
 
-  constructor(private routineServ: RoutineService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"", creationDate:new Date().getTime(), type:"", exercises:[]};
   }
 
@@ -43,6 +59,7 @@ export class NuevaRutinaComponent implements OnInit {
   }
 
   guardarRutina(){
+    //this.validForm();
   	let type = Routine_Type[this.newRoutine.type];
     this.newRoutine.type = type;
     this.guardarEjercicios();
@@ -53,4 +70,38 @@ export class NuevaRutinaComponent implements OnInit {
   			)
   	this.volverAtras();
   }
+  
+  /* guardo html viejo por si no funca 
+
+    <div class="container" style="padding-top: 35px;">
+  <ul class="list-group">
+      <li class="list-group-item">
+          <div class="form-group">
+            <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">Nombre rutina</h1>
+            <input type="text" class="form-control" [(ngModel)]="newRoutine.name">
+          </div>
+      </li>
+      <li class="list-group-item">
+          <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">Tipo rutina</h1>
+          <div class="styled-select rounded">
+              <select [(ngModel)]="newRoutine.type" class="form-control">
+                <option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </option>
+              </select>
+          </div>
+      </li>
+      <li class="list-group-item" *ngFor="let exercise of exercises">
+          <input id="checkboxEjercicios" type="checkbox" [(ngModel)]="exercise.checked"> {{exercise.name}}<br>
+      </li>
+  </ul>
+  <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
+      <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
+      <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+  </div>
+  <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
+        <button class="btn btn-primary" (click)="actualizarRutina()"> Actualizar </button>
+        <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+    </div>  
+</div>
+
+  */
 }

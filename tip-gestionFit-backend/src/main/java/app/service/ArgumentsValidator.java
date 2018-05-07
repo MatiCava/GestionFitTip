@@ -5,9 +5,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.validator.routines.EmailValidator;
+import org.hamcrest.text.IsEmptyString;
 
 import app.model.Exercise;
+import app.model.Exercise_Type;
 import app.model.Routine;
+import app.model.Routine_Type;
 import app.model.User;
 import app.model.User_Instructor;
 import app.model.User_Student;
@@ -44,6 +47,13 @@ public class ArgumentsValidator {
 		isNullOrEmptyString(name);
 		if(name.length() < 4 || name.length() > 50)
 			throw new IllegalArgumentException("Not a valid name");
+
+	}
+	
+	public static void isInvalidDescription(String description) {
+		isNullOrEmptyString(description);
+		if(description.length() < 14 || description.length() > 60)
+			throw new IllegalArgumentException("Not a valid description");
 
 	}
 	
@@ -86,13 +96,33 @@ public class ArgumentsValidator {
 	}
 
 	public static void validateRoutine(Routine newRutines) {
+		isInvalidFullName(newRutines.getName());
 		isInvalidListExercises(newRutines.getExercises());
+		isInvalidTypeRoutine(newRutines.getType());
 	}
 
+
+	private static void isInvalidTypeRoutine(Routine_Type type) {
+		if(type == null){
+			throw new IllegalArgumentException("Not a valid type");
+		}
+	}
 
 	private static void isInvalidListExercises(List<Exercise> exercises) {
 		if(exercises.isEmpty()){
 			throw new IllegalArgumentException("Not a valid list of exercises");
+		}
+	}
+
+	public static void validateExercise(Exercise newExercise) {
+		isInvalidFullName(newExercise.getName());
+		isInvalidTyperExercise(newExercise.getType());
+		isInvalidDescription(newExercise.getDescription());
+	}
+
+	private static void isInvalidTyperExercise(Exercise_Type type) {
+		if(type == null){
+			throw new IllegalArgumentException("Not a valid type");
 		}
 	}
 
