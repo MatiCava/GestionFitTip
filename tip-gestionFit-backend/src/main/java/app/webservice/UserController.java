@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import app.model.Credential;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;

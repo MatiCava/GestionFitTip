@@ -62,8 +62,8 @@ public class EmailService {
 		
         HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
                 .basicAuth("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9")
-                .queryString("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">")
-                .queryString("to", "matiascavallin96@gmail.com")
+                .queryString("from", "Mailgun User <gestionfitinfo@gmail.com>")
+                .queryString("to", user.getMail())
                 .queryString("subject", "Hello")
                 .queryString("text", "Testing out some Mailgun awesomeness!")
                 .queryString("html", buildHtml(user, text))

@@ -1,16 +1,26 @@
 <div class="container" style="padding-top: 35px;">
-    <form [formGroup="form"]>
+    <form [formGroup]="form">
         <div class="form-group">
             <label class="form-control" for="inputNombre">Ingrese un nombre para la rutina</label>
             <input type="text" class="form-control" id="inputNombre" formControlName="name" placeholder="Nombre">
         </div>
         <div class="form-group">
-            <select [(ngModel)]="newRoutine.type" class="form-control">
+            <select formControlName="type" class="form-control">
                 <option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </option>
             </select>
         </div>
+    </form>
         <div class="form-group" *ngFor="let exercise of exercises">
             <input id="checkboxEjercicios" type="checkbox" [(ngModel)]="exercise.checked"> {{exercise.name}}<br>
         </div>
-    </form>
+
+        <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
+            <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
+            <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+        </div>
+        <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
+              <button class="btn btn-primary" (click)="actualizarRutina()"> Actualizar </button>
+              <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+          </div> 
+    
 </div>
