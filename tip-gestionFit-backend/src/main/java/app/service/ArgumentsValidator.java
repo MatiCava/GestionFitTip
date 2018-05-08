@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.validator.routines.EmailValidator;
-import org.hamcrest.text.IsEmptyString;
 
 import app.model.Exercise;
 import app.model.Exercise_Type;
