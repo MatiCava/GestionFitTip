@@ -4,14 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.mail.internet.MimeMessage;
-import javax.validation.constraints.Email;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.mashape.unirest.http.exceptions.UnirestException;
 
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
@@ -93,7 +86,7 @@ public class UserController {
 		//System.out.println(newRoutines.type);
 		this.userServ.newRutines(idUser, newRoutines);
 
-		this.emailServ.sendEmailToUser(this.userServ.getById(idUser),"Te agregaron una rutina wachin@", "Se te ha agregado una nueva rutina, entra a tu perfil para revisar si esta todo bien salu2");
+		this.emailServ.sendEmailToUser(this.userServ.getById(idUser),EmailService.ROUTINE);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
@@ -101,7 +94,7 @@ public class UserController {
 	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
 			this.userServ.saveStudent(user);
 
-			this.emailServ.sendEmailToUser(user, "Si te llego este mail todo ok", "Bienvenido al gym x esperamos que nos acompañes mucho tiempo etc");
+			this.emailServ.sendEmailToUser(user, EmailService.WELCOME);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
