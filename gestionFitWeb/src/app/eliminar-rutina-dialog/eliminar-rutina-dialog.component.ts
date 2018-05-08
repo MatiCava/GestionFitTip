@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { RoutineService } from './../services/routine/routine.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class EliminarRutinaDialogComponent implements OnInit {
   id:any;
   rutina:any;
 
-  constructor(private routineServ: RoutineService, public thisDialogRef: MatDialogRef<EliminarRutinaDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private translateService: TranslateService, private routineServ: RoutineService, public thisDialogRef: MatDialogRef<EliminarRutinaDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.id = data.id;
   }
 

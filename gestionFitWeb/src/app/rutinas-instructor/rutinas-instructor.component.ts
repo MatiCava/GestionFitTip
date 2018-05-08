@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { RoutineService } from '../services/routine/routine.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -17,7 +18,7 @@ export class RutinasInstructorComponent implements OnInit {
   rutinaAlumno:any[];
   
 
-  constructor(private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private translateService: TranslateService, private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.getId();
