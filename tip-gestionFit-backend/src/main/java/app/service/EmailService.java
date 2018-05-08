@@ -6,66 +6,35 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+import javax.mail.internet.MimeMessage;
 
 import app.model.User;
 
 @Component
+@Service
 public class EmailService {
 	
 	@Autowired
 	JavaMailSender sender ;
 	
-	/* no funca
-	public static ClientResponse SendInlineImage() {
-		   Client client = Client.create();
-		   client.addFilter(new HTTPBasicAuthFilter("api",
-		                   "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		   WebResource webResource =
-		           client.resource("https://api.mailgun.net/v3/sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" +
-		                           "/messages");
-		   FormDataMultiPart form = new FormDataMultiPart();
-		   form.field("from", "mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		   form.field("to", "baz@example.com");
-		   form.field("subject", "Hello");
-		   form.field("text", "Testing some Mailgun awesomness!");
-		   //form.field("html", "<html>Inline image here: <img src=\"cid:test.jpg\"></html>");
-		   File jpgFile = new File("/home/matias/Escritorio/diamond_1-1024x768.png");
-		   form.bodyPart(new FileDataBodyPart("inline",jpgFile,
-		                   MediaType.APPLICATION_OCTET_STREAM_TYPE));
-		   return webResource.type(MediaType.MULTIPART_FORM_DATA_TYPE).
-		           post(ClientResponse.class, form);
-		} 
-		
-		
-		
-		HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
-                .basicAuth("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9")
-                .queryString("from", "Mailgun User <gestionfitinfo@gmail.com>")
-                .queryString("to", user.getMail())
-                .queryString("subject", "Hello")
-                .queryString("text", "Testing out some Mailgun awesomeness!")
-                .queryString("html", buildHtml(user, text))
-                .asJson();
+	
+	public void sendEmailToUser(User user,String matter,String text)throws Exception {
+        MimeMessage msg = sender.createMimeMessage();
+        MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
+        msgHelper.setTo("matiascavallin96@gmail.com"); //user.getMail()
+        msgHelper.setText(buildHtml(user, text),true);
+        msgHelper.setSubject(matter);
+        sender.send(msg);
+   }
 
-        return request.getBody();
-        
-        
-        
-        
-        	public ClientResponse sendSimpleMessage() {
-		  Client client = Client.create();
-		  client.addFilter(new HTTPBasicAuthFilter("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		  WebResource webResource = client.resource("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org"
-		      + "/messages");
-		  MultivaluedMapImpl formData = new MultivaluedMapImpl();
-		  formData.add("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		  formData.add("to", "matiascavallin96@gmail.com");
-		  formData.add("subject", "Simple Mailgun Example");
-		  formData.add("text", "Plaintext content");
-		  return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
-		      formData);
-		} 
-        */
 	
 	
 	
@@ -84,19 +53,7 @@ public class EmailService {
 		
 	}
 	
-	public  void sendComplexMessage(User user, String text) throws Exception {
-		
-		MimeMessage message = sender.createMimeMessage();
-		        // Enable the multipart flag!
-		
-		        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-		        helper.setTo(user.getMail());
-		        helper.setText(buildHtml(user,text), true);
-		        helper.setSubject("Hi");
-		        sender.send(message);
 
-        
-    }
 	
 
 
