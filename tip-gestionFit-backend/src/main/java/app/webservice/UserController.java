@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import app.model.Credential;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;
@@ -38,7 +37,6 @@ public class UserController {
 	@Autowired
 	private UserService userServ = new UserService();
 	
-	private EmailService emailServ = new EmailService();
 	
 	
 	@GetMapping(value = "/users", produces = "application/json")   
@@ -85,14 +83,14 @@ public class UserController {
 	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines) throws UnirestException{
 		//System.out.println(newRoutines.type);
 		this.userServ.newRutines(idUser, newRoutines);
-		this.emailServ.sendComplexMessage(this.userServ.getById(idUser), "Se te ha agregado una nueva rutina, entra a tu perfil para revisar si esta todo bien salu2");
+		System.out.println(EmailService.sendComplexMessage(this.userServ.getById(idUser), "Se te ha agregado una nueva rutina, entra a tu perfil para revisar si esta todo bien salu2"));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/alumno", produces = "application/json")   
 	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws UnirestException {
 			this.userServ.saveStudent(user);
-			this.emailServ.sendComplexMessage(user, "Bienvenido al gym x esperamos que nos acompañes mucho tiempo etc");
+			EmailService.sendComplexMessage(user, "Bienvenido al gym x esperamos que nos acompañes mucho tiempo etc");
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 
 	}

@@ -17,11 +17,6 @@ export class NuevaRutinaComponent implements OnInit {
       Validators.required
     ])),
     type: new FormControl('', Validators.compose([
-      Validators.nullValidator,
-      Validators.required
-    ])),
-    exercises: new FormControl('', Validators.compose([
-      Validators.nullValidator,
       Validators.required
     ]))
   })
@@ -58,8 +53,13 @@ export class NuevaRutinaComponent implements OnInit {
   	this.newRoutine.exercises = this.exercisesAlumno;
   }
 
+  validForm(){
+    this.newRoutine.type = this.form.controls.type.value;
+    this.newRoutine.name = this.form.controls.name.value;
+  }
+
   guardarRutina(){
-    //this.validForm();
+    this.validForm();
   	let type = Routine_Type[this.newRoutine.type];
     this.newRoutine.type = type;
     this.guardarEjercicios();
