@@ -22,6 +22,10 @@ export class AppComponent implements OnInit{
     }
   }
 
+  changeLang(lang){
+    this.translateService.use(lang);
+  }
+
   alumnos() {
     this.routerService.navigate(["/alumnos"]);
   }

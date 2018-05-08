@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Exercise, Exercise_Type } from './../model/exercise';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nuevo-ejercicio',
@@ -13,7 +14,7 @@ export class NuevoEjercicioComponent implements OnInit {
   exercisesType=[Exercise_Type[1], Exercise_Type[0], Exercise_Type[3], Exercise_Type[2]];
 	newExercise;
 
-  constructor(private routineServ: RoutineService, private router: Router) {
+  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
     this.newExercise = {name:"", description:"", type:""};
   }
 

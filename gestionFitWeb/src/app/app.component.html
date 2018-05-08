@@ -7,7 +7,7 @@
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>  
-      </button>
+      </button>      
       
       <ul class="list-unstyled components">
         <li class="active">
@@ -24,13 +24,13 @@
         <li>
             <a [routerLink]="" (click)="rutinas()"><p>{{'Rutinas' | translate}} <i class="fas fa-calendar-alt"></i></p></a>
             <ul>
-                <li><a [routerLink]="" (click)="nuevaRutina()"><p>Nueva <i class="fas fa-calendar-plus"></i></p></a></li>
+                <li><a [routerLink]="" (click)="nuevaRutina()"><p>{{'Nueva' | translate}} <i class="fas fa-calendar-plus"></i></p></a></li>
             </ul>
         </li>
         <li>
             <p>Ejercicios <i class="fas fa-file-alt"></i></p>
             <ul>
-                <li><a [routerLink]="" (click)="nuevoEjercicio()"><p>Nuevo <i class="fas fa-plus-circle"></i> </p></a></li>
+                <li><a [routerLink]="" (click)="nuevoEjercicio()"><p>{{'Nuevo' | translate}} <i class="fas fa-plus-circle"></i> </p></a></li>
             </ul>
         </li>
 
@@ -38,7 +38,7 @@
             <a [routerLink]="" (click)="logout()"><p>Logout <i class="fas fa-sign-out-alt"></i></p></a>
         </li>
         <li>
-            <p>Cerrar <i class="fas fa-times-circle"></i></p>
+            <p>{{'Cerrar' | translate}} <i class="fas fa-times-circle"></i></p>
         </li>
       </ul>
 
@@ -67,6 +67,9 @@
                     GestionFit      
                     </a>      
                  </span>
+                 <a (click)="changeLang('es')"><img src="assets/es.svg" height="20px" width="25px"></a>
+
+                 <a (click)="changeLang('en')"><img src="assets/gb.svg" height="20px" width="25px"></a>
                  </div>
       </nav>
 

@@ -5,8 +5,10 @@
   "Ingresar": "Enter",
   "Registrarse": "Sign in",
   "Mediciones": "Measurements",
+  "Medicion": "Measurement",
   "Rutinas": "Routines",
   "Medida": "Measure",
+  "Medidas": "Measures",
   "Pecho": "Chest",
   "Brazo": "Arm",
   "Cintura":"Waist",
@@ -41,7 +43,6 @@
   "No definido": "Undefined",
   "Atras": "Back",
   "Guardar": "Save",
-  "Medicion": "Measurement",
   "Agregar Medicion": "Add Measurement",
   "requerido": "required",
   "requerida": "required",
@@ -60,7 +61,13 @@
   "Cerrar": "Close",
   "Español": "Spanish",
   "Ingles": "English",
-  "Ejercicios": "Exercises"
-
-
+  "Ejercicios": "Exercises",
+  "Nueva": "New",
+  "Nuevo": "New",
+  "Cancelar": "Cancel",
+  "Nombre ejercicio": "Exercise name",
+  "Tipo ejercicio": "Exercise type",
+  "Descripcion ejercicio": "Exercise description",
+  "Asignar una rutina": "Assign a routine",
+  "Escriba algo aqui...": "Write something here..."
 }

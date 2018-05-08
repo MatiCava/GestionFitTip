@@ -3,7 +3,7 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">Medidas</th>
+        <th scope="col">{{'Medidas' | translate}}</th>
         <th scope="col" *ngFor="let day of dates">{{day | date:'dd/MM/yyyy'}}</th>
       </tr>
     </thead> 
@@ -15,5 +15,5 @@
     </tbody>
   </table>
 </div>
-<button class="btn btn-primary" (click)="nuevaMedicion()">Nuevo</button>
+<button class="btn btn-primary" (click)="nuevaMedicion()">{{'Nuevo' | translate}}</button>
 </div>

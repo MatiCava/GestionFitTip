@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alumnos',
@@ -11,7 +12,7 @@ export class AlumnosComponent implements OnInit {
 
   public alumnos:any;
 
-  constructor(private userService: AlumnosService,private routerServ: Router) {
+  constructor(private translateService: TranslateService, private userService: AlumnosService,private routerServ: Router) {
     this.alumnos = [];
    }
 

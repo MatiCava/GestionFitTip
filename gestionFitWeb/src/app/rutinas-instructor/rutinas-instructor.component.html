@@ -1,13 +1,13 @@
 <div class="container" style="padding-top: 35px;">
   <ul class="list-group">
-    <h1 style="text-align: center">Asignar una rutina</h1>
+    <h1 style="text-align: center">{{'Asignar una rutina' | translate}}</h1>
     <li class="list-group-item" *ngFor="let rutina of rutinas">
       <input id="checkboxRutinas" type="checkbox" [(ngModel)]="rutina.checked"> {{rutina.name}}<br>
     </li>
     
   </ul>
   <div class="flex" style="padding-top: 25px;">
-      <button class="btn btn-primary" (click)="guardarRutinasAlumno()"> Guardar </button>
-      <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+      <button class="btn btn-primary" (click)="guardarRutinasAlumno()"> {{'Guardar' | translate}} </button>
+      <button class="btn btn-primary" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
   </div>  
 </div>

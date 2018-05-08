@@ -4,6 +4,7 @@ import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { EliminarRutinaDialogComponent } from './../eliminar-rutina-dialog/eliminar-rutina-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-rutinas',
@@ -15,7 +16,7 @@ export class ListaRutinasComponent implements OnInit {
   rutinas:any[];
   eliminarRutinaDialogRef: MatDialogRef<EliminarRutinaDialogComponent>;
 
-  constructor(private routineServ: RoutineService, private router: Router, private dialog: MatDialog) { }
+  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.traerRutinas()

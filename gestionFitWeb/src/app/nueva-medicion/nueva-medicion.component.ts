@@ -4,7 +4,7 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MedidasService } from '../services/medidas/medidas.service';
-
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class NuevaMedicionComponent implements OnInit {
 	id : any;
 	nombresMedidas:any = [];
 
-  constructor(private formBuilder: FormBuilder, private userServ: AlumnosService, private route: ActivatedRoute, private router: Router, private medidasServ: MedidasService) {
+  constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private userServ: AlumnosService, private route: ActivatedRoute, private router: Router, private medidasServ: MedidasService) {
     this.getId();
 		this.getCantMedidas();
 		for(let i=0;i<this.nombresMedidas.length;i++){
