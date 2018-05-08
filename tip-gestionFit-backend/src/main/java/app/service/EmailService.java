@@ -1,10 +1,14 @@
 package app.service;
 import java.io.File;
 
+import javax.mail.internet.MimeMessage;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -21,29 +25,11 @@ import app.model.User;
 import app.model.User_Instructor;
 import app.model.User_Student;
 
+@Service
 public class EmailService {
 	
-	/* no funca
-	public static ClientResponse SendInlineImage() {
-		   Client client = Client.create();
-		   client.addFilter(new HTTPBasicAuthFilter("api",
-		                   "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		   WebResource webResource =
-		           client.resource("https://api.mailgun.net/v3/sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" +
-		                           "/messages");
-		   FormDataMultiPart form = new FormDataMultiPart();
-		   form.field("from", "mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		   form.field("to", "baz@example.com");
-		   form.field("subject", "Hello");
-		   form.field("text", "Testing some Mailgun awesomness!");
-		   //form.field("html", "<html>Inline image here: <img src=\"cid:test.jpg\"></html>");
-		   File jpgFile = new File("/home/matias/Escritorio/diamond_1-1024x768.png");
-		   form.bodyPart(new FileDataBodyPart("inline",jpgFile,
-		                   MediaType.APPLICATION_OCTET_STREAM_TYPE));
-		   return webResource.type(MediaType.MULTIPART_FORM_DATA_TYPE).
-		           post(ClientResponse.class, form);
-		} */
-	
+	@Autowired
+	private JavaMailSender sender;
 	
 	
 	public static String buildHtml(User user, String text){
@@ -61,6 +47,17 @@ public class EmailService {
 		
 	}
 	
+	public void sendEmailToUser(User user,String matter,String text)throws Exception {
+        MimeMessage msg = sender.createMimeMessage();
+        MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
+        msgHelper.setTo("matiascavallin96@gmail.com"); //user.getMail()
+        msgHelper.setText(buildHtml(user, text),true);
+        msgHelper.setSubject(matter);
+        sender.send(msg);
+   }
+	
+	
+	
 	public static JsonNode sendComplexMessage(User user, String text) throws UnirestException {
 		
         HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
@@ -74,19 +71,5 @@ public class EmailService {
 
         return request.getBody();
     }
-	
-	public ClientResponse sendSimpleMessage() {
-		  Client client = Client.create();
-		  client.addFilter(new HTTPBasicAuthFilter("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		  WebResource webResource = client.resource("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org"
-		      + "/messages");
-		  MultivaluedMapImpl formData = new MultivaluedMapImpl();
-		  formData.add("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		  formData.add("to", "matiascavallin96@gmail.com");
-		  formData.add("subject", "Simple Mailgun Example");
-		  formData.add("text", "Plaintext content");
-		  return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
-		      formData);
-		} 
 
 }
