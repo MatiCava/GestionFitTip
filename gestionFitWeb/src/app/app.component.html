@@ -28,7 +28,7 @@
             </ul>
         </li>
         <li>
-            <p>Ejercicios <i class="fas fa-file-alt"></i></p>
+            <p> {{'Ejercicios' | translate}} <i class="fas fa-file-alt"></i></p>
             <ul>
                 <li><a [routerLink]="" (click)="nuevoEjercicio()"><p>{{'Nuevo' | translate}} <i class="fas fa-plus-circle"></i> </p></a></li>
             </ul>
@@ -38,7 +38,7 @@
             <a [routerLink]="" (click)="logout()"><p>Logout <i class="fas fa-sign-out-alt"></i></p></a>
         </li>
         <li>
-            <p>{{'Cerrar' | translate}} <i class="fas fa-times-circle"></i></p>
+            <a [routerLink]="" (click)="cerrarSidebar()"><p>{{'Cerrar' | translate}} <i class="fas fa-times-circle"></i></p></a>
         </li>
       </ul>
 
@@ -54,7 +54,7 @@
           
                 <ul class="navbar-nav" *ngIf="isLogged()">
                         <li class="nav-item">
-                            <a [routerLink]="" id="sidebarCollapse"><span class="navbar-toggler-icon"></span></a>
+                            <a [routerLink]="" (click)="cerrarSidebar()" id="sidebarCollapse"><span class="navbar-toggler-icon"></span></a>
                         </li>
                         
                 </ul>
@@ -76,6 +76,8 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+
+
 
 
 

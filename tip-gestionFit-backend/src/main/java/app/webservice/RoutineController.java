@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-
 import app.model.Exercise;
+import app.model.Exercise_Type;
 import app.model.Routine;
+import app.model.Routine_Type;
 import app.model.UserNotFoundException;
-import app.service.EmailService;
 import app.service.RoutineService;
-import app.service.UserService;
 
 @RestController
 @RequestMapping("/api")
@@ -37,6 +35,18 @@ public class RoutineController {
 	@GetMapping(value = "/routines", produces = "application/json")   
 	public List<Routine> getRoutines() {
 		return this.routineServ.getAll();
+
+	}
+	
+	@GetMapping(value = "/routines/types", produces = "application/json")   
+	public Routine_Type[] getRoutinesTypes() {
+		return Routine_Type.values();
+
+	}
+	
+	@GetMapping(value = "/exercises/types", produces = "application/json")   
+	public Exercise_Type[] getExercisesTypes() {
+		return Exercise_Type.values();
 
 	}
 

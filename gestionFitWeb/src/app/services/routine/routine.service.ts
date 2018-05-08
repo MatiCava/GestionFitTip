@@ -52,4 +52,16 @@ export class RoutineService {
 
     return this.http.post(this.apiUrl+"exercise", exercise, this.httpOptions);
   }
+
+  routineTypes():Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl + "routines/types",this.httpOptions)
+  }
+
+  exerciseTypes():Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl + "exercises/types",this.httpOptions)
+  }
 }

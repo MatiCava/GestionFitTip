@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+declare var jquery:any;
+declare var $ :any;
 
 
 @Component({
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
+  title = 'GestionFit';
 
   constructor(private translateService: TranslateService, private routerService: Router) {
     this.translateService.setDefaultLang('es');
@@ -17,8 +19,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
+    //$('#sidebar, #content').toggleClass('active');
     if (!this.isLogged()) {
       this.routerService.navigate(["/login"]);
+    }
+    else{
+      this.routerService.navigate(["/alumnos"])
     }
   }
 
@@ -27,18 +33,22 @@ export class AppComponent implements OnInit{
   }
 
   alumnos() {
+    this.cerrarSidebar();
     this.routerService.navigate(["/alumnos"]);
   }
 
   rutinas(){
+    this.cerrarSidebar();
     this.routerService.navigate(["/rutinas"]);
   }
   
   nuevaRutina(){
+    this.cerrarSidebar();
     this.routerService.navigate(["/rutinas/nueva"]);
   }
 
   nuevoEjercicio(){
+    this.cerrarSidebar();
     this.routerService.navigate(["/ejercicios/nuevo"]);
   }
 
@@ -47,7 +57,16 @@ export class AppComponent implements OnInit{
   }
 
   logout(){
+    this.cerrarSidebar();
     localStorage.removeItem("token");
     this.routerService.navigate(["/login"]);
+  }
+
+
+  cerrarSidebar(){
+      $('#sidebar, #content').toggleClass('active');
+      $('.collapse.in').toggleClass('in');
+      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+
   }
 }

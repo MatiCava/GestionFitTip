@@ -34,10 +34,18 @@ export class NuevaRutinaComponent implements OnInit {
 
   ngOnInit() {
     this.traerEjercicios();
+    this.traerTipos();
   }
 
   volverAtras(){
     this.router.navigate(['/alumnos']);
+  }
+
+  traerTipos(){
+    this.routineServ.routineTypes().subscribe(
+      result => {console.log(result);this.rutinasType= result;},
+      error => console.log(error)
+    )
   }
 
   traerEjercicios(){

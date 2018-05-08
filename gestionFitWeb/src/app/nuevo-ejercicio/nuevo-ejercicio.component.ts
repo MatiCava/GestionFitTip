@@ -19,6 +19,15 @@ export class NuevoEjercicioComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.traerTiposEjercicio();
+  }
+
+  traerTiposEjercicio(){
+    this.routineServ.exerciseTypes().subscribe(
+      result => {console.log(result);this.exercisesType= result},
+      error => console.log(error)
+    )
   }
 
   volverAtras(){
