@@ -35,6 +35,9 @@ import app.service.UserService;
 public class UserController {
 	
 	@Autowired
+	private EmailService emailServ = new EmailService();
+	
+	@Autowired
 	private UserService userServ = new UserService();
 	
 	
@@ -80,17 +83,17 @@ public class UserController {
 	
 	@PutMapping(value = "/user/{id}/nuevasRutinas",produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines) throws UnirestException{
+	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines) throws Exception{
 		//System.out.println(newRoutines.type);
 		this.userServ.newRutines(idUser, newRoutines);
-		System.out.println(EmailService.sendComplexMessage(this.userServ.getById(idUser), "Se te ha agregado una nueva rutina, entra a tu perfil para revisar si esta todo bien salu2"));
+		this.emailServ.sendComplexMessage(this.userServ.getById(idUser), "Se te ha agregado una nueva rutina, entra a tu perfil para revisar si esta todo bien salu2");
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/alumno", produces = "application/json")   
-	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws UnirestException {
+	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
 			this.userServ.saveStudent(user);
-			EmailService.sendComplexMessage(user, "Bienvenido al gym x esperamos que nos acompañes mucho tiempo etc");
+			this.emailServ.sendComplexMessage(user, "Bienvenido al gym x esperamos que nos acompañes mucho tiempo etc");
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 
 	}

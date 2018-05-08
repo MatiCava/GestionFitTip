@@ -1,27 +1,19 @@
 package app.service;
-import java.io.File;
+import javax.mail.internet.MimeMessage;
 
-import javax.ws.rs.core.MediaType;
-
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
-import org.springframework.stereotype.Service;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
 import app.model.User;
-import app.model.User_Instructor;
-import app.model.User_Student;
 
+@Component
 public class EmailService {
+	
+	@Autowired
+	JavaMailSender sender ;
 	
 	/* no funca
 	public static ClientResponse SendInlineImage() {
@@ -42,7 +34,38 @@ public class EmailService {
 		                   MediaType.APPLICATION_OCTET_STREAM_TYPE));
 		   return webResource.type(MediaType.MULTIPART_FORM_DATA_TYPE).
 		           post(ClientResponse.class, form);
-		} */
+		} 
+		
+		
+		
+		HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
+                .basicAuth("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9")
+                .queryString("from", "Mailgun User <gestionfitinfo@gmail.com>")
+                .queryString("to", user.getMail())
+                .queryString("subject", "Hello")
+                .queryString("text", "Testing out some Mailgun awesomeness!")
+                .queryString("html", buildHtml(user, text))
+                .asJson();
+
+        return request.getBody();
+        
+        
+        
+        
+        	public ClientResponse sendSimpleMessage() {
+		  Client client = Client.create();
+		  client.addFilter(new HTTPBasicAuthFilter("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
+		  WebResource webResource = client.resource("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org"
+		      + "/messages");
+		  MultivaluedMapImpl formData = new MultivaluedMapImpl();
+		  formData.add("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
+		  formData.add("to", "matiascavallin96@gmail.com");
+		  formData.add("subject", "Simple Mailgun Example");
+		  formData.add("text", "Plaintext content");
+		  return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
+		      formData);
+		} 
+        */
 	
 	
 	
@@ -61,32 +84,20 @@ public class EmailService {
 		
 	}
 	
-	public static JsonNode sendComplexMessage(User user, String text) throws UnirestException {
+	public  void sendComplexMessage(User user, String text) throws Exception {
 		
-        HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
-                .basicAuth("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9")
-                .queryString("from", "Mailgun User <gestionfitinfo@gmail.com>")
-                .queryString("to", user.getMail())
-                .queryString("subject", "Hello")
-                .queryString("text", "Testing out some Mailgun awesomeness!")
-                .queryString("html", buildHtml(user, text))
-                .asJson();
+		MimeMessage message = sender.createMimeMessage();
+		        // Enable the multipart flag!
+		
+		        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		        helper.setTo(user.getMail());
+		        helper.setText(buildHtml(user,text), true);
+		        helper.setSubject("Hi");
+		        sender.send(message);
 
-        return request.getBody();
+        
     }
 	
-	public ClientResponse sendSimpleMessage() {
-		  Client client = Client.create();
-		  client.addFilter(new HTTPBasicAuthFilter("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		  WebResource webResource = client.resource("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org"
-		      + "/messages");
-		  MultivaluedMapImpl formData = new MultivaluedMapImpl();
-		  formData.add("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		  formData.add("to", "matiascavallin96@gmail.com");
-		  formData.add("subject", "Simple Mailgun Example");
-		  formData.add("text", "Plaintext content");
-		  return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
-		      formData);
-		} 
+
 
 }
