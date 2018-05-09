@@ -7,7 +7,7 @@ import { User_Student } from '../../model/user_student';
 @Injectable()
 export class UserProvider {
 
-	apiUrl : String="http://localhost:8080/api/";
+	apiUrl : String="http://192.168.0.103:8080/api/";
 
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');

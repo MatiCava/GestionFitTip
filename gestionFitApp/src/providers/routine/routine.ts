@@ -15,7 +15,7 @@ export class RoutineProvider {
 
 	//https://gestionfit-backend.herokuapp.com/
 
-	apiUrl : String="http://localhost:8080/api/"
+	apiUrl : String="http://192.168.0.103:8080/api/"
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');
