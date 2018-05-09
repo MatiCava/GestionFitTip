@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-alumnos',
@@ -11,12 +14,14 @@ export class AlumnosComponent implements OnInit {
 
   public alumnos:any;
 
-  constructor(private userService: AlumnosService,private routerServ: Router) {
+  constructor(private translateService: TranslateService, private userService: AlumnosService,private routerServ: Router) {
     this.alumnos = [];
    }
 
   ngOnInit() {
+    //this.cerrarSidebar();
     this.getAlumnos();
+
   }
 
   infoAlumno(idAl){
@@ -38,5 +43,12 @@ export class AlumnosComponent implements OnInit {
   rutinasAlumno(idUser){
     this.routerServ.navigate(['/alumno/rutinas', idUser]);
   }
+
+  cerrarSidebar(){
+
+    $('#sidebar, #content').toggleClass('active');
+
+
+}
 
 }

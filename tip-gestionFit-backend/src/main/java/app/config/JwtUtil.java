@@ -1,29 +1,42 @@
 package app.config;
 
-import static java.util.Collections.emptyList;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.util.UrlPathHelper;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtUtil {
 
     // metodo para crear el JWT y enviarlo al cliente en el header de la respuesta
-    static void addAuthentication(HttpServletResponse res, String username) throws IOException {
+    static void addAuthentication(HttpServletResponse res,UserDetails userContext, long id) throws IOException {
+    	
+    	 if ((userContext.getUsername()) == "") 
+             throw new IllegalArgumentException("Cannot create JWT Token without username");
+
+         if (userContext.getAuthorities() == null || userContext.getAuthorities().isEmpty()) 
+             throw new IllegalArgumentException("User doesn't have any privileges");
+
+         Claims claims = Jwts.claims().setSubject(userContext.getUsername());
+         claims.put("scopes", userContext.getAuthorities().stream().map(s -> s.toString()).collect(Collectors.toList()));
 
         String token = Jwts.builder()
-            .setSubject(username)
+            .setClaims(claims)
             .setExpiration(new Date(System.currentTimeMillis() + 600000000))
             .signWith(SignatureAlgorithm.HS512, "I@nAci0")
             .compact();
@@ -32,14 +45,17 @@ public class JwtUtil {
       //agregamos al encabezado y al cuerpo de la respuesta el token 
         res.addHeader("Authorization", token);
     	PrintWriter writer = res.getWriter();
-		writer.write("{\"token\":\""+ "Bearer " + token +"\"}");
+		writer.write("{\"token\":\""+ "Bearer " + token + "\""+ ",\"id\":\""+ id + "\""+ "}");
         writer.close();
     }
 
     // metodo para validar el token enviado por el cliente
-    static Authentication getAuthentication(HttpServletRequest request) {
+    @SuppressWarnings("unchecked")
+	static Authentication getAuthentication(HttpServletRequest request) {
 
+    	
         // obtenemos el token que viene en el encabezado de la peticion
+    	System.out.println(request.getHeader("Authorization"));
         String token = request.getHeader("Authorization").replace("Bearer ", "");
         System.out.println("TOKEEEEN");
         System.out.print(token);
@@ -55,6 +71,12 @@ public class JwtUtil {
 	                    .parseClaimsJws(token) //este metodo es el que valida
 	                    .getBody()
 	                    .getSubject();
+	            
+	            Jws<Claims> jwsClaims = Jwts.parser().setSigningKey("I@nAci0").parseClaimsJws(token);
+	            List<String> scopes = jwsClaims.getBody().get("scopes", List.class);
+	            List<GrantedAuthority> authorities = scopes.stream()
+	                    .map(authority -> new SimpleGrantedAuthority(authority))
+	                    .collect(Collectors.toList());
 	            System.out.println(user);
 	            if(url.contains("user/byUsername")) {
 	            	if(!url.contains(user)) {
@@ -63,7 +85,7 @@ public class JwtUtil {
 	            }
 	
 	            return user != null ?
-	                    new UsernamePasswordAuthenticationToken(user, null,  emptyList()) :
+	                    new UsernamePasswordAuthenticationToken(user, null, authorities) :
 	                    null;
 	        }
         } catch(ExpiredJwtException exception){
@@ -71,5 +93,19 @@ public class JwtUtil {
         }
         return null;
     }
+    /*
+        RawAccessJwtToken rawAccessToken = (RawAccessJwtToken) authentication.getCredentials();
+
+        Jws<Claims> jwsClaims = rawAccessToken.parseClaims(jwtSettings.getTokenSigningKey());
+        String subject = jwsClaims.getBody().getSubject();
+        List<String> scopes = jwsClaims.getBody().get("scopes", List.class);
+        List<GrantedAuthority> authorities = scopes.stream()
+                .map(authority -> new SimpleGrantedAuthority(authority))
+                .collect(Collectors.toList());
+
+        UserContext context = UserContext.create(subject, authorities);
+
+        return new JwtAuthenticationToken(context, context.getAuthorities());	
+    }*/
 }
 

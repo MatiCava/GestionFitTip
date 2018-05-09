@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { ParamMap, ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { MedidasService } from '../services/medidas/medidas.service';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mediciones-instructor',
@@ -17,7 +17,7 @@ export class MedicionesInstructorComponent implements OnInit {
   _table: any;
   nombresMedidas: any = [];
 
-  constructor(private userServ: AlumnosService, private route: ActivatedRoute, private router: Router, private medidasServ: MedidasService) {
+  constructor(private translateService: TranslateService, private userServ: AlumnosService, private route: ActivatedRoute, private router: Router, private medidasServ: MedidasService) {
     this._table = {};
   }
 

@@ -7,9 +7,6 @@
       <p>{{'Usuario' | translate}}: <strong>{{alumno.username}}</strong></p>	
     </li>
     <li class="list-group-item">
-      <p> {{'Contraseña' | translate}}: <strong>{{alumno.password}}</strong> </p>
-    </li>
-    <li class="list-group-item">
       <p> Mail: <strong>{{alumno.mail}}</strong> </p>
     </li>
     <li class="list-group-item">
@@ -35,6 +32,6 @@
     </li>
   </ul>
   <div style="padding-top: 25px;padding-bottom: 25px;">
-    <button class="btn btn-primary" (click)="volver()">Atras</button>
+    <button class="btn btn-primary" (click)="volver()">{{'Atras' | translate}}</button>
   </div>
 </div>

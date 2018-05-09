@@ -20,6 +20,11 @@
   <version>4.0.0</version>
   <!-- <scope>provided</scope> -->
 </dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mail</artifactId>
+    <version>1.4.3.RELEASE</version>
+</dependency>
   		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -30,6 +35,27 @@
 	    <artifactId>hibernate-core</artifactId>
 	    <version>5.2.2.Final</version>
 	</dependency>
+	    <dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt</artifactId>
+	    <version>0.7.0</version>
+	</dependency>
+	        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+          <dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-web</artifactId>
+	<version>5.0.4.RELEASE</version>
+  </dependency>
+  <dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-config</artifactId>
+	<version>5.0.4.RELEASE</version>
+  </dependency>
+        
 <!-- 	<dependency>
 	      <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
@@ -137,8 +163,17 @@
     	<artifactId>jersey-media-multipart</artifactId>
     	<version>2.27</version>
 	</dependency>
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.6.1</version>
+            </dependency>
 	
-	
+	<dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-mail</artifactId>
+    	<version>1.5.7.RELEASE</version>
+	</dependency>
 
   </dependencies>
   

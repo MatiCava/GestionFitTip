@@ -1,29 +1,26 @@
 <div class="container" style="padding-top: 35px;">
-  <ul class="list-group">
-      <li class="list-group-item">
-          <div class="form-group">
-            <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">Nombre rutina</h1>
-            <input type="text" class="form-control" [(ngModel)]="newRoutine.name">
-          </div>
-      </li>
-      <li class="list-group-item">
-          <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">Tipo rutina</h1>
-          <div class="styled-select rounded">
-              <select [(ngModel)]="newRoutine.type" class="form-control">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label class="form-control" for="inputNombre">Ingrese un nombre para la rutina</label>
+            <input type="text" class="form-control" id="inputNombre" formControlName="name" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+            <select formControlName="type" class="form-control">
                 <option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </option>
-              </select>
-          </div>
-      </li>
-      <li class="list-group-item" *ngFor="let exercise of exercises">
-          <input id="checkboxEjercicios" type="checkbox" [(ngModel)]="exercise.checked"> {{exercise.name}}<br>
-      </li>
-  </ul>
-  <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
-      <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
-      <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
-  </div>
-  <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
-        <button class="btn btn-primary" (click)="actualizarRutina()"> Actualizar </button>
-        <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
-    </div>  
+            </select>
+        </div>
+    </form>
+        <div class="form-group" *ngFor="let exercise of exercises">
+            <input id="checkboxEjercicios" type="checkbox" [(ngModel)]="exercise.checked"> {{exercise.name}}<br>
+        </div>
+
+        <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
+            <button class="btn btn-primary" (click)="guardarRutina()"> Guardar </button>
+            <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+        </div>
+        <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
+              <button class="btn btn-primary" (click)="actualizarRutina()"> Actualizar </button>
+              <button class="btn btn-primary" (click)="volverAtras()"> Cancelar </button>
+          </div> 
+    
 </div>

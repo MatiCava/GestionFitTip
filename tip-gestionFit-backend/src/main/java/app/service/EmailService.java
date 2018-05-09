@@ -1,71 +1,104 @@
 package app.service;
-import java.io.File;
+import javax.mail.internet.MimeMessage;
 
-import javax.ws.rs.core.MediaType;
-
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
+import app.model.User;
 
+@Component
+@Service
 public class EmailService {
 	
-	/* no funca
-	public static ClientResponse SendInlineImage() {
-		   Client client = Client.create();
-		   client.addFilter(new HTTPBasicAuthFilter("api",
-		                   "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		   WebResource webResource =
-		           client.resource("https://api.mailgun.net/v3/sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" +
-		                           "/messages");
-		   FormDataMultiPart form = new FormDataMultiPart();
-		   form.field("from", "mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		   form.field("to", "baz@example.com");
-		   form.field("subject", "Hello");
-		   form.field("text", "Testing some Mailgun awesomness!");
-		   //form.field("html", "<html>Inline image here: <img src=\"cid:test.jpg\"></html>");
-		   File jpgFile = new File("/home/matias/Escritorio/diamond_1-1024x768.png");
-		   form.bodyPart(new FileDataBodyPart("inline",jpgFile,
-		                   MediaType.APPLICATION_OCTET_STREAM_TYPE));
-		   return webResource.type(MediaType.MULTIPART_FORM_DATA_TYPE).
-		           post(ClientResponse.class, form);
-		} */
+	public static String WELCOME = "¡Bienvenido a GestionFit!";
+	public static String ROUTINE = "Nueva rutina asignada";
 	
-	public static JsonNode sendComplexMessage() throws UnirestException {
-		
-        HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + "/messages")
-                .basicAuth("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9")
-                .queryString("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">")
-                .queryString("to", "matiascavallin96@gmail.com")
-                .queryString("subject", "Hello")
-                .queryString("text", "Testing out some Mailgun awesomeness!")
-                .queryString("html", "<html> <div> <h1> HTML version</h1> </div>  </html>")
-                .asJson();
 
-        return request.getBody();
-    }
 	
-	public ClientResponse sendSimpleMessage() {
-		  Client client = Client.create();
-		  client.addFilter(new HTTPBasicAuthFilter("api", "key-3ac6e9afd20b3f9c12c7fbb087453ea9"));
-		  WebResource webResource = client.resource("https://api.mailgun.net/v3/" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org"
-		      + "/messages");
-		  MultivaluedMapImpl formData = new MultivaluedMapImpl();
-		  formData.add("from", "Mailgun User <mailgun@" + "sandbox7b8b2acb769040948e75234177fe8e75.mailgun.org" + ">");
-		  formData.add("to", "matiascavallin96@gmail.com");
-		  formData.add("subject", "Simple Mailgun Example");
-		  formData.add("text", "Plaintext content");
-		  return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class,
-		      formData);
-		} 
+	@Autowired
+	JavaMailSender sender ;
+	
+	
+	public void sendEmailToUser(User user,String matter)throws Exception {
+		String text = "";
+		switch(matter){
+			case "¡Bienvenido a GestionFit!" : text = this.welcomeMessage(user);
+			case "Nueva rutina asignada": text = this.newRoutineAssignedMessage(user);
+		}
+        MimeMessage msg = sender.createMimeMessage();
+        MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
+        msgHelper.setTo(user.getMail());
+        msgHelper.setText(buildHtml(text),true);
+        msgHelper.setSubject(matter);
+        sender.send(msg);
+   }
+
+	
+	
+	
+	public static String buildHtml(String text){
+		
+		String html =
+				
+				"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
+		 +		"<html xmlns='http://www.w3.org/1999/xhtml'>"
+		 +    	"<head>"
+		 +			"<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />"
+		 +			"<meta name='viewport' content='width=device-width, initial-scale=1.0'/>"
+		 +			"<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>"
+		 +		"</head>"
+		 +		"<body>"
+		 + "	   		<div padding-top: 20px'> "
+		 + "				<table align='center' border='1' cellpadding='0' cellspacing='0' width='600'>"
+		 +"						<tr>"
+		 +"						<td bgcolor='#59b6f8'>"
+		 +"							<img src='https://image.ibb.co/gnMBDn/GFEmail.jpg' alt='GFEmail' width='100%' height='230' style='display: block;'>"
+		 +"						</td>"
+		 +"						</tr>"
+		 +"						<tr>"
+		 +"						<td bgcolor='#ffffff'>"
+		 +							"<div>"
+		 + 								text	
+		 +"							 </div>"
+		 +"						</td>"
+		 +"						</tr>"
+		 +"						<tr>"
+		 +"						<td bgcolor='#ee4c50'>"
+		 +""
+		 +"						</td>"
+		 +"						</tr>"
+		 +"					</table>"
+		 + "				<br> "
+		 + "			</div>  "
+		 + "	 </body>"
+		 +		"</html>";
+				
+				
+				
+
+		
+		return html;
+		
+	}
+	
+	
+	private String welcomeMessage(User user){
+		String WELCOME_MESSAGE = "							<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + "Bienvenido a GestionFit " + user.getNameAndSurname() + "</h1> "
+				 + "							<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> Ya puedes ingresar a tu cuenta desde la app. Tu usuario es: " + user.getUsername() + "</h1>";
+		return WELCOME_MESSAGE;
+	}
+	
+	private String newRoutineAssignedMessage(User user){
+		String ROUTINE_MESSAGE = "							<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + user.getNameAndSurname() + "</h1> "
+				 + "							<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> Se te asigno una nueva rutina. Ingresa en la app para visualizarla. </h1>";
+		return ROUTINE_MESSAGE;
+	}
+	
+
+	
+
 
 }

@@ -12,6 +12,6 @@ export class LoginService {
 
 
   logIn(cred): Observable<any> {
-    return this.http.post(this.apiUrl + "auth/login", cred);
+    return this.http.post(this.apiUrl + "auth/login", cred,{observe: 'response'});
   }
 }

@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Measurement;
@@ -28,11 +31,12 @@ public class DataService {
 //	MeasurementDAO measurementDAO = new MeasurementDAO();
 	
 	public void createInitialData() {
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
-		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1","1234","Roberto Robertson","robert@gmail.com","","","Bajar de peso",
+		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","gastonveliez95@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
-		
-		User_Instructor inst1 = new User_Instructor("instructor1","1234","Fernando Fernandez", "ff@gmail.com");
+		User_Instructor inst1 = new User_Instructor("instructor1",encoder.encode("1234"),"Fernando Fernandez", "ff@gmail.com");
 		
 		Exercise ex1 = new Exercise("Biceps", "3 series de 15 repeticiones", Exercise_Type.Arms);
 		Exercise ex2 = new Exercise("Gemelos", "3 series de 15 repeticiones", Exercise_Type.Lower_Body);

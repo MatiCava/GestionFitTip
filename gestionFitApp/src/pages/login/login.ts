@@ -11,7 +11,7 @@ import { LoginProvider } from '../../providers/login/login';
 })
 export class LoginPage {
 
-	public credential = {username:"",password:""};
+	public credential = {email:"",password:""};
   public user:any;
   cantAccess: boolean = false;
 
@@ -42,16 +42,16 @@ export class LoginPage {
   login(){
   	this.loginServ.logIn(this.credential).subscribe(
   		result => {
-  			this.user = result;
-  			console.log(this.user);
-  			localStorage.setItem("user_role",this.user.role);
-        localStorage.setItem("id",this.user.id);
-  			if(this.user.role == "Student"){
-  				this.navCtrl.push("dashboard",{id:this.user.id});
+  			console.log(result);
+        localStorage.setItem("id",result.body.id);
+        localStorage.setItem("token",result.body.token);
+        this.navCtrl.push("dashboard",{id:result.body.id});
+ /* 			if(this.user.role == "Student"){
+  				this.navCtrl.push("dashboard",{id:result.body.id});
   			}
   			else{
   				this.cantAccess = true;
-  			}
+  			}*/
   		},
   		error => {
   			console.log(error);

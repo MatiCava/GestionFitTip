@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-info-alumno',
@@ -12,7 +13,7 @@ export class InfoAlumnoComponent implements OnInit {
   id: any;
   private alumno;
 
-  constructor(private userServ: AlumnosService, private route: ActivatedRoute, private routerServ: Router) {
+  constructor(private translateService: TranslateService, private userServ: AlumnosService, private route: ActivatedRoute, private routerServ: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.alumno = {};
   }

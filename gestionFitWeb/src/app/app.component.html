@@ -1,10 +1,14 @@
 <div class="wrapper">
     <!-- Sidebar Holder -->
-    <nav id="sidebar" *ngIf="isLogged()">
+    <nav id="sidebar" class="active" *ngIf="isLogged()">
       <div class="sidebar-header">
         <img src="assets/icon.png" height="60px" width="60px">
       </div>
 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>  
+      </button>      
+      
       <ul class="list-unstyled components">
         <li class="active">
             <h3>Menu</h3>
@@ -20,13 +24,13 @@
         <li>
             <a [routerLink]="" (click)="rutinas()"><p>{{'Rutinas' | translate}} <i class="fas fa-calendar-alt"></i></p></a>
             <ul>
-                <li><a [routerLink]="" (click)="nuevaRutina()"><p>Nueva <i class="fas fa-calendar-plus"></i></p></a></li>
+                <li><a [routerLink]="" (click)="nuevaRutina()"><p>{{'Nueva' | translate}} <i class="fas fa-calendar-plus"></i></p></a></li>
             </ul>
         </li>
         <li>
-            <p>Ejercicios <i class="fas fa-file-alt"></i></p>
+            <p> {{'Ejercicios' | translate}} <i class="fas fa-file-alt"></i></p>
             <ul>
-                <li><a [routerLink]="" (click)="nuevoEjercicio()"><p>Nuevo <i class="fas fa-plus-circle"></i> </p></a></li>
+                <li><a [routerLink]="" (click)="nuevoEjercicio()"><p>{{'Nuevo' | translate}} <i class="fas fa-plus-circle"></i> </p></a></li>
             </ul>
         </li>
 
@@ -34,7 +38,7 @@
             <a [routerLink]="" (click)="logout()"><p>Logout <i class="fas fa-sign-out-alt"></i></p></a>
         </li>
         <li>
-            <p>Cerrar <i class="fas fa-times-circle"></i></p>
+            <a [routerLink]="" (click)="cerrarSidebar()"><p>{{'Cerrar' | translate}} <i class="fas fa-times-circle"></i></p></a>
         </li>
       </ul>
 
@@ -42,7 +46,7 @@
     </nav>
 
     <!-- Page Content Holder -->
-    <div id="content">
+    <div id="content" class="active">
 
         <nav class="navbar navbar-expand-sm navbar-light  shadow" style="width:100%;">
         <div class="container-fluid">
@@ -50,7 +54,7 @@
           
                 <ul class="navbar-nav" *ngIf="isLogged()">
                         <li class="nav-item">
-                            <a [routerLink]="" id="sidebarCollapse"><span class="navbar-toggler-icon"></span></a>
+                            <a [routerLink]="" (click)="cerrarSidebar()" id="sidebarCollapse"><span class="navbar-toggler-icon"></span></a>
                         </li>
                         
                 </ul>
@@ -63,12 +67,17 @@
                     GestionFit      
                     </a>      
                  </span>
+                 <a [routerLink]="" (click)="changeLang('es')"><img src="assets/es.svg" height="20px" width="25px"></a>
+
+                 <a [routerLink]="" (click)="changeLang('en')"><img src="assets/gb.svg" height="20px" width="25px"></a>
                  </div>
       </nav>
 
       <router-outlet></router-outlet>
     </div>
   </div>
+
+
 
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editar-rutina',
@@ -18,7 +19,7 @@ export class EditarRutinaComponent implements OnInit {
   isEdit = true;
   
 
-  constructor(private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
+  constructor(private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.newRoutine = {};
   }

@@ -24,11 +24,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.csrf().disable()
         	.authorizeRequests()
         	.antMatchers("/").permitAll()
+        	.antMatchers("/api/alumnos","/api/routines","/api/exercises").hasAuthority("ROLE_INSTRUCTOR")
         	.antMatchers("/auth/login").permitAll() //permitimos el acceso a /login a cualquiera
             .antMatchers("/favicon.ico").permitAll() 
             .antMatchers("/css/**").permitAll()
             .antMatchers("/bower_components/**").permitAll()
-            .anyRequest().authenticated() //cualquier otra peticion requiere autenticacion
+            //.anyRequest().hasAnyAuthority("ROLE_INSTRUCTOR","ROLE_STUDENT")
+            .anyRequest().permitAll()//cualquier otra peticion requiere autenticacion
             .and()
             // Las peticiones /login pasan previamente por este filtro
             .addFilterBefore(new LoginFilter("/auth/login", authenticationManager()),
@@ -36,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             // Las demás peticiones pasan por este filtro para validar el token
             .addFilterBefore(new JwtFilter(),
-                    UsernamePasswordAuthenticationFilter.class);
+                    UsernamePasswordAuthenticationFilter.class)
+            ;
     }
     
 

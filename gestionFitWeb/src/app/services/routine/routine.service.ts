@@ -7,52 +7,61 @@ import { Routine } from '../../model/routine';
 @Injectable()
 export class RoutineService {
 
-  apiUrl : String="http://localhost:8080/api/"
+  apiUrl : String="http://localhost:8080/api/";
+
+  httpOptions :any ;
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');
   }
 
   getRutines(): Observable<any>{
-  	return this.http.get(this.apiUrl+"routines");
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+  	return this.http.get(this.apiUrl+"routines", this.httpOptions);
   }
 
   getExercises(): Observable<any>{
-    return this.http.get(this.apiUrl+"exercises");
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl+"exercises" , this.httpOptions);
   }
 
   getRoutine(id):Observable<any>{
-    return this.http.get(this.apiUrl+"routine/"+id);
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl+"routine/"+id, this.httpOptions);
   }
 
   deleteRoutine(id):Observable<any>{
-    return this.http.delete(this.apiUrl+"routine/"+id);
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.delete(this.apiUrl+"routine/"+id, this.httpOptions);
   }
 
   saveRoutine(routine):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
-    const httpOptions = {
-          headers: new HttpHeaders({
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
-                'Accept': 'application/json',
-                'Content-Type':  'application/json'
-          })
-    };
 
-    return this.http.post(this.apiUrl+"routine", routine, httpOptions);
+    return this.http.post(this.apiUrl+"routine", routine, this.httpOptions);
   }
 
   saveExercise(exercise):Observable<any>{
-    const httpOptions = {
-          headers: new HttpHeaders({
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
-                'Accept': 'application/json',
-                'Content-Type':  'application/json'
-          })
-    };
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
-    return this.http.post(this.apiUrl+"exercise", exercise, httpOptions);
+
+    return this.http.post(this.apiUrl+"exercise", exercise, this.httpOptions);
+  }
+
+  routineTypes():Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl + "routines/types",this.httpOptions)
+  }
+
+  exerciseTypes():Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl + "exercises/types",this.httpOptions)
   }
 }

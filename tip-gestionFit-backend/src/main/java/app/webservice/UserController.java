@@ -18,14 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.model.Credential;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;
 import app.model.User;
 import app.model.UserNotFoundException;
 import app.model.User_Student;
+import app.service.EmailService;
 import app.service.UserService;
+
 
 @RestController
 @RequestMapping(value="/api")
@@ -33,21 +34,20 @@ import app.service.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService userServ = new UserService() ;
+	private EmailService emailServ = new EmailService();
 	
+	@Autowired
+	private UserService userServ = new UserService();
 
+	
+	
 	@GetMapping(value = "/users", produces = "application/json")   
 	public List<User> getUsers() {
 		return this.userServ.getAll();
 
 	}
 	
-	@GetMapping("/authenticate")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void auth() {
-		//Este metodo sirve solo para validar el token y autorizar o no al cliente
 
-	}
 	
 /*	@PostMapping(value = "/login", produces = "application/json")
 	public User login(@RequestBody Credential cred) {
@@ -82,17 +82,20 @@ public class UserController {
 	
 	@PutMapping(value = "/user/{id}/nuevasRutinas",produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines){
+	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines) throws Exception{
 		//System.out.println(newRoutines.type);
 		this.userServ.newRutines(idUser, newRoutines);
+
+		this.emailServ.sendEmailToUser(this.userServ.getById(idUser),EmailService.ROUTINE);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/alumno", produces = "application/json")   
-	public ResponseEntity<Void> createUser(@RequestBody User_Student user) {
+	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
 			this.userServ.saveStudent(user);
-			return new ResponseEntity<Void>(HttpStatus.CREATED);
 
+			this.emailServ.sendEmailToUser(user, EmailService.WELCOME);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
 	@GetMapping(value= "/user/{id}",produces= "application/json")
@@ -139,7 +142,7 @@ public class UserController {
 		this.userServ.delete(this.userServ.getById(idUser));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
-
+	
+	
 
 }

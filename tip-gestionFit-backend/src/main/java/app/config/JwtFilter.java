@@ -26,6 +26,7 @@ public class JwtFilter extends GenericFilterBean {
                          FilterChain filterChain)
             throws IOException, ServletException {
 
+    	System.out.println("Authhhhhhhhhhhhhh");
     	
         Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
         

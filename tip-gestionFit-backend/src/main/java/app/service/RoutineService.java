@@ -26,16 +26,19 @@ public class RoutineService {
 	
 	@Transactional
 	public void save(Routine newRoutine){
+		ArgumentsValidator.validateRoutine(newRoutine);
 		this.routineDAO.save(newRoutine);
 	}
 	
 	@Transactional
 	public void saveExercise(Exercise newExercise){
+		//ArgumentsValidator.validateExercise(newExercise);
 		this.exerciseDAO.save(newExercise);
 	}
 	
 	@Transactional
 	public void update(Routine newRoutine){
+		ArgumentsValidator.validateRoutine(newRoutine);
 		this.routineDAO.update(newRoutine);
 	}
 	

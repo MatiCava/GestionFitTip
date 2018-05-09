@@ -8,16 +8,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import app.persistence.UserDAO;
+
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
+	  @Autowired
+	  private UserDAO userDAO = new UserDAO();
 
     public LoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
@@ -28,7 +34,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(
             HttpServletRequest req, HttpServletResponse res)
             throws AuthenticationException, IOException, ServletException {
-    	System.out.println("#####################LLEGOOOOO##########################");
+//    	System.out.println("#####################LLEGOOOOO##########################");
         // obtenemos el body de la peticion que viene en formato JSON
     	InputStream body = req.getInputStream();   	
 
@@ -38,8 +44,8 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         // finalmente autenticamos
         // spring compara el username/password recibidos
         // contra el que definimos en la clase SecurityConfig
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
+//        System.out.println(user.getEmail());
+//        System.out.println(user.getPassword());
 
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -54,8 +60,11 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-
-        // si la autenticacion fue exitosa  agregamos el token a la respuesta
-        JwtUtil.addAuthentication(res, auth.getName());
+    	System.out.println(auth.getAuthorities().iterator().next().getAuthority());
+    	// si la autenticacion fue exitosa  agregamos el token a la respuesta
+    	
+    	UserDetails user = (UserDetails) auth.getPrincipal();
+    	long id = this.userDAO.getByUsername(user.getUsername()).getId();
+        JwtUtil.addAuthentication(res,user,id);
     }
 }

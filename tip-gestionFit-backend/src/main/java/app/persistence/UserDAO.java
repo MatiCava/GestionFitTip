@@ -67,7 +67,7 @@ public class UserDAO extends GenericDAO<User> {
 		Session session = sessionFactory.openSession();
 		try {
 			Criteria criteria = session.createCriteria(User.class);
-			Criterion criterion = Restrictions.and(Restrictions.eq("role", User_Role.Student),Restrictions.eq("id",idUser));
+			Criterion criterion = Restrictions.and(Restrictions.eq("role", "STUDENT"),Restrictions.eq("id",idUser));
 			result = (User_Student) criteria.add(criterion).uniqueResult();
 		}catch(Exception e) {
 			throw new RuntimeException(e);
