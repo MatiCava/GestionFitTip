@@ -1,5 +1,5 @@
 <ion-content style="margin-top:10px;">
-	<ion-item>
+	<ion-item *ngIf="tieneMed">
 	<ion-label>Grafico de medida:</ion-label>
 	<ion-select [(ngModel)]="selected" (ionChange)="updateGraphic()">
 		<ion-option *ngFor="let nombre of names" [value]="nombre">{{nombre | translate}}</ion-option>

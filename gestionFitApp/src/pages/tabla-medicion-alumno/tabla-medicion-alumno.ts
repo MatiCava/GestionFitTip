@@ -27,6 +27,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
         this.setDates();
         this.defineChartData(0);
         this.createLineChart();
+        if(this._table.measures[0].measures.length >= 1){this.tieneMed=true}
       }
       
     }
@@ -37,6 +38,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
 
   @ViewChild("grafico") lineChart;
 
+  public tieneMed: boolean = false;
   public lineChartEl : any;
   public chartLabels : any    = [];
   public chartValues : any    = [];

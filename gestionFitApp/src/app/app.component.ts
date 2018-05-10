@@ -3,6 +3,8 @@ import { Platform,Nav,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
+import { Globalization } from '@ionic-native/globalization';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -13,10 +15,13 @@ export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
   public isBrowser:boolean = false;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public menuCtrl: MenuController, private translateService: TranslateService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public menuCtrl: MenuController, private translateService: TranslateService,private glob: Globalization) {
     platform.ready().then(() => {
-      this.translateService.setDefaultLang('es');
-      this.translateService.use('es');
+      this.glob.getPreferredLanguage()
+    .then(res => {console.log(res);this.translateService.setDefaultLang(res.value);
+    this.translateService.use(res.value);})
+    .catch(e => console.log(e));
+      
       if(!platform.is("core")){
         statusBar.styleDefault();
         splashScreen.hide();
@@ -30,15 +35,12 @@ export class MyApp implements OnInit{
 
   ngOnInit(){
     if(this.logged()){
-      if(this.isInstructor()){
-        this.rootPage = "alumnos";
-        this.rootPageParams = {id:Number(localStorage.getItem("id"))}
-      }
-      else if(this.isStudent()){
+
+
         this.rootPage = "dashboard";
         this.rootPageParams = {id:Number(localStorage.getItem("id"))}
 
-      }
+      
     }
     else{
       this.rootPage = "login";
@@ -68,16 +70,10 @@ export class MyApp implements OnInit{
   }
 
   logged(){
-    return localStorage.getItem("user_role") != null;
+    return localStorage.getItem("token") != null;
   }
 
-  isStudent(){
-    return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Student";
-  }
-
-  isInstructor(){
-    return localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor";
-  }
+ 
 
   changeLang(lang){
     this.translateService.use(lang);

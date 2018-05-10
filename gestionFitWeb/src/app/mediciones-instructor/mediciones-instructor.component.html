@@ -1,5 +1,5 @@
 <div class="container" style="padding-top: 40px;">
-<div class="table-responsive" style="text-align: center">
+<div class="table-responsive" style="text-align: center" *ngIf="tieneMed">
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -16,4 +16,5 @@
   </table>
 </div>
 <button class="btn btn-primary" (click)="nuevaMedicion()">{{'Nuevo' | translate}}</button>
+<button class="btn btn-secondary" routerLink="/alumnos">{{'Atras' | translate}}</button>
 </div>

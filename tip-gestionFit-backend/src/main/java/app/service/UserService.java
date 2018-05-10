@@ -15,7 +15,6 @@ import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;
 import app.model.User;
-import app.model.User_Role;
 import app.model.User_Student;
 import app.persistence.UserDAO;
 

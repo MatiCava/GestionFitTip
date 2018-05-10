@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import app.model.User;
-import app.model.User_Role;
 import app.model.User_Student;
 
 @Repository

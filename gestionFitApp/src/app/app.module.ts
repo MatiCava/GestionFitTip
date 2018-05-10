@@ -30,6 +30,7 @@ import { LoginProvider } from '../providers/login/login';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InstagramProvider } from '../providers/instagram/instagram';
+import { Globalization } from '@ionic-native/globalization';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,7 +73,8 @@ export function createTranslateLoader(http: HttpClient) {
     RoutineProvider,
     LoginProvider,
     InstagramProvider,
-    Camera
+    Camera,
+    Globalization
   ]
 })
 export class AppModule {}

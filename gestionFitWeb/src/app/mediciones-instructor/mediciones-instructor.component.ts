@@ -16,6 +16,7 @@ export class MedicionesInstructorComponent implements OnInit {
   id: any;
   _table: any;
   nombresMedidas: any = [];
+  tieneMed: boolean = false;
 
   constructor(private translateService: TranslateService, private userServ: AlumnosService, private route: ActivatedRoute, private router: Router, private medidasServ: MedidasService) {
     this._table = {};
@@ -34,9 +35,13 @@ export class MedicionesInstructorComponent implements OnInit {
                                   );
   }
 
+  tieneMediciones(){
+
+  }
+
   getTabla() {
       this.userServ.getTabla(this.id).subscribe(
-        table => {this._table = table; console.log(table);
+        table => {this._table = table; console.log(table);if(this._table.measures[0].measures.length >=1){this.tieneMed = true;};
         this.setDates(); },
         error => {console.log(error); }
       );
