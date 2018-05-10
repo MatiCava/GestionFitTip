@@ -1,8 +1,9 @@
 <div class="container" style="padding-top: 35px;">
   <h1 style="text-align: center;font-family: Poppins, sans-serif;font-weight: 400;"><i class="fas fa-calendar-alt"></i> {{'Rutinas' | translate}}</h1>
   <ul class="list-group">
-    <li class="list-group-item d-flex align-items-sm-end" *ngFor="let rutina of rutinas" style="font-size: 25px;font-family: Poppins, sans-serif;">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let rutina of rutinas" style="font-size: 25px;font-family: Poppins, sans-serif;">
       {{rutina.name}}
+      <span>
       <a [routerLink]="" (click)="infoRoutine(rutina.id)">
           <span class="badge badge-light badge-pill" style="color: #1565C0">
             <i class="fas fa-info pull-right"></i>
@@ -18,6 +19,7 @@
             <i class="fas fa-trash pull-right"></i>
           </span>
       </a>
+    </span>
       </li>
   </ul>
 </div>

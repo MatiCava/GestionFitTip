@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -31,6 +32,7 @@ public class Routine {
 	public Routine_Type type;
 	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderColumn
 	public List<Exercise> exercises = new ArrayList<Exercise>();
 	
 	public Routine() {

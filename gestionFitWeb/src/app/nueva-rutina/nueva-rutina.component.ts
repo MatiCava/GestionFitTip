@@ -23,10 +23,11 @@ export class NuevaRutinaComponent implements OnInit {
 
   exercises:any[];
 	exercisesAlumno:any[] = [];
-	rutinasType=[Routine_Type[4], Routine_Type[3], Routine_Type[2], Routine_Type[1], Routine_Type[0]];
+	rutinasType=[];
   newRoutine;
   isEdit = false;
   isNew = true;
+  tieneEjercicios = false;
 
   constructor(private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"", creationDate:new Date().getTime(), type:"", exercises:[]};
@@ -36,6 +37,7 @@ export class NuevaRutinaComponent implements OnInit {
     this.traerEjercicios();
     this.traerTipos();
   }
+
 
   volverAtras(){
     this.router.navigate(['/alumnos']);
@@ -55,11 +57,6 @@ export class NuevaRutinaComponent implements OnInit {
               )
   }
 
-  guardarEjercicios(){
-  	this.exercisesAlumno = this.exercises.filter(ex => ex.checked == true);
-  	console.log(this.exercisesAlumno);
-  	this.newRoutine.exercises = this.exercisesAlumno;
-  }
 
   validForm(){
     this.newRoutine.type = this.form.controls.type.value;
@@ -70,13 +67,20 @@ export class NuevaRutinaComponent implements OnInit {
     this.validForm();
   	let type = Routine_Type[this.newRoutine.type];
     this.newRoutine.type = type;
-    this.guardarEjercicios();
+    //this.guardarEjercicios();
     console.log(this.newRoutine);
     this.routineServ.saveRoutine(this.newRoutine).subscribe(
   			res => {console.log(res);},
   			error => {console.log(error);}
   			)
   	this.volverAtras();
+  }
+
+  agregarEjercicio(ejercicio){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(ejercicio);
   }
   
   /* guardo html viejo por si no funca 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import app.exception.InvalidModelObjectException;
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Routine;
@@ -19,14 +20,14 @@ public class ArgumentsValidator {
 	public static void isNullOrEmptyString(String... strArr) {
 	    for (String st : strArr) {
 	        if  (st==null || st.isEmpty())
-				throw new IllegalArgumentException("Not a valid string");
+				throw new InvalidModelObjectException("Not a valid string");
 	    }
 	}
 	
 	public static void isNegativeInt(Integer... intArr) {
 	    for (Integer i : intArr) {
 	        if  (i==null || i < 0)
-				throw new IllegalArgumentException("Not a valid int");
+				throw new InvalidModelObjectException("Not a valid int");
 	    }
 	}
 	
@@ -37,7 +38,7 @@ public class ArgumentsValidator {
 		
 		for (String st : strArr) {
 	        if  (!mailValid.isValid(st))
-				throw new IllegalArgumentException("Not a valid mail");
+				throw new InvalidModelObjectException("Not a valid mail");
 
 	    } 
 	}
@@ -52,14 +53,14 @@ public class ArgumentsValidator {
 	public static void isInvalidDescription(String description) {
 		isNullOrEmptyString(description);
 		if(description.length() < 14 || description.length() > 60)
-			throw new IllegalArgumentException("Not a valid description");
+			throw new InvalidModelObjectException("Not a valid description");
 
 	}
 	
 	public static void isInvalidTelephone(String number) {
 		isNullOrEmptyString(number);
 		if( number.length() < 8)
-			throw new IllegalArgumentException("Not a valid telephone");
+			throw new InvalidModelObjectException("Not a valid telephone");
 
 	}
 	
@@ -67,7 +68,7 @@ public class ArgumentsValidator {
 		int greater = date.compareTo(new GregorianCalendar(1900,01,01).getTime());
 		int less = date.compareTo(new GregorianCalendar(2006,01,01).getTime());
 		if(greater < 0 || less >0) 
-			throw new IllegalArgumentException("Not a valid date");
+			throw new InvalidModelObjectException("Not a valid date");
 
 	}
 
@@ -80,7 +81,7 @@ public class ArgumentsValidator {
 		isNegativeInt(user.getAge());
 		isNotAValidMailAddress(user.getMail());
 		if(user.getWeigth() < 30f)
-			throw new IllegalArgumentException("Not a valid weigth");
+			throw new InvalidModelObjectException("Not a valid weigth");
 		
 		
 	}
@@ -103,13 +104,13 @@ public class ArgumentsValidator {
 
 	private static void isInvalidTypeRoutine(Routine_Type type) {
 		if(type == null){
-			throw new IllegalArgumentException("Not a valid type");
+			throw new InvalidModelObjectException("Not a valid type");
 		}
 	}
 
 	private static void isInvalidListExercises(List<Exercise> exercises) {
 		if(exercises.isEmpty()){
-			throw new IllegalArgumentException("Not a valid list of exercises");
+			throw new InvalidModelObjectException("Not a valid list of exercises");
 		}
 	}
 
@@ -121,7 +122,7 @@ public class ArgumentsValidator {
 
 	private static void isInvalidTyperExercise(Exercise_Type type) {
 		if(type == null){
-			throw new IllegalArgumentException("Not a valid type");
+			throw new InvalidModelObjectException("Not a valid type");
 		}
 	}
 

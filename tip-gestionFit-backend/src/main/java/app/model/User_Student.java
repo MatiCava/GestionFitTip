@@ -36,7 +36,6 @@ public class User_Student extends User {
 	private int age;
 	private float weigth;
 	@OneToOne(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
-	//@Fetch(value = FetchMode.SUBSELECT)
 	private MeasuringTable measurements;
 	@ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)

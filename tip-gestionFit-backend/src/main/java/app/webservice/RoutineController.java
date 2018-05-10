@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.exception.NotFoundException;
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Routine;
 import app.model.Routine_Type;
-import app.model.UserNotFoundException;
 import app.service.RoutineService;
 
 @RestController
@@ -57,8 +57,6 @@ public class RoutineController {
 
 	@PostMapping(value = "/routine", produces = "application/json")
 	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) {
-			System.out.println(routine.getType());
-			System.out.println(routine.getExercises());
 			this.routineServ.save(routine);
 			
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -76,7 +74,7 @@ public class RoutineController {
 	public Routine getRoutine(@PathVariable("id") Long idRoutine){
 		Routine routine = this.routineServ.getById(idRoutine);
 		if(routine == null) {
-			throw new UserNotFoundException("Rutina no encontrada");
+			throw new NotFoundException("Rutina no encontrada");
 		}
 		
 		return routine;

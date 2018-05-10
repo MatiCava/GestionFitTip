@@ -16,6 +16,7 @@ export class RutinasInstructorComponent implements OnInit {
   id:any;
 	rutinas: any[];
   rutinaAlumno:any[];
+  tieneRutinas:boolean = false;
   
 
   constructor(private translateService: TranslateService, private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router) { }
@@ -28,13 +29,19 @@ export class RutinasInstructorComponent implements OnInit {
   getId(){
     this.route.paramMap.switchMap((params: ParamMap) => 
                                   params.get('id')).subscribe(
-                                        res => {this.id = res;},
+                                        res => {this.id = res;this.getRutinasAlumno(res);},
                                         error => {console.log(error);},
                                   );
   }
 
+  getRutinasAlumno(id){
+    this.userService.getRutines(id).subscribe(
+      res => {this.rutinaAlumno = res;this.tieneRutinas = this.rutinaAlumno.length >= 1;},
+      error => console.log(error)
+    );
+  }
+
   guardarRutinasAlumno(){
-    this.rutinaAlumno = this.rutinas.filter(ex => ex.checked == true);
     console.log(this.id);
     console.log(this.rutinaAlumno);
   	this.userService.updateRutines(this.id,this.rutinaAlumno).subscribe(
@@ -42,6 +49,13 @@ export class RutinasInstructorComponent implements OnInit {
   			error => {console.log(error);}
         )
     this.volverAtras();
+  }
+
+  agregarRutina(rutina){
+    if(!this.tieneRutinas){
+      this.tieneRutinas=true;
+    }
+    this.rutinaAlumno.push(rutina);
   }
 
   traerRutinas(){

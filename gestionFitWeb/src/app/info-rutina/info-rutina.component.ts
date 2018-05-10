@@ -21,12 +21,11 @@ export class InfoRutinaComponent implements OnInit {
 
   ngOnInit() {
     this.getInfoRutina();
-    console.log(this.rutina);
   }
 
   getInfoRutina(){
     this.routineServ.getRoutine(this.id).subscribe(
-                      result => {this.rutina = result;},
+                      result => {this.rutina = result;console.log(result);},
                       error => {console.log(error);}
                       );
   }

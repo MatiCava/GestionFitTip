@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.exception.NotFoundException;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;
 import app.model.User;
-import app.model.UserNotFoundException;
 import app.model.User_Student;
 import app.service.EmailService;
 import app.service.UserService;
@@ -47,24 +47,6 @@ public class UserController {
 
 	}
 	
-
-	
-/*	@PostMapping(value = "/login", produces = "application/json")
-	public User login(@RequestBody Credential cred) {
-		User user = this.userServ.getByUsername(cred.username);
-		if(user == null) {
-			throw new UserNotFoundException("No exite usuario con ese username");
-		}
-		
-		System.out.println(user.getPassword());
-		System.out.println(cred.password);
-		if(!user.getPassword().equals(cred.password)) {
-			throw new RuntimeException("Password incorrecto");
-		}
-		
-		return user;
-		
-	}*/
 	
 	@GetMapping(value = "/alumnos", produces = "application/json")   
 	public List<User_Student> getAlumnos() {
@@ -102,7 +84,7 @@ public class UserController {
 	public User getUser(@PathVariable("id") Long idUser){
 		User user = this.userServ.getById(idUser);
 		if(user == null) {
-			throw new UserNotFoundException("Usuario no encontrado");
+			throw new NotFoundException("Usuario no encontrado");
 		}
 		
 		return user;
@@ -120,7 +102,7 @@ public class UserController {
 		User user = this.userServ.getById(idUser);
 		System.out.println(user);
 		if(table == null) {
-			throw new UserNotFoundException("Usuario no encontrado");
+			throw new NotFoundException("Usuario no encontrado");
 		}
 		return table;
 	}
