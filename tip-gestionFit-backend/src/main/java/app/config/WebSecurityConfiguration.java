@@ -32,6 +32,8 @@ public class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdap
           public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
               String password = null;
               app.model.User user = userDAO.getByUsername(username);
+              if(user == null){ throw new UsernameNotFoundException("No existe el usuario '"
+                      + username + "'");};
               password = user.getPassword();
               String role = user.getRole();
 

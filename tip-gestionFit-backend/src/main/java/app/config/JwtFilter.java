@@ -19,6 +19,8 @@ import org.springframework.web.filter.GenericFilterBean;
  * para que valide el token.
  */
 public class JwtFilter extends GenericFilterBean {
+	
+	
 
     @Override
     public void doFilter(ServletRequest request,
@@ -26,12 +28,13 @@ public class JwtFilter extends GenericFilterBean {
                          FilterChain filterChain)
             throws IOException, ServletException {
 
-    	System.out.println("Authhhhhhhhhhhhhh");
-    	
-        Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
+    	System.out.println("Authhhhhhhhh " + ((HttpServletRequest)request).getRequestURL().toString());
+    	if(!((HttpServletRequest)request).getRequestURL().toString().contains("error")){        Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
         
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);};
+    	
+
 
         filterChain.doFilter(request,response);
     }

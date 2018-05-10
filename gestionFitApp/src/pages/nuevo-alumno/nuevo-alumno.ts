@@ -49,10 +49,10 @@ export class NuevoAlumnoPage {
       Validators.minLength(8),
       Validators.required    ])),
   observations:new FormControl('',Validators.compose([
-      Validators.minLength(5)
+      Validators.minLength(0)
     ])),
   pathologies: new FormControl('',Validators.compose([
-      Validators.minLength(5)
+      Validators.minLength(0)
     ]))
   })
 

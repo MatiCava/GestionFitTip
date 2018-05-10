@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../app/services/login/login.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoginComponent implements OnInit {
 
-  public credential = {email: '', password: ''};
+  credentials: FormGroup = this.formBuilder.group({
+    email: new FormControl('',Validators.required),
+    password: new FormControl('',Validators.required)
+  });
   public user: any;
+  errorLogin:boolean = false;
 
-  constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router) { }
+  constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
   }
@@ -22,18 +28,14 @@ export class LoginComponent implements OnInit {
   onSubmit() { this.login(); }
 
   login() {
-    this.loginServ.logIn(this.credential).subscribe(
+    this.loginServ.logIn(this.credentials.value).subscribe(
       result => {
         console.log(result);
-        console.log(result.body.token);
-        console.log(result.body.id);
-//        this.user = result;
-//        console.log(this.user);
         localStorage.setItem("token", result.body.token);
         this.routerServ.navigate(['/alumnos']);
       },
       error => {
-        console.log(error);
+        {if(error.status == 401){this.errorLogin=true;};console.log(error)};
       }
       );
   }

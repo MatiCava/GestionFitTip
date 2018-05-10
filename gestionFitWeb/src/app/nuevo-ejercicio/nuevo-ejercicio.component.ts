@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NuevoEjercicioComponent implements OnInit {
 
-  exercisesType=[Exercise_Type[1], Exercise_Type[0], Exercise_Type[3], Exercise_Type[2]];
+  exercisesType=[];
 	newExercise;
 
   constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
