@@ -61,4 +61,17 @@ public class RoutineService {
 	public List<Exercise> getExercises() {
 		return this.exerciseDAO.getAll();
 	}
+	
+	@Transactional
+	public Exercise getExercise(Long id) {
+		return this.exerciseDAO.getById(id);
+	}
+	
+	@Transactional
+	public void updateExercise(Exercise newExercise){
+		//ArgumentsValidator.validateExercise(newExercise);
+		this.exerciseDAO.update(newExercise);
+	}
+	
+	
 }

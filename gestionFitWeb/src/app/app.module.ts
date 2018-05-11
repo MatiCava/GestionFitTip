@@ -24,6 +24,9 @@ import { InfoRutinaComponent } from './info-rutina/info-rutina.component';
 import { EditarRutinaComponent } from './editar-rutina/editar-rutina.component';
 import { MedidasService } from './services/medidas/medidas.service';
 import { EliminarRutinaDialogComponent } from './eliminar-rutina-dialog/eliminar-rutina-dialog.component';
+import { ListaEjerciciosComponent } from './lista-ejercicios/lista-ejercicios.component';
+import { InfoEjercicioComponent } from './info-ejercicio/info-ejercicio.component';
+import { EditarEjercicioComponent } from './editar-ejercicio/editar-ejercicio.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,6 +49,9 @@ const appRoutes: Routes = [
   { path: 'rutinas/nueva', component: NuevaRutinaComponent },
   { path: 'alumno/nuevaRutina/:id', component: RutinasInstructorComponent },
   { path: 'alumno/medicion/nueva/:id', component: NuevaMedicionComponent },
+  { path: 'ejercicios', component: ListaEjerciciosComponent},
+  { path: 'ejercicio/info/:id', component: InfoEjercicioComponent },
+  { path: 'ejercicio/edit/:id', component: EditarEjercicioComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent }
 ];
 
@@ -63,7 +69,10 @@ const appRoutes: Routes = [
     ListaRutinasComponent,
     InfoRutinaComponent,
     EditarRutinaComponent,
-    EliminarRutinaDialogComponent
+    EliminarRutinaDialogComponent,
+    ListaEjerciciosComponent,
+    EditarEjercicioComponent,
+    InfoEjercicioComponent
 
   ],
   imports: [

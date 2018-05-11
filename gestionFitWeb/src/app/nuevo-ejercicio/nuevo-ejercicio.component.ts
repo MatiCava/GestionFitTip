@@ -3,6 +3,7 @@ import { Exercise, Exercise_Type } from './../model/exercise';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-nuevo-ejercicio',
@@ -11,10 +12,26 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NuevoEjercicioComponent implements OnInit {
 
-  exercisesType=[Exercise_Type[1], Exercise_Type[0], Exercise_Type[3], Exercise_Type[2]];
-	newExercise;
+  form:FormGroup = this.formBuilder.group({
+    name: new FormControl('', Validators.compose([
+      Validators.minLength(4),
+      Validators.required
+    ])),
+    type: new FormControl('', Validators.compose([
+      Validators.required
+    ])),
+    description: new FormControl('', Validators.compose([
+      Validators.minLength(14),
+      Validators.required
+    ]))
+  })
 
-  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
+  exercisesType=[];
+  newExercise;
+  isEdit = false;
+  isNew = true;
+
+  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
     this.newExercise = {name:"", description:"", type:""};
   }
 
@@ -31,10 +48,17 @@ export class NuevoEjercicioComponent implements OnInit {
   }
 
   volverAtras(){
-    this.router.navigate(['/alumnos']);
+    this.router.navigate(['/ejercicios']);
   }
-//<input type="text" [(ngModel)]="newExercise.description">
+
+  validForm(){
+    this.newExercise.type = this.form.controls.type.value;
+    this.newExercise.name = this.form.controls.name.value;
+    this.newExercise.description = this.form.controls.description.value;
+  }
+
   guardarEjercicio(){
+    this.validForm();
   	let type = Exercise_Type[this.newExercise.type];
     this.newExercise.type = type;
     console.log(this.newExercise);
@@ -43,6 +67,10 @@ export class NuevoEjercicioComponent implements OnInit {
   			error => {console.log(error);}
   			)
   	this.volverAtras();
+  }
+
+  actualizarEjercicio(){
+    
   }
 
 }

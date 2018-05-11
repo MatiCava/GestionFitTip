@@ -3,6 +3,7 @@ import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-editar-rutina',
@@ -11,28 +12,38 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class EditarRutinaComponent implements OnInit {
 
+  form:FormGroup = this.formBuilder.group({
+    name: new FormControl('', Validators.compose([
+      Validators.minLength(4),
+      Validators.required
+    ])),
+    type: new FormControl('', Validators.compose([
+      Validators.required
+    ])),
+    exercises: new FormControl('', Validators.compose([
+      Validators.required
+    ]))
+  })
+
+
   id:any;
   exercises:any[];
-  rutinasType=[Routine_Type[4], Routine_Type[3], Routine_Type[2], Routine_Type[1], Routine_Type[0]];
+  rutinasType=[];
   newRoutine;
   isNew = false; 
   isEdit = true;
-  
+  tieneEjercicios = false;
 
-  constructor(private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.newRoutine = {};
+    this.newRoutine={};
   }
 
   ngOnInit() {
     this.getRutina();
+    this.traerTipos();
     this.traerEjercicios();
-    this.marcarEjercicios();
     console.log(this.newRoutine.exercises); 
-  }
-
-  marcarEjercicios(){
-
   }
 
   traerEjercicios(){
@@ -42,15 +53,54 @@ export class EditarRutinaComponent implements OnInit {
               )
   }
 
+  traerTipos(){
+    this.routineServ.routineTypes().subscribe(
+      result => {console.log(result);this.rutinasType= result;},
+      error => console.log(error)
+    )
+  }
+
   getRutina(){
     this.routineServ.getRoutine(this.id).subscribe(
-      result => {this.newRoutine = result;},
+      result => {this.asignarValoresAForm(result);},
       error => {console.log(error);}
       );
   }
 
-  actualizarRutina(){
+  asignarValoresAForm(result){
+    this.newRoutine = result;
+    this.form.get('name').setValue(this.newRoutine.name);
+    this.form.get('type').setValue(this.newRoutine.type);
+    this.form.get('exercises').setValue(this.newRoutine.exercises);
+    this.tieneEjercicios = this.newRoutine.exercises != null;
+    console.log(this.newRoutine);
+  }
 
+  asignarValoresDeForm(){
+    this.newRoutine.name = this.form.controls.name.value;
+    this.newRoutine.type = this.form.controls.type.value;
+    this.newRoutine.exercises = this.form.controls.exercises.value;
+  }
+
+  actualizarRutina(){
+    this.asignarValoresDeForm();
+    console.log(this.newRoutine);
+    this.routineServ.updateRoutine(this.id, this.newRoutine).subscribe(
+      res => {console.log(res);},
+      error => {console.log(error);}
+      )
+    this.volverAtras();
+  }
+
+  agregarEjercicio(ejercicio){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(ejercicio);
+  }
+
+  eliminarEjercicio(ejercicio){
+    this.newRoutine.exercises = this.newRoutine.exercises.filter(ex => ex !== ejercicio);
   }
 
   volverAtras(){
