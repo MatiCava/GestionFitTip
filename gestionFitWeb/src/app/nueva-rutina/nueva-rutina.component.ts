@@ -71,7 +71,6 @@ export class NuevaRutinaComponent implements OnInit {
     this.validForm();
   	let type = Routine_Type[this.newRoutine.type];
     this.newRoutine.type = type;
-    //this.guardarEjercicios();
     console.log(this.newRoutine);
     this.routineServ.saveRoutine(this.newRoutine).subscribe(
   			res => {console.log(res);this.volverAtras();},
@@ -88,7 +87,9 @@ export class NuevaRutinaComponent implements OnInit {
   }
 
   eliminarEjercicio(ejercicio){
-    this.newRoutine.exercises = this.newRoutine.exercises.filter(ex => ex !== ejercicio);
+    console.log(ejercicio);
+    console.log(this.newRoutine.exercises.splice(ejercicio, 1));
+    console.log(this.newRoutine.exercises);
   }
   
   /* guardo html viejo por si no funca 

@@ -94,9 +94,15 @@ public class ArgumentsValidator {
 
 		
 	}
+	
+	public static void validateRoutines(List<Routine> list) {
+		for(Routine routine : list) {
+			validateRoutine(routine);
+		}
+	}
 
 	public static void validateRoutine(Routine newRutines) {
-		isInvalidFullName(newRutines.getName());
+		isNullOrEmptyString(newRutines.getName());
 		isInvalidListExercises(newRutines.getExercises());
 		isInvalidTypeRoutine(newRutines.getType());
 	}

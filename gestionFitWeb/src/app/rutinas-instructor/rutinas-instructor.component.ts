@@ -55,6 +55,7 @@ export class RutinasInstructorComponent implements OnInit {
     if(!this.tieneRutinas){
       this.tieneRutinas=true;
     }
+    rutina.id = null;
     this.rutinaAlumno.push(rutina);
   }
 

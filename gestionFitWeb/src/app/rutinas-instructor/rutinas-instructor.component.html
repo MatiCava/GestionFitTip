@@ -6,6 +6,9 @@
       <ul class="list-group" *ngIf="tieneRutinas">
         <li class="list-group-item" *ngFor="let rutinaAl of rutinaAlumno">
           {{rutinaAl.name}}
+          <ul class="list-group">
+            <li *ngFor="let ejercicio of rutinaAl.exercises">{{ejercicio.name}}</li>
+          </ul>
         </li>
         
       </ul>
