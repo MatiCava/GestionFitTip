@@ -31,6 +31,7 @@ export class NuevaRutinaComponent implements OnInit {
   isEdit = false;
   isNew = true;
   tieneEjercicios = false;
+  errorArgumentos = false;
 
   constructor(private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"", creationDate:new Date().getTime(), type:"", exercises:[]};
@@ -43,7 +44,7 @@ export class NuevaRutinaComponent implements OnInit {
 
 
   volverAtras(){
-    this.router.navigate(['/alumnos']);
+    this.router.navigate(['/rutinas']);
   }
 
   traerTipos(){
@@ -73,10 +74,10 @@ export class NuevaRutinaComponent implements OnInit {
     //this.guardarEjercicios();
     console.log(this.newRoutine);
     this.routineServ.saveRoutine(this.newRoutine).subscribe(
-  			res => {console.log(res);},
-  			error => {console.log(error);}
+  			res => {console.log(res);this.volverAtras();},
+  			error => {if(error.status == 406){this.errorArgumentos = true};}
   			)
-  	this.volverAtras();
+  	
   }
 
   agregarEjercicio(ejercicio){

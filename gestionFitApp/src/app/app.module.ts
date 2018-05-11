@@ -7,8 +7,6 @@ import { Camera } from '@ionic-native/camera';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { MyApp } from './app.component';
-import { AlumnosPage } from '../pages/alumnos/alumnos';
-import { AlumnosPageModule } from '../pages/alumnos/alumnos.module';
 import { InfoAlumnoPage } from '../pages/info-alumno/info-alumno';
 import { InfoAlumnoPageModule } from '../pages/info-alumno/info-alumno.module';
 import { InfoRutinaPage } from '../pages/info-rutina/info-rutina';
@@ -46,7 +44,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    AlumnosPageModule,
     InfoAlumnoPageModule,
     InfoRutinaPageModule,
     TranslateModule.forRoot({
@@ -60,7 +57,6 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AlumnosPage,
     InfoAlumnoPage,
     InfoRutinaPage
   ],
