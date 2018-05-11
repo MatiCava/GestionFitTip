@@ -23,7 +23,7 @@
 				
 			</ion-row>
 		</ion-grid>
-			<div style="padding-top: 20px">
+			<div style="padding-top: 20px;padding-bottom: 100px">
 					<h2 *ngIf="terminada()">Rutina finalizada!</h2>
 					<button *ngIf="!enCurso()" ion-button (click)="comenzar()">Comenzar</button>
 					<button *ngIf="enCurso()" ion-button (click)="cancel()">Cancelar</button>

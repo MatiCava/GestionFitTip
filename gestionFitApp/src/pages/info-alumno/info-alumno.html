@@ -10,7 +10,7 @@
 		<p> {{'Edad' | translate}}: {{user.age}} </p>
 	  </ion-col>
 	  <ion-col>
-		<p> {{'Telefono' | translate}}: {{user.telephone.slice(0,4)+"-"+user.telephone.slice(4,8)}}</p>
+		<p> {{'Telefono' | translate}}: {{formatearTelefono(user.telephone)}}</p>
 	  </ion-col>
 	</ion-row>
 	<ion-row>

@@ -1,9 +1,9 @@
 import { Component,ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { IonicPage, NavController, NavParams, AlertController,Slides,Slide } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
 import { User_Student,User_Role } from '../../model/user_student';
 import { Camera,CameraOptions } from '@ionic-native/camera'; 
+import { LoginProvider } from '../../providers/login/login';
 
 @IonicPage(
 	{name:"nuevoAlumno"}
@@ -12,6 +12,7 @@ import { Camera,CameraOptions } from '@ionic-native/camera';
 @Component({
   selector: 'page-nuevo-alumno',
   templateUrl: 'nuevo-alumno.html',
+  providers: [LoginProvider]
 })
 export class NuevoAlumnoPage {
 
@@ -60,10 +61,8 @@ export class NuevoAlumnoPage {
 
   alumno = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
   
-  userProvider: UserProvider;
 
-  constructor(private camera: Camera,private formBuilder: FormBuilder,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceUser: UserProvider) {
-    this.userProvider = serviceUser;
+  constructor(private camera: Camera,private formBuilder: FormBuilder,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider) {
   }
 
   ionViewDidLoad() {
@@ -99,7 +98,7 @@ export class NuevoAlumnoPage {
     this.crearAlumno();
     console.log(this.form.errors);
     console.log(this.form.errors != null || !(this.form.dirty));
-    this.userProvider.addNewUserStudent(this.alumno).subscribe(
+    this.serviceLogin.signup(this.alumno).subscribe(
     () => { 
               let confirmacion = this.alertCtrl.create({
                     title: 'Confirmacion',

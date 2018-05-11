@@ -36,6 +36,15 @@ export class InfoAlumnoPage {
     console.log('ionViewDidLoad InfoAlumnoPage');
   }
 
+  formatearTelefono(tel){
+    if(tel.length == 8){
+      return tel.slice(0,4)+"-"+tel.slice(4,8);
+    }
+    else{
+      return tel.slice(0,2)+" "+tel.slice(2,6)+"-"+tel.slice(6,10);
+    }
+  }
+
   
   sinRutinas(){
     return this.user.routines.length == 0;

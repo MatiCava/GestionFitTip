@@ -72,13 +72,7 @@ public class UserController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/alumno", produces = "application/json")   
-	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
-			this.userServ.saveStudent(user);
 
-			this.emailServ.sendEmailToUser(user, EmailService.WELCOME);
-			return new ResponseEntity<Void>(HttpStatus.CREATED);
-	}
 	
 	@GetMapping(value= "/user/{id}",produces= "application/json")
 	public User getUser(@PathVariable("id") Long idUser){
