@@ -30,7 +30,7 @@ export class NuevaRutinaComponent implements OnInit {
   newRoutine;
   isEdit = false;
   isNew = true;
-  tieneEjercicios = false;
+  tieneEjercicios = false; 
   errorArgumentos = false;
 
   constructor(private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {

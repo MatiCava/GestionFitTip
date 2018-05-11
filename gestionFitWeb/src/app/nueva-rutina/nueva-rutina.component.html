@@ -14,7 +14,12 @@
             <h2>Ejercicios agregados en rutina</h2>
             <div *ngIf="!tieneEjercicios">La rutina no posee ningun ejercicio</div>
             <ul class="list-group" *ngIf="tieneEjercicios">
-                <li class="list-group-item" *ngFor="let ex of newRoutine.exercises; let i = index"> {{ex.name}}  <a [routerLink]="" (click)="eliminarEjercicio(ex)"><i class="fas fa-minus"></i> {{'Eliminar'|translate}}</a></li>
+                <li class="list-group-item" *ngFor="let ex of newRoutine.exercises; let i = index">
+                        <div class="d-flex justify-content-between align-items-center">
+                             {{ex.name}}  <a [routerLink]="" (click)="eliminarEjercicio(i)"><i class="fas fa-minus"></i> {{'Eliminar'|translate}}</a>
+                        </div>
+                            
+                    </li>
             </ul>
         </div>
         <div class="form-group">

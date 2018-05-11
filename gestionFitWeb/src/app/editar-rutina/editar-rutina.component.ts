@@ -33,6 +33,8 @@ export class EditarRutinaComponent implements OnInit {
   isNew = false; 
   isEdit = true;
   tieneEjercicios = false;
+  errorArgumentos = false;
+
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -86,10 +88,10 @@ export class EditarRutinaComponent implements OnInit {
     this.asignarValoresDeForm();
     console.log(this.newRoutine);
     this.routineServ.updateRoutine(this.id, this.newRoutine).subscribe(
-      res => {console.log(res);},
-      error => {console.log(error);}
+      res => {console.log(res);this.volverAtras();},
+      error => {{if(error.status == 406){this.errorArgumentos = true};}}
       )
-    this.volverAtras();
+    
   }
 
   agregarEjercicio(ejercicio){
