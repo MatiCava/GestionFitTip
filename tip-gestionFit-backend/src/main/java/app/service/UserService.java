@@ -47,6 +47,7 @@ public class UserService {
 		ArgumentsValidator.validateStudent(user);
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(user.getPassword()));
+		user.setRole("STUDENT");
 
 		return this.userDAO.save(user);
 	}
