@@ -1,4 +1,5 @@
-<ion-content style="padding-bottom: 50px">
+<ion-content>
+	<div style="min-height: 100px">
 	<img [src]="user.photo" style="max-height: 100px;max-width: 100px;">
 	<ion-grid style="font-family: 'Poppins' , sans-serif">
 	<ion-row>
@@ -23,10 +24,12 @@
 		<p> {{'Patologias' | translate}}: {{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
 	  </ion-col>
 	</ion-row>
-  </ion-grid>
+	</ion-grid>
+</div>
+	<div>
 		<h2>{{'Mis rutinas' | translate}}</h2>
 	<ion-list>
-	  <ion-item *ngFor="let rutina of user.routines">
+	  <ion-item *ngFor="let rutina of user.routines" style="padding-bottom: 100px">
 		{{rutina.name}} 
 		<a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
 	  </ion-item>
@@ -36,4 +39,5 @@
 		</ion-item>
 	  </div>
 	</ion-list>
+</div>
 </ion-content>

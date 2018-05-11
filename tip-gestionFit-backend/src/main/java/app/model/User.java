@@ -1,5 +1,6 @@
 package app.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +14,11 @@ public class User {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
+	@Column(unique=true)
 	private String username;
 	public String password;
 	private String nameAndSurname;
+	@Column(unique=true)
 	private String mail;
 	private String role;
 

@@ -1,20 +1,29 @@
 <ion-content style="margin-top: 30px" padding>
-	<ion-list>
 	
+	<ion-list>
+		<form (ngSubmit)="onSubmit()" [formGroup]="credentials">
 	  <ion-item>
 	    <ion-label fixed>{{'Usuario' | translate}} </ion-label>
-	    <ion-input type="text" [(ngModel)]="credential.email"></ion-input>
+	    <ion-input type="text" formControlName="email" [class.invalid]="credentials.controls['email'].invalid && credentials.controls['email'].dirty"></ion-input>
 	  </ion-item>
 	
 	  <ion-item>
 	    <ion-label fixed>{{'Contraseña' | translate}}</ion-label>
-	    <ion-input type="password" [(ngModel)]="credential.password"></ion-input>
-	  </ion-item>
+	    <ion-input type="password" formControlName="password" [class.invalid]="credentials.controls['email'].invalid && credentials.controls['email'].dirty"></ion-input>
+		</ion-item>
+		<ion-item *ngIf="errorLogin">
+			<div ><p style="font-family: 'Poppins',sans-serif;color: red;font-size: 20px;">Usuario y/o contraseña incorrectos</p></div>
+		</ion-item>
 
 	  <ion-item >
-					<button ion-button (click)="login()" full>{{'Ingresar' | translate}}</button>
-					<button ion-button (click)="signUp()" color="secondary" full>{{'Registrarse' | translate}}</button>	  
-	  </ion-item>
+					<button ion-button type="submit" full>{{'Ingresar' | translate}}</button>
+		</ion-item>
+	</form>
+
+		<ion-item>
+			<button ion-button (click)="signUp()" color="secondary" full>{{'Registrarse' | translate}}</button>	  
+		</ion-item>
+		
 	
 	</ion-list>
 </ion-content>

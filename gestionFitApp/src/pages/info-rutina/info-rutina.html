@@ -10,16 +10,16 @@
 		</ion-item>
 		<ion-grid>
 			<ion-row>
-				<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black">{{'Nombre' | translate}}</ion-col>
-				<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black">{{'Descripcion' | translate}}</ion-col>
-				<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black">{{'Tipo' | translate}}</ion-col>
-				<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black"></ion-col>
+				<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{'Nombre' | translate}}</p></ion-col>
+				<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{'Descripcion' | translate}}</p></ion-col>
+				<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{'Tipo' | translate}}</p></ion-col>
+				<ion-col style="border:0.5px solid black"></ion-col>
 			</ion-row>
 			<ion-row *ngFor="let exercise of rutina.exercises">
-					<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black">{{exercise.name}}</ion-col>
-					<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black">{{exercise.description}}</ion-col>
-					<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black">{{exercise.type | translate}}</ion-col>
-					<ion-col style="text-align: center;font-size: 15px;border:0.5px solid black"><ion-checkbox *ngIf="!isInstructor() && enCurso()" [(ngModel)]="exercise.checked" (click)="checkFinalizo()"></ion-checkbox></ion-col>
+					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.name}}</p></ion-col>
+					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.description}}</p></ion-col>
+					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.type | translate}}</p></ion-col>
+					<ion-col style="border:0.5px solid black"><ion-checkbox *ngIf="!isInstructor() && enCurso()" [(ngModel)]="exercise.checked" (click)="checkFinalizo()"></ion-checkbox></ion-col>
 				
 			</ion-row>
 		</ion-grid>

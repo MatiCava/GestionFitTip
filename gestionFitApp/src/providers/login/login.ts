@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class LoginProvider {
 
-	apiUrl : String="http://localhost:8080/auth/"
+	apiUrl : String="http://192.168.1.38:8080/auth/"
 
   constructor(public http: HttpClient) {
     console.log('Hello LoginProvider Provider');

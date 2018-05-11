@@ -8,16 +8,16 @@
 	<canvas #grafico style="height: 300px"></canvas>
 	<div style="height: 20px"></div>
 
-	<div style="padding-bottom: 30px">
+	<div style="padding-bottom: 200px">
 	
 	<ion-grid *ngIf="table != null" style="height: 700px;">
-		<ion-row>
-			<ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;text-align: center">{{'Medida' | translate}}</p></ion-col>
-			<ion-col class="colValues" *ngFor="let day of dates"><p style="font-size: 15px;text-align: center">{{day | date:'dd/MM/yyyy'}}</p></ion-col>
+		<ion-row >
+			<ion-col class="colNames"><p style="font-size: 12px;font-weight: bold;text-align: center">{{'Medida' | translate}}</p></ion-col>
+			<ion-col class="colValues" *ngFor="let day of dates"><p style="font-size: 12px;text-align: center">{{day | date:'dd/MM/yyyy'}}</p></ion-col>
 		</ion-row>
 		<ion-row *ngFor="let medida of table.measures">
-			<ion-col class="colNames"><p style="font-size: 15px;font-weight: bold;text-align: center">{{medida.name | translate}}</p></ion-col>
-			<ion-col class="colValues" *ngFor="let medicion of medida.measures"><p style="font-size: 15px;text-align: center">{{medicion.measure}}cm {{'Altura' | translate}}: {{medicion.height}}cm</p></ion-col>
+			<ion-col class="colNames"><p style="font-size: 12px;font-weight: bold;text-align: center">{{medida.name | translate}}</p></ion-col>
+			<ion-col class="colValues" *ngFor="let medicion of medida.measures"><p style="font-size: 12px;text-align: center">{{medicion.measure}}cm {{'Altura' | translate}}: {{medicion.height}}cm</p></ion-col>
 		</ion-row>
 	</ion-grid>
 </div>

@@ -18,8 +18,9 @@ export class MyApp implements OnInit{
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public menuCtrl: MenuController, private translateService: TranslateService,private glob: Globalization) {
     platform.ready().then(() => {
       this.glob.getPreferredLanguage()
-    .then(res => {console.log(res);this.translateService.setDefaultLang(res.value);
-    this.translateService.use(res.value);})
+    .then(res => {if(res.value.includes("es")){this.translateService.setDefaultLang("es");
+    this.translateService.use('es')}else{this.translateService.setDefaultLang("en");
+    this.translateService.use('en')};})
     .catch(e => console.log(e));
       
       if(!platform.is("core")){
@@ -54,7 +55,7 @@ export class MyApp implements OnInit{
 
   logout(){
     this.menuCtrl.close().then(()=>
-      {localStorage.removeItem("user_role");
+      {localStorage.removeItem("token");
     localStorage.removeItem("id");
     this.nav.push("login");}
 

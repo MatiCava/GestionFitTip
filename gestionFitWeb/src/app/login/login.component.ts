@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('',Validators.required)
   });
   public user: any;
-  errorLogin:boolean = false;
+  errorLogin = false;
 
   constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router,private formBuilder: FormBuilder) { }
 

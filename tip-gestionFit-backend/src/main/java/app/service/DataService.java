@@ -55,6 +55,22 @@ public class DataService {
 		Measurement med6 = new Measurement(date,70,130);
 		Measurement med7 = new Measurement(date,70,130);
 		
+		Measurement med8 = new Measurement(date,75,130);
+		Measurement med9 = new Measurement(date,68,130);
+		Measurement med10 = new Measurement(date,70,130);
+		Measurement med11 = new Measurement(date,68,130);
+		Measurement med12 = new Measurement(date,70,130);
+		Measurement med13 = new Measurement(date,70,130);
+		Measurement med14 = new Measurement(date,70,130);
+		
+		Measurement med15 = new Measurement(date,72,130);
+		Measurement med16 = new Measurement(date,65,130);
+		Measurement med17 = new Measurement(date,71,130);
+		Measurement med18 = new Measurement(date,65,130);
+		Measurement med19 = new Measurement(date,70,130);
+		Measurement med20 = new Measurement(date,70,130);
+		Measurement med21 = new Measurement(date,70,130);
+		
 		List<Measurement> measures = new ArrayList<Measurement>();
 		measures.add(med1);		
 		measures.add(med2);
@@ -64,9 +80,29 @@ public class DataService {
 		measures.add(med6);
 		measures.add(med7);
 		
+		List<Measurement> measures2 = new ArrayList<Measurement>();
+		measures2.add(med8);		
+		measures2.add(med9);
+		measures2.add(med10);
+		measures2.add(med11);
+		measures2.add(med12);
+		measures2.add(med13);
+		measures2.add(med14);
+		
+		List<Measurement> measures3 = new ArrayList<Measurement>();
+		measures3.add(med15);		
+		measures3.add(med16);
+		measures3.add(med17);
+		measures3.add(med18);
+		measures3.add(med19);
+		measures3.add(med20);
+		measures3.add(med21);
+		
 		
 
 		alu1.addMeasurements(measures);
+		alu1.addMeasurements(measures2);
+		alu1.addMeasurements(measures3);
 		Routine rutina = new Routine("Rutina de fuerza para pegarle como el diego a la merca",Routine_Type.Strength);
 		Routine rutina2 = new Routine("Rutina de fuerza explosiva", Routine_Type.Explosive_Force);
 		Routine rutina3 = new Routine("Rutina de def muscular para tener la tabla de planchar", Routine_Type.Muscular_Definition);
@@ -89,8 +125,9 @@ public class DataService {
 		this.routineDAO.save(rutina4);
 		this.routineDAO.save(rutina5);
 		this.tableDAO.save(alu1.getMeasurements());
-		
-//		alu1.addRoutine(rutina);
+		List<Routine> routines = new ArrayList<Routine>();
+		routines.add(rutina);
+		alu1.addRoutine(routines);
 		this.userDAO.save(alu1);
 		this.userDAO.save(inst1);
 		

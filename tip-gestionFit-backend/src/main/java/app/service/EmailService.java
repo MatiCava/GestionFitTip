@@ -25,8 +25,8 @@ public class EmailService {
 	public void sendEmailToUser(User user,String matter)throws Exception {
 		String text = "";
 		switch(matter){
-			case "¡Bienvenido a GestionFit!" : text = this.welcomeMessage(user);
-			case "Nueva rutina asignada": text = this.newRoutineAssignedMessage(user);
+			case "¡Bienvenido a GestionFit!" : text = this.welcomeMessage(user);System.out.println("BIENVENIDA");break;
+			case "Nueva rutina asignada": text = this.newRoutineAssignedMessage(user);System.out.println("RUTINAA");break;
 		}
         MimeMessage msg = sender.createMimeMessage();
         MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 

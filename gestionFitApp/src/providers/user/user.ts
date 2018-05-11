@@ -8,7 +8,7 @@ import { User_Student } from '../../model/user_student';
 export class UserProvider {
 
 
-  apiUrl : String="http://localhost:8080/api/";
+  apiUrl : String="http://192.168.1.38:8080/api/";
   httpOptions: any;
 
   constructor(public http: HttpClient) {
@@ -22,10 +22,9 @@ export class UserProvider {
   }
 
   addNewUserStudent(newUser): Observable<any>{
-    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
 
  
-  	return this.http.post(this.apiUrl+"alumno", newUser, this.httpOptions);
+  	return this.http.post(this.apiUrl+"alumno", newUser);
   }
 
   getUser(id): Observable<any>{
