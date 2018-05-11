@@ -41,6 +41,11 @@ export class AppComponent implements OnInit{
     this.cerrarSidebar();
     this.routerService.navigate(["/rutinas"]);
   }
+
+  ejercicios(){
+    this.cerrarSidebar();
+    this.routerService.navigate(["/ejercicios"]);
+  }
   
   nuevaRutina(){
     this.cerrarSidebar();

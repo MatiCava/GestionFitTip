@@ -54,6 +54,16 @@ public class RoutineController {
 	public List<Exercise> getExercises(){
 		return this.routineServ.getExercises();
 	}
+	
+	@GetMapping(value= "/exercise/{id}",produces= "application/json")
+	public Exercise getExercise(@PathVariable("id") Long idExercise){
+		Exercise exercise = this.routineServ.getExercise(idExercise);
+		if(exercise == null) {
+			throw new NotFoundException("Ejercicio no encontrado");
+		}
+		
+		return exercise;
+	}
 
 	@PostMapping(value = "/routine", produces = "application/json")
 	public ResponseEntity<Void> createRoutine(@RequestBody Routine routine) {
@@ -89,6 +99,19 @@ public class RoutineController {
 		}
 		routine.id = (idRoutine);
 		this.routineServ.update(routine);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		
+	}
+	
+	@PutMapping(value = "/exercise/{id}",produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Void> updateExercise(@PathVariable("id") Long idExercise,@RequestBody Exercise exercise){
+		Exercise existingExercise = this.routineServ.getExercise(idExercise);
+		if(existingExercise == null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		exercise.id = (idExercise);
+		this.routineServ.updateExercise(exercise);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
 	}

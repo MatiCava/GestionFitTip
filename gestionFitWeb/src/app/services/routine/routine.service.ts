@@ -33,6 +33,11 @@ export class RoutineService {
     return this.http.get(this.apiUrl+"routine/"+id, this.httpOptions);
   }
 
+  getExercise(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+    return this.http.get(this.apiUrl+"exercise/"+id, this.httpOptions);
+  }
+
   deleteRoutine(id):Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
@@ -51,6 +56,17 @@ export class RoutineService {
 
 
     return this.http.post(this.apiUrl+"exercise", exercise, this.httpOptions);
+  }
+
+  updateRoutine(id, routine): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.put(this.apiUrl+"routine/"+id, routine, this.httpOptions);
+  }
+
+  updateExercise(id, exercise): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+    return this.http.put(this.apiUrl+"exercise/"+id, exercise, this.httpOptions);
   }
 
   routineTypes():Observable<any>{

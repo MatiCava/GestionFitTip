@@ -18,6 +18,9 @@ export class NuevaRutinaComponent implements OnInit {
     ])),
     type: new FormControl('', Validators.compose([
       Validators.required
+    ])),
+    exercises: new FormControl('', Validators.compose([
+      Validators.required
     ]))
   })
 
@@ -82,6 +85,10 @@ export class NuevaRutinaComponent implements OnInit {
       this.tieneEjercicios=true;
     }
     this.newRoutine.exercises.push(ejercicio);
+  }
+
+  eliminarEjercicio(ejercicio){
+    this.newRoutine.exercises = this.newRoutine.exercises.filter(ex => ex !== ejercicio);
   }
   
   /* guardo html viejo por si no funca 

@@ -1,28 +1,28 @@
 <div class="container" style="padding-top: 35px;">
-  <ul class="list-group">
-    <li class="list-group-item">
-      <div class="form-group">
-        <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">{{'Nombre ejercicio' | translate}}</h1>
-        <input type="text" class="form-control" [(ngModel)]="newExercise.name">
-      </div>
-    </li>
-    <li class="list-group-item">
-        <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">{{'Tipo ejercicio' | translate}}</h1>
-        <div class="styled-select rounded">
-            <select [(ngModel)]="newExercise.type" class="form-control">
-              <option *ngFor="let typeE of exercisesType" [value]="typeE"> {{typeE | translate}} </option>
-            </select>
-        </div>
-    </li>
-    <li class="list-group-item">
-      <div class="form-group shadow-textarea">
-        <h1 style="text-align: left; font-family: Poppins, sans-serif; font-size:25px">{{'Descripcion ejercicio' | translate}}</h1>
-        <textarea class="form-control z-depth-1" rows="4" placeholder="{{'Escriba algo aqui...' | translate}}"></textarea>
-      </div>
-    </li>
-  </ul>
-  <div class="flex" style="padding-top: 25px;">
-      <button class="btn btn-primary" (click)="guardarEjercicio()"> {{'Guardar' | translate}} </button>
-      <button class="btn btn-secondary" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label class="form-control" for="inputNombre">Ingrese un nombre para el ejercicio</label>
+      <input type="text" class="form-control" id="inputNombre" formControlName="name" placeholder="Nombre">
+    </div>
+    <div class="form-group">
+      <select formControlName="type" class="form-control">
+          <option *ngFor="let typeE of exercisesType" [value]="typeE"> {{typeE | translate}} </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="inputDescription">Ingrese una descripcion para el ejercicio</label>
+      <input type="text" class="form-control" id="inputDescription" formControlName="description" placeholder="Descripcion">
+    </div>
+  </form>
+  <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
+    <button class="btn btn-success" (click)="guardarEjercicio()"> Guardar </button>
+    <button class="btn btn-danger" (click)="volverAtras()"> Cancelar </button>
+  </div>
+  <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
+    <button class="btn btn-success" (click)="actualizarEjercicio()"> Actualizar </button>
+    <button class="btn btn-danger" (click)="volverAtras()"> Cancelar </button>
   </div> 
 </div>
+
+
+
