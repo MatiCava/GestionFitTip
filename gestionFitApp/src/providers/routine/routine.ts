@@ -4,18 +4,12 @@ import { Observable } from "rxjs/Observable";
 import { Routine } from '../../model/routine';
 import { Exercise } from '../../model/exercise'
 
-/*
-  Generated class for the RoutineProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class RoutineProvider {
 
-	//https://gestionfit-backend.herokuapp.com/
-
 	apiUrl : String="http://gestionfit-backend.herokuapp.com/api/"
+//S	apiUrl : String="http://localhost:8080/api/"
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');

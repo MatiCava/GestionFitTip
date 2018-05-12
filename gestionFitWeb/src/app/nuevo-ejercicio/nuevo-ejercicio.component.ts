@@ -32,7 +32,7 @@ export class NuevoEjercicioComponent implements OnInit {
   isNew = true;
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
-    this.newExercise = {name:"", description:"", type:""};
+    this.newExercise = {name:"", description:"", type:"",isTemplate : true};
   }
 
   ngOnInit() {
@@ -63,10 +63,10 @@ export class NuevoEjercicioComponent implements OnInit {
     this.newExercise.type = type;
     console.log(this.newExercise);
     this.routineServ.saveExercise(this.newExercise).subscribe(
-  			res => {console.log(res);},
+  			res => {console.log(res);this.volverAtras();},
   			error => {console.log(error);}
   			)
-  	this.volverAtras();
+  	
   }
 
   actualizarEjercicio(){

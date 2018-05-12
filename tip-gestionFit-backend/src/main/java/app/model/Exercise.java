@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class Exercise {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -14,6 +15,7 @@ public class Exercise {
 	public Exercise_Type type;
 	public String name;
 	public String description;
+	public boolean isTemplate;
 	
 	public Exercise() {
 		
@@ -23,6 +25,7 @@ public class Exercise {
 		this.type = typeE;
 		this.name = nom;
 		this.description = desc;
+		this.isTemplate = true;
 	}
 
 	public Exercise_Type getType() {

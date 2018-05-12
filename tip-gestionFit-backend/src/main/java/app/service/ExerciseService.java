@@ -21,13 +21,13 @@ public class ExerciseService {
 	
 	@Transactional
 	public void save(Exercise newExercise){
-		//ArgumentsValidator.validateExercise(newExercise);
+		ArgumentsValidator.validateExercise(newExercise);
 		this.exerciseDAO.save(newExercise);
 	}
 	
 	@Transactional
 	public void update(Exercise newExercise){
-		//ArgumentsValidator.validateExercise(newExercise);
+		ArgumentsValidator.validateExercise(newExercise);
 		this.exerciseDAO.update(newExercise);
 	}
 	

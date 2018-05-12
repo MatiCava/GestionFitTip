@@ -7,6 +7,7 @@ import { Observable } from "rxjs/Observable";
 export class LoginProvider {
 
 	apiUrl : String="http://gestionfit-backend.herokuapp.com/auth/"
+//	apiUrl : String="http://localhost:8080/auth/"
 
   constructor(public http: HttpClient) {
     console.log('Hello LoginProvider Provider');

@@ -1,6 +1,6 @@
 <ion-content style="margin-top:10px;">
 	<ion-item *ngIf="tieneMed">
-	<ion-label>Grafico de medida:</ion-label>
+	<ion-label>{{'Grafico de medida' | translate}}:</ion-label>
 	<ion-select [(ngModel)]="selected" (ionChange)="updateGraphic()">
 		<ion-option *ngFor="let nombre of names" [value]="nombre">{{nombre | translate}}</ion-option>
 	</ion-select>
@@ -10,7 +10,7 @@
 
 	<div style="padding-bottom: 200px">
 	
-	<ion-grid *ngIf="table != null" style="height: 700px;">
+	<ion-grid *ngIf="table != null && tieneMed" style="height: 700px;">
 		<ion-row >
 			<ion-col class="colNames"><p style="font-size: 12px;font-weight: bold;text-align: center">{{'Medida' | translate}}</p></ion-col>
 			<ion-col class="colValues" *ngFor="let day of dates"><p style="font-size: 12px;text-align: center">{{day | date:'dd/MM/yyyy'}}</p></ion-col>

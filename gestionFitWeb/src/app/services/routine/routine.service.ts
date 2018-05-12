@@ -7,7 +7,8 @@ import { Routine } from '../../model/routine';
 @Injectable()
 export class RoutineService {
 
-  apiUrl : String="http://localhost:8080/api/";
+//  apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  apiUrl: String = "http://localhost:8080/api/";
 
   httpOptions :any ;
 
@@ -21,10 +22,22 @@ export class RoutineService {
   	return this.http.get(this.apiUrl+"routines", this.httpOptions);
   }
 
+  getRutinesTemplates(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+  	return this.http.get(this.apiUrl+"routines/templates", this.httpOptions);
+  }
+
   getExercises(): Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
     return this.http.get(this.apiUrl+"exercises" , this.httpOptions);
+  }
+
+  getExercisesTemplate(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.get(this.apiUrl+"exercises/templates" , this.httpOptions);
   }
 
   getRoutine(id):Observable<any>{
@@ -42,6 +55,12 @@ export class RoutineService {
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
     return this.http.delete(this.apiUrl+"routine/"+id, this.httpOptions);
+  }
+
+  deleteExercise(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.delete(this.apiUrl+"exercise/"+id, this.httpOptions);
   }
 
   saveRoutine(routine):Observable<any>{

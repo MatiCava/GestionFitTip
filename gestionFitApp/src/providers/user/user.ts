@@ -9,6 +9,8 @@ export class UserProvider {
 
 
   apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+ // apiUrl : String="http://localhost:8080/api/";
+
   httpOptions: any;
 
   constructor(public http: HttpClient) {

@@ -38,7 +38,7 @@ public class JwtUtil {
         String token = Jwts.builder()
             .setClaims(claims)
             .setExpiration(new Date(System.currentTimeMillis() + 600000000))
-            .signWith(SignatureAlgorithm.HS512, "I@nAci0")
+            .signWith(SignatureAlgorithm.HS512, "G@sT0n")
             .compact();
 
         System.out.println(token);
@@ -55,10 +55,7 @@ public class JwtUtil {
 
     	
         // obtenemos el token que viene en el encabezado de la peticion
-    	System.out.println(request.getHeader("Authorization"));
         String token = request.getHeader("Authorization").replace("Bearer ", "");
-        System.out.println("TOKEEEEN");
-        System.out.print(token);
 
 
         String url=request.getRequestURL().toString();
@@ -67,17 +64,16 @@ public class JwtUtil {
         	// si hay un token presente entonces lo validamos
 	        if (token != null) {
 	            String user = Jwts.parser()
-	                    .setSigningKey("I@nAci0")
+	                    .setSigningKey("G@sT0n")
 	                    .parseClaimsJws(token) //este metodo es el que valida
 	                    .getBody()
 	                    .getSubject();
 	            
-	            Jws<Claims> jwsClaims = Jwts.parser().setSigningKey("I@nAci0").parseClaimsJws(token);
+	            Jws<Claims> jwsClaims = Jwts.parser().setSigningKey("G@sT0n").parseClaimsJws(token);
 	            List<String> scopes = jwsClaims.getBody().get("scopes", List.class);
 	            List<GrantedAuthority> authorities = scopes.stream()
 	                    .map(authority -> new SimpleGrantedAuthority(authority))
 	                    .collect(Collectors.toList());
-	            System.out.println(user);
 	            if(url.contains("user/byUsername")) {
 	            	if(!url.contains(user)) {
 	            		throw new ExpiredJwtException(null, null, user);
@@ -93,19 +89,6 @@ public class JwtUtil {
         }
         return null;
     }
-    /*
-        RawAccessJwtToken rawAccessToken = (RawAccessJwtToken) authentication.getCredentials();
 
-        Jws<Claims> jwsClaims = rawAccessToken.parseClaims(jwtSettings.getTokenSigningKey());
-        String subject = jwsClaims.getBody().getSubject();
-        List<String> scopes = jwsClaims.getBody().get("scopes", List.class);
-        List<GrantedAuthority> authorities = scopes.stream()
-                .map(authority -> new SimpleGrantedAuthority(authority))
-                .collect(Collectors.toList());
-
-        UserContext context = UserContext.create(subject, authorities);
-
-        return new JwtAuthenticationToken(context, context.getAuthorities());	
-    }*/
 }
 

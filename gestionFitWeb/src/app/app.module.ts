@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -23,10 +22,10 @@ import { ListaRutinasComponent } from './lista-rutinas/lista-rutinas.component';
 import { InfoRutinaComponent } from './info-rutina/info-rutina.component';
 import { EditarRutinaComponent } from './editar-rutina/editar-rutina.component';
 import { MedidasService } from './services/medidas/medidas.service';
-import { EliminarRutinaDialogComponent } from './eliminar-rutina-dialog/eliminar-rutina-dialog.component';
 import { ListaEjerciciosComponent } from './lista-ejercicios/lista-ejercicios.component';
 import { InfoEjercicioComponent } from './info-ejercicio/info-ejercicio.component';
 import { EditarEjercicioComponent } from './editar-ejercicio/editar-ejercicio.component';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,7 +68,6 @@ const appRoutes: Routes = [
     ListaRutinasComponent,
     InfoRutinaComponent,
     EditarRutinaComponent,
-    EliminarRutinaDialogComponent,
     ListaEjerciciosComponent,
     EditarEjercicioComponent,
     InfoEjercicioComponent
@@ -79,7 +77,6 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    MatDialogModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
@@ -92,9 +89,10 @@ const appRoutes: Routes = [
       }
     }),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
-  entryComponents: [EliminarRutinaDialogComponent],
+  entryComponents: [],
   exports: [RouterModule],
   providers: [LoginService, AlumnosService, RoutineService,MedidasService],
   bootstrap: [AppComponent]

@@ -28,7 +28,6 @@ public class DataService {
 	ExerciseDAO exerDAO = new ExerciseDAO();
 	MeasuringTableDAO tableDAO = new MeasuringTableDAO();
 	MeasureDAO measureDAO = new MeasureDAO();
-//	MeasurementDAO measurementDAO = new MeasurementDAO();
 	
 	public void createInitialData() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -103,11 +102,20 @@ public class DataService {
 		alu1.addMeasurements(measures);
 		alu1.addMeasurements(measures2);
 		alu1.addMeasurements(measures3);
-		Routine rutina = new Routine("Rutina de fuerza para pegarle como el diego a la merca",Routine_Type.Strength);
+		Routine rutina = new Routine("Rutina de fuerza para brazos",Routine_Type.Strength);
 		Routine rutina2 = new Routine("Rutina de fuerza explosiva", Routine_Type.Explosive_Force);
-		Routine rutina3 = new Routine("Rutina de def muscular para tener la tabla de planchar", Routine_Type.Muscular_Definition);
-		Routine rutina4 = new Routine("Rutina de resistencia para aguantar los pases de cocucha como cesar", Routine_Type.Resistance);
-		Routine rutina5 = new Routine("Rutina de fuerza y resistencia especifica para aguantar porros nevaditos", Routine_Type.Strength_Resistance);
+		Routine rutina3 = new Routine("Rutina de def muscular casi sin peso", Routine_Type.Muscular_Definition);
+		Routine rutina4 = new Routine("Rutina de resistencia casi todo aerobico", Routine_Type.Resistance);
+		Routine rutina5 = new Routine("Rutina de fuerza y resistencia mezcla balanceado", Routine_Type.Strength_Resistance);
+		ex4.id=null;
+		ex4.isTemplate = false;
+		ex1.id=null;
+		ex1.isTemplate = false;
+		ex2.id=null;
+		ex2.isTemplate = false;
+		ex3.id=null;
+		ex3.isTemplate = false;
+
 		rutina.addExercise(ex4);
 		rutina.addExercise(ex1);
 		rutina.addExercise(ex2);
@@ -126,6 +134,8 @@ public class DataService {
 		this.routineDAO.save(rutina5);
 		this.tableDAO.save(alu1.getMeasurements());
 		List<Routine> routines = new ArrayList<Routine>();
+		rutina.id = null;
+		rutina.isTemplate = false;
 		routines.add(rutina);
 		alu1.addRoutine(routines);
 		this.userDAO.save(alu1);

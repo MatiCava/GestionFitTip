@@ -10,16 +10,17 @@ import { Router } from '@angular/router';
 })
 export class ListaEjerciciosComponent implements OnInit {
 
-  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) { }
-
   exercises:any[];
+  ejercicioSeleccionado:any = {};
+
+  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) { }
 
   ngOnInit() {
     this.traerEjercicios();
   }
 
   traerEjercicios(){
-    this.routineServ.getExercises().subscribe(
+    this.routineServ.getExercisesTemplate().subscribe(
       result => {this.exercises = result;},
       error => {console.log(error);},
       )
@@ -33,7 +34,16 @@ export class ListaEjerciciosComponent implements OnInit {
     this.router.navigate(['/ejercicio/edit', idE]);
   }
 
-  openDeleteExerciseDialog(idE){
-
+  seleccionar(ex){
+    this.ejercicioSeleccionado = ex;
   }
+
+  eliminarEjercicio(){
+    this.routineServ.deleteExercise(this.ejercicioSeleccionado.id).subscribe(
+      result => {console.log(result);},
+      error => {console.log(error);}
+    );
+    this.ejercicioSeleccionado = {};
+  }
+
 }

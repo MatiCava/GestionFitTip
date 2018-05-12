@@ -38,6 +38,12 @@ public class RoutineController {
 
 	}
 	
+	@GetMapping(value = "/routines/templates", produces = "application/json")   
+	public List<Routine> getRoutinesTemplates() {
+		return this.routineServ.getAllTemplates();
+
+	}
+	
 	@GetMapping(value = "/routines/types", produces = "application/json")   
 	public Routine_Type[] getRoutinesTypes() {
 		return Routine_Type.values();
@@ -53,6 +59,11 @@ public class RoutineController {
 	@GetMapping(value = "/exercises", produces = "application/json")   
 	public List<Exercise> getExercises(){
 		return this.routineServ.getExercises();
+	}
+	
+	@GetMapping(value = "/exercises/templates", produces = "application/json")   
+	public List<Exercise> getExercisesTemplates(){
+		return this.routineServ.getExercisesTemplates();
 	}
 	
 	@GetMapping(value= "/exercise/{id}",produces= "application/json")
@@ -123,6 +134,11 @@ public class RoutineController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-
+	@DeleteMapping(value = "/exercise/{id}", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Void> deleteExercise(@PathVariable("id") Long idExercise){
+		this.routineServ.deleteExercise(this.routineServ.getExercise(idExercise));
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 }

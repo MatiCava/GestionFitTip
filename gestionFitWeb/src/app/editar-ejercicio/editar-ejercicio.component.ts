@@ -72,10 +72,10 @@ export class EditarEjercicioComponent implements OnInit {
   actualizarEjercicio(){
     this.asignarValoresDeForm();
     this.routineServ.updateExercise(this.id, this.newExercise).subscribe(
-      res => {console.log(res);},
+      res => {console.log(res);this.volverAtras();},
       error => {console.log(error);}
       )
-    this.volverAtras();
+    
   }
 
   volverAtras(){

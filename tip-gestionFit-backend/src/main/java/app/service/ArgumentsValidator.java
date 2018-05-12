@@ -121,7 +121,7 @@ public class ArgumentsValidator {
 	}
 
 	public static void validateExercise(Exercise newExercise) {
-		isInvalidFullName(newExercise.getName());
+		isNullOrEmptyString(newExercise.getName());
 		isInvalidTyperExercise(newExercise.getType());
 		isInvalidDescription(newExercise.getDescription());
 	}

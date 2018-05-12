@@ -32,7 +32,7 @@ public class RoutineService {
 	
 	@Transactional
 	public void saveExercise(Exercise newExercise){
-		//ArgumentsValidator.validateExercise(newExercise);
+		ArgumentsValidator.validateExercise(newExercise);
 		this.exerciseDAO.save(newExercise);
 	}
 	
@@ -56,6 +56,11 @@ public class RoutineService {
 	public List<Routine> getAll(){
 		return this.routineDAO.getAll();
 	}
+	
+	@Transactional
+	public List<Routine> getAllTemplates(){
+		return this.routineDAO.getAllTemplates();
+	}
 
 	@Transactional
 	public List<Exercise> getExercises() {
@@ -69,9 +74,19 @@ public class RoutineService {
 	
 	@Transactional
 	public void updateExercise(Exercise newExercise){
-		//ArgumentsValidator.validateExercise(newExercise);
+		ArgumentsValidator.validateExercise(newExercise);
 		this.exerciseDAO.update(newExercise);
 	}
+
+	@Transactional
+	public List<Exercise> getExercisesTemplates() {
+		return this.exerciseDAO.getAllTemplates();
+
+	}
 	
+	@Transactional
+	public void deleteExercise(Exercise exercise){
+		this.exerciseDAO.delete(exercise);
+	}
 	
 }

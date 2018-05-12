@@ -19,7 +19,6 @@ export class AlumnosComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.cerrarSidebar();
     this.getAlumnos();
 
   }

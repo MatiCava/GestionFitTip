@@ -4,7 +4,9 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class LoginService {
+
   apiUrl: String = "http://localhost:8080/";
+//  apiUrl: String = "http://gestionfit-backend.herokuapp.com/";
 
   constructor(public http: HttpClient) {
     console.log('Hello LoginProvider Provider');

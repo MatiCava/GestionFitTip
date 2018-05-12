@@ -26,11 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.antMatchers("/").permitAll()
         	.antMatchers("/auth/signup").permitAll()
         	.antMatchers("/api/alumnos","/api/routines","/api/exercises").hasAuthority("ROLE_INSTRUCTOR")
-//        	.antMatchers("/auth/login").permitAll() //permitimos el acceso a /login a cualquiera
             .antMatchers("/favicon.ico").permitAll() 
             .antMatchers("/css/**").permitAll().antMatchers("/error").permitAll()
             .antMatchers("/bower_components/**").permitAll()
-            //.anyRequest().hasAnyAuthority("ROLE_INSTRUCTOR","ROLE_STUDENT")
             .anyRequest().fullyAuthenticated()//cualquier otra peticion requiere autenticacion
             .and().formLogin().loginPage("/auth/login").failureUrl("/auth/login?error").permitAll().and()
             // Las peticiones /login pasan previamente por este filtro

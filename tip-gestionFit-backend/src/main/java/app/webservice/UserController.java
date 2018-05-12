@@ -1,6 +1,5 @@
 package app.webservice;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,14 +56,12 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Void> newMeasurements(@PathVariable("id") Long idUser,@RequestBody MeasurementsAdapter newMeasurements){
 		this.userServ.newMeasurement(idUser, newMeasurements);
-		System.out.println(new Date(newMeasurements.day));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/user/{id}/nuevasRutinas",produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Void> newRutines(@PathVariable("id") Long idUser,@RequestBody List<Routine> newRoutines) throws Exception{
-		//System.out.println(newRoutines.type);
 		this.userServ.newRutines(idUser, newRoutines);
 
 		this.emailServ.sendEmailToUser(this.userServ.getById(idUser),EmailService.ROUTINE);
@@ -93,8 +89,6 @@ public class UserController {
 	@GetMapping(value="/user/{id}/table",produces= "application/json")
 	public MeasuringTable getTable(@PathVariable("id") Long idUser) {
 		MeasuringTable table = this.userServ.getStudentTable(idUser);
-		User user = this.userServ.getById(idUser);
-		System.out.println(user);
 		if(table == null) {
 			throw new NotFoundException("Usuario no encontrado");
 		}

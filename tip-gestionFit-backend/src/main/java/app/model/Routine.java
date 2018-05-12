@@ -17,6 +17,7 @@ import javax.persistence.OrderColumn;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -25,12 +26,13 @@ public class Routine {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	public String name;
+	public boolean isTemplate;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date creationDate;
 	@Enumerated
 	public Routine_Type type;
-	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderColumn
 	public List<Exercise> exercises = new ArrayList<Exercise>();
@@ -44,6 +46,7 @@ public class Routine {
 		this.creationDate = new Date();
 		this.type = typeR;
 		this.exercises = new ArrayList<Exercise>();
+		this.isTemplate = true;
 	}
 	
 	
