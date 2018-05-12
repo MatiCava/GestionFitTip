@@ -34,18 +34,13 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(
             HttpServletRequest req, HttpServletResponse res)
             throws AuthenticationException, IOException, ServletException {
-//    	System.out.println("#####################LLEGOOOOO##########################");
         // obtenemos el body de la peticion que viene en formato JSON
     	InputStream body = req.getInputStream();   	
 
         // mapeamos con la clase Credentials para tener ahi los datos
         Credentials user = new ObjectMapper().readValue(body, Credentials.class);
 
-        // finalmente autenticamos
-        // spring compara el username/password recibidos
-        // contra el que definimos en la clase SecurityConfig
-//        System.out.println(user.getEmail());
-//        System.out.println(user.getPassword());
+
 
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -60,7 +55,6 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-    	System.out.println(auth.getAuthorities().iterator().next().getAuthority());
     	// si la autenticacion fue exitosa  agregamos el token a la respuesta
     	
     	UserDetails user = (UserDetails) auth.getPrincipal();

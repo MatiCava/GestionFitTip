@@ -53,9 +53,6 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private userServ: UserProvider, private translate: TranslateService) {
     
-    if(this.isInstructor()){
-      this.id = this.navParams.get("id");   
-    }
   }
 
   ngOnInit(){
@@ -67,17 +64,13 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes:SimpleChanges){
-    if(changes['table']){
-      console.log(this.table);
-    }
+ 
   }
 
   ionViewDidLoad() {
   }
 
-  isInstructor(){
-  	return ( localStorage.getItem("user_role") != null && localStorage.getItem("user_role") == "Instructor" );
-  }
+
 
   getTabla(){
   	this.userServ.getTabla(this.id).subscribe(

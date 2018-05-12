@@ -27,12 +27,9 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
-//	@Autowired
-//	private MeasuringTableDAO tableDAO;
-//	
+
 	public UserService(){
 		this.userDAO = new UserDAO();
-//		this.tableDAO = new MeasuringTableDAO();
 	}
 	
 	@Transactional

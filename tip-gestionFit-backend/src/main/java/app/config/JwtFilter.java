@@ -28,8 +28,6 @@ public class JwtFilter extends GenericFilterBean {
                          FilterChain filterChain)
             throws IOException, ServletException {
 
-    	System.out.println("Authhhhhhhhh " + ((HttpServletRequest)request).getRequestURL().toString());
-    	System.out.println(!((HttpServletRequest)request).getRequestURL().toString().contains("error") &&!((HttpServletRequest)request).getRequestURL().toString().contains("/auth/signup"));
     	if(!((HttpServletRequest)request).getRequestURL().toString().contains("error") && !((HttpServletRequest)request).getRequestURL().toString().contains("/auth/signup") ){        Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
         
 
