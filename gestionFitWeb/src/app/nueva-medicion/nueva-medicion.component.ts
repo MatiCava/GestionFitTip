@@ -47,7 +47,6 @@ export class NuevaMedicionComponent implements OnInit {
 
   getCantMedidas(){
     this.nombresMedidas = this.medidasServ.getMedidas();
-    console.log(this.medidasServ.getMedidas()) ;
 
   }
 	
@@ -77,14 +76,13 @@ export class NuevaMedicionComponent implements OnInit {
 			this.mediciones.push({day:null,measure:this.formMeasures.get(i+"").value,height:this.formHeight.get(i+"").value});
 		
 		}
-		console.log(this.mediciones);
 	}
 
   guardar(){
 		this.setValores();
 
   	this.userServ.updateTable(this.id,{day:new Date().getTime(),measures:this.mediciones}).subscribe(
-  		res => {console.log(res);this.router.navigate(["/alumno/mediciones",this.id]);},
+  		res => {this.router.navigate(["/alumno/mediciones",this.id]);},
   		error => {console.log(error);}
   		);
 	}

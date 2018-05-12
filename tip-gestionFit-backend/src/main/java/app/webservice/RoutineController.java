@@ -134,6 +134,11 @@ public class RoutineController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-
+	@DeleteMapping(value = "/exercise/{id}", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Void> deleteExercise(@PathVariable("id") Long idExercise){
+		this.routineServ.deleteExercise(this.routineServ.getExercise(idExercise));
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 }

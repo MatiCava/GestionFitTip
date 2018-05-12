@@ -19,7 +19,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    //$('#sidebar, #content').toggleClass('active');
     if (!this.isLogged()) {
       this.routerService.navigate(["/login"]);
     }

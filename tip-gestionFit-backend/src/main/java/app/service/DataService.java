@@ -116,6 +116,7 @@ public class DataService {
 		ex2.isTemplate = false;
 		ex3.id=null;
 		ex3.isTemplate = false;
+
 		rutina.addExercise(ex4);
 		rutina.addExercise(ex1);
 		rutina.addExercise(ex2);

@@ -84,5 +84,9 @@ public class RoutineService {
 
 	}
 	
+	@Transactional
+	public void deleteExercise(Exercise exercise){
+		this.exerciseDAO.delete(exercise);
+	}
 	
 }

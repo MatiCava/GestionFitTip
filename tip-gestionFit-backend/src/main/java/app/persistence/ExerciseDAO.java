@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import app.model.Exercise;
-import app.model.Routine;
 
 @Repository
 public class ExerciseDAO extends GenericDAO<Exercise>{
@@ -26,7 +25,7 @@ public class ExerciseDAO extends GenericDAO<Exercise>{
 
 		try {
 		@SuppressWarnings("deprecation")
-		Criteria criteria = session.createCriteria(Routine.class);
+		Criteria criteria = session.createCriteria(Exercise.class);
 		criteria.setMaxResults(50);
 		Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("isTemplate",true));
 		result = (List<Exercise>) criteria.add(criterion).list();
@@ -53,7 +52,7 @@ public class ExerciseDAO extends GenericDAO<Exercise>{
 
 		try {
 		@SuppressWarnings("deprecation")
-		Criteria criteria = session.createCriteria(Routine.class);
+		Criteria criteria = session.createCriteria(Exercise.class);
 		criteria.setMaxResults(50);
 		Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("isTemplate",false));
 

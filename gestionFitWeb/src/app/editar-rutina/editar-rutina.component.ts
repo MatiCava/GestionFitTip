@@ -104,9 +104,7 @@ export class EditarRutinaComponent implements OnInit {
   }
 
   eliminarEjercicio(ejercicio){
-    console.log(ejercicio);
-    console.log(this.newRoutine.exercises.splice(ejercicio, 1));
-    console.log(this.newRoutine.exercises);
+    this.newRoutine.exercises.splice(ejercicio, 1);
   }
 
   volverAtras(){
