@@ -53,13 +53,21 @@
   "Completar fecha de nacimiento": "Complete birthday",
   "Debe ser un telefono valido": "It has to be a valid telephone",
   "Debe ser un peso valido": "It has to be a valid weight",
-  "Debe ser un peso valido": "It has to be a valid observation",
+  "Debe ser una observacion valida": "It has to be a valid observation",
   "Debe ser una patologia valida": "It has to be valid pathology",
   "Inicio": "Home",
   "Alumnos": "Students",
   "Cerrar": "Close",
   "Español": "Spanish",
-  "Ingles": "English"
+  "Ingles": "English",
+  "Mi perfil": "My profile",
+  "Comenzar": "Start",
+  "Cancelar": "Cancel",
+  "Rutina finalizada": "Routine finished",
+  "Estas por crear un nuevo usuario en GestionFit": "You are about to create a new user in GestionFit",
+  "Para comenzar tomate una foto": "Take a picture of yourself",
+  "Grafico de medida": "Measurement's graphic"
+  
 
 
 }
