@@ -44,6 +44,12 @@ export class RoutineService {
     return this.http.delete(this.apiUrl+"routine/"+id, this.httpOptions);
   }
 
+  deleteExercise(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+    return this.http.delete(this.apiUrl+"exercise/"+id, this.httpOptions);
+  }
+
   saveRoutine(routine):Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 
