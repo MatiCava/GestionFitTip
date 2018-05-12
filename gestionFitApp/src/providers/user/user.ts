@@ -8,7 +8,7 @@ import { User_Student } from '../../model/user_student';
 export class UserProvider {
 
 
-  apiUrl : String="http://192.168.1.38:8080/api/";
+  apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
   httpOptions: any;
 
   constructor(public http: HttpClient) {
@@ -21,11 +21,7 @@ export class UserProvider {
   	return this.http.get<User_Student[]>(this.apiUrl+"alumnos/");
   }
 
-  addNewUserStudent(newUser): Observable<any>{
 
- 
-  	return this.http.post(this.apiUrl+"alumno", newUser);
-  }
 
   getUser(id): Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
