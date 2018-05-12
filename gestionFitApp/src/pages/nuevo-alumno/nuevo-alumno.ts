@@ -80,7 +80,7 @@ export class NuevoAlumnoPage {
   volverAtras(){
     this.navCtrl.push('login');
   }
-
+//refactor a simple form controls value
   crearAlumno(){
     this.alumno.username = this.form.controls['username'].value;
     this.alumno.password = this.form.controls['password'].value;
