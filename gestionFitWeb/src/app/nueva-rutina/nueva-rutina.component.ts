@@ -32,9 +32,10 @@ export class NuevaRutinaComponent implements OnInit {
   isNew = true;
   tieneEjercicios = false; 
   errorArgumentos = false;
+  isTemplate = true;
 
   constructor(private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
-    this.newRoutine = {name:"", creationDate:new Date().getTime(), type:"", exercises:[]};
+    this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
   }
 
   ngOnInit() {
@@ -69,8 +70,9 @@ export class NuevaRutinaComponent implements OnInit {
 
   guardarRutina(){
     this.validForm();
-  	let type = Routine_Type[this.newRoutine.type];
-    this.newRoutine.type = type;
+  	//let type = Routine_Type[this.newRoutine.type];
+    //this.newRoutine.type = type;
+    this.newRoutine.isTemplate = this.isTemplate;
     console.log(this.newRoutine);
     this.routineServ.saveRoutine(this.newRoutine).subscribe(
   			res => {console.log(res);this.volverAtras();},

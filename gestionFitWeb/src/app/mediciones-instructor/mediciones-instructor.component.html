@@ -15,6 +15,7 @@
     </tbody>
   </table>
 </div>
+<div *ngIf="!tieneMed"><p style="font-size: 18px">El usuario no posee mediciones todavia</p></div>
 <button class="btn btn-primary" (click)="nuevaMedicion()">{{'Nuevo' | translate}}</button>
 <button class="btn btn-secondary" routerLink="/alumnos">{{'Atras' | translate}}</button>
 </div>

@@ -21,7 +21,7 @@ export class ListaRutinasComponent implements OnInit {
   }
 
   traerRutinas(){
-  	this.routineServ.getRutines().subscribe(
+  	this.routineServ.getRutinesTemplates().subscribe(
   						result => {this.rutinas = result;},
   						error => {console.log(error);},
   						)

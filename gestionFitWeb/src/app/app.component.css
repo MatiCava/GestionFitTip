@@ -11,6 +11,26 @@ p {
   color: #999;
 }
 
+li {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+ul li p {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+div {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.list-group-item{
+  font-family: 'Poppins', sans-serif;
+
+}
+
 button{
   font-family: 'Poppins', sans-serif;
 }

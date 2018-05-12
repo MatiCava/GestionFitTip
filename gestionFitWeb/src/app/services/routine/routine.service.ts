@@ -21,6 +21,12 @@ export class RoutineService {
   	return this.http.get(this.apiUrl+"routines", this.httpOptions);
   }
 
+  getRutinesTemplates(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
+
+  	return this.http.get(this.apiUrl+"routines/templates", this.httpOptions);
+  }
+
   getExercises(): Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})}
 

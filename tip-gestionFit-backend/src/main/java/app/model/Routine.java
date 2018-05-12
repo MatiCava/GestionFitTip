@@ -25,6 +25,7 @@ public class Routine {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	public String name;
+	public boolean isTemplate;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date creationDate;
@@ -44,6 +45,7 @@ public class Routine {
 		this.creationDate = new Date();
 		this.type = typeR;
 		this.exercises = new ArrayList<Exercise>();
+		this.isTemplate = true;
 	}
 	
 	

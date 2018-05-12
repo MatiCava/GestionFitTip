@@ -56,6 +56,11 @@ public class RoutineService {
 	public List<Routine> getAll(){
 		return this.routineDAO.getAll();
 	}
+	
+	@Transactional
+	public List<Routine> getAllTemplates(){
+		return this.routineDAO.getAllTemplates();
+	}
 
 	@Transactional
 	public List<Exercise> getExercises() {

@@ -56,11 +56,12 @@ export class RutinasInstructorComponent implements OnInit {
       this.tieneRutinas=true;
     }
     rutina.id = null;
+    rutina.isTemplate = false;
     this.rutinaAlumno.push(rutina);
   }
 
   traerRutinas(){
-  	this.routineProvider.getRutines().subscribe(
+  	this.routineProvider.getRutinesTemplates().subscribe(
   						result => {this.rutinas = result;},
   						error => {console.log(error);},
   						)
