@@ -69,5 +69,18 @@
   "Tipo ejercicio": "Exercise type",
   "Descripcion ejercicio": "Exercise description",
   "Asignar una rutina": "Assign a routine",
-  "Escriba algo aqui...": "Write something here..."
+  "Escriba algo aqui...": "Write something here...",
+  "Usuario y/o contraseña incorrectos": "Wrong user or password",
+  "Ingrese un nombre para la rutina": "Enter a name for the routine",
+  "Ejercicios agregados en rutina": "Exercises already added to this routine",
+  "La rutina no posee ningun ejercicio": "It doesn't has any exercises",
+  "Error al guardar la rutina. Compruebe que los datos sean correctos": "Error saving routine. Check if all the fields are right",
+  "Confirmacion": "Confirmation",
+  "Esta seguro que desea eliminar la rutina": "Are you sure you want to delete this routine",
+  "Eliminar": "Delete",
+  "Ingrese un nombre para el ejercicio": "Enter a name for the exercise",
+  "Ingrese una descripcion para el ejercicio": "Enter a description for the exercise",
+  "Actualizar": "Update",
+  "Esta seguro que desea eliminar el ejercicio": "Are you sure you want to delete this exercise"
+
 }

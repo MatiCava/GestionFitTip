@@ -1,8 +1,8 @@
 <div class="container" style="padding-top: 35px;">
     <form [formGroup]="form">
         <div class="form-group">
-            <label class="form-control" for="inputNombre">Ingrese un nombre para la rutina</label>
-            <input type="text" class="form-control" id="inputNombre" formControlName="name" placeholder="Nombre">
+            <label class="form-control" for="inputNombre">{{'Ingrese un nombre para la rutina' | translate}}</label>
+            <input type="text" class="form-control" id="inputNombre" formControlName="name" placeholder="{{'Nombre' | translate}}">
         </div>
         <div class="form-group">
             <select formControlName="type" class="form-control">
@@ -11,8 +11,8 @@
         </div>
     </form>
         <div class="form-group" >
-            <h2>Ejercicios agregados en rutina</h2>
-            <div *ngIf="!tieneEjercicios">La rutina no posee ningun ejercicio</div>
+            <h2>{{'Ejercicios agregados en rutina' | translate}}</h2>
+            <div *ngIf="!tieneEjercicios">{{'La rutina no posee ningun ejercicio' | translate}}</div>
             <ul class="list-group" *ngIf="tieneEjercicios">
                 <li class="list-group-item" *ngFor="let ex of newRoutine.exercises; let i = index">
                         <div class="d-flex justify-content-between align-items-center">
@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div class="form-group">
-            <h2>Ejercicios</h2>
+            <h2>{{'Ejercicios' | translate}}</h2>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let exercise of exercises">
                     <div class="d-flex justify-content-between align-items-center">{{exercise.name}}<span><a [routerLink]="" (click)="agregarEjercicio(exercise)"><i class="fas fa-plus"></i> {{'Agregar'|translate}}</a></span></div>
@@ -32,15 +32,15 @@
             </ul>
         </div>
 
-        <div class="alert alert-danger" role="alert" style="font-family: 'Poppins',sans-serif;font-size: 20px" *ngIf="errorArgumentos" >Error al guardar la rutina. Compruebe que los datos sean correctos</div>
+        <div class="alert alert-danger" role="alert" style="font-family: 'Poppins',sans-serif;font-size: 20px" *ngIf="errorArgumentos" >{{'Error al guardar la rutina. Compruebe que los datos sean correctos' | translate}}</div>
 
         <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
-            <button class="btn btn-success" (click)="guardarRutina()"> Guardar </button>
-            <button class="btn btn-danger" (click)="volverAtras()"> Cancelar </button>
+            <button class="btn btn-success" (click)="guardarRutina()"> {{'Guardar' | translate}} </button>
+            <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
         </div>
         <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
-              <button class="btn btn-success" (click)="actualizarRutina()"> Actualizar </button>
-              <button class="btn btn-danger" (click)="volverAtras()"> Cancelar </button>
+              <button class="btn btn-success" (click)="actualizarRutina()"> {{'Actualizar' | translate}} </button>
+              <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
           </div> 
     
 </div>

@@ -3,6 +3,7 @@ import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nueva-rutina',
@@ -34,7 +35,7 @@ export class NuevaRutinaComponent implements OnInit {
   errorArgumentos = false;
   isTemplate = true;
 
-  constructor(private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
+  constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
   }
 
