@@ -96,8 +96,7 @@ export class NuevoAlumnoPage {
 
   guardarAlumno(){
     this.crearAlumno();
-    console.log(this.form.errors);
-    console.log(this.form.errors != null || !(this.form.dirty));
+
     this.serviceLogin.signup(this.alumno).subscribe(
     () => { 
               let confirmacion = this.alertCtrl.create({
