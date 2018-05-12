@@ -32,7 +32,7 @@
             </ul>
         </div>
 
-        <div style="font-family: 'Poppins',sans-serif;color: red;font-size: 20px" *ngIf="errorArgumentos" >Error al guardar la rutina. Compruebe que los datos sean correctos</div>
+        <div class="alert alert-danger" role="alert" style="font-family: 'Poppins',sans-serif;font-size: 20px" *ngIf="errorArgumentos" >Error al guardar la rutina. Compruebe que los datos sean correctos</div>
 
         <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
             <button class="btn btn-success" (click)="guardarRutina()"> Guardar </button>

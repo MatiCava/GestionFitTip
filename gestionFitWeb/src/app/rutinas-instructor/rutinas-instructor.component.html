@@ -4,11 +4,15 @@
       <h1 style="text-align: center">{{'Rutinas asignadas' | translate}}</h1>
       <div *ngIf="!tieneRutinas">El usuario no posee rutinas asignadas</div>
       <ul class="list-group" *ngIf="tieneRutinas">
-        <li class="list-group-item" *ngFor="let rutinaAl of rutinaAlumno">
-          {{rutinaAl.name}}
-          <ul class="list-group">
-            <li *ngFor="let ejercicio of rutinaAl.exercises">{{ejercicio.name}}</li>
-          </ul>
+        <li class="list-group-item" *ngFor="let rutinaAl of rutinaAlumno;let i = index">
+          <div class="d-flex justify-content-between align-items-center">
+            {{rutinaAl.name}} <a data-toggle="collapse" href="#{{i}}" role="button" aria-expanded="false" aria-controls="collapseEjercicios"><i class="fas fa-chevron-down"></i></a>
+          </div>
+          <div class="collapse" id="{{i}}">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let ejercicio of rutinaAl.exercises">{{ejercicio.name}}</li>
+            </ul>
+          </div>
         </li>
         
       </ul>

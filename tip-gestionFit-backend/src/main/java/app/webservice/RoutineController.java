@@ -38,6 +38,12 @@ public class RoutineController {
 
 	}
 	
+	@GetMapping(value = "/routines/templates", produces = "application/json")   
+	public List<Routine> getRoutinesTemplates() {
+		return this.routineServ.getAllTemplates();
+
+	}
+	
 	@GetMapping(value = "/routines/types", produces = "application/json")   
 	public Routine_Type[] getRoutinesTypes() {
 		return Routine_Type.values();

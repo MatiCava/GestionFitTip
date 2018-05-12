@@ -10,5 +10,5 @@
     </div>
     <button type="submit" class="btn btn-primary" style="font-family: 'Noto Sans', sans-serif">{{'Ingresar' | translate}}</button>
   </form>
-  <div *ngIf="errorLogin"><p style="font-family: 'Poppins',sans-serif;color: red">Usuario y/o contraseña incorrectos</p></div>
+  <div class="alert alert-danger" role="alert" *ngIf="errorLogin"><p style="font-family: 'Poppins',sans-serif;">Usuario y/o contraseña incorrectos</p></div>
 </div>
