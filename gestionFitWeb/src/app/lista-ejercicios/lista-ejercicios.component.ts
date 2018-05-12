@@ -19,7 +19,7 @@ export class ListaEjerciciosComponent implements OnInit {
   }
 
   traerEjercicios(){
-    this.routineServ.getExercises().subscribe(
+    this.routineServ.getExercisesTemplate().subscribe(
       result => {this.exercises = result;},
       error => {console.log(error);},
       )

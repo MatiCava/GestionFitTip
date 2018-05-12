@@ -61,6 +61,11 @@ public class RoutineController {
 		return this.routineServ.getExercises();
 	}
 	
+	@GetMapping(value = "/exercises/templates", produces = "application/json")   
+	public List<Exercise> getExercisesTemplates(){
+		return this.routineServ.getExercisesTemplates();
+	}
+	
 	@GetMapping(value= "/exercise/{id}",produces= "application/json")
 	public Exercise getExercise(@PathVariable("id") Long idExercise){
 		Exercise exercise = this.routineServ.getExercise(idExercise);

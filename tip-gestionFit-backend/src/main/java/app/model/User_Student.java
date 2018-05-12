@@ -12,7 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Fetch;
@@ -36,7 +36,7 @@ public class User_Student extends User {
 	private float weigth;
 	@OneToOne(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
 	private MeasuringTable measurements;
-	@ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
 	private Set<Routine> routines;
 	

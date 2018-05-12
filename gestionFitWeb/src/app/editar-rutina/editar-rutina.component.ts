@@ -98,6 +98,8 @@ export class EditarRutinaComponent implements OnInit {
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
+    ejercicio.id = null;
+    ejercicio.isTemplate = false;
     this.newRoutine.exercises.push(ejercicio);
   }
 

@@ -70,8 +70,7 @@ export class NuevaRutinaComponent implements OnInit {
 
   guardarRutina(){
     this.validForm();
-  	//let type = Routine_Type[this.newRoutine.type];
-    //this.newRoutine.type = type;
+
     this.newRoutine.isTemplate = this.isTemplate;
     console.log(this.newRoutine);
     this.routineServ.saveRoutine(this.newRoutine).subscribe(
@@ -85,6 +84,8 @@ export class NuevaRutinaComponent implements OnInit {
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
+    ejercicio.id = null;
+    ejercicio.isTemplate = false;
     this.newRoutine.exercises.push(ejercicio);
   }
 

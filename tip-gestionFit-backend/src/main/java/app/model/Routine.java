@@ -31,7 +31,7 @@ public class Routine {
 	public Date creationDate;
 	@Enumerated
 	public Routine_Type type;
-	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderColumn
 	public List<Exercise> exercises = new ArrayList<Exercise>();

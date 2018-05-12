@@ -14,6 +14,7 @@ public class Exercise {
 	public Exercise_Type type;
 	public String name;
 	public String description;
+	public boolean isTemplate;
 	
 	public Exercise() {
 		
@@ -23,6 +24,7 @@ public class Exercise {
 		this.type = typeE;
 		this.name = nom;
 		this.description = desc;
+		this.isTemplate = true;
 	}
 
 	public Exercise_Type getType() {

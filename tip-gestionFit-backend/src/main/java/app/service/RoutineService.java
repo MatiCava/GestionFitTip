@@ -77,6 +77,12 @@ public class RoutineService {
 		//ArgumentsValidator.validateExercise(newExercise);
 		this.exerciseDAO.update(newExercise);
 	}
+
+	@Transactional
+	public List<Exercise> getExercisesTemplates() {
+		return this.exerciseDAO.getAllTemplates();
+
+	}
 	
 	
 }
