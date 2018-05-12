@@ -26,10 +26,10 @@
 	</ion-row>
 	</ion-grid>
 </div>
-	<div style="padding-bottom: 50px">
+	<div style="padding-bottom: 50px;padding-top: 180px">
 		<h2>{{'Mis rutinas' | translate}}</h2>
 	<ion-list>
-	  <ion-item *ngFor="let rutina of user.routines" style="padding-bottom: 150px">
+	  <ion-item *ngFor="let rutina of user.routines" style="padding-bottom: 90px">
 		{{rutina.name}} 
 		<a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
 	  </ion-item>
