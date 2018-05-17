@@ -22,7 +22,7 @@ public class UserDAO extends GenericDAO<User> {
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	public List<User_Student> getAllUserRole(Object objt){
 		List<User_Student> result = null;
-		Session session = sessionFactory.openSession();
+		Session session =getSessionFactory().openSession();
 		try {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
@@ -43,7 +43,7 @@ public class UserDAO extends GenericDAO<User> {
 	@SuppressWarnings("deprecation")
 	public User getByUsername(String username) {
 		User result = null;
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		try {
 		Criteria criteria = session.createCriteria(User.class);
 		Criterion criterion = Restrictions.eq("username", username);
@@ -63,7 +63,7 @@ public class UserDAO extends GenericDAO<User> {
 	@SuppressWarnings("deprecation")
 	public User_Student getStudent(Long idUser) {
 		User_Student result = null;
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		try {
 			Criteria criteria = session.createCriteria(User.class);
 			Criterion criterion = Restrictions.and(Restrictions.eq("role", "STUDENT"),Restrictions.eq("id",idUser));

@@ -20,7 +20,7 @@ public class ExerciseDAO extends GenericDAO<Exercise>{
 	@SuppressWarnings("unchecked")
 	public List<Exercise> getAllTemplates(){
 	
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		List<Exercise> result = null;
 
 		try {
@@ -47,7 +47,7 @@ public class ExerciseDAO extends GenericDAO<Exercise>{
 	@Override
 	public List<Exercise> getAll() {
 		
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		List<Exercise> result = null;
 
 		try {

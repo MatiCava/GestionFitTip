@@ -1,11 +1,15 @@
 package app.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -15,12 +19,40 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class GenericDAO<T> {
+	
+
 
 	private Class<T> entityType;
-	protected static final SessionFactory sessionFactory =new Configuration().configure().buildSessionFactory();
+	private static StandardServiceRegistry registry;
+	protected static SessionFactory sessionFactory ;
+	public static SessionFactory getSessionFactory() {
+		if(sessionFactory == null){
+			Configuration cfg = new Configuration().configure();
+
+		
+		Map<String,String> jdbcUrlSettings = new HashMap<>();
+		String jdbcDbUrl = System.getenv("JDBC_DATABASE_URL");
+		if (null != jdbcDbUrl) {
+		  jdbcUrlSettings.put("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
+		  jdbcUrlSettings.put("hibernate.connection.username", System.getenv("JDBC_DATABASE_USERNAME"));
+		  jdbcUrlSettings.put("hibernate.connection.password", System.getenv("JDBC_DATABASE_PASSWORD"));
+		}
+		cfg.setProperty("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
+		cfg.setProperty("hibernate.connection.username", System.getenv("JDBC_DATABASE_USERNAME"));
+		cfg.setProperty("hibernate.connection.username", System.getenv("JDBC_DATABASE_USERNAME"));
+
+		registry = new StandardServiceRegistryBuilder().
+		    configure("hibernate.cfg.xml").
+		    applySettings(jdbcUrlSettings).
+		    build();
+		sessionFactory=cfg.buildSessionFactory(registry);
+		}
+		return sessionFactory;
+	}
 	
 	@Autowired
 	public GenericDAO() {
+
 	}
 	
 	public GenericDAO(Class<T> entityType) {
@@ -28,7 +60,7 @@ public class GenericDAO<T> {
 	}
 
 	public long save(T object) {
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		Long lastId = null;
 		try {
 			session.beginTransaction();
@@ -46,7 +78,7 @@ public class GenericDAO<T> {
 	}
 
 	public void update(T object) {
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.update(object);
@@ -60,7 +92,7 @@ public class GenericDAO<T> {
 	}
 	
 	public void delete(T object) {
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.delete(object);
@@ -75,7 +107,7 @@ public class GenericDAO<T> {
 
 	@SuppressWarnings("unchecked")
 	public T getById(Long id) {
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		T result = null;
 
 		try {
@@ -99,7 +131,7 @@ public class GenericDAO<T> {
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
 		
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		List<T> result = null;
 
 		try {

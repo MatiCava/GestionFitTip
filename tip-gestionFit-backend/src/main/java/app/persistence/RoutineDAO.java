@@ -20,7 +20,7 @@ public class RoutineDAO extends GenericDAO<Routine> {
 	@SuppressWarnings("unchecked")
 	public List<Routine> getAllTemplates(){
 	
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		List<Routine> result = null;
 
 		try {
@@ -47,7 +47,7 @@ public class RoutineDAO extends GenericDAO<Routine> {
 	@Override
 	public List<Routine> getAll() {
 		
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		List<Routine> result = null;
 
 		try {
