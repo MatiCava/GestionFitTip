@@ -39,6 +39,7 @@ public class User_Student extends User {
 	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
 	private Set<Routine> routines;
+	private int remainingLessons;
 	
 
 	public User_Student() {
@@ -212,6 +213,21 @@ public class User_Student extends User {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+
+	public int getRemainingLessons() {
+		return remainingLessons;
+	}
+
+
+	public void setRemainingLessons(int remainingLessons) {
+		this.remainingLessons = remainingLessons;
+	}
+	
+	//Crear excepcion si no tiene clases restantes
+	public void substractRemainingLessons(){
+		this.remainingLessons = this.remainingLessons - 1;
 	}
 	
 	

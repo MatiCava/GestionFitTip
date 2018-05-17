@@ -111,5 +111,22 @@ public class UserService {
 		return this.userDAO.getStudent(idUser).getRoutines();
 	}
 
+	@Transactional
+	public void addLessons(long id, int numLessons) {
+		User_Student user = (User_Student) this.getById(id);
+		int newRLessons = user.getRemainingLessons() + numLessons;
+		user.setRemainingLessons(newRLessons);
+		this.updateStudent(user);
+	}
+	
+	
+	//Falta agregar la asistencia a un log
+	@Transactional
+	public void studentAssist(long id){
+		User_Student user = (User_Student) this.getById(id);
+		user.substractRemainingLessons();
+		this.updateStudent(user);
+	}
+
 
 }
