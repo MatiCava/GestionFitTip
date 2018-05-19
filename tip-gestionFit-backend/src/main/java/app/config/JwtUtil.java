@@ -15,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import app.exception.NoAuthorizationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -51,11 +52,18 @@ public class JwtUtil {
 
     // metodo para validar el token enviado por el cliente
     @SuppressWarnings("unchecked")
-	static Authentication getAuthentication(HttpServletRequest request) {
+	static Authentication getAuthentication(HttpServletRequest request) throws NoAuthorizationException {
 
     	
         // obtenemos el token que viene en el encabezado de la peticion
-        String token = request.getHeader("Authorization").replace("Bearer ", "");
+    	String token;
+    	if(request.getHeader("Authorization") != null){
+    		token = request.getHeader("Authorization").replace("Bearer ", "");	
+    	}
+    	else{
+    		throw new NoAuthorizationException("Empty header");
+    	}
+        
 
 
         String url=request.getRequestURL().toString();

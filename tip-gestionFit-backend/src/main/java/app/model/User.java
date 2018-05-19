@@ -21,6 +21,7 @@ public class User {
 	@Column(unique=true)
 	private String mail;
 	private String role;
+	private String rfid;
 
 	public User() {
 		
@@ -89,6 +90,18 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+
+	public String getRfid() {
+		return rfid;
+	}
+
+
+	public void setRfid(String rfid) {
+		this.rfid = rfid;
+	}
+	
+	
 	
 	
 	

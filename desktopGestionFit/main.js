@@ -3,6 +3,10 @@ const {app, BrowserWindow} = require('electron')
   // Mantén una referencia global del objeto ventana, si no lo haces, la ventana se
   // cerrará automáticamente cuando el objeto de JavaScript sea basura colleccionada.
   let win
+
+  //var usb = require('usb')
+
+
   
   function createWindow () {
     // Crea la ventana del navegador.
@@ -11,9 +15,9 @@ const {app, BrowserWindow} = require('electron')
     // y carga el archivo index.html de la aplicación.
     win.loadURL(`file://${__dirname}/dist/index.html`)
   
-    // Abre las herramientas de desarrollo.
-    //win.webContents.openDevTools()
-  
+     //Abre las herramientas de desarrollo.
+    win.webContents.openDevTools()
+
     // Emitido cuando la ventana es cerrada.
     win.on('closed', () => {
       // Desreferencia el objeto ventana, usualmente tu guardarias ventanas

@@ -1,6 +1,8 @@
 package app.config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	//Lista de urls que no nesecitan autorizacion
+    	List<String> whitelist = new ArrayList<String>();
+    	whitelist.add("error");
+    	whitelist.add("auth/signup");
+    	whitelist.add("/api/checkUsername");
+    	whitelist.add("/api/assist");
+    	whitelist.add("/api/addRfid");
         http.cors().and()
         	.csrf().disable()
         	.authorizeRequests()
@@ -29,6 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/favicon.ico").permitAll() 
             .antMatchers("/css/**").permitAll().antMatchers("/error").permitAll()
             .antMatchers("/bower_components/**").permitAll()
+            .antMatchers("/api/checkUsername/**","/api/addRfid/**").permitAll()
+            
             .anyRequest().fullyAuthenticated()//cualquier otra peticion requiere autenticacion
             .and().formLogin().loginPage("/auth/login").failureUrl("/auth/login?error").permitAll().and()
             // Las peticiones /login pasan previamente por este filtro
@@ -36,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     UsernamePasswordAuthenticationFilter.class)
 
             // Las demás peticiones pasan por este filtro para validar el token
-            .addFilterBefore(new JwtFilter(),
+            .addFilterBefore(new JwtFilter(whitelist),
                     UsernamePasswordAuthenticationFilter.class)
             ;
     }

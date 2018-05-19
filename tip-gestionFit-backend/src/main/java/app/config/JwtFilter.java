@@ -1,6 +1,7 @@
 package app.config;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
 
+
 /**
  * Las peticiones que no sean /login pasarán por este filtro
  * el cuál se encarga de pasar el "request" a nuestra clase de utilidad JwtUtil
@@ -20,6 +22,11 @@ import org.springframework.web.filter.GenericFilterBean;
  */
 public class JwtFilter extends GenericFilterBean {
 	
+	private List<String> whitelist;
+	
+	public JwtFilter(List<String> whitelist){
+		this.whitelist = whitelist;
+	}
 	
 
     @Override
@@ -27,8 +34,13 @@ public class JwtFilter extends GenericFilterBean {
                          ServletResponse response,
                          FilterChain filterChain)
             throws IOException, ServletException {
+    	boolean notInWhiteList = true;
 
-    	if(!((HttpServletRequest)request).getRequestURL().toString().contains("error") && !((HttpServletRequest)request).getRequestURL().toString().contains("/auth/signup") ){        Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
+    	for(String url :this.whitelist){
+    		notInWhiteList =  notInWhiteList && !((HttpServletRequest)request).getRequestURL().toString().contains(url);
+    	}
+    	
+    	if(notInWhiteList){        Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest)request);
         
 
         SecurityContextHolder.getContext().setAuthentication(authentication);};

@@ -44,6 +44,12 @@ export class UserProvider {
   }
 
 
+  checkUsername(user){
+    return this.http.get(this.apiUrl + "checkUsername/" + user);
+  }
+
+
+
  
 
 }

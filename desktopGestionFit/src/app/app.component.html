@@ -1,9 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     Bienvenido a {{ title }}!
   </h1>
   <img width="300" alt="Logo GestionFit" src="assets/icon.png">
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
+    <input type="text" class="form-control"  formControlName="rfid">
+    <button class="btn btn-primary" type="submit">Ingresar</button>
+  </form>
+
+  <h2 *ngIf="changed">Id de usuario ingresada: {{rfidForm.controls['rfid']}}</h2> 
 </div>
 
 

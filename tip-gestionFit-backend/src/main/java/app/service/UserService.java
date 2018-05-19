@@ -128,5 +128,16 @@ public class UserService {
 		this.updateStudent(user);
 	}
 
+	@Transactional
+	public boolean checkUsername(String username) {
+		
+		return this.userDAO.checkUsername(username);
+	}
+
+	@Transactional
+	public User getByRfid(String id) {
+		return this.userDAO.getByRfid(id);
+	}
+
 
 }

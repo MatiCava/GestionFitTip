@@ -41,7 +41,7 @@ public class UserController {
 	
 	
 	@GetMapping(value = "/users", produces = "application/json")   
-	public List<User> getUsers() {
+	public List<User> getUsers() throws Exception{
 		return this.userServ.getAll();
 
 	}
@@ -122,18 +122,27 @@ public class UserController {
 		
 	}
 	
-	@PostMapping(value = "/student/{id}/assist",produces="application/json")
-	public ResponseEntity<Void> studentAssist(@PathVariable("id") long id) throws Exception{
-		User_Student user = (User_Student) this.getUser(id);
+	@PostMapping(value = "/assist/student/{id}",produces="application/json")
+	public ResponseEntity<User> studentAssist(@PathVariable("id") String id) throws Exception{
+		User_Student user = (User_Student) this.userServ.getByRfid(id);
 		if(user.getRemainingLessons() > 0){
-			this.userServ.studentAssist(id);
-			this.emailServ.sendEmailToUser(this.userServ.getById(id),EmailService.ASSIST);
+			this.userServ.studentAssist(user.getId());
+			this.emailServ.sendEmailToUser(user,EmailService.ASSIST);
 		}
 		else{
-			this.emailServ.sendEmailToUser(this.userServ.getById(id),EmailService.ASSIST);
+			this.emailServ.sendEmailToUser(user,EmailService.ASSIST);
 		}
 		
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/addRfid/{username}/{rfid}",produces = "application/json")
+	public ResponseEntity<Void> addRfid(@PathVariable("username") String username,@PathVariable("rfid") String rfid){
+		User_Student user =(User_Student) this.userServ.getByUsername(username);
+		user.setRfid(rfid);
+		this.userServ.updateStudent(user);
 		return new ResponseEntity<Void>(HttpStatus.OK);
+		
 	}
 	
 	@PostMapping(value = "/promo",produces="application/json")
@@ -144,6 +153,11 @@ public class UserController {
 			this.emailServ.sendEmailToUser(student, EmailService.PROMO);
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/checkUsername/{username}", produces="application/json")
+	public ResponseEntity<Boolean> checkUsername(@PathVariable("username") String username){
+		return new ResponseEntity<Boolean>(this.userServ.checkUsername(username),HttpStatus.OK);
 	}
 
 }

@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController,Slides,Slide } fro
 import { User_Student,User_Role } from '../../model/user_student';
 import { Camera,CameraOptions } from '@ionic-native/camera'; 
 import { LoginProvider } from '../../providers/login/login';
+import { UserProvider } from '../../providers/user/user';
 
 @IonicPage(
 	{name:"nuevoAlumno"}
@@ -12,12 +13,13 @@ import { LoginProvider } from '../../providers/login/login';
 @Component({
   selector: 'page-nuevo-alumno',
   templateUrl: 'nuevo-alumno.html',
-  providers: [LoginProvider]
+  providers: [LoginProvider, UserProvider]
 })
 export class NuevoAlumnoPage {
 
     @ViewChild(Slides) slides : Slides;
 
+    usuarioExistente:any;
 
   form:FormGroup = this.formBuilder.group({
     username: new FormControl('',Validators.compose([
@@ -62,11 +64,17 @@ export class NuevoAlumnoPage {
   alumno = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
   
 
-  constructor(private camera: Camera,private formBuilder: FormBuilder,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider) {
+  constructor(private camera: Camera,private formBuilder: FormBuilder
+    ,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider,private userServ: UserProvider) {
+    this.usuarioExistente = false;
   }
 
   ionViewDidLoad() {
     this.slides.lockSwipes(true);
+  }
+
+  checkUsername(usuario){
+    this.userServ.checkUsername(usuario).subscribe(res => this.usuarioExistente = res,error => console.log(error))
   }
 
   validForm(){
@@ -74,7 +82,7 @@ export class NuevoAlumnoPage {
     for(let control in this.form.controls){
       invalid = invalid || this.form.controls[control].invalid;
     }
-    return (invalid || !(this.form.dirty));
+    return (invalid || !(this.form.dirty) || this.usuarioExistente);
   }
 
   volverAtras(){
