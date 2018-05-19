@@ -7,7 +7,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class AlumnosService {
 
   apiUrl : String="http://localhost:8080/api/";
-//  apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  //apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
 
   httpOptions: any;
 

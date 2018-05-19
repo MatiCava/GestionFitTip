@@ -115,18 +115,35 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/addLessons/{idStudent}/{nLessons}", produces = "application/json")
-	public ResponseEntity<Void> addLessonsToStudent(@PathVariable("idStudent") long id, @PathVariable("nLessons") int numLessons ){
+	public ResponseEntity<Void> addLessonsToStudent(@PathVariable("idStudent") long id, @PathVariable("nLessons") int numLessons ) throws Exception{
 		this.userServ.addLessons(id,numLessons);
+		this.emailServ.sendEmailToUser(this.userServ.getById(id), EmailService.PAID);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
 	}
 	
 	@PostMapping(value = "/student/{id}/assist",produces="application/json")
-	public ResponseEntity<Void> studentAssist(@PathVariable("id") long id){
-		this.userServ.studentAssist(id);
+	public ResponseEntity<Void> studentAssist(@PathVariable("id") long id) throws Exception{
+		User_Student user = (User_Student) this.getUser(id);
+		if(user.getRemainingLessons() > 0){
+			this.userServ.studentAssist(id);
+			this.emailServ.sendEmailToUser(this.userServ.getById(id),EmailService.ASSIST);
+		}
+		else{
+			this.emailServ.sendEmailToUser(this.userServ.getById(id),EmailService.ASSIST);
+		}
+		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	
+	@PostMapping(value = "/promo",produces="application/json")
+	public ResponseEntity<Void> promoStudents() throws Exception{
+		List<User_Student> students =  this.getAlumnos();
+		students.removeIf(s -> s.getRemainingLessons() <= 0);
+		for(User_Student student : students){
+			this.emailServ.sendEmailToUser(student, EmailService.PROMO);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 }

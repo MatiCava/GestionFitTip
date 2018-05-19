@@ -7,7 +7,7 @@ import { Routine } from '../../model/routine';
 @Injectable()
 export class RoutineService {
 
-//  apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  //apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
   apiUrl: String = "http://localhost:8080/api/";
 
   httpOptions :any ;

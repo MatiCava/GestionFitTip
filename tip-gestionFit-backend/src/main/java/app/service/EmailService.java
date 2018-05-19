@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import app.model.User;
+import app.model.User_Student;
 
 @Component
 @Service
@@ -15,6 +16,10 @@ public class EmailService {
 	
 	public static String WELCOME = "¡Bienvenido a GestionFit!";
 	public static String ROUTINE = "Nueva rutina asignada";
+	public static String ASSIST = "Gracias por asistir a la clase";
+	public static String NEEDPAY = "Debe volver a pagar clases";
+	public static String PROMO = "Nuevas promos disponibles";
+	public static String PAID = "Gracias por seguir elegiendonos para tu salud";
 	
 
 	
@@ -27,6 +32,10 @@ public class EmailService {
 		switch(matter){
 			case "¡Bienvenido a GestionFit!" : text = this.welcomeMessage(user);System.out.println("BIENVENIDA");break;
 			case "Nueva rutina asignada": text = this.newRoutineAssignedMessage(user);System.out.println("RUTINAA");break;
+			case "Gracias por asistir a la clase": text = this.assistClassMessage((User_Student) user);break;
+			case "Debe volver a pagar clases": text = this.needPayment(user);break;
+			case "Nuevas promos disponibles": text = this.newPromo(user);break;
+			case "Gracias por seguir elegiendonos para tu salud": text = this.newPayment(user); break;
 		}
         MimeMessage msg = sender.createMimeMessage();
         MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
@@ -97,8 +106,29 @@ public class EmailService {
 		return ROUTINE_MESSAGE;
 	}
 	
+	private String assistClassMessage(User_Student user){
+		String ASSIST_MESSAGE = "							<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + "Esperamos que disfrutes tu clase " + user.getNameAndSurname() + "</h1> "
+				 + "							<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> Todavia te quedan " + user.getRemainingLessons() + " clases, luego tendras que volver a abonar. </h1>";
+		return ASSIST_MESSAGE;
+	}
 
+	private String needPayment(User user){
+		String NEED_PAYMENT_MESSAGE = "							<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + "Usted " + user.getNameAndSurname() + " se ha quedado sin clases </h1> "
+				 + "							<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> Si desea continuar asistiendo a las clases por favor vuelva a abonar, esperamos verlo pronto.  </h1>";
+		return NEED_PAYMENT_MESSAGE;
+	}
 	
-
+	private String newPromo(User user){
+		String PROMO_MESSAGE = "							<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + "Buenas " + user.getNameAndSurname() + " se han agregado nuevas promos </h1> "
+				 + "							<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> Si te interesa que hay de nuevo por favor preguntanos o revisa nuestra seccion de promos.  </h1>";
+		return PROMO_MESSAGE;
+	}
+	
+	private String newPayment(User user){
+		String PAYMENT_MESSAGE = "							<h1 style='text-align: center; font-family: Poppins, sans-serif; font-size:14x'> " + "Gracias " + user.getNameAndSurname() + " por elegirnos </h1> "
+				 + "							<h1 style='text-align: left; font-family: Poppins, sans-serif; font-size:12px'> Usted ha abonado por un mes de clases, decida a cuales quiera asistir y que se divierta.  </h1>";
+		return PAYMENT_MESSAGE;
+	}
+	
 
 }
