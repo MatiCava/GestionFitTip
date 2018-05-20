@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from 'selenium-webdriver/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
 
-  apiUrl : String="http://localhost:8080/api/";
-  //apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  apiUrl: String = 'http://localhost:8080/api/';
 
   httpOptions: any;
 
@@ -13,7 +12,6 @@ export class UserService {
     console.log('Hello UserProvider Provider');
 
   }
-  
 
 
 }

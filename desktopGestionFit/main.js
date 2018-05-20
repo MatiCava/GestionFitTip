@@ -4,7 +4,7 @@ const {app, BrowserWindow} = require('electron')
   // cerrará automáticamente cuando el objeto de JavaScript sea basura colleccionada.
   let win
 
-  //var usb = require('usb')
+//var usbDetect = require('usb-detection');
 
 
   

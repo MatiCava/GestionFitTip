@@ -20,6 +20,7 @@ export class NuevoAlumnoPage {
     @ViewChild(Slides) slides : Slides;
 
     usuarioExistente:any;
+    emailExistente:any;
 
   form:FormGroup = this.formBuilder.group({
     username: new FormControl('',Validators.compose([
@@ -67,6 +68,7 @@ export class NuevoAlumnoPage {
   constructor(private camera: Camera,private formBuilder: FormBuilder
     ,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider,private userServ: UserProvider) {
     this.usuarioExistente = false;
+    this.emailExistente = false;
   }
 
   ionViewDidLoad() {
@@ -74,7 +76,11 @@ export class NuevoAlumnoPage {
   }
 
   checkUsername(usuario){
-    this.userServ.checkUsername(usuario).subscribe(res => this.usuarioExistente = res,error => console.log(error))
+    this.userServ.checkUsername(usuario).subscribe(res => {this.usuarioExistente = res;console.log( usuario + " " +res)},error => console.log(error))
+  }
+
+  checkEmail(email){
+    this.userServ.checkEmail(email).subscribe(res => {this.emailExistente = res;console.log( email + " " +res)},error => console.log(error))
   }
 
   validForm(){

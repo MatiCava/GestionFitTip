@@ -98,7 +98,28 @@ public class UserDAO extends GenericDAO<User> {
 				session.close();
 			}
 		}
-		return result.size() == 0;
+		return result.size() != 0;
+	}
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	public boolean checkEmail(String email) {
+		List<User_Student> result = null;
+		Session session =getSessionFactory().openSession();
+		try {
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("mail", email));
+			result = (List<User_Student>) criteria.add(criterion).list();
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return result.size() != 0;
 	}
 
 

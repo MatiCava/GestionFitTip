@@ -159,5 +159,10 @@ public class UserController {
 	public ResponseEntity<Boolean> checkUsername(@PathVariable("username") String username){
 		return new ResponseEntity<Boolean>(this.userServ.checkUsername(username),HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/checkEmail/{email}", produces="application/json")
+	public ResponseEntity<Boolean> checkEmail(@PathVariable("email") String email){
+		return new ResponseEntity<Boolean>(this.userServ.checkEmail(email),HttpStatus.OK);
+	}
 
 }

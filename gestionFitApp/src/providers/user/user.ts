@@ -8,8 +8,8 @@ import { User_Student } from '../../model/user_student';
 export class UserProvider {
 
 
-  apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
- // apiUrl : String="http://localhost:8080/api/";
+ // apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  apiUrl : String="http://localhost:8080/api/";
 
   httpOptions: any;
 
@@ -46,6 +46,10 @@ export class UserProvider {
 
   checkUsername(user){
     return this.http.get(this.apiUrl + "checkUsername/" + user);
+  }
+
+  checkEmail(email){
+    return this.http.get(this.apiUrl + "checkEmail/" + email);
   }
 
 

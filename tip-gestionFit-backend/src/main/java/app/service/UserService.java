@@ -130,13 +130,18 @@ public class UserService {
 
 	@Transactional
 	public boolean checkUsername(String username) {
-		
+		System.out.println(username);
 		return this.userDAO.checkUsername(username);
 	}
 
 	@Transactional
 	public User getByRfid(String id) {
 		return this.userDAO.getByRfid(id);
+	}
+
+	@Transactional
+	public Boolean checkEmail(String email) {
+		return this.userDAO.checkEmail(email);
 	}
 
 

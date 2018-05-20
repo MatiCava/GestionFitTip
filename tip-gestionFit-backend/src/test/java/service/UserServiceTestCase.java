@@ -3,9 +3,13 @@ package service;
 import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
@@ -22,8 +26,25 @@ public class UserServiceTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		sessionFactory = new Configuration().configure().buildSessionFactory();
-		session =sessionFactory.openSession();
+		if(sessionFactory ==null) {
+			Configuration cfg = new Configuration().configure();
+		
+		
+		Map<String,String> jdbcUrlSettings = new HashMap<>();
+		String jdbcDbUrl = System.getenv("JDBC_DATABASE_URL");
+		if (null != jdbcDbUrl) {
+		  jdbcUrlSettings.put("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
+		  jdbcUrlSettings.put("hibernate.connection.username", System.getenv("JDBC_DATABASE_USERNAME"));
+		  jdbcUrlSettings.put("hibernate.connection.password", System.getenv("JDBC_DATABASE_PASSWORD"));
+		}
+
+
+		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").applySettings(jdbcUrlSettings).
+		    build();
+		sessionFactory=cfg.buildSessionFactory(registry);
+		session = sessionFactory.openSession();
+
+		}
 	}
 
 	@After
