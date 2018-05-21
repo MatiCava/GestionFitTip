@@ -35,6 +35,8 @@ public class DataService {
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
 		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","gastonveliez95@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu2 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","carlos@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
 		User_Instructor inst1 = new User_Instructor("instructor1",encoder.encode("1234"),"Fernando Fernandez", "ff@gmail.com");
 		
 		Exercise ex1 = new Exercise("Biceps", "3 series de 15 repeticiones", Exercise_Type.Arms);
@@ -139,6 +141,7 @@ public class DataService {
 		routines.add(rutina);
 		alu1.addRoutine(routines);
 		this.userDAO.save(alu1);
+		this.userDAO.save(alu2);
 		this.userDAO.save(inst1);
 		
 	}

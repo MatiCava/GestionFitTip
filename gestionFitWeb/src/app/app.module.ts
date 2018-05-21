@@ -25,7 +25,11 @@ import { MedidasService } from './services/medidas/medidas.service';
 import { ListaEjerciciosComponent } from './lista-ejercicios/lista-ejercicios.component';
 import { InfoEjercicioComponent } from './info-ejercicio/info-ejercicio.component';
 import { EditarEjercicioComponent } from './editar-ejercicio/editar-ejercicio.component';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PromosComponent } from './promos/promos.component';
+import { PipesModule } from './pipes/pipes.module';
+
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +43,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'alumnos', component: AlumnosComponent },
+  { path: 'promos', component: PromosComponent },
   { path: 'alumno/info/:id', component: InfoAlumnoComponent },
   { path: 'alumno/rutinas/:id', component: RutinasInstructorComponent },
   { path: 'alumno/mediciones/:id', component: MedicionesInstructorComponent },
@@ -51,7 +56,7 @@ const appRoutes: Routes = [
   { path: 'ejercicios', component: ListaEjerciciosComponent},
   { path: 'ejercicio/info/:id', component: InfoEjercicioComponent },
   { path: 'ejercicio/edit/:id', component: EditarEjercicioComponent },
-  { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent }
+  { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent },
 ];
 
 @NgModule({
@@ -70,7 +75,10 @@ const appRoutes: Routes = [
     EditarRutinaComponent,
     ListaEjerciciosComponent,
     EditarEjercicioComponent,
-    InfoEjercicioComponent
+    InfoEjercicioComponent,
+    PromosComponent
+    
+    
 
   ],
   imports: [
@@ -90,7 +98,8 @@ const appRoutes: Routes = [
     }),
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PipesModule
   ],
   entryComponents: [],
   exports: [RouterModule],
