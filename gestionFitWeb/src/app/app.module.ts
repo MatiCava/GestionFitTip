@@ -28,6 +28,7 @@ import { EditarEjercicioComponent } from './editar-ejercicio/editar-ejercicio.co
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PromosComponent } from './promos/promos.component';
 import { PipesModule } from './pipes/pipes.module';
+import { NgxPaginationModule } from 'ngx-pagination'; 
 
 
 
@@ -99,7 +100,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    PipesModule
+    PipesModule,
+    NgxPaginationModule
   ],
   entryComponents: [],
   exports: [RouterModule],
