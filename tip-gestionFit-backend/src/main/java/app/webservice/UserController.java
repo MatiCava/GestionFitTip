@@ -124,15 +124,10 @@ public class UserController {
 	
 	@PostMapping(value = "/assist/student/{id}",produces="application/json")
 	public ResponseEntity<User> studentAssist(@PathVariable("id") String id) throws Exception{
-		User_Student user = (User_Student) this.userServ.getByRfid(id);
-		if(user.getRemainingLessons() > 0){
-			this.userServ.studentAssist(user.getId());
-			this.emailServ.sendEmailToUser(user,EmailService.ASSIST);
-		}
-		else{
-			this.emailServ.sendEmailToUser(user,EmailService.ASSIST);
-		}
-		
+		User_Student user;
+		this.userServ.studentAssist(id);
+		user = (User_Student) this.userServ.getByRfid(id);
+		this.emailServ.sendEmailToUser(user,EmailService.ASSIST);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	

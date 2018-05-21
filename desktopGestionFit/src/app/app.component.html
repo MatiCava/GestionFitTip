@@ -2,14 +2,30 @@
   <h1>
     Bienvenido a {{ title }}!
   </h1>
-  <img width="300" alt="Logo GestionFit" src="assets/icon.png">
+  <img width="150" alt="Logo GestionFit" src="assets/icon.png">
 
   <form (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
-    <input type="text" class="form-control"  formControlName="rfid">
+    <div class="form-group">
+      <label for="rfidInput">Rfid</label>
+      <input type="text" class="form-control" id="rfidInput" aria-describedby="rfidHelp" placeholder="00000000" #rfidInput (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
+      <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
+    </div>
     <button class="btn btn-primary" type="submit">Ingresar</button>
+
   </form>
 
-  <h2 *ngIf="changed">Id de usuario ingresada: {{rfidForm.controls['rfid']}}</h2> 
+  <div class="row" style="padding-top: 30px">
+    <div class="col-md" style="height: 200px">
+      <img [src]="user.photo" class="img-thumbnail">
+    </div>
+    <div class="col-md">
+      <h3>Nombre: {{user.nameAndSurname}}</h3>
+      <h3>Clases restantes: {{user.remainingLessons}}</h3>
+      <h3>Id: {{user.rfid}}</h3>
+    </div>
+  </div>
+
+
 </div>
 
 

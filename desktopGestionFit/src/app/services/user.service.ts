@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -11,6 +12,10 @@ export class UserService {
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
 
+  }
+
+  marcarAsistencia(rfid): Observable<any>{
+    return this.http.post(this.apiUrl + "assist/student/" + rfid,{});
   }
 
 

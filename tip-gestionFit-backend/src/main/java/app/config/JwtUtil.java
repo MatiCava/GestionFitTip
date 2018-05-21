@@ -2,6 +2,7 @@ package app.config;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,9 +37,16 @@ public class JwtUtil {
          Claims claims = Jwts.claims().setSubject(userContext.getUsername());
          claims.put("scopes", userContext.getAuthorities().stream().map(s -> s.toString()).collect(Collectors.toList()));
 
+         //Seteamos la expiracion del token dentro de 5 dias
+         Date dt = new Date();
+         Calendar c = Calendar.getInstance(); 
+         c.setTime(dt); 
+         c.add(Calendar.DATE, 5);
+         dt = c.getTime();
+         
         String token = Jwts.builder()
             .setClaims(claims)
-            .setExpiration(new Date(System.currentTimeMillis() + 600000000))
+            .setExpiration(dt)
             .signWith(SignatureAlgorithm.HS512, "G@sT0n")
             .compact();
 

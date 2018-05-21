@@ -122,8 +122,8 @@ public class UserService {
 	
 	//Falta agregar la asistencia a un log
 	@Transactional
-	public void studentAssist(long id){
-		User_Student user = (User_Student) this.getById(id);
+	public void studentAssist(String id){
+		User_Student user = (User_Student) this.getByRfid(id);
 		user.substractRemainingLessons();
 		this.updateStudent(user);
 	}
