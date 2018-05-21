@@ -11,4 +11,10 @@
     color: #1565C0;
 }
 
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #1565C0;
+    border-radius: 5px;
+    text-align: left;
+}
+
                             

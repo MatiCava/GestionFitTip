@@ -81,6 +81,9 @@
   "Ingrese un nombre para el ejercicio": "Enter a name for the exercise",
   "Ingrese una descripcion para el ejercicio": "Enter a description for the exercise",
   "Actualizar": "Update",
-  "Esta seguro que desea eliminar el ejercicio": "Are you sure you want to delete this exercise"
+  "Esta seguro que desea eliminar el ejercicio": "Are you sure you want to delete this exercise",
+  "Anterior": "Previous",
+  "Siguiente": "Next",
+  "Buscar": "Search"
 
 }
