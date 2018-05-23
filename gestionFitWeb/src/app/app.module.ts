@@ -28,7 +28,8 @@ import { EditarEjercicioComponent } from './editar-ejercicio/editar-ejercicio.co
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PromosComponent } from './promos/promos.component';
 import { PipesModule } from './pipes/pipes.module';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AgregarClasesComponent } from './agregar-clases/agregar-clases.component'; 
 
 
 
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
   { path: 'ejercicio/info/:id', component: InfoEjercicioComponent },
   { path: 'ejercicio/edit/:id', component: EditarEjercicioComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent },
+  { path: 'alumno/clases/agregar', component: AgregarClasesComponent}
 ];
 
 @NgModule({
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     ListaEjerciciosComponent,
     EditarEjercicioComponent,
     InfoEjercicioComponent,
-    PromosComponent
+    PromosComponent,
+    AgregarClasesComponent
     
     
 

@@ -6,23 +6,39 @@
     </div>
     <br>
     <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let alumno of alumnos | alumnosFilter : searchText | paginate: { itemsPerPage: 10, currentPage: p }" style="font-size: 25px;font-family: 'Poppins', sans-serif;">
-        {{alumno.nameAndSurname}}
-        <a [routerLink]="" (click)="infoAlumno(alumno.id)">
-            <span class="badge badge-light badge-pill" style="color: #1565C0;font-family: 'Poppins' , sans-serif">
-                <i class="fas fa-address-card"></i> {{'Info' | translate}}
-            </span>
-        </a>
+        <!-- d-flex justify-content-between align-items-center -->
+      <li class="list-group-item " *ngFor="let alumno of alumnos | alumnosFilter : searchText | paginate: { itemsPerPage: 10, currentPage: p }" style="font-size: 25px;font-family: 'Poppins', sans-serif;">
+        <div class="row">
+            <div class="col-md-4"> {{alumno.nameAndSurname}}</div>
+            <div class="col-md">
+            <a [routerLink]="" (click)="infoAlumno(alumno.id)">
+                <span class="badge badge-light badge-pill" style="color: #1565C0;font-family: 'Poppins' , sans-serif">
+                    <i class="fas fa-address-card"></i> {{'Info' | translate}}
+                </span>
+            </a>
+        </div>
+        <div class="col-md">
         <a [routerLink]="" (click)="rutinasAlumno(alumno.id)">
             <span class="badge badge-light badge-pill"  style="color: #1565C0">
                 <i class="fas fa-calendar-alt"></i> {{'Rutinas' | translate}}
             </span>
         </a>
+    </div>
+    <div class="col-md">
         <a [routerLink]="" (click)="medicionesAlumno(alumno.id)">
             <span class="badge badge-light badge-pill"  style="color: #1565C0">
                 <i class="fas fa-clipboard"></i> {{'Mediciones' | translate}}
             </span>
         </a>
+    </div>
+    <div class="col-md">
+        <a [routerLink]="" (click)="agregarClases(alumno.id)">
+            <span class="badge badge-light badge-pill"  style="color: #1565C0">
+                <i class="far fa-plus-square"></i> {{'Clases' | translate}}
+            </span>
+        </a>
+    </div>
+    </div>
         </li>
     </ul>
     <br>

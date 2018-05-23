@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    if (this.isLogged()) {
+      this.routerServ.navigate(["/alumnos"]);
+    }
   }
 
   onSubmit() { this.login(); }
@@ -41,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   isLogged() {
-    return localStorage.getItem("id") != null;
+    return localStorage.getItem("token") != null;
   }
 
 }

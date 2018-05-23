@@ -19,17 +19,20 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
+
+  }
+
+  changeRoute() {
     if (!this.isLogged()) {
       this.routerService.navigate(["/login"]);
-    }
-    else{
-      this.routerService.navigate(["/alumnos"])
     }
   }
 
   changeLang(lang){
     this.translateService.use(lang);
   }
+
+
 
   alumnos() {
     this.cerrarSidebar();

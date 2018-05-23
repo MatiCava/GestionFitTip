@@ -24,12 +24,16 @@ export class AlumnosComponent implements OnInit {
 
   }
 
-  infoAlumno(idAl){
+  infoAlumno(idAl)  {
     this.routerServ.navigate(['/alumno/info', idAl]);
   }
 
-  medicionesAlumno(idAl){
-    this.routerServ.navigate(['/alumno/mediciones',idAl]);
+  medicionesAlumno(idAl)  {
+    this.routerServ.navigate(['/alumno/mediciones', idAl]);
+  }
+
+  agregarClases(idAl) {
+    this.routerServ.navigate(['/alumno/clases/agregar'], idAl);
   }
 
 
