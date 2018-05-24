@@ -114,7 +114,7 @@ public class UserController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/addLessons/{idStudent}/{nLessons}", produces = "application/json")
+	@PutMapping(value = "/addLessons/{idStudent}/{nLessons}", produces = "application/json")
 	public ResponseEntity<Void> addLessonsToStudent(@PathVariable("idStudent") long id, @PathVariable("nLessons") int numLessons ) throws Exception{
 		this.userServ.addLessons(id,numLessons);
 		this.emailServ.sendEmailToUser(this.userServ.getById(id), EmailService.PAID);

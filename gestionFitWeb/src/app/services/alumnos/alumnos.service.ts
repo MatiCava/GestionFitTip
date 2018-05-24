@@ -62,6 +62,12 @@ export class AlumnosService {
     return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines, this.httpOptions);
   }
 
+  addLessons(id,lessons){
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+
+    return this.http.put(this.apiUrl + "addLessons/" + id + "/" + lessons,{},this.httpOptions);
+  }
+
 
 
 }

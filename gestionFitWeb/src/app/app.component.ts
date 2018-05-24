@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { LoginService } from './services/login/login.service';
 declare var jquery:any;
 declare var $ :any;
 
@@ -8,12 +9,13 @@ declare var $ :any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [LoginService]
 })
 export class AppComponent implements OnInit{
   title = 'GestionFit';
 
-  constructor(private translateService: TranslateService, private routerService: Router) {
+  constructor(private translateService: TranslateService, private routerService: Router,private loginServ : LoginService) {
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
   }
@@ -23,9 +25,14 @@ export class AppComponent implements OnInit{
   }
 
   changeRoute() {
-    if (!this.isLogged()) {
+    this.loginServ.auth().subscribe(
+      res => console.log(res),
+      error => {console.log(error);localStorage.clear();this.routerService.navigate(["/login"])}
+    );
+
+/*    if (!this.isLogged()) {
       this.routerService.navigate(["/login"]);
-    }
+    }*/
   }
 
   changeLang(lang){

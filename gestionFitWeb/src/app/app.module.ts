@@ -59,7 +59,7 @@ const appRoutes: Routes = [
   { path: 'ejercicio/info/:id', component: InfoEjercicioComponent },
   { path: 'ejercicio/edit/:id', component: EditarEjercicioComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent },
-  { path: 'alumno/clases/agregar', component: AgregarClasesComponent}
+  { path: 'alumno/clases/agregar/:idUser', component: AgregarClasesComponent}
 ];
 
 @NgModule({

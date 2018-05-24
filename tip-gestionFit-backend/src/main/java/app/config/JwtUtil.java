@@ -42,6 +42,7 @@ public class JwtUtil {
          Calendar c = Calendar.getInstance(); 
          c.setTime(dt); 
          c.add(Calendar.DATE, 5);
+//         c.add(Calendar.MINUTE, 2);
          dt = c.getTime();
          
         String token = Jwts.builder()

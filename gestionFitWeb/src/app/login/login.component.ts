@@ -23,9 +23,12 @@ export class LoginComponent implements OnInit {
   constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    if (this.isLogged()) {
-      this.routerServ.navigate(["/alumnos"]);
-    }
+
+    this.loginServ.auth().subscribe(
+      res => {console.log(res),this.routerServ.navigate(["/alumnos"]);},
+      error => {console.log("Not logged");}
+    );
+
   }
 
   onSubmit() { this.login(); }

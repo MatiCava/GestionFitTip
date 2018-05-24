@@ -40,6 +40,10 @@ public class User_Student extends User {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private Set<Routine> routines;
 	private int remainingLessons;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date paymentDate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date lessonsExpires;
 	
 
 	public User_Student() {
@@ -229,6 +233,28 @@ public class User_Student extends User {
 	public void substractRemainingLessons(){
 		this.remainingLessons = this.remainingLessons - 1;
 	}
+
+
+	public Date getPaymentDate() {
+		return paymentDate;
+	}
+
+
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
+
+	public Date getLessonsExpires() {
+		return lessonsExpires;
+	}
+
+
+	public void setLessonsExpires(Date lessonsExpires) {
+		this.lessonsExpires = lessonsExpires;
+	}
+	
+	
 	
 	
 

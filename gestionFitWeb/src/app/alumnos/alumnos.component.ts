@@ -33,7 +33,7 @@ export class AlumnosComponent implements OnInit {
   }
 
   agregarClases(idAl) {
-    this.routerServ.navigate(['/alumno/clases/agregar'], idAl);
+    this.routerServ.navigate(['/alumno/clases/agregar', idAl]);
   }
 
 

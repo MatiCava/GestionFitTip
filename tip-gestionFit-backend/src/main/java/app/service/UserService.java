@@ -116,6 +116,15 @@ public class UserService {
 		User_Student user = (User_Student) this.getById(id);
 		int newRLessons = user.getRemainingLessons() + numLessons;
 		user.setRemainingLessons(newRLessons);
+		user.setPaymentDate(new Date());
+		
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance(); 
+        c.setTime(dt); 
+        c.add(Calendar.MONTH, 1);
+        dt = c.getTime();
+        
+        user.setLessonsExpires(dt);
 		this.updateStudent(user);
 	}
 	
