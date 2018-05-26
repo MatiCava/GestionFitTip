@@ -1,3 +1,48 @@
-<p>
-  promos works!
-</p>
+<div class="container" style="padding-top: 35px;">
+  <form [formGroup]="formPromo">
+    <div class="form-group">
+      <label class="form-control" for="inputMatter">{{'Escriba el asunto del mail' | translate}}</label>
+      <input type="text" class="form-control" id="inputMatter" formControlName="matter" placeholder="{{'Promo 2x1...' | translate}}">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="inputBody">{{'Escriba el contenido del mail' | translate}}</label>
+      <input type="text" class="form-control" id="inputBody" formControlName="body" placeholder="...">
+    </div>
+  </form>
+  <!--
+  <html xmlns='http://www.w3.org/1999/xhtml'>
+		<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		</head>
+		<body>
+			<div padding-top: 20px> 
+				<table align='center' border='1' cellpadding='0' cellspacing='0' width='600'>
+					<tr>
+		  			<td bgcolor='#59b6f8'>
+			  			<img src='https://image.ibb.co/gnMBDn/GFEmail.jpg' alt='GFEmail' width='100%' height='230' style='display: block;'>
+		    		</td>
+		      </tr>
+					<tr>
+		  		  <td bgcolor='#ffffff'>
+		  		    <div>
+		  			    text	
+		          </div>
+		        </td>
+		 			</tr>
+		 			<tr>
+		 				<td bgcolor='#ee4c50'>
+		 
+		        </td>
+		  			</tr>
+		 		</table>
+      	<br> 
+	 		</div>  
+	 </body>
+  </html>-->
+  <div class="flex" style="padding-top: 25px;">
+    <button class="btn btn-success" (click)="enviarPromo()"> {{'Enviar promo' | translate}} </button>
+    <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
+  </div> 
+</div>

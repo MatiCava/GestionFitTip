@@ -76,6 +76,10 @@ export class AppComponent implements OnInit{
     this.routerService.navigate(["/login"]);
   }
 
+  promos(){
+    this.cerrarSidebar();
+    this.routerService.navigate(["/promos"]);
+  }
 
   cerrarSidebar(){
       $('#sidebar, #content').toggleClass('active');

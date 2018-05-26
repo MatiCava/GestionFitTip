@@ -1,4 +1,5 @@
 package app.service;
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,14 @@ public class EmailService {
         sender.send(msg);
    }
 
+	public void sendPromoToUser(User user, String matter, String body) throws MessagingException{
+		MimeMessage msg = sender.createMimeMessage();
+        MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
+        msgHelper.setTo(user.getMail());
+        msgHelper.setText(buildHtml(body),true);
+        msgHelper.setSubject(matter);
+        sender.send(msg);
+	}
 	
 	
 	
