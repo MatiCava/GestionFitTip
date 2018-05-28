@@ -4,10 +4,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { Globalization } from '@ionic-native/globalization';
+import { LoginProvider } from '../providers/login/login';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [LoginProvider]
 })
 export class MyApp implements OnInit{
   rootPage:any = 'login';
@@ -15,7 +17,7 @@ export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
   public isBrowser:boolean = false;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public menuCtrl: MenuController, private translateService: TranslateService,private glob: Globalization) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public loginServ: LoginProvider,public menuCtrl: MenuController, private translateService: TranslateService,private glob: Globalization) {
     platform.ready().then(() => {
       this.glob.getPreferredLanguage()
     .then(res => {if(res.value.includes("es")){this.translateService.setDefaultLang("es");
@@ -35,17 +37,10 @@ export class MyApp implements OnInit{
   }
 
   ngOnInit(){
-    if(this.logged()){
-
-
-        this.rootPage = "dashboard";
-        this.rootPageParams = {id:Number(localStorage.getItem("id"))}
-
-      
-    }
-    else{
-      this.rootPage = "login";
-    }
+    this.loginServ.auth().subscribe(
+      res => {this.nav.setRoot('dashboard',{id:Number(localStorage.getItem("id"))})},
+      error => {this.nav.setRoot("login")}
+    )
   }
 
   openPage(page){

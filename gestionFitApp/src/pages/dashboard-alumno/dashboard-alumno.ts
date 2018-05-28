@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController,Slides } from 'ionic-angular';
 import {UserProvider} from '../../providers/user/user';
 import { InfoRutinaPage } from '../info-rutina/info-rutina';
+import { LoginProvider } from '../../providers/login/login';
 
 
 @IonicPage(
@@ -12,7 +13,7 @@ import { InfoRutinaPage } from '../info-rutina/info-rutina';
 @Component({
   selector: 'page-dashboard-alumno',
   templateUrl: 'dashboard-alumno.html',
-  providers:[UserProvider]
+  providers:[UserProvider,LoginProvider]
 })
 export class DashboardAlumnoPage implements OnInit{
 
@@ -23,14 +24,21 @@ export class DashboardAlumnoPage implements OnInit{
 
 
 
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, private userServ : UserProvider) {
-  	this.id = this.navParams.get("id");
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, private userServ : UserProvider, private loginServ: LoginProvider) {
+    this.id = this.navParams.get("id");
+    //this.id = localStorage.getItem("id");
+    console.log(this.id);
     this.user = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", age:{}, weigth:{},routines:[]};
   }
 
   ngOnInit(){
-    this.getUser();
+    this.loginServ.auth().subscribe(res => {this.getUser();},error=> {this.navCtrl.push('login')})
   }
+
+  ionViewDidEnter(){
+    
+  }
+
 
 
 
@@ -39,7 +47,8 @@ export class DashboardAlumnoPage implements OnInit{
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardAlumnoPage');
+    
+    
   }
 
 

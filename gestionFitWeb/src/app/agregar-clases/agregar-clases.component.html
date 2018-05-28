@@ -2,7 +2,8 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
       <label class="form-control" for="inputClases">Ingrese la cantidad de clases a agregar</label>
-      <input type="number" class="form-control" id="inputClases" placeholder="4" min="1" formControlName="clases">
+      <input  type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="4" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
+      <small id="errorClases" *ngIf="form.controls['clases'].invalid && form.controls['clases'].dirty" class="form-text text-muted" style="color: red">Debe ingresar un numero de clases a asignar</small>
     </div>
     <!--
     <div class="form-group">
@@ -10,8 +11,8 @@
       <input type="date" class="form-control" id="inputDate">
     </div>
 -->
-<button type="submit" class="btn btn-success">{{'Agregar' | translate}}</button>
-  <button class="btn btn-danger">{{'Cancelar' | translate }}</button>
+    <button type="submit" [disabled]="(!form.valid)" class="btn btn-success">{{'Agregar' | translate}}</button>
+    <button class="btn btn-danger" routerLink="/alumnos">{{'Cancelar' | translate }}</button>
   </form>
   
 </div>

@@ -32,7 +32,7 @@ public class AuthController {
 
 	}
 	
-	@PostMapping(value = "auth/signup", produces = "application/json")   
+	@PostMapping(value = "/auth/signup", produces = "application/json")   
 	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
 			this.userServ.saveStudent(user);
 

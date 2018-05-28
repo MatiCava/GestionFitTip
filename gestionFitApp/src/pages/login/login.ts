@@ -26,13 +26,6 @@ export class LoginPage {
   }
 
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-
-  }
-
-  ionViewDidEnter(){
-  }
 
     logged(){
     return localStorage.getItem("token") != null;

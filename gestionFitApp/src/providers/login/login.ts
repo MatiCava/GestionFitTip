@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 
@@ -6,8 +6,10 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class LoginProvider {
 
-	apiUrl : String="http://gestionfit-backend.herokuapp.com/auth/"
-//	apiUrl : String="http://localhost:8080/auth/"
+//	apiUrl : String="http://gestionfit-backend.herokuapp.com/"
+  apiUrl : String="http://localhost:8080/"
+  
+  httpOptions:any;
 
   constructor(public http: HttpClient) {
     console.log('Hello LoginProvider Provider');
@@ -15,13 +17,19 @@ export class LoginProvider {
 
 
   logIn(cred): Observable<any>{
-  	return this.http.post(this.apiUrl +"login",cred,{observe: "response"});
+  	return this.http.post(this.apiUrl +"auth/login",cred,{observe: "response"});
   }
 
   signup(newUser): Observable<any>{
 
  
-  	return this.http.post(this.apiUrl+"signup", newUser);
+  	return this.http.post(this.apiUrl+"auth/signup", newUser);
+  }
+
+  auth(): Observable<any>{
+    if(localStorage.getItem("token") != null){
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")}),observe: "response"};}
+    return this.http.get(this.apiUrl + "authenticate",this.httpOptions);
   }
 
 }
