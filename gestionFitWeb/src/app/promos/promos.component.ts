@@ -45,7 +45,10 @@ export class PromosComponent implements OnInit {
 
   enviarPromo(){
     this.validForm();
-    this.alumnosServ.sendPromo(this.newPromo);
+    this.alumnosServ.sendPromo(this.newPromo).subscribe(
+      res=> {console.log(res);this.volverAtras();},
+      error => console.log(error)
+    );
   }
 
   volverAtras(){

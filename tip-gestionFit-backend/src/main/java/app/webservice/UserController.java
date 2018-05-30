@@ -148,6 +148,7 @@ public class UserController {
 		for(User_Student student : students){
 			System.out.println(student);
 			this.emailServ.sendPromoToUser(student, promo);
+			System.out.println(student.getMail());
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
