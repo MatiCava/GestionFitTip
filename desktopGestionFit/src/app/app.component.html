@@ -11,8 +11,16 @@
       <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
     </div>
     <button class="btn btn-primary" type="submit">Ingresar</button>
-
+    <br>
+    <div class="form-group">
+      <label for="mailInput">Si es tu primera vez registra tu llavero y tu primer asistencia con tu mail</label>
+      <input type="text" class="form-control" id="mailInput" placeholder="carlos@gmail.com" formControlName="mail">
+      <br>
+      <button class="btn btn-primary" (click)="saveRfid()">Registrarse</button>
+    </div>
   </form>
+
+  
 
   <div class="row" style="padding-top: 30px">
     <div class="col-md" style="height: 100px">

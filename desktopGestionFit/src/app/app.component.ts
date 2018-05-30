@@ -15,7 +15,8 @@ export class AppComponent implements OnInit{
 
   title = 'GestionFit';
   rfidForm: FormGroup = this.formBuilder.group({
-    rfid : new FormControl('',Validators.required)
+    rfid : new FormControl('',Validators.required),
+    mail: new FormControl('', Validators.minLength(18))
   })
   user:any;
   focused=false;
@@ -29,11 +30,10 @@ export class AppComponent implements OnInit{
   }
 
   onSubmit(){
-    this.userServ.marcarAsistencia(this.rfidForm.controls.rfid.value).subscribe(
-      res=>{console.log(res);this.user = res;this.rfidForm.controls.rfid.setValue("");this.rfidInput.nativeElement.focus();},
-      error => console.log(error)
-    );
-
+      this.userServ.marcarAsistencia(this.rfidForm.controls.rfid.value).subscribe(
+        res=>{console.log(res);this.user = res;this.rfidForm.controls.rfid.setValue("");this.rfidInput.nativeElement.focus();},
+        error => console.log(error)
+      );
   }
 
   onFocus(){
@@ -44,6 +44,11 @@ export class AppComponent implements OnInit{
     this.focused = false;
   }
 
-
+  saveRfid(){
+    this.userServ.registrarRfid(this.rfidForm.controls.mail.value, this.rfidForm.controls.rfid.value).subscribe(
+      res => console.log(res),
+      error=> console.log(error)
+    );
+  }
   
 }

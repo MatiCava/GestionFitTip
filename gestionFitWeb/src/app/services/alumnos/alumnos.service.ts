@@ -68,10 +68,10 @@ export class AlumnosService {
     return this.http.put(this.apiUrl + "addLessons/" + id + "/" + lessons,{},this.httpOptions);
   }
 
-  sendPromo(strings){
+  sendPromo(promo){
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
-    console.log(strings);
-    return this.http.post(this.apiUrl + "promo", strings, this.httpOptions);
+    console.log(promo);
+    return this.http.post(this.apiUrl + "promo", promo, this.httpOptions);
   }
 
 }

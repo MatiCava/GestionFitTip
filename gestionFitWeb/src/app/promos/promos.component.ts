@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
 import { Router } from '@angular/router';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { NgxInputFileUploadComponent } from 'ngx-input-file-upload'
 
 @Component({
   selector: 'app-promos',
@@ -10,6 +11,11 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 })
 export class PromosComponent implements OnInit {
 
+  private NgxInputFileUploadComponent: NgxInputFileUploadComponent;
+  newPromo;
+  acceptHtml="image/*"
+  acceptTs=/image-*/
+  activeColor: string = '#3366CC';
   formPromo:FormGroup = this.formBuilder.group({
     matter: new FormControl('', Validators.compose([
       Validators.minLength(10),
@@ -21,16 +27,25 @@ export class PromosComponent implements OnInit {
     ]))
   })
 
-  constructor(private formBuilder: FormBuilder, private alumnosServ: AlumnosService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private alumnosServ: AlumnosService, private router: Router) {
+    this.newPromo = {matter:"", body:"", photo:""};
+   }
 
   ngOnInit() {
   }
 
-  enviarPromo(){
+  validForm(){
     console.log(this.formPromo.controls.matter.value);
     console.log(this.formPromo.controls.body.value);
-    var list = [this.formPromo.controls.matter.value,this.formPromo.controls.body.value];
-    this.alumnosServ.sendPromo(list);
+    console.log(this.NgxInputFileUploadComponent.imageSrc);
+    this.newPromo.matter = this.formPromo.controls.matter.value;
+    this.newPromo.body = this.formPromo.controls.body.value;
+    this.newPromo.photo = this.NgxInputFileUploadComponent.imageSrc;
+  }
+
+  enviarPromo(){
+    this.validForm();
+    this.alumnosServ.sendPromo(this.newPromo);
   }
 
   volverAtras(){

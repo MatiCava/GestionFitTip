@@ -8,7 +8,10 @@
       <label class="form-control" for="inputBody">{{'Escriba el contenido del mail' | translate}}</label>
       <input type="text" class="form-control" id="inputBody" formControlName="body" placeholder="...">
     </div>
-  </form>
+	</form>
+	<label class="form-control">{{'Suba una imagen' | translate}}</label>
+	<ngx-input-file-upload [acceptHtml]="acceptHtml" [acceptTs]="acceptTs" [activeColor]="activeColor">
+	</ngx-input-file-upload>
   <!--
   <html xmlns='http://www.w3.org/1999/xhtml'>
 		<head>

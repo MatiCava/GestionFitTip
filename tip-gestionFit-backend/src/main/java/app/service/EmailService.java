@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import app.model.Promo;
 import app.model.User;
 import app.model.User_Student;
 
@@ -46,12 +47,12 @@ public class EmailService {
         sender.send(msg);
    }
 
-	public void sendPromoToUser(User user, String matter, String body) throws MessagingException{
+	public void sendPromoToUser(User user, Promo promo) throws MessagingException{
 		MimeMessage msg = sender.createMimeMessage();
         MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
         msgHelper.setTo(user.getMail());
-        msgHelper.setText(buildHtml(body),true);
-        msgHelper.setSubject(matter);
+        msgHelper.setText(buildHtml(promo.getBody()),true);
+        msgHelper.setSubject(promo.getMatter());
         sender.send(msg);
 	}
 	

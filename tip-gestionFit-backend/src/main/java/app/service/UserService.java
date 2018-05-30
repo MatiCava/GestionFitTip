@@ -102,6 +102,11 @@ public class UserService {
 	public User getByUsername(String username) {
 		return this.userDAO.getByUsername(username);
 	}
+	
+	@Transactional
+	public User getByMail(String mail) {
+		return this.userDAO.getByMail(mail);
+	}
 
 	public MeasuringTable getStudentTable(Long idUser) {
 		return this.userDAO.getStudent(idUser).getMeasurements();

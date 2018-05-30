@@ -59,6 +59,26 @@ public class UserDAO extends GenericDAO<User> {
 		}
 		return result;
 	}
+	
+	@SuppressWarnings("deprecation")
+	public User getByMail(String mail) {
+		User result = null;
+		Session session = getSessionFactory().openSession();
+		try {
+		Criteria criteria = session.createCriteria(User.class);
+		Criterion criterion = Restrictions.eq("mail", mail);
+		result = (User) criteria.add(criterion).uniqueResult();
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return result;
+	}
 
 	@SuppressWarnings("deprecation")
 	public User_Student getStudent(Long idUser) {

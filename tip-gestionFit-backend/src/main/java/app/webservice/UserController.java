@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import app.exception.NotFoundException;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
+import app.model.Promo;
 import app.model.Routine;
 import app.model.User;
 import app.model.User_Student;
@@ -131,9 +132,10 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
-	@PostMapping(value="/addRfid/{username}/{rfid}",produces = "application/json")
-	public ResponseEntity<Void> addRfid(@PathVariable("username") String username,@PathVariable("rfid") String rfid){
-		User_Student user =(User_Student) this.userServ.getByUsername(username);
+	@PostMapping(value="/addRfid/{mail}/{rfid}",produces = "application/json")
+	public ResponseEntity<Void> addRfid(@PathVariable("mail") String mail,@PathVariable("rfid") String rfid){
+		//habria que checkear que no exista otro usuario con ese rfid
+		User_Student user =(User_Student) this.userServ.getByMail(mail);
 		user.setRfid(rfid);
 		this.userServ.updateStudent(user);
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -141,13 +143,11 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/promo",produces="application/json")
-	public ResponseEntity<Void> promoStudents(@PathVariable("strings") List<String> strings) throws Exception{
+	public ResponseEntity<Void> promoStudents(@RequestBody Promo promo) throws Exception{
 		List<User_Student> students =  this.getAlumnos();
-		String matter = strings.get(0);
-		String body = strings.get(1);
 		for(User_Student student : students){
 			System.out.println(student);
-			this.emailServ.sendPromoToUser(student, matter, body);
+			this.emailServ.sendPromoToUser(student, promo);
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

@@ -30,7 +30,7 @@ import { PromosComponent } from './promos/promos.component';
 import { PipesModule } from './pipes/pipes.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AgregarClasesComponent } from './agregar-clases/agregar-clases.component'; 
-
+import { NgxInputFileUploadModule } from 'ngx-input-file-upload';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -104,7 +104,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     PipesModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxInputFileUploadModule
   ],
   entryComponents: [],
   exports: [RouterModule],

@@ -18,5 +18,8 @@ export class UserService {
     return this.http.post(this.apiUrl + "assist/student/" + rfid,{});
   }
 
+  registrarRfid(mail, rfid){
+    return this.http.post(this.apiUrl + "addRfid/" + mail + "/" + rfid,{});
+  }
 
 }
