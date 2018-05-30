@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController,Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController,Slides, LoadingController } from 'ionic-angular';
 import {UserProvider} from '../../providers/user/user';
 import { InfoRutinaPage } from '../info-rutina/info-rutina';
 import { LoginProvider } from '../../providers/login/login';
@@ -24,7 +24,7 @@ export class DashboardAlumnoPage implements OnInit{
 
 
 
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, private userServ : UserProvider, private loginServ: LoginProvider) {
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, private userServ : UserProvider, private loginServ: LoginProvider, public loadingCtrl: LoadingController) {
     this.id = this.navParams.get("id");
     //this.id = localStorage.getItem("id");
     console.log(this.id);
@@ -32,6 +32,7 @@ export class DashboardAlumnoPage implements OnInit{
   }
 
   ngOnInit(){
+    this.presentSpinner();
     this.loginServ.auth().subscribe(res => {this.getUser();},error=> {this.navCtrl.push('login')})
   }
 
@@ -39,6 +40,16 @@ export class DashboardAlumnoPage implements OnInit{
     
   }
 
+  presentSpinner(){
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Wait please',
+      dismissOnPageChange: true,
+      duration: 8000
+    });
+  
+    loading.present();
+  }
 
 
 

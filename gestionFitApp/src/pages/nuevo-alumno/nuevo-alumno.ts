@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams, AlertController,Slides,Slide } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,Slides,Slide, LoadingController } from 'ionic-angular';
 import { User_Student,User_Role } from '../../model/user_student';
 import { Camera,CameraOptions } from '@ionic-native/camera'; 
 import { LoginProvider } from '../../providers/login/login';
@@ -66,7 +66,7 @@ export class NuevoAlumnoPage {
   
 
   constructor(private camera: Camera,private formBuilder: FormBuilder
-    ,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider,private userServ: UserProvider) {
+    ,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider,private userServ: UserProvider, public loadingCtrl: LoadingController) {
     this.usuarioExistente = false;
     this.emailExistente = false;
   }
@@ -108,9 +108,11 @@ export class NuevoAlumnoPage {
     this.alumno.birthday = this.form.controls['birthday'].value;
   }
 
+ 
+
   guardarAlumno(){
     this.crearAlumno();
-
+    this.presentSpinner();
     this.serviceLogin.signup(this.alumno).subscribe(
     () => { 
               let confirmacion = this.alertCtrl.create({
@@ -131,6 +133,17 @@ export class NuevoAlumnoPage {
               }
           });
     this.navCtrl.push('alumnos');
+  }
+
+  presentSpinner(){
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Wait please',
+      dismissOnPageChange: true,
+      duration: 4000
+    });
+  
+    loading.present();
   }
 
   tomarFoto(){

@@ -9,7 +9,7 @@ import { Exercise } from '../../model/exercise'
 export class RoutineProvider {
 
 	apiUrl : String="http://gestionfit-backend.herokuapp.com/api/"
-//S	apiUrl : String="http://localhost:8080/api/"
+//apiUrl : String="http://localhost:8080/api/"
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');

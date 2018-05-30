@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController, LoadingController } from 'ionic-angular';
 import { RoutineProvider } from '../../providers/routine/routine'
 
 @IonicPage({
@@ -18,13 +18,25 @@ export class InfoRutinaPage {
   private iniciada=false;
   private finish=false;
 
-  constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private routineService: RoutineProvider) {
+  constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private routineService: RoutineProvider, public loadingCtrl: LoadingController) {
   	this.id = this.navParams.get("id");
     this.rutina={};
+  }
+  
+  presentSpinner(){
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Wait please',
+      dismissOnPageChange: true,
+      duration: 5000
+    });
+  
+    loading.present();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InfoRutinaPage');
+    this.presentSpinner();
     this.getInfoRutina();
   }
 
