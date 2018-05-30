@@ -33,7 +33,7 @@ public class DataService {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
-		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","matiascavallin96@gmail.com","","","Bajar de peso",
+		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","gastonveliez95@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
 		User_Student alu2 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);

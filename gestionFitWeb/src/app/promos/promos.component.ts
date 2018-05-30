@@ -30,7 +30,10 @@ export class PromosComponent implements OnInit {
     console.log(this.formPromo.controls.matter.value);
     console.log(this.formPromo.controls.body.value);
     var list = [this.formPromo.controls.matter.value,this.formPromo.controls.body.value];
-    this.alumnosServ.sendPromo(list);
+    this.alumnosServ.sendPromo(list).subscribe(
+      res=> {console.log(res);this.volverAtras();},
+      error => console.log(error)
+    );
   }
 
   volverAtras(){
