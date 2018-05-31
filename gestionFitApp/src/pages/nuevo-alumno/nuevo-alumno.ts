@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams, AlertController,Slides,Slide, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,Slides,Slide, LoadingController, Loading } from 'ionic-angular';
 import { User_Student,User_Role } from '../../model/user_student';
 import { Camera,CameraOptions } from '@ionic-native/camera'; 
 import { LoginProvider } from '../../providers/login/login';
@@ -60,6 +60,7 @@ export class NuevoAlumnoPage {
     ]))
   })
 
+  loading:Loading;
 
 
   alumno = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
@@ -127,6 +128,7 @@ export class NuevoAlumnoPage {
               }
 
               ); 
+              this.loading.dismiss();
               confirmacion.present();
               er => {
                 console.log(er);
@@ -136,14 +138,12 @@ export class NuevoAlumnoPage {
   }
 
   presentSpinner(){
-    let loading = this.loadingCtrl.create({
+    this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Wait please',
-      dismissOnPageChange: true,
-      duration: 4000
     });
   
-    loading.present();
+    this.loading.present();
   }
 
   tomarFoto(){

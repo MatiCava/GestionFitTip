@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController,Slides, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController,Slides, LoadingController, Loading } from 'ionic-angular';
 import {UserProvider} from '../../providers/user/user';
 import { InfoRutinaPage } from '../info-rutina/info-rutina';
 import { LoginProvider } from '../../providers/login/login';
@@ -21,6 +21,7 @@ export class DashboardAlumnoPage implements OnInit{
   dates: any = [];
 	id:any;
   public user;
+  loading: Loading;
 
 
 
@@ -33,6 +34,7 @@ export class DashboardAlumnoPage implements OnInit{
 
   ngOnInit(){
     this.presentSpinner();
+    
     this.loginServ.auth().subscribe(res => {this.getUser();},error=> {this.navCtrl.push('login')})
   }
 
@@ -41,14 +43,13 @@ export class DashboardAlumnoPage implements OnInit{
   }
 
   presentSpinner(){
-    let loading = this.loadingCtrl.create({
+    this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Wait please',
-      dismissOnPageChange: true,
-      duration: 8000
     });
   
-    loading.present();
+    this.loading.present();
+
   }
 
 
@@ -66,7 +67,7 @@ export class DashboardAlumnoPage implements OnInit{
   
   getUser(){
   	this.userServ.getUser(this.id).subscribe(
-      alumno => {this.user = alumno;},
+      alumno => {this.user = alumno;this.loading.dismiss()},
   		error => {console.log(error)})
   }
 

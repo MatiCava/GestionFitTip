@@ -19,7 +19,7 @@
 					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.name}}</p></ion-col>
 					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.description}}</p></ion-col>
 					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.type | translate}}</p></ion-col>
-					<ion-col style="border:0.5px solid black"><ion-checkbox *ngIf="!isInstructor() && enCurso()" [(ngModel)]="exercise.checked" (click)="checkFinalizo()"></ion-checkbox></ion-col>
+					<ion-col style="border:0.5px solid black"><ion-checkbox *ngIf="enCurso()" [(ngModel)]="exercise.checked" (click)="checkFinalizo()"></ion-checkbox></ion-col>
 				
 			</ion-row>
 		</ion-grid>
