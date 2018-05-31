@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
     this.loginServ.auth().subscribe(
       res => {console.log(res),this.routerServ.navigate(["/alumnos"]);},
-      error => {console.log("Not logged");}
+      error => {console.log("Not logged");console.log(error);}
     );
 
   }

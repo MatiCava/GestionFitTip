@@ -32,6 +32,13 @@ public class AuthController {
 
 	}
 	
+	@GetMapping("/authenticate/instructor")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void authInstructor() {
+		//Este metodo sirve solo para validar el token y autorizar o no al cliente
+
+	}
+	
 	@PostMapping(value = "/auth/signup", produces = "application/json")   
 	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
 			this.userServ.saveStudent(user);

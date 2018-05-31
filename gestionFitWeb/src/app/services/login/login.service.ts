@@ -19,7 +19,13 @@ export class LoginService {
   }
 
   auth(): Observable<any> {
-    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
-    return this.http.get(this.apiUrl + "authenticate",this.httpOptions);
+    if(localStorage.getItem("token")!=null){
+      this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+      return this.http.get(this.apiUrl + "authenticate/instructor",this.httpOptions);
+    }
+    else{
+      return this.http.get(this.apiUrl + "authenticate/instructor")
+    }
+    
   }
 }

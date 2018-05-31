@@ -20,6 +20,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import app.exception.InsufficientLessonsException;
+
 @Entity
 public class User_Student extends User {
 	
@@ -230,8 +232,12 @@ public class User_Student extends User {
 	}
 	
 	//Crear excepcion si no tiene clases restantes
-	public void substractRemainingLessons(){
-		this.remainingLessons = this.remainingLessons - 1;
+	public void substractRemainingLessons() throws InsufficientLessonsException{
+		if(this.remainingLessons > 0){
+			this.remainingLessons = this.remainingLessons - 1;
+		}else{
+			throw new InsufficientLessonsException();
+		}
 	}
 
 
