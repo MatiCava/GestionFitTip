@@ -88,6 +88,7 @@ export class NuevaRutinaComponent implements OnInit {
     ejercicio.id = null;
     ejercicio.isTemplate = false;
     this.newRoutine.exercises.push(ejercicio);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
   }
 
   eliminarEjercicio(ejercicio){

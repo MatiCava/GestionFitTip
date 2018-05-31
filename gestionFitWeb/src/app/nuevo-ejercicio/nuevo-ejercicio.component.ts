@@ -21,7 +21,7 @@ export class NuevoEjercicioComponent implements OnInit {
       Validators.required
     ])),
     description: new FormControl('', Validators.compose([
-      Validators.minLength(14),
+      Validators.minLength(1),
       Validators.required
     ]))
   })
