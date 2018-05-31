@@ -1,8 +1,13 @@
 package app.service;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+import java.util.List;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -47,20 +52,43 @@ public class EmailService {
         sender.send(msg);
    }
 
-	public void sendPromoToUser(User user, Promo promo) throws MessagingException{
-		MimeMessage msg = sender.createMimeMessage();
-        MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
-        msgHelper.setTo(user.getMail());
-        msgHelper.setText(buildHtml(promo.getBody()),true);
-        msgHelper.setSubject(promo.getMatter());
-        sender.send(msg);
+	public void sendPromoToUsers(List<User_Student> users, Promo promo) throws MessagingException, UnsupportedEncodingException{
+		ByteArrayResource targetStream = null;
+		if(promo.getPhoto() != null){
+			byte[] imgBytes = Base64.getDecoder().decode(promo.getPhoto().split(",")[1]);
+			targetStream = new ByteArrayResource(imgBytes);
+				
+		}
+		
+		for(User_Student user : users){
+			MimeMessage msg = sender.createMimeMessage();
+	        MimeMessageHelper msgHelper = new MimeMessageHelper(msg,true); 
+	        
+	        if(promo.getPhoto() != null){
+	        	String contentType = "text/plain";
+	        
+	        	if(promo.getPhoto().contains("png")){
+	        		contentType = "image/png";
+	        	}
+	        	else if(promo.getPhoto().contains("jpeg")){
+	        		contentType ="image/jpeg";
+	        	}
+	        
+	        	msgHelper.addAttachment("promo", targetStream,contentType);
+	        }
+	        msgHelper.setTo(user.getMail());
+	        msgHelper.setText(buildHtml(promo.getBody()),true);
+	        msgHelper.setSubject(promo.getMatter());
+	        sender.send(msg);
+		}
+		
+
 	}
 	
-	
-	
+
 	public static String buildHtml(String text){
 		
-		String html =
+		String html1 =
 				
 				"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
 		 +		"<html xmlns='http://www.w3.org/1999/xhtml'>"
@@ -80,26 +108,29 @@ public class EmailService {
 		 +"						<tr>"
 		 +"						<td bgcolor='#ffffff'>"
 		 +							"<div>"
-		 + 								text	
-		 +"							 </div>"
-		 +"						</td>"
-		 +"						</tr>"
-		 +"						<tr>"
-		 +"						<td bgcolor='#ee4c50'>"
-		 +""
-		 +"						</td>"
-		 +"						</tr>"
-		 +"					</table>"
-		 + "				<br> "
-		 + "			</div>  "
-		 + "	 </body>"
-		 +		"</html>";
-				
-				
-				
+		 + 								text;
+		
+
+		 
+		 String html2="							 </div>"
+				 +"						</td>"
+				 +"						</tr>"
+				 +"						<tr>"
+				 +"						<td bgcolor='#ee4c50'>"
+				 +""
+				 +"						</td>"
+				 +"						</tr>"
+				 +"					</table>"
+				 + "				<br> "
+				 + "			</div>  "
+				 + "	 </body>"
+				 +		"</html>";
+		 
+		 
+		
 
 		
-		return html;
+		return html1 + html2;
 		
 	}
 	

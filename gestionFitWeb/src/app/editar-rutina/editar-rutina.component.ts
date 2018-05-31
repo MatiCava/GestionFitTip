@@ -34,6 +34,7 @@ export class EditarRutinaComponent implements OnInit {
   isEdit = true;
   tieneEjercicios = false;
   errorArgumentos = false;
+  searchText:any;
 
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {

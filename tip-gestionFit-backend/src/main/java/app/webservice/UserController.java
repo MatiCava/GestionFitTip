@@ -145,11 +145,8 @@ public class UserController {
 	@PostMapping(value = "/promo",produces="application/json")
 	public ResponseEntity<Void> promoStudents(@RequestBody Promo promo) throws Exception{
 		List<User_Student> students =  this.getAlumnos();
-		for(User_Student student : students){
-			System.out.println(student);
-			this.emailServ.sendPromoToUser(student, promo);
-			System.out.println(student.getMail());
-		}
+		this.emailServ.sendPromoToUsers(students, promo);
+
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	

@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.authorizeRequests()
         	.antMatchers("/").permitAll()
         	.antMatchers("/auth/signup").permitAll()
-        	.antMatchers("/api/alumnos","/api/routines","/api/exercises").hasAuthority("ROLE_INSTRUCTOR")
+        	.antMatchers("/api/alumnos","/api/routines","/api/exercises","/authenticate/instructor").hasAuthority("ROLE_INSTRUCTOR")
             .antMatchers("/favicon.ico").permitAll() 
             .antMatchers("/css/**").permitAll().antMatchers("/error").permitAll()
             .antMatchers("/bower_components/**").permitAll()

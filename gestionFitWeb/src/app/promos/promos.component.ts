@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
 import { Router } from '@angular/router';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
@@ -10,6 +10,8 @@ import { NgxInputFileUploadComponent } from 'ngx-input-file-upload'
   styleUrls: ['./promos.component.css']
 })
 export class PromosComponent implements OnInit {
+
+  @ViewChild(NgxInputFileUploadComponent)
 
   private NgxInputFileUploadComponent: NgxInputFileUploadComponent;
   newPromo;
@@ -52,6 +54,6 @@ export class PromosComponent implements OnInit {
   }
 
   volverAtras(){
-    this.router.navigate(['/ejercicios']);
+    this.router.navigate(['/alumnos']);
   }
 }

@@ -17,23 +17,48 @@
         
       </ul>
   </div>
+
+  <div class="form-check">
+      <input class="form-check-input" type="radio" [(ngModel)]="nuevaRutina" name="options" id="asignar" [value]="false" checked>
+      <label class="form-check-label" for="asignar">
+        Asignar rutina generica
+      </label>
+      </div>
+      <div class="form-check">
+      <input class="form-check-input" type="radio"  [(ngModel)]="nuevaRutina" name="options" id="nueva" [value]="true">
+      <label class="form-check-label" for="nueva">
+        Crear nueva rutina personalizada
+      </label>
+      
+    </div>
   
-  <div>
-  <h1 style="text-align: center">{{'Asignar rutinas' | translate}}</h1>
-  <div class="form-inline md-form form-sm active-cyan-2">
-    <input class="form-control form-control-sm mr-3 w-75" type="text" [(ngModel)]="searchText" placeholder="{{'Buscar' | translate}}" aria-label="Search">
-    <i class="fa fa-search" aria-hidden="true"></i>
-  </div>
-  <br>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let rutina of rutinas | rutinasEjerciciosFilter : searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-      <div class="d-flex justify-content-between align-items-center">{{rutina.name}} <span><a [routerLink]="" (click)="agregarRutina(rutina)"><i class="fas fa-plus"></i> {{'Agregar' | translate}}</a></span></div>
-    </li>
+  <div *ngIf="!nuevaRutina">
+    <h1 style="text-align: center">{{'Asignar rutinas' | translate}}</h1>
+    <div class="form-inline md-form form-sm active-cyan-2">
+      <input class="form-control form-control-sm mr-3 w-75" type="text" [(ngModel)]="searchText" placeholder="{{'Buscar' | translate}}" aria-label="Search">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+    <br>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let rutina of rutinas | rutinasEjerciciosFilter : searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+        <div class="d-flex justify-content-between align-items-center">{{rutina.name}} <span><a [routerLink]="" (click)="agregarRutina(rutina)"><i class="fas fa-plus"></i> {{'Agregar' | translate}}</a></span></div>
+      </li>
     
-  </ul>
-  <br>
-  <pagination-controls class="my-pagination" autoHide="true" previousLabel="{{'Anterior' | translate}}" nextLabel="{{'Siguiente' | translate}}" (pageChange)="p = $event"></pagination-controls>
+    </ul>
+    <br>
+    <pagination-controls class="my-pagination" autoHide="true" previousLabel="{{'Anterior' | translate}}" nextLabel="{{'Siguiente' | translate}}" (pageChange)="p = $event"></pagination-controls>
   </div>
+
+  <div *ngIf="nuevaRutina">
+    <h1 style="text-align: center">{{'Nueva rutina personalizada' | translate}}</h1>
+    <div class="form-group">
+      <div class="form-group-item">
+        <label>Nombre</label>
+        
+      </div>
+    </div>
+  </div>
+
   <div class="flex" style="padding-top: 25px;">
       <button class="btn btn-success" (click)="guardarRutinasAlumno()"> {{'Guardar' | translate}} </button>
       <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>

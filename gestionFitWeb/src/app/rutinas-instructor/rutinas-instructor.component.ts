@@ -17,6 +17,8 @@ export class RutinasInstructorComponent implements OnInit {
 	rutinas: any[];
   rutinaAlumno:any[];
   tieneRutinas:boolean = false;
+  nuevaRutina:boolean= false;
+  searchText:any;
   
 
   constructor(private translateService: TranslateService, private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router) { }
@@ -24,6 +26,10 @@ export class RutinasInstructorComponent implements OnInit {
   ngOnInit() {
     this.getId();
     this.traerRutinas();
+  }
+
+  print(){
+    console.log(this.nuevaRutina);
   }
 
   getId(){

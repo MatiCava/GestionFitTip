@@ -6,6 +6,10 @@ public class Promo {
 	private String body;
 	private String photo;
 	
+	public Promo(){
+		
+	}
+	
 	public Promo(String matterS, String bodyS, String photoS){
 		this.matter = matterS;
 		this.body = bodyS;
