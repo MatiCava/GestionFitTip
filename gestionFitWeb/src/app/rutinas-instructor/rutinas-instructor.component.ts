@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { RoutineService } from '../services/routine/routine.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/switchMap';
+import { NuevaRutinaAsignarComponent } from '../nueva-rutina-asignar/nueva-rutina-asignar.component';
 
 @Component({
   selector: 'app-rutinas-instructor',
@@ -12,6 +13,8 @@ import 'rxjs/add/operator/switchMap';
   providers: [RoutineService]
 })
 export class RutinasInstructorComponent implements OnInit {
+
+  @ViewChild(NuevaRutinaAsignarComponent) rutinaComponent: NuevaRutinaAsignarComponent
 
   id:any;
 	rutinas: any[];
@@ -64,6 +67,14 @@ export class RutinasInstructorComponent implements OnInit {
     rutina.id = null;
     rutina.isTemplate = false;
     this.rutinaAlumno.push(rutina);
+  }
+
+  agregarRutinaNueva(){
+    console.log(this.rutinaComponent.form.value);
+    if(!this.tieneRutinas){
+      this.tieneRutinas=true;
+    }
+    this.rutinaAlumno.push(this.rutinaComponent.form.value);
   }
 
   traerRutinas(){

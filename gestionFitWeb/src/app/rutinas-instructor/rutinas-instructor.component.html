@@ -31,7 +31,7 @@
       </label>
       
     </div>
-  
+  <!-- Ordenar bien posicion de elementos -->
   <div *ngIf="!nuevaRutina">
     <h1 style="text-align: center">{{'Asignar rutinas' | translate}}</h1>
     <div class="form-inline md-form form-sm active-cyan-2">
@@ -40,8 +40,11 @@
     </div>
     <br>
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let rutina of rutinas | rutinasEjerciciosFilter : searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-        <div class="d-flex justify-content-between align-items-center">{{rutina.name}} <span><a [routerLink]="" (click)="agregarRutina(rutina)"><i class="fas fa-plus"></i> {{'Agregar' | translate}}</a></span></div>
+      <li class="list-group-item" *ngFor="let rutina of rutinas | rutinasEjerciciosFilter : searchText | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index;">
+        <div class="d-flex justify-content-between align-items-center">{{rutina.name}} <span><a [routerLink]="" (click)="agregarRutina(rutina)"><i class="fas fa-plus"></i> {{'Agregar' | translate}}</a></span><a data-toggle="collapse" href="#rutina{{i}}" role="button" aria-expanded="false">Editar</a></div>
+        <div class="collapse" id="rutina{{i}}">
+          Aca se editaria la rutina
+        </div>
       </li>
     
     </ul>
@@ -51,15 +54,11 @@
 
   <div *ngIf="nuevaRutina">
     <h1 style="text-align: center">{{'Nueva rutina personalizada' | translate}}</h1>
-    <div class="form-group">
-      <div class="form-group-item">
-        <label>Nombre</label>
-        
-      </div>
-    </div>
+    <app-nueva-rutina-asignar></app-nueva-rutina-asignar>
+    <button class="btn btn-primary" (click)="agregarRutinaNueva()">Agregar nueva rutina</button>
   </div>
 
-  <div class="flex" style="padding-top: 25px;">
+  <div class="flex" style="padding-top: 25px;padding-bottom: 25px">
       <button class="btn btn-success" (click)="guardarRutinasAlumno()"> {{'Guardar' | translate}} </button>
       <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
   </div>  

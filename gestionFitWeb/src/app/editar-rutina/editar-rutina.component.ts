@@ -32,6 +32,7 @@ export class EditarRutinaComponent implements OnInit {
   newRoutine;
   isNew = false; 
   isEdit = true;
+  isAsignar = false;
   tieneEjercicios = false;
   errorArgumentos = false;
   searchText:any;

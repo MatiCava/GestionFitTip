@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Routine, Routine_Type } from './../model/routine';
-import { RoutineService } from './../services/routine/routine.service';
-import { Router } from '@angular/router';
-import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { RoutineService } from '../services/routine/routine.service';
 
 @Component({
-  selector: 'app-nueva-rutina',
-  templateUrl: './nueva-rutina.component.html',
-  styleUrls: ['./nueva-rutina.component.css']
-}) 
-export class NuevaRutinaComponent implements OnInit {
+  selector: 'app-nueva-rutina-asignar',
+  templateUrl: '../nueva-rutina/nueva-rutina.component.html',
+  styleUrls: ['../nueva-rutina/nueva-rutina.component.css']
+})
+export class NuevaRutinaAsignarComponent implements OnInit {
 
-  form:FormGroup = this.formBuilder.group({
+  public form:FormGroup = this.formBuilder.group({
     name: new FormControl('', Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -22,22 +20,26 @@ export class NuevaRutinaComponent implements OnInit {
     ])),
     exercises: new FormControl('', Validators.compose([
       Validators.required
-    ]))
+    ])),
+    isTemplate: new FormControl(),
+    creationDate: new FormControl()
   })
 
   exercises:any[];
 	exercisesAlumno:any[] = [];
 	rutinasType=[];
-  newRoutine;
-  isAsignar = false;
+  public newRoutine;
   isEdit = false;
-  isNew = true;
+  isNew = false;
+  isAsignar = true;
   tieneEjercicios = false; 
   errorArgumentos = false;
-  isTemplate = true;
+  isTemplate = false;
 
-  constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
-    this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
+  constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService) {
+    this.newRoutine = {name:"",isTemplate:false, creationDate:new Date().getTime(), type:"", exercises:[]};
+    this.form.controls.isTemplate.setValue(false);
+    this.form.controls.creationDate.setValue(new Date().getTime());
   }
 
   ngOnInit() {
@@ -45,10 +47,6 @@ export class NuevaRutinaComponent implements OnInit {
     this.traerTipos();
   }
 
-
-  volverAtras(){
-    this.router.navigate(['/rutinas']);
-  }
 
   traerTipos(){
     this.routineServ.routineTypes().subscribe(
@@ -71,14 +69,7 @@ export class NuevaRutinaComponent implements OnInit {
   }
 
   guardarRutina(){
-    this.validForm();
 
-    this.newRoutine.isTemplate = this.isTemplate;
-    console.log(this.newRoutine);
-    this.routineServ.saveRoutine(this.newRoutine).subscribe(
-  			res => {console.log(res);this.volverAtras();},
-  			error => {if(error.status == 406){this.errorArgumentos = true};}
-  			)
   	
   }
 
@@ -96,6 +87,5 @@ export class NuevaRutinaComponent implements OnInit {
     this.newRoutine.exercises.splice(ejercicio, 1);
     
   }
-  
 
 }
