@@ -12,14 +12,24 @@ import { error } from 'protractor';
 export class AppComponent implements OnInit{
   @ViewChild("rfidInput")
   rfidInput:ElementRef;
+  @ViewChild("rfidInputRegister")
+  rfidInputRegister:ElementRef;
 
   title = 'GestionFit';
   rfidForm: FormGroup = this.formBuilder.group({
+    rfid : new FormControl('',Validators.required)
+  })
+
+  registerForm: FormGroup = this.formBuilder.group({
     rfid : new FormControl('',Validators.required),
-    mail: new FormControl('', Validators.minLength(18))
+    mail: new FormControl('', Validators.compose([
+      Validators.minLength(18),
+      Validators.required
+    ]))
   })
   user:any;
   focused=false;
+  registerBool=false;
 
   constructor(private formBuilder: FormBuilder, private userServ: UserService){
     this.user = {nameAndSurname:"",photo:"http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png",rfid:"",remainingLessons:0};
@@ -45,9 +55,13 @@ export class AppComponent implements OnInit{
   }
 
   saveRfid(){
-    this.userServ.registrarRfid(this.rfidForm.controls.mail.value, this.rfidForm.controls.rfid.value).subscribe(
+    this.userServ.registrarRfid(this.registerForm.controls.mail.value, this.registerForm.controls.rfid.value).subscribe(
       res => console.log(res),
       error=> console.log(error)
+    );
+    this.userServ.marcarAsistencia(this.registerForm.controls.rfid.value).subscribe(
+      res=>{console.log(res);this.user = res;this.registerForm.controls.rfid.setValue("");this.rfidInputRegister.nativeElement.focus();},
+      error => console.log(error)
     );
   }
   
