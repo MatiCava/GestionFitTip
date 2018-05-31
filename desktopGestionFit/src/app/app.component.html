@@ -4,23 +4,28 @@
   </h1>
   <img width="150" alt="Logo GestionFit" src="assets/icon.png">
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
+  <form *ngIf="!registerBool" (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
     <div class="form-group">
       <label for="rfidInput">Rfid</label>
       <input type="text" class="form-control" id="rfidInput" aria-describedby="rfidHelp" placeholder="00000000" #rfidInput (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
       <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
     </div>
     <button class="btn btn-primary" type="submit">Ingresar</button>
-    <br>
+  </form>
+
+  <form *ngIf="registerBool" [formGroup]="registerForm">
     <div class="form-group">
-      <label for="mailInput">Si es tu primera vez registra tu llavero y tu primer asistencia con tu mail</label>
+      <label for="mailInput">Registra tu llavero pasandolo y tu primer asistencia con tu mail</label>
       <input type="text" class="form-control" id="mailInput" placeholder="carlos@gmail.com" formControlName="mail">
+      <label for="rfidInput2">Rfid</label>
+      <input type="text" class="form-control" id="rfidInput2" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
       <br>
       <button class="btn btn-primary" (click)="saveRfid()">Registrarse</button>
     </div>
   </form>
-
-  
+  <br>
+  <label>Primera vez en el gimnasio?</label>
+  <input type="checkbox" [(ngModel)]="registerBool">
 
   <div class="row" style="padding-top: 30px">
     <div class="col-md" style="height: 100px">
