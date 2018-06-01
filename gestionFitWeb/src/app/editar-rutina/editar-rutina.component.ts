@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ViewChild, QueryList } from '@angular/core';
 import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 
 @Component({
   selector: 'app-editar-rutina',
@@ -11,6 +12,9 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
   styleUrls: ['./editar-rutina.component.css']
 })
 export class EditarRutinaComponent implements OnInit {
+
+  @ViewChild(NuevoEjercicioAsignarComponent) ejercicioComponent: NuevoEjercicioAsignarComponent;
+  @ViewChildren(NuevoEjercicioAsignarComponent) ejerciciosEdit: QueryList<NuevoEjercicioAsignarComponent>;
 
   form:FormGroup = this.formBuilder.group({
     name: new FormControl('', Validators.compose([
@@ -111,5 +115,14 @@ export class EditarRutinaComponent implements OnInit {
 
   volverAtras(){
     this.router.navigate(['/rutinas']);
+  }
+
+  
+  agregarEjercicioEditado(id){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
   }
 }

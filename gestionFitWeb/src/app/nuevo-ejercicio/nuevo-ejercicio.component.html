@@ -17,6 +17,7 @@
       <small id="errorDescription" *ngIf="form.controls.description.invalid && form.controls.description.dirty"></small>
     </div>
   </form>
+  <div *ngIf="isAsignar">
   <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
     <button class="btn btn-success" [disabled]="!form.valid" (click)="guardarEjercicio()"> {{'Guardar' | translate}} </button>
     <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
@@ -24,7 +25,8 @@
   <div *ngIf="isEdit" class="flex" style="padding-top: 25px;">
     <button class="btn btn-success" [disabled]="!form.valid" (click)="actualizarEjercicio()"> {{'Actualizar' | translate}} </button>
     <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
-  </div> 
+  </div>
+</div> 
 </div>
 
 

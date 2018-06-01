@@ -37,9 +37,6 @@ export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
 
   }
 
-  print(){
-    console.log(this.rutinasEdits.length);
-  }
 
   getId(){
     this.route.paramMap.switchMap((params: ParamMap) => 
@@ -84,7 +81,6 @@ export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
   }
 
   agregarRutinaEditada(id){
-    console.log(this.rutinasEdits.toArray()[id]);
     this.rutinaAlumno.push(this.rutinasEdits.toArray()[id].form.value);
 
   }

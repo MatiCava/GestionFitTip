@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       result => {
         console.log(result);
         localStorage.setItem("token", result.body.token);
+        localStorage.setItem("id",result.body.id);
         this.routerServ.navigate(['/alumnos']);
       },
       error => {

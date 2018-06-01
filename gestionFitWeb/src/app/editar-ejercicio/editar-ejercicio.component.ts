@@ -30,6 +30,7 @@ export class EditarEjercicioComponent implements OnInit {
   newExercise;
   isNew = false; 
   isEdit = true;
+  isAsignar = false;
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');

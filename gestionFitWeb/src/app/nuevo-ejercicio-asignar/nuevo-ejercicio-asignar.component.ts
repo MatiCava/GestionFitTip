@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Exercise, Exercise_Type } from './../model/exercise';
-import { RoutineService } from './../services/routine/routine.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { RoutineService } from '../services/routine/routine.service';
+import { Router } from '@angular/router';
+import { Exercise_Type } from '../model/exercise';
 
 @Component({
-  selector: 'app-nuevo-ejercicio',
-  templateUrl: './nuevo-ejercicio.component.html',
-  styleUrls: ['./nuevo-ejercicio.component.css']
+  selector: 'app-nuevo-ejercicio-asignar',
+  templateUrl: '../nuevo-ejercicio/nuevo-ejercicio.component.html',
+  styleUrls: ['../nuevo-ejercicio/nuevo-ejercicio.component.css']
 })
-export class NuevoEjercicioComponent implements OnInit {
+export class NuevoEjercicioAsignarComponent implements OnInit {
+
+  @Input() ejercicioAEditar:any;
 
   form:FormGroup = this.formBuilder.group({
     name: new FormControl('', Validators.compose([
@@ -23,7 +25,8 @@ export class NuevoEjercicioComponent implements OnInit {
     description: new FormControl('', Validators.compose([
       Validators.minLength(1),
       Validators.required
-    ]))
+    ])),
+    isTemplate: new FormControl()
   })
 
   exercisesType=[];
@@ -33,23 +36,30 @@ export class NuevoEjercicioComponent implements OnInit {
   isNew = true;
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
-    this.newExercise = {name:"", description:"", type:"",isTemplate : true};
+    this.newExercise = {name:"", description:"", type:"",isTemplate : false};
+    this.form.controls.type.setValue(false);
   }
 
   ngOnInit() {
 
     this.traerTiposEjercicio();
+    if(this.ejercicioAEditar != null){
+      this.form.controls.name.setValue(this.ejercicioAEditar.name);
+      this.form.controls.type.setValue(this.ejercicioAEditar.type);
+      this.form.controls.description.setValue(this.ejercicioAEditar.description);
+      
+    }
   }
 
   traerTiposEjercicio(){
     this.routineServ.exerciseTypes().subscribe(
-      result => {console.log(result);this.exercisesType= result},
+      result => {this.exercisesType= result},
       error => console.log(error)
     )
   }
 
   volverAtras(){
-    this.router.navigate(['/ejercicios']);
+
   }
 
   validForm(){
@@ -59,19 +69,10 @@ export class NuevoEjercicioComponent implements OnInit {
   }
 
   guardarEjercicio(){
-    this.validForm();
-  	let type = Exercise_Type[this.newExercise.type];
-    this.newExercise.type = type;
-    console.log(this.newExercise);
-    this.routineServ.saveExercise(this.newExercise).subscribe(
-  			res => {console.log(res);this.volverAtras();},
-  			error => {console.log(error);}
-  			)
-  	
+
   }
 
   actualizarEjercicio(){
     
   }
-
 }

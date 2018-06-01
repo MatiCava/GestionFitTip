@@ -32,6 +32,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AgregarClasesComponent } from './agregar-clases/agregar-clases.component'; 
 import { NgxInputFileUploadModule } from 'ngx-input-file-upload';
 import { NuevaRutinaAsignarComponent } from './nueva-rutina-asignar/nueva-rutina-asignar.component';
+import { NuevoEjercicioAsignarComponent } from './nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -82,7 +83,8 @@ const appRoutes: Routes = [
     InfoEjercicioComponent,
     PromosComponent,
     AgregarClasesComponent,
-    NuevaRutinaAsignarComponent
+    NuevaRutinaAsignarComponent,
+    NuevoEjercicioAsignarComponent
     
     
 

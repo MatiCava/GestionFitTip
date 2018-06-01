@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
+import { NuevoEjercicioComponent } from '../nuevo-ejercicio/nuevo-ejercicio.component';
 
 @Component({
   selector: 'app-nueva-rutina',
@@ -11,6 +13,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./nueva-rutina.component.css']
 }) 
 export class NuevaRutinaComponent implements OnInit {
+
+  @ViewChild(NuevoEjercicioAsignarComponent) ejercicioComponent: NuevoEjercicioAsignarComponent;
+  @ViewChildren(NuevoEjercicioAsignarComponent) ejerciciosEdit: QueryList<NuevoEjercicioAsignarComponent>;
 
   form:FormGroup = this.formBuilder.group({
     name: new FormControl('', Validators.compose([
@@ -22,7 +27,9 @@ export class NuevaRutinaComponent implements OnInit {
     ])),
     exercises: new FormControl('', Validators.compose([
       Validators.required
-    ]))
+    ])),
+    isTemplate: new FormControl(),
+    creationDate: new FormControl()
   })
 
   exercises:any[];
@@ -35,9 +42,12 @@ export class NuevaRutinaComponent implements OnInit {
   tieneEjercicios = false; 
   errorArgumentos = false;
   isTemplate = true;
+  searchText:any;
 
   constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
+    this.form.controls.isTemplate.setValue(true);
+    this.form.controls.creationDate.setValue(new Date().getTime());
   }
 
   ngOnInit() {
@@ -71,11 +81,9 @@ export class NuevaRutinaComponent implements OnInit {
   }
 
   guardarRutina(){
-    this.validForm();
 
-    this.newRoutine.isTemplate = this.isTemplate;
     console.log(this.newRoutine);
-    this.routineServ.saveRoutine(this.newRoutine).subscribe(
+    this.routineServ.saveRoutine(this.form.value).subscribe(
   			res => {console.log(res);this.volverAtras();},
   			error => {if(error.status == 406){this.errorArgumentos = true};}
   			)
@@ -96,6 +104,16 @@ export class NuevaRutinaComponent implements OnInit {
     this.newRoutine.exercises.splice(ejercicio, 1);
     
   }
+
+  agregarEjercicioEditado(id){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+  }
+
+
   
 
 }

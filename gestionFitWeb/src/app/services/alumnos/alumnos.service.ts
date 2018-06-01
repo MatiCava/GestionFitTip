@@ -33,6 +33,11 @@ export class AlumnosService {
   	return this.http.post(this.apiUrl+"alumno", newUser, this.httpOptions);
   }
 
+  updateUser(user):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+    return this.http.put(this.apiUrl + "user/" + user.id,user);
+  }
+
   getUser(id): Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
   	return this.http.get(this.apiUrl+"user/"+id, this.httpOptions);

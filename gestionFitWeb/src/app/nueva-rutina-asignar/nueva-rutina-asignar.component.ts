@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, ViewChild, QueryList } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { RoutineService } from '../services/routine/routine.service';
+import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 
 @Component({
   selector: 'app-nueva-rutina-asignar',
@@ -11,6 +12,8 @@ import { RoutineService } from '../services/routine/routine.service';
 export class NuevaRutinaAsignarComponent implements OnInit {
 
   @Input() rutinaAEditar:any;
+  @ViewChild(NuevoEjercicioAsignarComponent) ejercicioComponent: NuevoEjercicioAsignarComponent;
+  @ViewChildren(NuevoEjercicioAsignarComponent) ejerciciosEdit: QueryList<NuevoEjercicioAsignarComponent>;
 
   public form:FormGroup = this.formBuilder.group({
     name: new FormControl('', Validators.compose([
@@ -37,6 +40,7 @@ export class NuevaRutinaAsignarComponent implements OnInit {
   tieneEjercicios = false; 
   errorArgumentos = false;
   isTemplate = false;
+  searchText:any;
 
   constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService) {
     
@@ -50,7 +54,6 @@ export class NuevaRutinaAsignarComponent implements OnInit {
 
   ngOnInit() {
     if(this.rutinaAEditar != null){
-      console.log(this.rutinaAEditar);
       this.form.controls.name.setValue(this.rutinaAEditar.name);
       this.form.controls.type.setValue(this.rutinaAEditar.type);
       this.form.controls.exercises.setValue(this.rutinaAEditar.exercises);
@@ -62,7 +65,7 @@ export class NuevaRutinaAsignarComponent implements OnInit {
 
   traerTipos(){
     this.routineServ.routineTypes().subscribe(
-      result => {console.log(result);this.rutinasType= result;},
+      result => {this.rutinasType= result;},
       error => console.log(error)
     )
   }
@@ -99,5 +102,14 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     this.newRoutine.exercises.splice(ejercicio, 1);
     
   }
+
+  agregarEjercicioEditado(id){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+  }
+
 
 }
