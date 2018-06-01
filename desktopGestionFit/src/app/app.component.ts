@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
 
   registerForm: FormGroup = this.formBuilder.group({
     rfid : new FormControl('',Validators.required),
+    lessons: new FormControl('', Validators.required),
     mail: new FormControl('', Validators.compose([
       Validators.minLength(18),
       Validators.required
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit{
         res=>{console.log(res);this.user = res;this.rfidForm.controls.rfid.setValue("");this.rfidInput.nativeElement.focus();},
         error => console.log(error)
       );
+      this.clearForm();
   }
 
   onFocus(){
@@ -54,14 +56,24 @@ export class AppComponent implements OnInit{
     this.focused = false;
   }
 
+  clearForm(){
+    this.registerForm.reset();
+    this.rfidInputRegister.nativeElement.focus();
+    this.registerBool = false;
+  }
+
+  addLessons(){
+    this.userServ.addLessons(this.registerForm.controls.mail.value, this.registerForm.controls.lessons.value).subscribe(
+      res => {console.log(res); this.registerForm.controls.lessons.setValue(null);},
+      error=> console.log(error)
+    );
+  }
+
+  //this.registerForm.controls.mail.setValue(""); this.registerForm.controls.rfid.setValue(""); this.rfidInputRegister.nativeElement.focus();
   saveRfid(){
     this.userServ.registrarRfid(this.registerForm.controls.mail.value, this.registerForm.controls.rfid.value).subscribe(
       res => console.log(res),
       error=> console.log(error)
-    );
-    this.userServ.marcarAsistencia(this.registerForm.controls.rfid.value).subscribe(
-      res=>{console.log(res);this.user = res;this.registerForm.controls.rfid.setValue("");this.rfidInputRegister.nativeElement.focus();},
-      error => console.log(error)
     );
   }
   

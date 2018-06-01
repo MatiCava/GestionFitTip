@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	whitelist.add("/api/checkEmail");
     	whitelist.add("/api/assist");
     	whitelist.add("/api/addRfid");
+    	whitelist.add("/api/addLessonsDesktop");
     	
     	
         http.cors().and()
@@ -41,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/favicon.ico").permitAll() 
             .antMatchers("/css/**").permitAll().antMatchers("/error").permitAll()
             .antMatchers("/bower_components/**").permitAll()
-            .antMatchers("/api/checkUsername/**","/api/checkEmail/**","/api/addRfid/**","/api/assist/**").permitAll()
+            .antMatchers("/api/checkUsername/**","/api/checkEmail/**","/api/addRfid/**","/api/assist/**","/api/addLessonsDesktop/**").permitAll()
             
             .anyRequest().fullyAuthenticated()//cualquier otra peticion requiere autenticacion
             .and().formLogin().loginPage("/auth/login").failureUrl("/auth/login?error").permitAll().and()

@@ -123,6 +123,15 @@ public class UserController {
 		
 	}
 	
+	@PutMapping(value = "/addLessonsDesktop/{mail}/{nLessons}", produces = "application/json")
+	public ResponseEntity<User> addLessonsToStudentDesktop(@PathVariable("mail") String mail, @PathVariable("nLessons") int numLessons ) throws Exception{
+		User user = this.userServ.getByMail(mail);
+		this.userServ.addLessons(user.getId(),numLessons);
+		this.emailServ.sendEmailToUser(this.userServ.getByMail(mail), EmailService.PAID);
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+		
+	}
+	
 	@PostMapping(value = "/assist/student/{id}",produces="application/json")
 	public ResponseEntity<User> studentAssist(@PathVariable("id") String id) throws Exception{
 		User_Student user;
@@ -133,12 +142,12 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/addRfid/{mail}/{rfid}",produces = "application/json")
-	public ResponseEntity<Void> addRfid(@PathVariable("mail") String mail,@PathVariable("rfid") String rfid){
+	public ResponseEntity<User> addRfid(@PathVariable("mail") String mail,@PathVariable("rfid") String rfid){
 		//habria que checkear que no exista otro usuario con ese rfid
 		User_Student user =(User_Student) this.userServ.getByMail(mail);
 		user.setRfid(rfid);
 		this.userServ.updateStudent(user);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
 	}
 	

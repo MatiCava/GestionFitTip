@@ -22,4 +22,8 @@ export class UserService {
     return this.http.post(this.apiUrl + "addRfid/" + mail + "/" + rfid,{});
   }
 
+  addLessons(mail, lessons){
+    return this.http.put(this.apiUrl + "addLessonsDesktop/" + mail + "/" + lessons, {});
+  }
+
 }
