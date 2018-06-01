@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { RoutineService } from '../services/routine/routine.service';
@@ -9,6 +9,8 @@ import { RoutineService } from '../services/routine/routine.service';
   styleUrls: ['../nueva-rutina/nueva-rutina.component.css']
 })
 export class NuevaRutinaAsignarComponent implements OnInit {
+
+  @Input() rutinaAEditar:any;
 
   public form:FormGroup = this.formBuilder.group({
     name: new FormControl('', Validators.compose([
@@ -37,12 +39,22 @@ export class NuevaRutinaAsignarComponent implements OnInit {
   isTemplate = false;
 
   constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService) {
-    this.newRoutine = {name:"",isTemplate:false, creationDate:new Date().getTime(), type:"", exercises:[]};
-    this.form.controls.isTemplate.setValue(false);
-    this.form.controls.creationDate.setValue(new Date().getTime());
+    
+      this.newRoutine = {name:"",isTemplate:false, creationDate:new Date().getTime(), type:"", exercises:[]};
+      this.form.controls.isTemplate.setValue(false);
+      this.form.controls.creationDate.setValue(new Date().getTime());
+    
+
+
   }
 
   ngOnInit() {
+    if(this.rutinaAEditar != null){
+      console.log(this.rutinaAEditar);
+      this.form.controls.name.setValue(this.rutinaAEditar.name);
+      this.form.controls.type.setValue(this.rutinaAEditar.type);
+      this.form.controls.exercises.setValue(this.rutinaAEditar.exercises);
+    }
     this.traerEjercicios();
     this.traerTipos();
   }

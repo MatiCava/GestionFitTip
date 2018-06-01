@@ -41,9 +41,19 @@
     <br>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let rutina of rutinas | rutinasEjerciciosFilter : searchText | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index;">
-        <div class="d-flex justify-content-between align-items-center">{{rutina.name}} <span><a [routerLink]="" (click)="agregarRutina(rutina)"><i class="fas fa-plus"></i> {{'Agregar' | translate}}</a></span><a data-toggle="collapse" href="#rutina{{i}}" role="button" aria-expanded="false">Editar</a></div>
-        <div class="collapse" id="rutina{{i}}">
-          Aca se editaria la rutina
+        <div class="row">
+          <div class="col-md-6">{{rutina.name}}</div> 
+          <div class="col-md-3">
+            <span><a [routerLink]="" (click)="agregarRutina(rutina)"><i class="fas fa-plus"></i> {{'Agregar' | translate}}</a></span>
+          </div>
+          <div class="col-md-3">
+              <a data-toggle="collapse" href="#rutina{{i}}" role="button" aria-expanded="false">Editar</a>
+          </div>
+          </div>
+            <div class="collapse" id="rutina{{i}}">
+          
+          <app-nueva-rutina-asignar #edit [rutinaAEditar]="rutina"></app-nueva-rutina-asignar>
+          <button class="btn btn-primary" data-toggle="collapse" attr.data-target="#rutina{{i}}" (click)="agregarRutinaEditada(i)" >Agregar</button>
         </div>
       </li>
     

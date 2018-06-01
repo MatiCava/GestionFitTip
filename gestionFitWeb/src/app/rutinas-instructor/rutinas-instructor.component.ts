@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewChildren,QueryList, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { RoutineService } from '../services/routine/routine.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -12,9 +12,10 @@ import { NuevaRutinaAsignarComponent } from '../nueva-rutina-asignar/nueva-rutin
   styleUrls: ['./rutinas-instructor.component.css'],
   providers: [RoutineService]
 })
-export class RutinasInstructorComponent implements OnInit {
+export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
 
   @ViewChild(NuevaRutinaAsignarComponent) rutinaComponent: NuevaRutinaAsignarComponent
+  @ViewChildren(NuevaRutinaAsignarComponent) rutinasEdits: QueryList<NuevaRutinaAsignarComponent>
 
   id:any;
 	rutinas: any[];
@@ -31,8 +32,13 @@ export class RutinasInstructorComponent implements OnInit {
     this.traerRutinas();
   }
 
+  ngAfterViewChecked(){
+    //console.log(this.rutinasEdits.length);
+
+  }
+
   print(){
-    console.log(this.nuevaRutina);
+    console.log(this.rutinasEdits.length);
   }
 
   getId(){
@@ -77,9 +83,15 @@ export class RutinasInstructorComponent implements OnInit {
     this.rutinaAlumno.push(this.rutinaComponent.form.value);
   }
 
+  agregarRutinaEditada(id){
+    console.log(this.rutinasEdits.toArray()[id]);
+    this.rutinaAlumno.push(this.rutinasEdits.toArray()[id].form.value);
+
+  }
+
   traerRutinas(){
   	this.routineProvider.getRutinesTemplates().subscribe(
-  						result => {this.rutinas = result;},
+  						result => {this.rutinas = result;console.log(this.rutinasEdits.length);},
   						error => {console.log(error);},
   						)
   }
