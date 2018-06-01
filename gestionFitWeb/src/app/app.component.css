@@ -85,12 +85,12 @@ SIDEBAR STYLE
 }
 
 #sidebar .sidebar-header {
-  padding: 10px;
+  padding: 6px;
   background: #318fd3;
 }
 
 #sidebar ul.components {
-  padding: 10px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #47748b;
 }
 
@@ -104,7 +104,7 @@ SIDEBAR STYLE
 }
 
 #sidebar ul li a {
-  padding: 10px;
+  padding: 6px;
   font-size: 1.0em;
   display: block;
   color:white;
@@ -133,7 +133,7 @@ ul ul a {
 }
 
 ul.CTAs {
-  padding: 10px;
+  padding: 6px;
 }
 
 ul.CTAs a {

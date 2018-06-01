@@ -24,7 +24,20 @@
                     </li>
             </ul>
         </div>
-        <div class="form-group">
+          <div class="form-check">
+      <input class="form-check-input" type="radio" [(ngModel)]="nuevoEjercicio" name="optionsEj" id="asignarEj" [value]="false" checked>
+      <label class="form-check-label" for="asignarEj">
+        Asignar ejercicio generico
+      </label>
+      </div>
+      <div class="form-check">
+      <input class="form-check-input" type="radio"  [(ngModel)]="nuevoEjercicio" name="optionsEj" id="nuevoEj" [value]="true">
+      <label class="form-check-label" for="nuevoEj">
+        Crear nuevo ejercicio personalizado
+      </label>
+      
+    </div>
+        <div class="form-group" *ngIf="!nuevoEjercicio">
             <h2>{{'Ejercicios' | translate}}</h2>
             <div class="form-inline md-form form-sm active-cyan-2">
                 <input class="form-control form-control-sm mr-3 w-75" type="text" [(ngModel)]="searchText" placeholder="{{'Buscar' | translate}}" aria-label="Search">
@@ -55,7 +68,14 @@
             <br>
             <pagination-controls class="my-pagination" autoHide="true" previousLabel="{{'Anterior' | translate}}" nextLabel="{{'Siguiente' | translate}}" (pageChange)="p = $event"></pagination-controls>
         </div>
+        <div *ngIf="nuevoEjercicio">
+            <h1 style="text-align: center">{{'Nuevo ejercicio personalizado' | translate}}</h1>
+            <app-nuevo-ejercicio-asignar></app-nuevo-ejercicio-asignar>
+            <button class="btn btn-primary" (click)="agregarEjercicioNuevo()">Agregar nuevo ejercicio</button>
+
+        </div>
         <div *ngIf=!isAsignar>
+        
         <div class="alert alert-danger" role="alert" style="font-family: 'Poppins',sans-serif;font-size: 20px" *ngIf="errorArgumentos" >{{'Error al guardar la rutina. Compruebe que los datos sean correctos' | translate}}</div>
         
         <div *ngIf="isNew" class="flex" style="padding-top: 25px;">
