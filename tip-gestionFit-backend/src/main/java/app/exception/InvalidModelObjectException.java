@@ -3,7 +3,7 @@ package app.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+@ResponseStatus(value=HttpStatus.NOT_ACCEPTABLE,reason="Not valid arguments")
 public class InvalidModelObjectException extends IllegalArgumentException {
 
 	private static final long serialVersionUID = 1L;
