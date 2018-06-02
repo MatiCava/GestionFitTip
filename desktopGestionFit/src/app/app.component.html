@@ -11,16 +11,25 @@
       <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
     </div>
     <button class="btn btn-primary" type="submit">Ingresar</button>
+    <div *ngIf="errorAssist" class="alert alert-danger" role="alert">
+      {{errorAssistMessage}}
+      <button type="button" class="close" (click)="errorAssist = false" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </form>
 
   <form *ngIf="registerBool" [formGroup]="registerForm">
     <div class="form-group">
-      <label for="mailInput">Registra tu llavero pasandolo y tu primer asistencia con tu mail</label>
+      <label for="mailInput">Pasa tu llavero y registralo con tu mail y cuantas clases queres arrancar</label>
       <input type="text" class="form-control" id="mailInput" placeholder="carlos@gmail.com" formControlName="mail">
       <label for="rfidInput2">Rfid</label>
       <input type="text" class="form-control" id="rfidInput2" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
+      <label for="lessonsInput">Agrega clases con tu mail</label>
+      <input type="number" class="form-control" id="lessonsInput" placeholder="5" formControlName="lessons">
       <br>
-      <button class="btn btn-primary" (click)="saveRfid()">Registrarse</button>
+      <button class="btn btn-primary" (click)="saveRfid()" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
+      <button class="btn btn-primary" (click)="addLessons()" data-toggle="modal" data-target="#modalClases">Agregar clases</button>
     </div>
   </form>
   <br>
@@ -35,6 +44,45 @@
       <h3>Nombre: {{user.nameAndSurname}}</h3>
       <h3>Clases restantes: {{user.remainingLessons}}</h3>
       <h3>Id: {{user.rfid}}</h3>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalClases" tabindex="-1" role="dialog" aria-labelledby="modalClasesTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalClasesTitle">Confirmacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Ha agregado clases</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistrarTitle">Confirmacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Ya ha registrado su rfid, desea cerrar y agregar clases o ingresar?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="clearForm()" class="btn btn-primary" data-dismiss="modal">Ingresar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
   </div>
 

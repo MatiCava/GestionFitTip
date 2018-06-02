@@ -13,8 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import app.exception.ExpiredLessonsException;
 import app.exception.InsufficientLessonsException;
 import app.exception.NotFoundException;
+import app.exception.UserNotFoundException;
 import app.model.Measurement;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
@@ -138,10 +140,10 @@ public class UserService {
 	
 	//Falta agregar la asistencia a un log
 	@Transactional
-	public void studentAssist(String id) throws InsufficientLessonsException{
+	public void studentAssist(String id) throws InsufficientLessonsException,ExpiredLessonsException{
 		User_Student user = (User_Student) this.getByRfid(id);
 		if(user == null){
-			throw new NotFoundException("Usuario no encontrado");
+			throw new UserNotFoundException("Usuario no encontrado");
 		}
 		user.substractRemainingLessons();
 		this.updateStudent(user);

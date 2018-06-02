@@ -43,6 +43,7 @@ export class NuevaRutinaComponent implements OnInit {
   errorArgumentos = false;
   isTemplate = true;
   searchText:any;
+  nuevoEjercicio:boolean=false;
 
   constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
     this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
@@ -110,6 +111,14 @@ export class NuevaRutinaComponent implements OnInit {
       this.tieneEjercicios=true;
     }
     this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+  }
+
+  agregarEjercicioNuevo(){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(this.ejercicioComponent.form.value);
     this.form.controls.exercises.setValue(this.newRoutine.exercises);
   }
 

@@ -111,5 +111,13 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     this.form.controls.exercises.setValue(this.newRoutine.exercises);
   }
 
+    agregarEjercicioNuevo(){
+    if(!this.tieneEjercicios){
+      this.tieneEjercicios=true;
+    }
+    this.newRoutine.exercises.push(this.ejercicioComponent.form.value);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+  }
+
 
 }

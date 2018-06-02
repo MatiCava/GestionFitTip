@@ -17,20 +17,21 @@
         
       </ul>
   </div>
-
-  <div class="form-check">
+<div style="margin-top:20px;padding-bottom:30px">
+  <div class="form-check" >
       <input class="form-check-input" type="radio" [(ngModel)]="nuevaRutina" name="options" id="asignar" [value]="false" checked>
       <label class="form-check-label" for="asignar">
         Asignar rutina generica
       </label>
-      </div>
-      <div class="form-check">
+  </div>
+  <div class="form-check">
       <input class="form-check-input" type="radio"  [(ngModel)]="nuevaRutina" name="options" id="nueva" [value]="true">
       <label class="form-check-label" for="nueva">
         Crear nueva rutina personalizada
       </label>
       
-    </div>
+  </div>
+  </div>
   <!-- Ordenar bien posicion de elementos -->
   <div *ngIf="!nuevaRutina">
     <h1 style="text-align: center">{{'Asignar rutinas' | translate}}</h1>
@@ -65,7 +66,7 @@
   <div *ngIf="nuevaRutina">
     <h1 style="text-align: center">{{'Nueva rutina personalizada' | translate}}</h1>
     <app-nueva-rutina-asignar></app-nueva-rutina-asignar>
-    <button class="btn btn-primary" (click)="agregarRutinaNueva()">Agregar nueva rutina</button>
+    <button class="btn btn-primary" (click)="agregarRutinaNueva()" style="margin-top:30px">Agregar nueva rutina</button>
   </div>
 
   <div class="flex" style="padding-top: 25px;padding-bottom: 25px">
