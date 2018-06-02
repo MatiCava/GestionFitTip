@@ -15,6 +15,7 @@ export class NuevoEjercicioAsignarComponent implements OnInit {
   @Input() ejercicioAEditar:any;
 
   form:FormGroup = this.formBuilder.group({
+    id: new FormControl(),
     name: new FormControl('', Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -31,23 +32,21 @@ export class NuevoEjercicioAsignarComponent implements OnInit {
 
   exercisesType=[];
   newExercise;
-  isAsignar = false;
+  isAsignar = true;
   isEdit = false;
   isNew = true;
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
     this.newExercise = {name:"", description:"", type:"",isTemplate : false};
-    this.form.controls.type.setValue(false);
+    this.form.controls.isTemplate.setValue(false);
   }
 
   ngOnInit() {
 
     this.traerTiposEjercicio();
     if(this.ejercicioAEditar != null){
-      this.form.controls.name.setValue(this.ejercicioAEditar.name);
-      this.form.controls.type.setValue(this.ejercicioAEditar.type);
-      this.form.controls.description.setValue(this.ejercicioAEditar.description);
-      
+      this.form.setValue(this.ejercicioAEditar);
+      this.form.controls.isTemplate.setValue(false);
     }
   }
 

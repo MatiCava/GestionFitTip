@@ -7,6 +7,12 @@
       <p>{{'Usuario' | translate}}: <strong>{{alumno.username}}</strong></p>	
     </li>
     <li class="list-group-item">
+      <p>{{'Clases restantes' | translate}}: <strong>{{alumno.remainingLessons}}</strong></p>	
+    </li>
+    <li class="list-group-item">
+      <p>{{'Vencimiento mes' | translate}}: <strong>{{alumno.lessonsExpires | date:'dd/MM/yyyy'}}</strong><span *ngIf="alumno.lessonsExpires == null" > <strong> {{'El usuario todavia no pago su primer mes ' | translate}} </strong></span></p>	
+    </li>
+    <li class="list-group-item">
       <p> Mail: <strong>{{alumno.mail}}</strong> </p>
     </li>
     <li class="list-group-item">

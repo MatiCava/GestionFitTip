@@ -34,7 +34,6 @@ export class InfoRutinaPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoRutinaPage');
     this.presentSpinner();
     this.getInfoRutina();
   }
@@ -64,7 +63,7 @@ export class InfoRutinaPage {
   getInfoRutina(){
   	this.routineService.getRoutine(this.id).subscribe(
         routine => {this.rutina = routine;
-          console.log(this.rutina);this.loading.dismiss()},
+                    this.loading.dismiss()},
   			error => {console.log(error)}
   			)
   }
@@ -73,7 +72,6 @@ export class InfoRutinaPage {
   checkFinalizo(){
     let checked = this.rutina.exercises.filter(ex => ex.checked == true)
     this.finish =checked.length == this.rutina.exercises.length;
-    console.log(this.finish);
 
   }
 

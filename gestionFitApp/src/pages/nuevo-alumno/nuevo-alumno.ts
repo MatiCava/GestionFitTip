@@ -23,6 +23,7 @@ export class NuevoAlumnoPage {
     emailExistente:any;
 
   form:FormGroup = this.formBuilder.group({
+    photo : new FormControl('',Validators.required),
     username: new FormControl('',Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -57,19 +58,21 @@ export class NuevoAlumnoPage {
     ])),
   pathologies: new FormControl('',Validators.compose([
       Validators.minLength(0)
-    ]))
+    ])),
+    role: new FormControl(),
+    routines: new FormControl(),
+    measures: new FormControl()
   })
 
-  loading:Loading;
-
-
-  alumno = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
-  
+  loading:Loading;  
 
   constructor(private camera: Camera,private formBuilder: FormBuilder
     ,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider,private userServ: UserProvider, public loadingCtrl: LoadingController) {
     this.usuarioExistente = false;
     this.emailExistente = false;
+    this.form.controls.routines.setValue([]);
+    this.form.controls.measures.setValue({});
+    this.form.controls.role.setValue("STUDENT");
   }
 
   ionViewDidLoad() {
@@ -95,26 +98,12 @@ export class NuevoAlumnoPage {
   volverAtras(){
     this.navCtrl.push('login');
   }
-//refactor a simple form controls value
-  crearAlumno(){
-    this.alumno.username = this.form.controls['username'].value;
-    this.alumno.password = this.form.controls['password'].value;
-    this.alumno.nameAndSurname = this.form.controls['nameAndSurname'].value;
-    this.alumno.mail = this.form.controls['mail'].value;
-    this.alumno.objective = this.form.controls['objective'].value;
-    this.alumno.telephone = this.form.controls['telephone'].value;
-    this.alumno.weigth = this.form.controls['weigth'].value;
-    this.alumno.observations = this.form.controls['observations'].value;
-    this.alumno.pathologies = this.form.controls['pathologies'].value;
-    this.alumno.birthday = this.form.controls['birthday'].value;
-  }
 
  
 
   guardarAlumno(){
-    this.crearAlumno();
     this.presentSpinner();
-    this.serviceLogin.signup(this.alumno).subscribe(
+    this.serviceLogin.signup(this.form.value).subscribe(
     () => { 
               let confirmacion = this.alertCtrl.create({
                     title: 'Confirmacion',
@@ -157,7 +146,7 @@ export class NuevoAlumnoPage {
     this.camera.getPicture(options).then((imageData) => {
 
      let base64Image = 'data:image/jpeg;base64,' + imageData;
-     this.alumno.photo = base64Image;
+     this.form.controls.photo.setValue(base64Image);
      this.slides.lockSwipes(false);
      this.slides.slideNext();
      this.slides.lockSwipes(true);

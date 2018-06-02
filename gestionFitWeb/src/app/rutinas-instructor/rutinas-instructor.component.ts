@@ -12,7 +12,7 @@ import { NuevaRutinaAsignarComponent } from '../nueva-rutina-asignar/nueva-rutin
   styleUrls: ['./rutinas-instructor.component.css'],
   providers: [RoutineService]
 })
-export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
+export class RutinasInstructorComponent implements OnInit{
 
   @ViewChild(NuevaRutinaAsignarComponent) rutinaComponent: NuevaRutinaAsignarComponent
   @ViewChildren(NuevaRutinaAsignarComponent) rutinasEdits: QueryList<NuevaRutinaAsignarComponent>
@@ -32,10 +32,6 @@ export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
     this.traerRutinas();
   }
 
-  ngAfterViewChecked(){
-    //console.log(this.rutinasEdits.length);
-
-  }
 
 
   getId(){
@@ -54,8 +50,6 @@ export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
   }
 
   guardarRutinasAlumno(){
-    console.log(this.id);
-    console.log(this.rutinaAlumno);
   	this.userService.updateRutines(this.id,this.rutinaAlumno).subscribe(
   			res => {console.log(res);},
   			error => {console.log(error);}
@@ -73,7 +67,6 @@ export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
   }
 
   agregarRutinaNueva(){
-    console.log(this.rutinaComponent.form.value);
     if(!this.tieneRutinas){
       this.tieneRutinas=true;
     }
@@ -87,7 +80,7 @@ export class RutinasInstructorComponent implements OnInit,AfterViewChecked{
 
   traerRutinas(){
   	this.routineProvider.getRutinesTemplates().subscribe(
-  						result => {this.rutinas = result;console.log(this.rutinasEdits.length);},
+  						result => {this.rutinas = result;},
   						error => {console.log(error);},
   						)
   }

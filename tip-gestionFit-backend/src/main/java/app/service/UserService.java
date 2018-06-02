@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import app.exception.ExpiredLessonsException;
 import app.exception.InsufficientLessonsException;
-import app.exception.NotFoundException;
 import app.exception.UserNotFoundException;
 import app.model.Measurement;
 import app.model.MeasurementsAdapter;
@@ -132,8 +131,11 @@ public class UserService {
 		}
 		int newRLessons = user.getRemainingLessons() + numLessons;
 		user.setRemainingLessons(newRLessons);
+		
+		//Fecha de pago
 		user.setPaymentDate(new Date());
 		
+		//Seteo de expiracion en un mes
         Date dt = new Date();
         Calendar c = Calendar.getInstance(); 
         c.setTime(dt); 
@@ -145,7 +147,7 @@ public class UserService {
 	}
 	
 	
-	//Falta agregar la asistencia a un log
+	//Se podria agregar un log
 	@Transactional
 	public void studentAssist(String id) throws InsufficientLessonsException,ExpiredLessonsException{
 		User_Student user = (User_Student) this.getByRfid(id);
@@ -158,7 +160,6 @@ public class UserService {
 
 	@Transactional
 	public boolean checkUsername(String username) {
-		System.out.println(username);
 		return this.userDAO.checkUsername(username);
 	}
 

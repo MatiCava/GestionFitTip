@@ -19,16 +19,22 @@
     </div>
   </form>
 
-  <form *ngIf="registerBool" [formGroup]="registerForm">
+  <form *ngIf="registerBool" [formGroup]="registerForm" (ngSubmit)="saveRfid()">
     <div class="form-group">
-      <label for="mailInput">Pasa tu llavero y registralo con tu mail y cuantas clases queres arrancar</label>
-      <input type="text" class="form-control" id="mailInput" placeholder="carlos@gmail.com" formControlName="mail">
+      <label for="mailInput">Registre un llavero/tarjeta a un alumno y/o agregue clases al momento del pago</label>
+      <input type="text" class="form-control" id="mailInput" aria-describedby="mailHelper" placeholder="carlos@gmail.com" formControlName="mail" [class.invalid]="registerForm.controls['mail'].invalid">
+      <small id="mailHelper" *ngIf="registerForm.controls['mail'].invalid"></small>
+     
       <label for="rfidInput2">Rfid</label>
-      <input type="text" class="form-control" id="rfidInput2" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
-      <label for="lessonsInput">Agrega clases con tu mail</label>
+      <input type="text" class="form-control" id="rfidInput2" aria-describedby="rfidHelper" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
+      <small id="rfidHelper" *ngIf="focused">Puede pasar el llavero/tarjeta ahora</small>
+      <br>
+      <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
+      <br>
+      <label for="lessonsInput">Agrega clases <strong>(* requiere campo mail completo)</strong></label>
       <input type="number" class="form-control" id="lessonsInput" placeholder="5" formControlName="lessons">
       <br>
-      <button class="btn btn-primary" (click)="saveRfid()" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
+      
       <button class="btn btn-primary" (click)="addLessons()" data-toggle="modal" data-target="#modalClases">Agregar clases</button>
       <div *ngIf="errorRegister" class="alert alert-danger" role="alert">
         {{errorRegisterMessage}}

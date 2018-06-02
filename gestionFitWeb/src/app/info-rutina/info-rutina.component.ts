@@ -25,7 +25,7 @@ export class InfoRutinaComponent implements OnInit {
 
   getInfoRutina(){
     this.routineServ.getRoutine(this.id).subscribe(
-                      result => {this.rutina = result;console.log(result);},
+                      result => {this.rutina = result;},
                       error => {console.log(error);}
                       );
   }

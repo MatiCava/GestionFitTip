@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.loginServ.auth().subscribe(
-      res => {console.log(res),this.routerServ.navigate(["/alumnos"]);},
+      res => {this.routerServ.navigate(["/alumnos"]);},
       error => {console.log("Not logged");console.log(error);}
     );
 
@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginServ.logIn(this.credentials.value).subscribe(
       result => {
-        console.log(result);
         localStorage.setItem("token", result.body.token);
         localStorage.setItem("id",result.body.id);
         this.routerServ.navigate(['/alumnos']);

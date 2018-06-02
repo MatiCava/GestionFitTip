@@ -76,10 +76,6 @@ export class NuevaRutinaComponent implements OnInit {
   }
 
 
-  validForm(){
-    this.newRoutine.type = this.form.controls.type.value;
-    this.newRoutine.name = this.form.controls.name.value;
-  }
 
   guardarRutina(){
 
@@ -103,6 +99,7 @@ export class NuevaRutinaComponent implements OnInit {
 
   eliminarEjercicio(ejercicio){
     this.newRoutine.exercises.splice(ejercicio, 1);
+    this.form.controls.exercises.setValue(this.newRoutine.exercises);
     
   }
 

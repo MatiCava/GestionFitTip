@@ -15,11 +15,10 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'tabla-medicion-alumno.html',
   providers:[UserProvider]
 })
-export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
+export class TablaMedicionAlumnoPage implements OnInit{
   _table:any;
   @Input() set table(tab){
     if(tab!= null){
-      console.log(tab);
       this._table = tab;
       if(this.dates.length == 0){
         this.names = this._table.measures.map(m => m.name);
@@ -59,18 +58,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
     if(this.id != null){
       this.getTabla();
     }
-    
-    
   }
-
-  ngOnChanges(changes:SimpleChanges){
- 
-  }
-
-  ionViewDidLoad() {
-  }
-
-
 
   getTabla(){
   	this.userServ.getTabla(this.id).subscribe(
@@ -79,6 +67,7 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
   		error => {console.log(error)}
   		)
   }
+
   atras(){
     this.navCtrl.push("alumnos");
   }
@@ -118,7 +107,6 @@ export class TablaMedicionAlumnoPage implements OnInit, OnChanges{
      this.chartColours = [];
      this.chartValues = [];
      this.chartHoverColours = [];
-
      this.translate.get(this._table.measures[index].name).subscribe((res: string) => {
       this.chartMeasure = res;
       

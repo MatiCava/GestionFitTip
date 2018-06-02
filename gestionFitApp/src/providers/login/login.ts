@@ -7,7 +7,7 @@ import { Observable } from "rxjs/Observable";
 export class LoginProvider {
 
 	apiUrl : String="https://gestionfit-backend.herokuapp.com/"
-  //apiUrl : String="http://localhost:8080/"
+  //apiUrl : String="http://localhost:8080/";
   
   httpOptions:any;
 
@@ -28,8 +28,9 @@ export class LoginProvider {
 
   auth(): Observable<any>{
     if(localStorage.getItem("token") != null){
-    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")}),observe: "response"};}
-    return this.http.get(this.apiUrl + "authenticate",this.httpOptions);
+      this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")}),observe: "response"};
+    }
+    return this.http.get(this.apiUrl + "authenticate/student",this.httpOptions);
   }
 
 }

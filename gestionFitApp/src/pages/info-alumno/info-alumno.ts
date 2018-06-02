@@ -33,7 +33,6 @@ export class InfoAlumnoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoAlumnoPage');
   }
 
   formatearTelefono(tel){
@@ -52,7 +51,6 @@ export class InfoAlumnoPage {
 
 
   abrirInfo(idRoutine){
-    console.log(idRoutine);
    this.navCtrl.push(InfoRutinaPage,{id:idRoutine}); 
    
   }

@@ -22,7 +22,6 @@ export class RutinasAlumnoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RutinasAlumnoPage');
     this.getRutines();
   }
 

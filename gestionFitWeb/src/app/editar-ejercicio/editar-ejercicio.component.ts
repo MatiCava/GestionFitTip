@@ -12,6 +12,7 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 export class EditarEjercicioComponent implements OnInit {
 
   form:FormGroup = this.formBuilder.group({
+    id: new FormControl(),
     name: new FormControl('', Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -22,7 +23,8 @@ export class EditarEjercicioComponent implements OnInit {
     description: new FormControl('', Validators.compose([
       Validators.minLength(14),
       Validators.required
-    ]))
+    ])),
+    isTemplate: new FormControl()
   })
 
   id:any;
@@ -44,36 +46,28 @@ export class EditarEjercicioComponent implements OnInit {
 
   traerEjercicio(){
     this.routineServ.getExercise(this.id).subscribe(
-      result => {this.asignarValoresAForm(result);console.log(result);},
+      result => {this.asignarValoresAForm(result);},
       error => {console.log(error);}
       );
   }
 
   asignarValoresAForm(result){
-    this.newExercise = result;
-    console.log(this.newExercise);
-    this.form.get('name').setValue(this.newExercise.name);
-    this.form.get('type').setValue(this.newExercise.type);
-    this.form.get('description').setValue(this.newExercise.description);
+    this.form.setValue(result);
+
   }
 
   traerTiposEjercicio(){
     this.routineServ.exerciseTypes().subscribe(
-      result => {console.log(result);this.exercisesType= result},
+      result => {this.exercisesType= result},
       error => console.log(error)
     )
   }
 
-  asignarValoresDeForm(){
-    this.newExercise.name = this.form.controls.name.value;
-    this.newExercise.type = this.form.controls.type.value;
-    this.newExercise.description = this.form.controls.description.value;
-  }
 
   actualizarEjercicio(){
-    this.asignarValoresDeForm();
-    this.routineServ.updateExercise(this.id, this.newExercise).subscribe(
-      res => {console.log(res);this.volverAtras();},
+
+    this.routineServ.updateExercise(this.id, this.form.value).subscribe(
+      res => {this.volverAtras();},
       error => {console.log(error);}
       )
     

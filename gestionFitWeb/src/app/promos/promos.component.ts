@@ -37,9 +37,6 @@ export class PromosComponent implements OnInit {
   }
 
   validForm(){
-    console.log(this.formPromo.controls.matter.value);
-    console.log(this.formPromo.controls.body.value);
-    console.log(this.NgxInputFileUploadComponent.imageSrc);
     this.newPromo.matter = this.formPromo.controls.matter.value;
     this.newPromo.body = this.formPromo.controls.body.value;
     this.newPromo.photo = this.NgxInputFileUploadComponent.imageSrc;
@@ -48,7 +45,7 @@ export class PromosComponent implements OnInit {
   enviarPromo(){
     this.validForm();
     this.alumnosServ.sendPromo(this.newPromo).subscribe(
-      res=> {console.log(res);this.volverAtras();},
+      res=> {this.volverAtras();},
       error => console.log(error)
     );
   }

@@ -24,7 +24,7 @@ export class InfoEjercicioComponent implements OnInit {
 
   getInfoEjercicio(){
     this.routineServ.getExercise(this.id).subscribe(
-      result => {this.ejercicio = result;console.log(result);},
+      result => {this.ejercicio = result},
       error => {console.log(error);}
       );
   }

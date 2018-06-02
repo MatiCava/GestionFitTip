@@ -21,17 +21,16 @@ export class InstagramFeedPage implements OnInit{
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InstagramFeedPage');
   }
 
   ngOnInit(){
     this.instagramServ.getInstagramUserInfo().subscribe(
-      res=> {this.media=res.data;console.log(res)},
+      res=> {this.media=res.data},
       error=> console.log(error)
       );
 
     this.instagramServ.getInstagramProfile().subscribe(
-      res=> {this.info=res.data;console.log(res)},
+      res=> {this.info=res.data},
       error=> console.log(error));
 
   }

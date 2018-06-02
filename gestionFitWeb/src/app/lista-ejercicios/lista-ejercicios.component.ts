@@ -40,7 +40,7 @@ export class ListaEjerciciosComponent implements OnInit {
 
   eliminarEjercicio(){
     this.routineServ.deleteExercise(this.ejercicioSeleccionado.id).subscribe(
-      result => {console.log(result);location.reload()},
+      result => {location.reload()},
       error => {console.log(error);}
     );
     this.ejercicioSeleccionado = {};

@@ -17,6 +17,7 @@ export class EditarRutinaComponent implements OnInit {
   @ViewChildren(NuevoEjercicioAsignarComponent) ejerciciosEdit: QueryList<NuevoEjercicioAsignarComponent>;
 
   form:FormGroup = this.formBuilder.group({
+    id: new FormControl(),
     name: new FormControl('', Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -26,7 +27,9 @@ export class EditarRutinaComponent implements OnInit {
     ])),
     exercises: new FormControl('', Validators.compose([
       Validators.required
-    ]))
+    ])),
+    isTemplate: new FormControl(),
+    creationDate: new FormControl()
   })
 
 
@@ -45,13 +48,13 @@ export class EditarRutinaComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.newRoutine={};
+
   }
 
   ngOnInit() {
     this.getRutina();
     this.traerTipos();
     this.traerEjercicios();
-    console.log(this.newRoutine.exercises); 
   }
 
   traerEjercicios(){
@@ -76,25 +79,15 @@ export class EditarRutinaComponent implements OnInit {
   }
 
   asignarValoresAForm(result){
-    this.newRoutine = result;
-    this.form.get('name').setValue(this.newRoutine.name);
-    this.form.get('type').setValue(this.newRoutine.type);
-    this.form.get('exercises').setValue(this.newRoutine.exercises);
-    this.tieneEjercicios = this.newRoutine.exercises != null;
-    console.log(this.newRoutine);
+    this.form.setValue(result);
+    this.tieneEjercicios = this.form.controls.exercises.value != null;
   }
 
-  asignarValoresDeForm(){
-    this.newRoutine.name = this.form.controls.name.value;
-    this.newRoutine.type = this.form.controls.type.value;
-    this.newRoutine.exercises = this.form.controls.exercises.value;
-  }
+
 
   actualizarRutina(){
-    this.asignarValoresDeForm();
-    console.log(this.newRoutine);
-    this.routineServ.updateRoutine(this.id, this.newRoutine).subscribe(
-      res => {console.log(res);this.volverAtras();},
+    this.routineServ.updateRoutine(this.id, this.form.value).subscribe(
+      res => {this.volverAtras();},
       error => {{if(error.status == 406){this.errorArgumentos = true};}}
       )
     
@@ -106,11 +99,14 @@ export class EditarRutinaComponent implements OnInit {
     }
     ejercicio.id = null;
     ejercicio.isTemplate = false;
-    this.newRoutine.exercises.push(ejercicio);
+    this.form.controls.exercises.value.push(ejercicio);
+
   }
 
   eliminarEjercicio(ejercicio){
-    this.newRoutine.exercises.splice(ejercicio, 1);
+    this.form.controls.exercises.value.splice(ejercicio, 1);
+
+
   }
 
   volverAtras(){
@@ -122,15 +118,13 @@ export class EditarRutinaComponent implements OnInit {
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
-    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.form.controls.exercises.value.push(this.ejerciciosEdit.toArray()[id].form.value);
   }
 
     agregarEjercicioNuevo(){
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.newRoutine.exercises.push(this.ejercicioComponent.form.value);
-    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.form.controls.exercises.value.push(this.ejercicioComponent.form.value);
   }
 }

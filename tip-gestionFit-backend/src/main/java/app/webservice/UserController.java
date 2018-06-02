@@ -137,7 +137,7 @@ public class UserController {
 		User_Student user;
 		this.userServ.studentAssist(id);
 		user = (User_Student) this.userServ.getByRfid(id);
-		this.emailServ.sendEmailToUser(user,EmailService.ASSIST);
+
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	

@@ -42,7 +42,9 @@ public class JwtUtil {
          Calendar c = Calendar.getInstance(); 
          c.setTime(dt); 
          c.add(Calendar.DATE, 5);
-//         c.add(Calendar.MINUTE, 2);
+         
+//		2 minutos para testeo
+//      c.add(Calendar.MINUTE, 2);
          dt = c.getTime();
          
         String token = Jwts.builder()
@@ -51,7 +53,6 @@ public class JwtUtil {
             .signWith(SignatureAlgorithm.HS512, "G@sT0n")
             .compact();
 
-        System.out.println(token);
       //agregamos al encabezado y al cuerpo de la respuesta el token 
         res.addHeader("Authorization", token);
     	PrintWriter writer = res.getWriter();

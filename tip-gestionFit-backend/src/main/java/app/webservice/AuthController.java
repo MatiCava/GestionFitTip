@@ -25,7 +25,7 @@ public class AuthController {
 	private EmailService emailServ = new EmailService();
 	
 	
-	@GetMapping("/authenticate")
+	@GetMapping("/authenticate/student")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void auth() {
 		//Este metodo sirve solo para validar el token y autorizar o no al cliente

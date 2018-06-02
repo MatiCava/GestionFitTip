@@ -41,7 +41,7 @@ export class ListaRutinasComponent implements OnInit {
 
   eliminarRutina(){
     this.routineServ.deleteRoutine(this.rutinaSeleccionada.id).subscribe(
-      result => {console.log(result);location.reload()},
+      result => {location.reload()},
       error => {console.log(error);}
     );
     this.rutinaSeleccionada = {};

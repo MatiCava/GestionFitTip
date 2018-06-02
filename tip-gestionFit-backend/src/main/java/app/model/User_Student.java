@@ -53,6 +53,7 @@ public class User_Student extends User {
 		super();
 		this.measurements = new MeasuringTable();
 		this.routines = new HashSet<Routine>();
+		this.setRole("STUDENT");
 
 
 	}

@@ -21,14 +21,11 @@ export class InfoAlumnoComponent implements OnInit {
     this.getInfoAlumno();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoAlumnoPage');
-    this.getInfoAlumno();
-  }
+
 
   getInfoAlumno() {
     this.userServ.getUser(this.id).subscribe(
-      user => {this.alumno = user; console.log(this.alumno); },
+      user => {this.alumno = user;},
       err => {console.log(err); });
   }
 

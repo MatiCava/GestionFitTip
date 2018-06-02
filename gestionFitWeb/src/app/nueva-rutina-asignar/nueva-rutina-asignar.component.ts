@@ -16,6 +16,7 @@ export class NuevaRutinaAsignarComponent implements OnInit {
   @ViewChildren(NuevoEjercicioAsignarComponent) ejerciciosEdit: QueryList<NuevoEjercicioAsignarComponent>;
 
   public form:FormGroup = this.formBuilder.group({
+    id: new FormControl(),
     name: new FormControl('', Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -47,16 +48,18 @@ export class NuevaRutinaAsignarComponent implements OnInit {
       this.newRoutine = {name:"",isTemplate:false, creationDate:new Date().getTime(), type:"", exercises:[]};
       this.form.controls.isTemplate.setValue(false);
       this.form.controls.creationDate.setValue(new Date().getTime());
+      this.form.controls.exercises.setValue([]);
     
 
 
   }
 
   ngOnInit() {
+    console.log(this.rutinaAEditar);
     if(this.rutinaAEditar != null){
-      this.form.controls.name.setValue(this.rutinaAEditar.name);
-      this.form.controls.type.setValue(this.rutinaAEditar.type);
-      this.form.controls.exercises.setValue(this.rutinaAEditar.exercises);
+      this.form.setValue(this.rutinaAEditar);
+      console.log(this.form.controls.exercises.value.length > 0);
+      this.tieneEjercicios = this.form.controls.exercises.value.length > 0;
     }
     this.traerEjercicios();
     this.traerTipos();
@@ -94,12 +97,11 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     }
     ejercicio.id = null;
     ejercicio.isTemplate = false;
-    this.newRoutine.exercises.push(ejercicio);
-    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.form.controls.exercises.value.push(ejercicio);
   }
 
   eliminarEjercicio(ejercicio){
-    this.newRoutine.exercises.splice(ejercicio, 1);
+    this.form.controls.exercises.value.splice(ejercicio, 1);
     
   }
 
@@ -107,16 +109,14 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
-    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.form.controls.exercises.value.push(this.ejerciciosEdit.toArray()[id].form.value);
   }
 
     agregarEjercicioNuevo(){
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.newRoutine.exercises.push(this.ejercicioComponent.form.value);
-    this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.form.controls.exercises.value.push(this.ejercicioComponent.form.value);
   }
 
 

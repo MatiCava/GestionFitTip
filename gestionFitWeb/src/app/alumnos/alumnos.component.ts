@@ -39,7 +39,7 @@ export class AlumnosComponent implements OnInit {
 
   getAlumnos(){
   	this.userService.getUsersStudents().subscribe(
-  		res => {this.alumnos = res;console.log(res)},
+  		res => {this.alumnos = res},
   		error => {console.log(error)}
   		);
   }
