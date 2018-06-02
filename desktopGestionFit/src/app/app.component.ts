@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { error } from 'protractor';
+import { HttpResponse } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit{
   user:any;
   focused=false;
   registerBool=false;
+  errorAssist = false;
+  errorAssistMessage = '';
 
   constructor(private formBuilder: FormBuilder, private userServ: UserService){
     this.user = {nameAndSurname:"",photo:"http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png",rfid:"",remainingLessons:0};
@@ -42,10 +45,18 @@ export class AppComponent implements OnInit{
 
   onSubmit(){
       this.userServ.marcarAsistencia(this.rfidForm.controls.rfid.value).subscribe(
-        res=>{console.log(res);this.user = res;this.rfidForm.controls.rfid.setValue("");this.rfidInput.nativeElement.focus();},
-        error => console.log(error)
+        res => {console.log(res);this.user = res;this.rfidForm.controls.rfid.setValue("");this.rfidInput.nativeElement.focus();
+        this.errorAssist=false;},
+        error => {this.handleErrorAsistencia(error)}
       );
       this.clearForm();
+  }
+
+  handleErrorAsistencia(response: any){
+      this.errorAssist = true;
+      this.errorAssistMessage = response.error.message;
+      this.rfidForm.controls.rfid.setValue("");
+      this.rfidInput.nativeElement.focus();
   }
 
   onFocus(){

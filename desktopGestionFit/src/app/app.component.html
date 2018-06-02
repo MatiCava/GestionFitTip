@@ -11,6 +11,12 @@
       <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
     </div>
     <button class="btn btn-primary" type="submit">Ingresar</button>
+    <div *ngIf="errorAssist" class="alert alert-danger" role="alert">
+      {{errorAssistMessage}}
+      <button type="button" class="close" (click)="errorAssist = false" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </form>
 
   <form *ngIf="registerBool" [formGroup]="registerForm">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -14,8 +14,8 @@ export class UserService {
 
   }
 
-  marcarAsistencia(rfid): Observable<any>{
-    return this.http.post(this.apiUrl + "assist/student/" + rfid,{});
+  marcarAsistencia(rfid): Observable<Response>{
+    return this.http.post<Response>(this.apiUrl + "assist/student/" + rfid,{observe: "response"},{});
   }
 
   registrarRfid(mail, rfid){
