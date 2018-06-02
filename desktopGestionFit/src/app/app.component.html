@@ -30,6 +30,18 @@
       <br>
       <button class="btn btn-primary" (click)="saveRfid()" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
       <button class="btn btn-primary" (click)="addLessons()" data-toggle="modal" data-target="#modalClases">Agregar clases</button>
+      <div *ngIf="errorRegister" class="alert alert-danger" role="alert">
+        {{errorRegisterMessage}}
+        <button type="button" class="close" (click)="errorRegister = false" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="successAlert" class="alert alert-success" role="alert">
+        {{successAlertMessage}}
+        <button type="button" class="close" (click)="successAlert = false" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     </div>
   </form>
   <br>
@@ -46,8 +58,8 @@
       <h3>Id: {{user.rfid}}</h3>
     </div>
   </div>
-
-  <div class="modal fade" id="modalClases" tabindex="-1" role="dialog" aria-labelledby="modalClasesTitle" aria-hidden="true">
+<!--
+  <div ng-hide="errorRegister" class="modal fade" id="modalClases" tabindex="-1" role="dialog" aria-labelledby="modalClasesTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -66,7 +78,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarTitle" aria-hidden="true">
+  <div ng-hide="errorRegister" class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -85,7 +97,7 @@
       </div>
     </div>
   </div>
-
+-->
 
 </div>
 

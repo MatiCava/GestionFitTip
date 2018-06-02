@@ -142,8 +142,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/addRfid/{mail}/{rfid}",produces = "application/json")
-	public ResponseEntity<User> addRfid(@PathVariable("mail") String mail,@PathVariable("rfid") String rfid){
-		//habria que checkear que no exista otro usuario con ese rfid
+	public ResponseEntity<User> addRfid(@PathVariable("mail") String mail,@PathVariable("rfid") String rfid) throws Exception{
 		User_Student user =(User_Student) this.userServ.getByMail(mail);
 		user.setRfid(rfid);
 		this.userServ.updateStudent(user);

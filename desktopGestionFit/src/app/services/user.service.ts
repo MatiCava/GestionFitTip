@@ -18,12 +18,12 @@ export class UserService {
     return this.http.post<Response>(this.apiUrl + "assist/student/" + rfid,{observe: "response"},{});
   }
 
-  registrarRfid(mail, rfid){
-    return this.http.post(this.apiUrl + "addRfid/" + mail + "/" + rfid,{});
+  registrarRfid(mail, rfid): Observable<Response>{
+    return this.http.post<Response>(this.apiUrl + "addRfid/" + mail + "/" + rfid,{});
   }
 
-  addLessons(mail, lessons){
-    return this.http.put(this.apiUrl + "addLessonsDesktop/" + mail + "/" + lessons, {});
+  addLessons(mail, lessons): Observable<Response>{
+    return this.http.put<Response>(this.apiUrl + "addLessonsDesktop/" + mail + "/" + lessons, {});
   }
 
 }

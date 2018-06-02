@@ -108,8 +108,12 @@ public class UserService {
 	}
 	
 	@Transactional
-	public User getByMail(String mail) {
-		return this.userDAO.getByMail(mail);
+	public User getByMail(String mail) throws UserNotFoundException {
+		User_Student user = (User_Student) this.userDAO.getByMail(mail);
+		if(user == null){
+			throw new UserNotFoundException("Usuario no encontrado");
+		}
+		return user;
 	}
 
 	public MeasuringTable getStudentTable(Long idUser) {
@@ -121,8 +125,11 @@ public class UserService {
 	}
 
 	@Transactional
-	public void addLessons(long id, int numLessons) {
+	public void addLessons(long id, int numLessons) throws UserNotFoundException {
 		User_Student user = (User_Student) this.getById(id);
+		if(user == null){
+			throw new UserNotFoundException("Usuario no encontrado");
+		}
 		int newRLessons = user.getRemainingLessons() + numLessons;
 		user.setRemainingLessons(newRLessons);
 		user.setPaymentDate(new Date());

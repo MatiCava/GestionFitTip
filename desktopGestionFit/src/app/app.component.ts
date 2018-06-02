@@ -34,6 +34,10 @@ export class AppComponent implements OnInit{
   registerBool=false;
   errorAssist = false;
   errorAssistMessage = '';
+  errorRegister = false;
+  errorRegisterMessage = '';
+  successAlert = false;
+  successAlertMessage = '';
 
   constructor(private formBuilder: FormBuilder, private userServ: UserService){
     this.user = {nameAndSurname:"",photo:"http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png",rfid:"",remainingLessons:0};
@@ -75,17 +79,31 @@ export class AppComponent implements OnInit{
 
   addLessons(){
     this.userServ.addLessons(this.registerForm.controls.mail.value, this.registerForm.controls.lessons.value).subscribe(
-      res => {console.log(res); this.registerForm.controls.lessons.setValue(null);},
-      error=> console.log(error)
+      res => {console.log(res); this.registerForm.controls.lessons.setValue(null); this.handleSuccessAlert("Clases agregadas")},
+      error=> {this.handleErrorRegister(error);}
     );
   }
 
   //this.registerForm.controls.mail.setValue(""); this.registerForm.controls.rfid.setValue(""); this.rfidInputRegister.nativeElement.focus();
   saveRfid(){
     this.userServ.registrarRfid(this.registerForm.controls.mail.value, this.registerForm.controls.rfid.value).subscribe(
-      res => console.log(res),
-      error=> console.log(error)
+      res => {console.log(res); this.handleSuccessAlert("Rfid agregado con exito");},
+      error=> {this.handleErrorRegister(error);}
     );
+  }
+
+  handleErrorRegister(response: any){
+    this.errorRegister = true;
+    this.errorRegisterMessage = response.error.message;
+    this.registerForm.controls.rfid.setValue("");
+    this.registerForm.controls.mail.setValue("");
+    this.registerForm.controls.lessons.setValue(null);
+    this.rfidInputRegister.nativeElement.focus();
+  }
+
+  handleSuccessAlert(message: string){
+    this.successAlertMessage = message;
+    this.successAlert = true;
   }
   
 }
