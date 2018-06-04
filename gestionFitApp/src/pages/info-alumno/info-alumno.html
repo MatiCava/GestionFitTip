@@ -3,25 +3,28 @@
 	<img [src]="user.photo" style="max-height: 100px;max-width: 100px;">
 	<ion-grid style="font-family: 'Poppins' , sans-serif">
 	<ion-row>
+		<a [routerLink]="" (click)="editarUsuario()">{{'Editar informacion' | translate}}</a>
+	</ion-row>
+	<ion-row>
 	  <ion-col>
-		<p> {{'Nombre' | translate}}: {{user.nameAndSurname}}</p>
+		<p> {{'Nombre' | translate}}: <p> {{user.nameAndSurname}}</p>
 	  </ion-col>
 	  <ion-col>
-		<p> {{'Edad' | translate}}: {{user.age}} </p>
+		<p> {{'Edad' | translate}}:</p><p> {{user.age}} </p>
 	  </ion-col>
 	  <ion-col>
-		<p> {{'Telefono' | translate}}: {{formatearTelefono(user.telephone)}}</p>
+		<p> {{'Telefono' | translate}}:</p><p>{{formatearTelefono(user.telephone)}}</p>
 	  </ion-col>
 	</ion-row>
 	<ion-row>
 	  <ion-col>
-		<p> {{'Peso' | translate}}: {{user.weigth.toString().replace('.',',')}} kg.</p>
+		<p> {{'Peso' | translate}}: </p><p> {{user.weigth.toString().replace('.',',')}} kg.</p>
 	  </ion-col>
 	  <ion-col>
-		<p> {{'Objetivo' | translate}}: {{user.objective}}</p><p *ngIf="user.objective == ''" > {{'No definido' | translate}}</p>
+		<p> {{'Objetivo' | translate}}:</p><p> {{user.objective}}</p><p *ngIf="user.objective == ''" > {{'No definido' | translate}}</p>
 	  </ion-col>
 	  <ion-col>
-		<p> {{'Patologias' | translate}}: {{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
+		<p> {{'Patologias' | translate}}:</p><p>{{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
 	  </ion-col>
 	</ion-row>
 	</ion-grid>

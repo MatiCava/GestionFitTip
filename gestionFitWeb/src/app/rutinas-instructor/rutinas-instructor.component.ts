@@ -57,6 +57,7 @@ export class RutinasInstructorComponent implements OnInit{
     this.volverAtras();
   }
 
+  //Validar rutina antes de asignar
   agregarRutina(rutina){
     if(!this.tieneRutinas){
       this.tieneRutinas=true;

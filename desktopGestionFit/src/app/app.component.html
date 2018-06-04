@@ -3,7 +3,8 @@
     Bienvenido a {{ title }}!
   </h1>
   <img width="150" alt="Logo GestionFit" src="assets/icon.png">
-
+<div class="row" style="padding-bottom: 30px;padding-left: 20px;padding-right: 20px">
+  <div class="col-md-8">
   <form *ngIf="!registerBool" (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
     <div class="form-group">
       <label for="rfidInput">Rfid</label>
@@ -53,17 +54,31 @@
   <br>
   <label>Primera vez en el gimnasio?</label>
   <input type="checkbox" [(ngModel)]="registerBool">
+</div>
 
-  <div class="row" style="padding-top: 30px">
-    <div class="col-md" style="height: 100px">
-      <img [src]="user.photo" style="min-width: 50px;min-height: 50px;max-width: 150px;max-height: 150px;">
+  <div class="col-md-3">
+  <div class="card" style="width: 18rem;padding-top: 30px">
+    <img class="card-img-top" [src]="user.photo" alt="Imagen usuario">
+    <div class="card-body">
+      <h5 class="card-title">Nombre: {{user.nameAndSurname}}</h5>
     </div>
-    <div class="col-md">
-      <h3>Nombre: {{user.nameAndSurname}}</h3>
-      <h3>Clases restantes: {{user.remainingLessons}}</h3>
-      <h3>Id: {{user.rfid}}</h3>
-    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Clases restantes: {{user.remainingLessons }}</li>
+      <li class="list-group-item">Fecha de pago: {{user.paymentDate | date: 'dd/MM/yyyy'}}</li>
+      <li class="list-group-item">Fecha de vencimiento: {{user.lessonsExpires | date: 'dd/MM/yyyy'}}</li>
+    </ul>
   </div>
+  </div>
+
+</div>
+
+  <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#fff"
+  loadingText="Cargando..."
+  type="ball-pulse">
+</ngx-spinner>
 <!--
   <div ng-hide="errorRegister" class="modal fade" id="modalClases" tabindex="-1" role="dialog" aria-labelledby="modalClasesTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -23,6 +23,11 @@ export class UserProvider {
   	return this.http.get<User_Student[]>(this.apiUrl+"alumnos/");
   }
 
+  updateStudent(student): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+    return this.http.put(this.apiUrl + "update",student);
+  }
+
 
 
   getUser(id): Observable<any>{

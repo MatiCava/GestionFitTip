@@ -41,6 +41,7 @@ public class AuthController {
 	
 	@PostMapping(value = "/auth/signup", produces = "application/json")   
 	public ResponseEntity<Void> createUser(@RequestBody User_Student user) throws Exception {
+			System.out.println(user.getNameAndSurname());
 			this.userServ.saveStudent(user);
 
 			this.emailServ.sendEmailToUser(user, EmailService.WELCOME);

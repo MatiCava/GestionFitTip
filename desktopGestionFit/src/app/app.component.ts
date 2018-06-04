@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserService } from './services/user.service';
 import { error } from 'protractor';
 import { HttpResponse } from 'selenium-webdriver/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit{
   successAlert = false;
   successAlertMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private userServ: UserService){
+  constructor(private formBuilder: FormBuilder, private userServ: UserService, private spinner: NgxSpinnerService){
     this.user = {nameAndSurname:"",photo:"http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png",rfid:"",remainingLessons:0};
   }
 
@@ -48,15 +49,17 @@ export class AppComponent implements OnInit{
   }
 
   onSubmit(){
+    this.spinner.show();
       this.userServ.marcarAsistencia(this.rfidForm.controls.rfid.value).subscribe(
         res => {console.log(res);this.user = res;this.rfidForm.controls.rfid.setValue("");this.rfidInput.nativeElement.focus();
-        this.errorAssist=false;},
+        this.errorAssist=false;this.spinner.hide()},
         error => {this.handleErrorAsistencia(error)}
       );
       this.clearForm();
   }
 
   handleErrorAsistencia(response: any){
+      this.spinner.hide();
       this.errorAssist = true;
       this.errorAssistMessage = response.error.message;
       this.rfidForm.controls.rfid.setValue("");
@@ -78,17 +81,20 @@ export class AppComponent implements OnInit{
   }
 
   addLessons(){
+    this.spinner.show();
     this.userServ.addLessons(this.registerForm.controls.mail.value, this.registerForm.controls.lessons.value).subscribe(
-      res => {console.log(res); this.registerForm.controls.lessons.setValue(null); this.handleSuccessAlert("Clases agregadas")},
-      error=> {this.handleErrorRegister(error);}
+      res => {console.log(res); this.registerForm.controls.lessons.setValue(null);
+         this.handleSuccessAlert("Clases agregadas");this.spinner.hide()},
+      error=> {this.handleErrorRegister(error);this.spinner.hide()}
     );
   }
 
   //this.registerForm.controls.mail.setValue(""); this.registerForm.controls.rfid.setValue(""); this.rfidInputRegister.nativeElement.focus();
   saveRfid(){
+    this.spinner.show();
     this.userServ.registrarRfid(this.registerForm.controls.mail.value, this.registerForm.controls.rfid.value).subscribe(
-      res => {console.log(res); this.handleSuccessAlert("Rfid agregado con exito");},
-      error=> {this.handleErrorRegister(error);}
+      res => {console.log(res); this.handleSuccessAlert("Rfid agregado con exito");this.spinner.hide();},
+      error=> {this.handleErrorRegister(error);this.spinner.hide();}
     );
   }
 
