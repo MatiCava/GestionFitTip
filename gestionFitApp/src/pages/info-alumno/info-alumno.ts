@@ -57,7 +57,7 @@ export class InfoAlumnoPage {
 
   editarUsuario(){
     
-    //this.navCtrl.push();
+    this.navCtrl.push("editarUsuario");
   }
 
 

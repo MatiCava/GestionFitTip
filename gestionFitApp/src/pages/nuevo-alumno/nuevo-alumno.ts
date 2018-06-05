@@ -89,7 +89,7 @@ export class NuevoAlumnoPage {
       for(let control in this.form.controls){
         invalid = invalid || this.form.controls[control].invalid;
       }
-      return (invalid || !(this.form.dirty) || this.usuarioExistente);
+      return (invalid || !(this.form.dirty) || this.usuarioExistente || this.emailExistente);
     }
   
     volverAtras(){

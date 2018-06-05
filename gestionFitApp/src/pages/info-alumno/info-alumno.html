@@ -3,7 +3,7 @@
 	<img [src]="user.photo" style="max-height: 100px;max-width: 100px;">
 	<ion-grid style="font-family: 'Poppins' , sans-serif">
 	<ion-row>
-		<a [routerLink]="" (click)="editarUsuario()">{{'Editar informacion' | translate}}</a>
+		<button ion-button (click)="editarUsuario()"> <i class="fas fa-edit"></i>{{'Editar informacion' | translate}}</button>
 	</ion-row>
 	<ion-row>
 	  <ion-col>
@@ -29,7 +29,7 @@
 	</ion-row>
 	</ion-grid>
 </div>
-	<div style="padding-bottom: 50px;padding-top: 180px">
+	<div style="padding-bottom: 50px;padding-top: 250px">
 		<h2>{{'Mis rutinas' | translate}}</h2>
 	<ion-list>
 	  <ion-item *ngFor="let rutina of user.routines" style="padding-bottom: 90px">

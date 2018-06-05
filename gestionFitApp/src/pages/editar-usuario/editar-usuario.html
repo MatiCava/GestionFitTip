@@ -1,18 +1,82 @@
-<!--
-  Generated template for the EditarUsuarioPage page.
+<ion-content [formGroup]="form" >
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+		<ion-list style="padding-top: 50px">
+			
+				<ion-item>
 
-  <ion-navbar>
-    <ion-title>editarUsuario</ion-title>
-  </ion-navbar>
+					<ion-label color="{{ form.controls.username.errors && form.controls.username.dirty ? 'danger' : 'primary' }}" floating>{{'Usuario' | translate}}*</ion-label>
+					<ion-input type="text" formControlName="username"  #textInput (input)="textInput.value.length > 4 && checkUsername(textInput.value)"></ion-input>
+				</ion-item>
+				<p style="color: red" *ngIf="usuarioExistente"> El nombre de usuario ya existe. Elija otro. </p> 
+				<p style="color: red" *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched"> {{'Usuario'  | translate}} {{'requerido' | translate}} </p>
+				<p style="color: red" *ngIf="form.controls['username'].hasError('minlength') && (form.controls['username'].touched || form.controls['username'].dirty)"> {{'Debe tener al menos 4 caracteres' | translate}} </p>
+			
+				<ion-item>
+					<ion-label color="{{ form.controls.mail.errors && form.controls.mail.dirty ? 'danger' : 'primary' }}" floating>Mail*</ion-label>
+					<ion-input type="email" formControlName="mail" #emailInput (input)="emailInput.value.length > 4 && checkEmail(emailInput.value)"></ion-input>
+				</ion-item>
+				<p style="color: red" *ngIf="emailExistente"> La direccion de mail ya existe. Elija otro. </p> 
+				<p style="color: red" *ngIf="form.controls['mail'].hasError('required') && form.controls['mail'].touched"> Mail {{'requerido' | translate}} </p>
+				<p style="color: red" *ngIf="form.controls['mail'].hasError('pattern') && (form.controls['mail'].touched || form.controls['mail'].dirty)"> {{'Debe ser un mail valido' | translate}} </p>
+				
+        <ion-item>
+					<ion-label color="{{ form.controls.nameAndSurname.errors && form.controls.nameAndSurname.dirty ? 'danger' : 'primary' }}" floating>{{'Nombre y apellido' | translate}}*</ion-label>
+					<ion-input type="text" formControlName="nameAndSurname" ></ion-input>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['nameAndSurname'].hasError('required') && form.controls['nameAndSurname'].touched"> {{'Nombre' | translate}} {{'requerido' | translate}} </p>
+				<p style="color: red" *ngIf="form.controls['nameAndSurname'].hasError('minlength') && (form.controls['nameAndSurname'].touched || form.controls['nameAndSurname'].dirty)"> {{'Debe ser un nombre valido' | translate}} </p>
 
-</ion-header>
+				<ion-item>
+					<ion-label color="{{ form.controls.birthday.errors && form.controls.birthday.dirty ? 'danger' : 'primary' }}" floating>{{'Fecha de nacimiento' | translate}}*</ion-label>
+					<ion-datetime formControlName="birthday" displayFormat="DD/MM/YYYY" min="1930" max="2008"></ion-datetime>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['birthday'].hasError('required') && form.controls['birthday'].touched"> {{'Fecha de nacimiento' | translate}} {{'requerida' | translate}} </p>
+				<p style="color: red" *ngIf="form.controls['birthday'].hasError('nullValidator') && (form.controls['birthday'].touched || form.controls['birthday'].dirty)"> {{'Completar fecha de nacimiento' | translate}} </p>
+        
+        <ion-item>
+					<ion-label color="{{ form.controls.telephone.errors && form.controls.telephone.dirty ? 'danger' : 'primary' }}" floating>{{'Telefono' | translate}}*</ion-label>
+					<ion-input type="text" formControlName="telephone"></ion-input>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['telephone'].hasError('required') && form.controls['telephone'].touched"> {{'Telefono' | translate}} {{'requerido' | translate}} </p>
+				<p style="color: red" *ngIf="form.controls['telephone'].hasError('minlength') && (form.controls['telephone'].touched || form.controls['telephone'].dirty)"> {{'Debe ser un telefono valido' | translate}} </p>
+
+				<ion-item>
+					<ion-label color="{{ form.controls.weigth.errors && form.controls.weigth.dirty ? 'danger' : 'primary' }}" floating>{{'Peso' | translate}}*</ion-label>
+					<ion-input type="number" formControlName="weigth"></ion-input>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['weigth'].hasError('required') && form.controls['weigth'].touched"> {{'Peso' | translate}} {{'requerido' | translate}} </p>
+				<p style="color: red" *ngIf="(form.controls['weigth'].hasError('min') || form.controls['weigth'].hasError('max') ) && (form.controls['weigth'].touched || form.controls['weigth'].dirty)"> {{'Debe ser un peso valido' | translate}} </p>
+
+				<ion-item>
+					<ion-label color="{{ form.controls.observations.errors && form.controls.observations.dirty ? 'danger' : 'primary' }}" floating>{{'Observaciones' | translate}}</ion-label>
+					<ion-textarea formControlName="observations"></ion-textarea>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['observations'].hasError('minlength') && (form.controls['observations'].touched || form.controls['observations'].dirty)"> {{'Debe ser una observacion valida' | translate}} </p>
+
+				<ion-item>
+					<ion-label color="{{ form.controls.objective.errors && form.controls.objective.dirty ? 'danger' : 'primary' }}" floating>{{'Objetivo' | translate}}*</ion-label>
+					<ion-textarea formControlName="objective"></ion-textarea>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['objective'].hasError('required') && form.controls['objective'].touched"> {{'Objetivo' | translate}} {{'requerido' | translate}} </p>
+				
+
+				<ion-item>
+					<ion-label color="{{ form.controls.pathologies.errors && form.controls.pathologies.dirty ? 'danger' : 'primary' }}" floating>{{'Patologias' | translate}}</ion-label>
+					<ion-textarea formControlName="pathologies"></ion-textarea>
+				</ion-item>
+				<p style="color: red" *ngIf="form.controls['pathologies'].hasError('minlength') && (form.controls['pathologies'].touched || form.controls['pathologies'].dirty)"> {{'Debe ser una patologia valida' | translate}} </p>
+			<ion-item>
+			<ion-col>
+				<button ion-button (click)="volverAtras()"><ion-icon name="arrow-back" class="largeIcon" > {{'Atras' | translate}}</ion-icon> </button>
+			</ion-col>
+			<ion-col>
+				<button [disabled]="validForm()" ion-button (click)="guardarAlumno()" color="secondary"><ion-icon name="checkmark-circle" class="largeIcon" > {{'Actualizar' | translate}}</ion-icon> </button>
+			</ion-col>
+		</ion-item>
+			</ion-list>
 
 
-<ion-content padding>
+	
+	
 
 </ion-content>

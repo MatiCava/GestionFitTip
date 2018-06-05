@@ -8,8 +8,8 @@ import { User_Student } from '../../model/user_student';
 export class UserProvider {
 
 
-  apiUrl : String="https://gestionfit-backend.herokuapp.com/api/";
-  //apiUrl : String="http://localhost:8080/api/";
+  //apiUrl : String="https://gestionfit-backend.herokuapp.com/api/";
+  apiUrl : String="http://localhost:8080/api/";
 
   httpOptions: any;
 
@@ -23,9 +23,9 @@ export class UserProvider {
   	return this.http.get<User_Student[]>(this.apiUrl+"alumnos/");
   }
 
-  updateStudent(student): Observable<any>{
+  updateStudent(student,id): Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
-    return this.http.put(this.apiUrl + "update",student);
+    return this.http.put(this.apiUrl + "user/"+id,student,this.httpOptions);
   }
 
 
