@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpModule} from '@angular/http';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,6 +35,8 @@ import { AgregarClasesComponent } from './agregar-clases/agregar-clases.componen
 import { NgxInputFileUploadModule } from 'ngx-input-file-upload';
 import { NuevaRutinaAsignarComponent } from './nueva-rutina-asignar/nueva-rutina-asignar.component';
 import { NuevoEjercicioAsignarComponent } from './nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+import { CalendarioGeneralComponent } from './calendario-general/calendario-general.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
   { path: 'ejercicio/info/:id', component: InfoEjercicioComponent },
   { path: 'ejercicio/edit/:id', component: EditarEjercicioComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent },
-  { path: 'alumno/clases/agregar/:idUser', component: AgregarClasesComponent}
+  { path: 'alumno/clases/agregar/:idUser', component: AgregarClasesComponent},
+  { path: 'calendario-general',component: CalendarioGeneralComponent}
 ];
 
 @NgModule({
@@ -84,7 +89,9 @@ const appRoutes: Routes = [
     PromosComponent,
     AgregarClasesComponent,
     NuevaRutinaAsignarComponent,
-    NuevoEjercicioAsignarComponent
+    NuevoEjercicioAsignarComponent,
+    CalendarioComponent,
+    CalendarioGeneralComponent
     
     
 
@@ -109,7 +116,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     PipesModule,
     NgxPaginationModule,
-    NgxInputFileUploadModule
+    NgxInputFileUploadModule,
+    HttpModule
   ],
   entryComponents: [],
   exports: [RouterModule],
