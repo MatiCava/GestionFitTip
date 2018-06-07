@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import app.exception.ExpiredLessonsException;
 import app.exception.InsufficientLessonsException;
 import app.exception.UserNotFoundException;
+import app.model.DayStudent;
 import app.model.Measurement;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
@@ -40,6 +41,8 @@ public class UserService {
 		Calendar birthCal = GregorianCalendar.getInstance();
 
         birthCal.setTime(user.getBirthday());
+        
+        
 		
 		int age = (GregorianCalendar.getInstance().get(Calendar.YEAR) - birthCal.get(Calendar.YEAR));
 		
@@ -171,6 +174,16 @@ public class UserService {
 	@Transactional
 	public Boolean checkEmail(String email) {
 		return this.userDAO.checkEmail(email);
+	}
+
+	public void addDays(long id,List<DayStudent> days) {
+		User_Student user = (User_Student) this.userDAO.getById(id);
+		if(days != user.getClassDays()){
+			user.setClassDays(days);
+			this.updateStudent(user);
+		}
+
+		
 	}
 
 

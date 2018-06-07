@@ -1,5 +1,6 @@
 package app.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -8,6 +9,8 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import app.model.DayStudent;
+import app.model.Class_Calendar;
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Measurement;
@@ -15,11 +18,13 @@ import app.model.Routine;
 import app.model.Routine_Type;
 import app.model.User_Instructor;
 import app.model.User_Student;
+import app.persistence.CalendarDAO;
 import app.persistence.ExerciseDAO;
 import app.persistence.MeasureDAO;
 import app.persistence.MeasuringTableDAO;
 import app.persistence.RoutineDAO;
 import app.persistence.UserDAO;
+import app.persistence.UserScheduleDAO;
 
 public class DataService {
 
@@ -28,8 +33,13 @@ public class DataService {
 	ExerciseDAO exerDAO = new ExerciseDAO();
 	MeasuringTableDAO tableDAO = new MeasuringTableDAO();
 	MeasureDAO measureDAO = new MeasureDAO();
+	CalendarDAO calDAO = new CalendarDAO();
+	UserScheduleDAO scheDAO = new UserScheduleDAO();
+
 	
 	public void createInitialData() {
+		
+		calDAO.save(new Class_Calendar());
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
@@ -143,6 +153,8 @@ public class DataService {
 		this.userDAO.save(alu1);
 		this.userDAO.save(alu2);
 		this.userDAO.save(inst1);
+		
+		System.out.println(calDAO.getAll().get(0).getClassDay(LocalDate.now()).getDay());
 		
 	}
 }
