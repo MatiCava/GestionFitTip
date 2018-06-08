@@ -66,11 +66,20 @@
   <div *ngIf="nuevaRutina">
     <h1 style="text-align: center">{{'Nueva rutina personalizada' | translate}}</h1>
     <app-nueva-rutina-asignar></app-nueva-rutina-asignar>
-    <button class="btn btn-primary" (click)="agregarRutinaNueva()" style="margin-top:30px">Agregar nueva rutina</button>
+    <button class="btn btn-primary" [disabled]="!rutinaComponent.form.valid" (click)="agregarRutinaNueva()" style="margin-top:30px">Agregar nueva rutina</button>
   </div>
 
   <div class="flex" style="padding-top: 25px;padding-bottom: 25px">
       <button class="btn btn-success" (click)="guardarRutinasAlumno()"> {{'Guardar' | translate}} </button>
       <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>
   </div>  
+
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#1565C0"
+    loadingText="Cargando..."
+    type="ball-pulse">
+  </ngx-spinner>
+
 </div>

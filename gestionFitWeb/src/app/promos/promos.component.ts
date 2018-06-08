@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
 import { Router } from '@angular/router';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
-import { NgxInputFileUploadComponent } from 'ngx-input-file-upload'
+import { NgxInputFileUploadComponent } from 'ngx-input-file-upload';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-promos',
@@ -29,7 +30,7 @@ export class PromosComponent implements OnInit {
     ]))
   })
 
-  constructor(private formBuilder: FormBuilder, private alumnosServ: AlumnosService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private alumnosServ: AlumnosService, private router: Router, private spinner: NgxSpinnerService) {
     this.newPromo = {matter:"", body:"", photo:""};
    }
 
@@ -43,10 +44,11 @@ export class PromosComponent implements OnInit {
   }
 
   enviarPromo(){
+    this.spinner.show();
     this.validForm();
     this.alumnosServ.sendPromo(this.newPromo).subscribe(
-      res=> {this.volverAtras();},
-      error => console.log(error)
+      res=> {this.volverAtras();this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();}
     );
   }
 

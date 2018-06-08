@@ -6,6 +6,7 @@ import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 import { NuevoEjercicioComponent } from '../nuevo-ejercicio/nuevo-ejercicio.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nueva-rutina',
@@ -45,7 +46,7 @@ export class NuevaRutinaComponent implements OnInit {
   searchText:any;
   nuevoEjercicio:boolean=false;
 
-  constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router) {
+  constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router, private spinner: NgxSpinnerService) {
     this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
     this.form.controls.isTemplate.setValue(true);
     this.form.controls.creationDate.setValue(new Date().getTime());
@@ -69,20 +70,21 @@ export class NuevaRutinaComponent implements OnInit {
   }
 
   traerEjercicios(){
+    this.spinner.show();
     this.routineServ.getExercisesTemplate().subscribe(
-              result => {this.exercises = result;},
-              error => {console.log(error);},
+              result => {this.exercises = result;this.spinner.hide();},
+              error => {console.log(error);this.spinner.hide();},
               )
   }
 
 
 
   guardarRutina(){
-
+    this.spinner.show();
     console.log(this.newRoutine);
     this.routineServ.saveRoutine(this.form.value).subscribe(
-  			res => {console.log(res);this.volverAtras();},
-  			error => {if(error.status == 406){this.errorArgumentos = true};}
+  			res => {console.log(res);this.volverAtras();this.spinner.hide();},
+  			error => {if(error.status == 406){this.errorArgumentos = true};this.spinner.hide();}
   			)
   	
   }

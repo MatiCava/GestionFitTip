@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from '../services/alumnos/alumnos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-agregar-clases',
@@ -19,7 +20,7 @@ export class AgregarClasesComponent implements OnInit {
 
   idUser:any;
 
-  constructor(private userServ : AlumnosService, private routerServ: Router, private formBuilder : FormBuilder,private route: ActivatedRoute) {
+  constructor(private userServ : AlumnosService, private routerServ: Router, private formBuilder : FormBuilder,private route: ActivatedRoute, private spinner: NgxSpinnerService) {
     this.idUser = this.route.snapshot.paramMap.get("idUser");
    }
 
@@ -27,9 +28,10 @@ export class AgregarClasesComponent implements OnInit {
   }
 
   onSubmit(){
+    this.spinner.show();
     this.userServ.addLessons(this.idUser,this.form.controls.clases.value).subscribe(
-      res => {this.routerServ.navigate(["/alumnos"])},
-      error => console.log(error)
+      res => {this.routerServ.navigate(["/alumnos"]);this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();}
     )
   }
 

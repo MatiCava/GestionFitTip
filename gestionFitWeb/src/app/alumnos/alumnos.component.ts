@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from './../services/alumnos/alumnos.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var jquery:any;
 declare var $ :any;
@@ -15,7 +16,7 @@ export class AlumnosComponent implements OnInit {
 
   public alumnos:any;
 
-  constructor(private translateService: TranslateService, private userService: AlumnosService,private routerServ: Router) {
+  constructor(private translateService: TranslateService, private userService: AlumnosService,private routerServ: Router, private spinner: NgxSpinnerService) {
     this.alumnos = [];
    }
 
@@ -38,9 +39,10 @@ export class AlumnosComponent implements OnInit {
 
 
   getAlumnos(){
+    this.spinner.show();
   	this.userService.getUsersStudents().subscribe(
-  		res => {this.alumnos = res},
-  		error => {console.log(error)}
+  		res => {this.alumnos = res;this.spinner.hide();},
+  		error => {console.log(error);this.spinner.hide();}
   		);
   }
 

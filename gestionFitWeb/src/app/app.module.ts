@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 import { AppComponent } from './app.component';
@@ -117,7 +118,8 @@ const appRoutes: Routes = [
     PipesModule,
     NgxPaginationModule,
     NgxInputFileUploadModule,
-    HttpModule
+    HttpModule,
+    NgxSpinnerModule
   ],
   entryComponents: [],
   exports: [RouterModule],

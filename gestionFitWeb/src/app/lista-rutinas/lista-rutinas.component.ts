@@ -3,6 +3,7 @@ import { Routine } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-lista-rutinas',
@@ -14,16 +15,17 @@ export class ListaRutinasComponent implements OnInit {
   rutinas:any[];
   rutinaSeleccionada:any = {};
 
-  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) { }
+  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.traerRutinas()
   }
 
   traerRutinas(){
+    this.spinner.show();
   	this.routineServ.getRutinesTemplates().subscribe(
-  						result => {this.rutinas = result;},
-  						error => {console.log(error);},
+  						result => {this.rutinas = result;this.spinner.hide();},
+  						error => {console.log(error);this.spinner.hide();},
   						)
   }
 

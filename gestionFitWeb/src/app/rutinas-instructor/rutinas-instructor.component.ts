@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/switchMap';
 import { NuevaRutinaAsignarComponent } from '../nueva-rutina-asignar/nueva-rutina-asignar.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-rutinas-instructor',
@@ -25,7 +26,7 @@ export class RutinasInstructorComponent implements OnInit{
   searchText:any;
   
 
-  constructor(private translateService: TranslateService, private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private translateService: TranslateService, private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getId();
@@ -50,9 +51,10 @@ export class RutinasInstructorComponent implements OnInit{
   }
 
   guardarRutinasAlumno(){
+    this.spinner.show();
   	this.userService.updateRutines(this.id,this.rutinaAlumno).subscribe(
-  			res => {console.log(res);},
-  			error => {console.log(error);}
+  			res => {console.log(res);this.spinner.hide();},
+  			error => {console.log(error);this.spinner.hide();}
         )
     this.volverAtras();
   }
@@ -80,9 +82,10 @@ export class RutinasInstructorComponent implements OnInit{
   }
 
   traerRutinas(){
+    this.spinner.show();
   	this.routineProvider.getRutinesTemplates().subscribe(
-  						result => {this.rutinas = result;},
-  						error => {console.log(error);},
+  						result => {this.rutinas = result;this.spinner.hide();},
+  						error => {console.log(error);this.spinner.hide();},
   						)
   }
 

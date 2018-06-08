@@ -4,6 +4,7 @@ import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nuevo-ejercicio',
@@ -32,7 +33,7 @@ export class NuevoEjercicioComponent implements OnInit {
   isEdit = false;
   isNew = true;
 
-  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService, private router: Router, private spinner: NgxSpinnerService) {
     this.newExercise = {name:"", description:"", type:"",isTemplate : true};
   }
 
@@ -42,9 +43,10 @@ export class NuevoEjercicioComponent implements OnInit {
   }
 
   traerTiposEjercicio(){
+    this.spinner.show();
     this.routineServ.exerciseTypes().subscribe(
-      result => {console.log(result);this.exercisesType= result},
-      error => console.log(error)
+      result => {console.log(result);this.exercisesType= result;this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();}
     )
   }
 
@@ -59,13 +61,14 @@ export class NuevoEjercicioComponent implements OnInit {
   }
 
   guardarEjercicio(){
+    this.spinner.show();
     this.validForm();
   	let type = Exercise_Type[this.newExercise.type];
     this.newExercise.type = type;
     console.log(this.newExercise);
     this.routineServ.saveExercise(this.newExercise).subscribe(
-  			res => {console.log(res);this.volverAtras();},
-  			error => {console.log(error);}
+  			res => {console.log(res);this.volverAtras();this.spinner.hide();},
+  			error => {console.log(error);this.spinner.hide();}
   			)
   	
   }

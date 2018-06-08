@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { RoutineService } from './../services/routine/routine.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-lista-ejercicios',
@@ -13,16 +14,17 @@ export class ListaEjerciciosComponent implements OnInit {
   exercises:any[];
   ejercicioSeleccionado:any = {};
 
-  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router) { }
+  constructor(private translateService: TranslateService, private routineServ: RoutineService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.traerEjercicios();
   }
 
   traerEjercicios(){
+    this.spinner.show();
     this.routineServ.getExercisesTemplate().subscribe(
-      result => {this.exercises = result;},
-      error => {console.log(error);},
+      result => {this.exercises = result;this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();},
       )
   }
 

@@ -3,6 +3,7 @@ import { RoutineService } from './../services/routine/routine.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar-ejercicio',
@@ -34,7 +35,7 @@ export class EditarEjercicioComponent implements OnInit {
   isEdit = true;
   isAsignar = false;
 
-  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.newExercise={}; 
   }
@@ -45,9 +46,10 @@ export class EditarEjercicioComponent implements OnInit {
   }
 
   traerEjercicio(){
+    this.spinner.show();
     this.routineServ.getExercise(this.id).subscribe(
-      result => {this.asignarValoresAForm(result);},
-      error => {console.log(error);}
+      result => {this.asignarValoresAForm(result);this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();}
       );
   }
 
@@ -65,10 +67,10 @@ export class EditarEjercicioComponent implements OnInit {
 
 
   actualizarEjercicio(){
-
+    this.spinner.show();
     this.routineServ.updateExercise(this.id, this.form.value).subscribe(
-      res => {this.volverAtras();},
-      error => {console.log(error);}
+      res => {this.volverAtras();this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();}
       )
     
   }

@@ -3,6 +3,7 @@ import { LoginService } from '../../app/services/login/login.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   public user: any;
   errorLogin = false;
 
-  constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router,private formBuilder: FormBuilder) { }
+  constructor(private translateService: TranslateService, private loginServ: LoginService, private routerServ: Router,private formBuilder: FormBuilder, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
 
@@ -34,14 +35,16 @@ export class LoginComponent implements OnInit {
   onSubmit() { this.login(); }
 
   login() {
+    this.spinner.show();
     this.loginServ.logIn(this.credentials.value).subscribe(
       result => {
         localStorage.setItem("token", result.body.token);
         localStorage.setItem("id",result.body.id);
         this.routerServ.navigate(['/alumnos']);
+        this.spinner.hide();
       },
       error => {
-        {if(error.status == 401){this.errorLogin=true;};console.log(error)};
+        {if(error.status == 401){this.errorLogin=true;};console.log(error);this.spinner.hide();};
       }
       );
   }

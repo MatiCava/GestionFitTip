@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
 import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar-rutina',
@@ -45,7 +46,7 @@ export class EditarRutinaComponent implements OnInit {
   searchText:any;
 
 
-  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.newRoutine={};
 
@@ -72,9 +73,10 @@ export class EditarRutinaComponent implements OnInit {
   }
 
   getRutina(){
+    this.spinner.show();
     this.routineServ.getRoutine(this.id).subscribe(
-      result => {this.asignarValoresAForm(result);},
-      error => {console.log(error);}
+      result => {this.asignarValoresAForm(result);this.spinner.hide();},
+      error => {console.log(error);this.spinner.hide();}
       );
   }
 
@@ -86,9 +88,10 @@ export class EditarRutinaComponent implements OnInit {
 
 
   actualizarRutina(){
+    this.spinner.show();
     this.routineServ.updateRoutine(this.id, this.form.value).subscribe(
-      res => {this.volverAtras();},
-      error => {{if(error.status == 406){this.errorArgumentos = true};}}
+      res => {this.volverAtras();this.spinner.hide();},
+      error => {{if(error.status == 406){this.errorArgumentos = true};}this.spinner.hide();}
       )
     
   }
