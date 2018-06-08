@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import app.model.Class_Calendar;
 import app.model.Class_Day;
-import app.model.Class_Student;
 import app.model.DayStudent;
 import app.model.User;
 import app.persistence.CalendarDAO;
@@ -54,23 +53,11 @@ public class CalendarService {
 	@Transactional
 	public Class_Calendar get(){
 		Class_Calendar calendar = this.calendarDAO.getById((long) 1);
-		if(LocalDate.now().isAfter(calendar.getClasses().get(calendar.getClasses().size()-1).getDay())){
-			System.out.println("CAMBIOOO");
+		if(LocalDate.now().minusDays(15).isAfter(calendar.firstClass())){
 			calendar.clearCalendar();
 			this.update(calendar);
 		}
-		else{
-			System.out.println("NOO CAMBIOOO");
 
-		}
-//		for(Class_Day classD : calendar.getClasses()){
-//			if(!classD.getStudent_classes().isEmpty()){
-//				for(Class_Student classS : classD.getStudent_classes()){
-//					System.out.println(classS.getStartHour() + classS.getStudentName());
-//				}
-//			}
-//		}
-		System.out.println(calendar.getClasses().size());
 		return calendar;
 	}
 
@@ -85,25 +72,7 @@ public class CalendarService {
 		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
 		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));
 		    			agregados ++;
-//		    		}
-//		    		else{
-//		    		for(Class_Student classS : calendar.getClassDay(startDate.plusDays(i)).getStudent_classes()){
-//		    			if(classS.getStartHour().equals(day.getStartHour())){
-//		    				System.out.println("############# MISMAHORA");
-//		    				if(!classS.getStudentName().contains(name)){
-//			    				System.out.println("############# "+ name);
-//
-//			    				classS.setStudentName(classS.getStudentName() + " , " + name);
-//			    				agregados++;
-//		    				}
-//		    			}
-//		    			else{
-//		    				System.out.println("************* MISMAHORA");
-//		    				agregados++;
-//			    			calendar.addClass(startDate.plusDays(i), new Class_Student(day.getStartHour(),day.getEndHour(),name));
-//		    			}
-//		    		}
-//		    		}
+
 		    	}
 		    }
 		}
