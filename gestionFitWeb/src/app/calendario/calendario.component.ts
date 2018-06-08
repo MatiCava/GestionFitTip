@@ -22,8 +22,6 @@ export class CalendarioComponent implements OnInit {
   constructor(private userServ: AlumnosService) { }
 
   ngOnInit() {
-    this.userServ.getCalendar().subscribe(res => this.handleEvents(res),error=> console.log(error));
-    ;
     scheduler.config.first_hour = 8;
     scheduler.config.last_hour = 21;
     scheduler.config.xml_date = "%Y-%m-%d %H:%i";
@@ -31,6 +29,9 @@ export class CalendarioComponent implements OnInit {
     scheduler.config.hour_size_px = 100;
     scheduler.config.displayed_event_color = "red";
     scheduler.init(this.schedulerContainer.nativeElement, new Date());
+    this.userServ.getCalendar().subscribe(res => this.handleEvents(res),error=> console.log(error));
+    
+
     //scheduler.parse([{id: 1 , start_date: "2018-06-07 08:00" , end_date: "2018-06-07 09:00", text: "Clase"},{id: 2 , start_date: "2018-06-07 08:00" , end_date: "2018-06-07 09:00", text: "Clase2"}], "json");
   }
 
@@ -47,6 +48,7 @@ export class CalendarioComponent implements OnInit {
     console.log(this.formatedEvs);
 
     scheduler.parse(this.formatedEvs,"json");
+    scheduler.updateView();
   }
 
   addEvent(date,events){

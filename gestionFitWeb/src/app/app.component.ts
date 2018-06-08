@@ -35,6 +35,11 @@ export class AppComponent implements OnInit{
     }*/
   }
 
+  calendario(){
+    this.cerrarSidebar();
+    this.routerService.navigate(["/calendario-general"]);
+  }
+
   changeLang(lang){
     this.translateService.use(lang);
   }

@@ -27,19 +27,36 @@ public class Class_Calendar {
 	}
 	
 	public void clearCalendar(){
-		this.classes.clear();
+		
+	    long numOfDaysBetween = ChronoUnit.DAYS.between(this.classes.get(0).getDay(), this.classes.get(0).getDay().plusMonths(1)); 
+	    for(int i =0; i < numOfDaysBetween;i++){
+	    	this.classes.remove(i);
+	    }
+	    
+	    LocalDate lastDay = this.classes.get(this.classes.size()-1).getDay();
+	    long numOfDaysBetween2 = ChronoUnit.DAYS.between(lastDay, this.classes.get(0).getDay().plusMonths(1)); 
+	    List<LocalDate> dates = new ArrayList<LocalDate>();
+	    for(int i =1; i < numOfDaysBetween2;i++){
+	    	dates.add(lastDay.plusDays(i));
+	    }
+
+	    
+	    for(LocalDate date : dates){
+	    	this.classes.add(new Class_Day(date));
+	    }
+
+		
 	}
 	
 	public void initializeCalendar(){
-		LocalDate startDate = LocalDate.now().minusDays(7);
-	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusDays(7).plusMonths(1)); 
+		LocalDate startDate = LocalDate.now();
+	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1).plusDays(20)); 
 	    
 	    List<LocalDate> dates = new ArrayList<LocalDate>();
 	    for(int i =0; i < numOfDaysBetween;i++){
 	    	dates.add(startDate.plusDays(i));
 	    }
-//	    IntStream.iterate(0, i -> i + 1).limit(numOfDaysBetween).mapToObj(i -> startDate.plusDays(i))
-//	      .collect(Collectors.toList()); 
+
 	    
 	    for(LocalDate date : dates){
 	    	this.classes.add(new Class_Day(date));

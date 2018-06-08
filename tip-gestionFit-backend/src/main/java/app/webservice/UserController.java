@@ -55,7 +55,7 @@ public class UserController {
 	
 	@GetMapping(value = "/calendar", produces = "application/json")   
 	public Class_Calendar getCalendar() throws Exception{
-		return this.calServ.getAll().get(0);
+		return this.calServ.get();
 
 	}
 	
