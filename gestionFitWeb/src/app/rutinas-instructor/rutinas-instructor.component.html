@@ -33,7 +33,7 @@
   </div>
   </div>
   <!-- Ordenar bien posicion de elementos -->
-  <div *ngIf="!nuevaRutina">
+  <div *ngIf="!nuevaRutina" style="border: 5px solid grey;padding: 5px">
     <h1 style="text-align: center">{{'Asignar rutinas' | translate}}</h1>
     <div class="form-inline md-form form-sm active-cyan-2">
       <input class="form-control form-control-sm mr-3 w-75" type="text" [(ngModel)]="searchText" placeholder="{{'Buscar' | translate}}" aria-label="Search">
@@ -63,7 +63,7 @@
     <pagination-controls class="my-pagination" autoHide="true" previousLabel="{{'Anterior' | translate}}" nextLabel="{{'Siguiente' | translate}}" (pageChange)="p = $event"></pagination-controls>
   </div>
 
-  <div *ngIf="nuevaRutina">
+  <div *ngIf="nuevaRutina" style="border: 1px solid grey;padding: 10px">
     <h1 style="text-align: center">{{'Nueva rutina personalizada' | translate}}</h1>
     <app-nueva-rutina-asignar></app-nueva-rutina-asignar>
     <button class="btn btn-primary" [disabled]="!rutinaComponent.form.valid" (click)="agregarRutinaNueva()" style="margin-top:30px">Agregar nueva rutina</button>

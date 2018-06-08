@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChildren, ViewChild, QueryList } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { RoutineService } from '../services/routine/routine.service';
 import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
@@ -16,7 +16,7 @@ export class NuevaRutinaAsignarComponent implements OnInit {
   @ViewChildren(NuevoEjercicioAsignarComponent) ejerciciosEdit: QueryList<NuevoEjercicioAsignarComponent>;
 
   public form:FormGroup = this.formBuilder.group({
-    id: new FormControl(),
+    id: new FormControl(''),
     name: new FormControl('', Validators.compose([
       Validators.minLength(4),
       Validators.required
@@ -24,12 +24,10 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     type: new FormControl('', Validators.compose([
       Validators.required
     ])),
-    exercises: new FormControl('', Validators.compose([
-      Validators.required
-    ])),
-    isTemplate: new FormControl(),
-    creationDate: new FormControl()
-  })
+    exercises: new FormControl([],Validators.compose([this.minLengthArray(1),Validators.required])) ,
+    isTemplate: new FormControl(''),
+    creationDate: new FormControl('')
+  });
 
   exercises:any[];
 	exercisesAlumno:any[] = [];
@@ -48,11 +46,19 @@ export class NuevaRutinaAsignarComponent implements OnInit {
       this.newRoutine = {name:"",isTemplate:false, creationDate:new Date().getTime(), type:"", exercises:[]};
       this.form.controls.isTemplate.setValue(false);
       this.form.controls.creationDate.setValue(new Date().getTime());
-      this.form.controls.exercises.setValue([]);
     
 
 
   }
+
+  minLengthArray(min: number) {
+    return (c: AbstractControl): {[key: string]: any} => {
+        if (c.value.length >= min)
+            return null;
+
+        return { 'minLengthArray': {valid: false }};
+    }
+}
 
   ngOnInit() {
     console.log(this.rutinaAEditar);
@@ -97,11 +103,16 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     }
     ejercicio.id = null;
     ejercicio.isTemplate = false;
-    this.form.controls.exercises.value.push(ejercicio);
+    console.log(this.form.controls.exercises.value);
+    let newEx = this.form.controls.exercises.value;
+    newEx.push(ejercicio);
+    this.form.controls.exercises.setValue(newEx);
   }
 
   eliminarEjercicio(ejercicio){
-    this.form.controls.exercises.value.splice(ejercicio, 1);
+    let newEx = this.form.controls.exercises.value;
+    newEx.splice(ejercicio, 1);
+    this.form.controls.exercises.setValue(newEx);
     
   }
 
@@ -109,14 +120,19 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.form.controls.exercises.value.push(this.ejerciciosEdit.toArray()[id].form.value);
+    let newEx = this.form.controls.exercises.value;
+    newEx.push(this.ejerciciosEdit.toArray()[id].form.value);
+    this.form.controls.exercises.setValue(newEx);
   }
 
     agregarEjercicioNuevo(){
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.form.controls.exercises.value.push(this.ejercicioComponent.form.value);
+    let newEx = this.form.controls.exercises.value;
+    newEx.push(this.ejercicioComponent.form.value);
+    this.form.controls.exercises.setValue(newEx);
+ 
   }
 
 

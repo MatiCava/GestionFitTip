@@ -69,6 +69,8 @@ export class RutinasInstructorComponent implements OnInit{
     this.rutinaAlumno.push(rutina);
   }
 
+
+
   agregarRutinaNueva(){
     if(!this.tieneRutinas){
       this.tieneRutinas=true;

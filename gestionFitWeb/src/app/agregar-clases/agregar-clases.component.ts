@@ -15,7 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AgregarClasesComponent implements OnInit {
 
   form: FormGroup = this.formBuilder.group({
-    clases : new FormControl('',Validators.compose([
+    clases : new FormControl({value:0,disabled:true},Validators.compose([
       Validators.required,Validators.min(1)
     ]))
   });
