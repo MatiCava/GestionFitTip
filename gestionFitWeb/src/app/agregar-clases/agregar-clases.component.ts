@@ -25,8 +25,8 @@ export class AgregarClasesComponent implements OnInit {
   idUser:any;
 
   horas = [];
-
-  elegidos=0;
+  puedeGuardar = true;
+  elegidos = 0;
 
   constructor(private userServ : AlumnosService, private routerServ: Router, private formBuilder : FormBuilder,private route: ActivatedRoute, private spinner: NgxSpinnerService) {
     this.idUser = this.route.snapshot.paramMap.get("idUser");
@@ -41,12 +41,15 @@ export class AgregarClasesComponent implements OnInit {
         this.horas.push(i+':00');
       }
     }
-    this.userServ.getUser(this.idUser).subscribe(res => this.setHorariosElegidos(res.classDays) ,error => console.log(error));
+    this.userServ.getUser(this.idUser).subscribe(res => this.setHorariosElegidos(res) ,error => console.log(error));
     
   }
 
-  setHorariosElegidos(days){
-    this.diasElegidos = days;
+  setHorariosElegidos(user){
+    console.log(user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime());
+    this.form.controls.clases.setValue(user.remainingLessons);
+    this.puedeGuardar = user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime(); 
+    this.diasElegidos = user.classDays;
     for(let day of this.diasElegidos){
       for(let dia of this.dias){
         if(dia.day === day.day){
@@ -59,7 +62,7 @@ export class AgregarClasesComponent implements OnInit {
   }
 
   horaSeleccionada(hora,day){
-    day.endHour = this.horas[this.horas.indexOf(hora)+1] 
+    day.endHour = this.horas[this.horas.indexOf(hora)+1] ;
     console.log(this.diasElegidos);
   }
 
@@ -87,6 +90,9 @@ export class AgregarClasesComponent implements OnInit {
       this.elegidos += 1;
       this.diasElegidos.push(day);
 
+    }
+    if(this.elegidos == 0){
+      this.form.controls.clases.setValue(0);
     }
     if(this.elegidos == 1){
       this.form.controls.clases.setValue(4);

@@ -39,11 +39,10 @@ export class CalendarioComponent implements OnInit {
     console.log(calendar);
     for(let day of calendar.classes){
 
-      if(day.student_classes.length >0){
-        console.log(day);
+      this.formatedEvs.push({id:this.idx,start_date: day.day + " " + day.startHour,
+      end_date: day.day + " " + day.endHour,text:day.studentName})
 
-        this.addEvent(day.day,day.student_classes);
-      }
+
     }
     console.log(this.formatedEvs);
 
@@ -51,11 +50,6 @@ export class CalendarioComponent implements OnInit {
     scheduler.updateView();
   }
 
-  addEvent(date,events){
-    for(let ev of events){
-      this.formatedEvs.push({id:this.idx,start_date: date + " " + ev.startHour,end_date:date + " " + ev.endHour,text:ev.studentName})
-      this.idx ++;
-    }
-  }
+
 
 }

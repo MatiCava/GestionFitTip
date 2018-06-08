@@ -18,6 +18,12 @@ public class DayStudent {
 	public DayStudent(){
 		
 	}
+	
+	public DayStudent(String dayD,String start,String end) {
+		this.day = dayD;
+		this.startHour = start;
+		this.endHour = end;
+	}
 
 	public String getDay() {
 		return day;

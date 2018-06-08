@@ -1,16 +1,11 @@
 package app.model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,8 +17,11 @@ public class Class_Day {
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate day;
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Set<Class_Student> student_classes = new HashSet<Class_Student>();
+	private String startHour;
+	private String endHour;
+	private String studentName;
+//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+//	private Set<Class_Student> student_classes = new HashSet<Class_Student>();
 	
 	public Class_Day(){
 		
@@ -33,10 +31,17 @@ public class Class_Day {
 		this.day = date;
 	}
 	
-	public Class_Day(LocalDate date,Set<Class_Student> classes){
+	public Class_Day(LocalDate date,String start,String end,String name) {
 		this.day = date;
-		this.student_classes = classes;
+		this.startHour = start;
+		this.endHour = end;
+		this.studentName = name;
 	}
+	
+//	public Class_Day(LocalDate date,Set<Class_Student> classes){
+//		this.day = date;
+//		this.student_classes = classes;
+//	}
 
 	public LocalDate getDay() {
 		return day;
@@ -46,23 +51,49 @@ public class Class_Day {
 		this.day = day;
 	}
 
-	public Set<Class_Student> getStudent_classes() {
-		return student_classes;
+	public String getStartHour() {
+		return startHour;
 	}
 
-	public void setStudent_classes(Set<Class_Student> student_classes) {
-		this.student_classes = student_classes;
+	public void setStartHour(String startHour) {
+		this.startHour = startHour;
 	}
 
-	public void add(Class_Student classS) {
-		this.student_classes.add(classS);
-		
+	public String getEndHour() {
+		return endHour;
 	}
 
-	public Class_Student get(int i) {
-		
-		return (Class_Student) this.student_classes.toArray()[i];
+	public void setEndHour(String endHour) {
+		this.endHour = endHour;
 	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	
+	
+
+//	public Set<Class_Student> getStudent_classes() {
+//		return student_classes;
+//	}
+//
+//	public void setStudent_classes(Set<Class_Student> student_classes) {
+//		this.student_classes = student_classes;
+//	}
+//
+//	public void add(Class_Student classS) {
+//		this.student_classes.add(classS);
+//		
+//	}
+//
+//	public Class_Student get(int i) {
+//		
+//		return (Class_Student) this.student_classes.toArray()[i];
+//	}
 	
 	
 

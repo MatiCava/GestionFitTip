@@ -2,8 +2,10 @@ package service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
@@ -15,7 +17,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import app.model.Class_Calendar;
+import app.model.Class_Day;
+import app.model.Class_Student;
+import app.model.DayStudent;
 import app.model.User_Student;
+import app.service.CalendarService;
 import app.service.UserService;
 
 public class UserServiceTestCase {
@@ -23,6 +30,7 @@ public class UserServiceTestCase {
 	SessionFactory sessionFactory ;
 	Session session;
 	UserService userServ = new UserService();
+	CalendarService calServ = new CalendarService();
 
 	@Before
 	public void setUp() throws Exception {
@@ -98,6 +106,29 @@ public class UserServiceTestCase {
 
 	}
 	
+	
+	@Test
+	public void testDummy() {
+		Class_Calendar calendar= new Class_Calendar();
+		this.calServ.save(calendar);
+		List<DayStudent> classes1 = new ArrayList<DayStudent>();
+		List<DayStudent> classes2 = new ArrayList<DayStudent>();
+		classes1.add(new DayStudent("TUESDAY","08:00","09:00"));
+		classes1.add(new DayStudent("FRIDAY","08:00","09:00"));
+		classes2.add(new DayStudent("TUESDAY","10:00","11:00"));
+		this.calServ.addDays(classes1, "Carlito");
+		this.calServ.addDays(classes2, "Roberto");
+		for(Class_Day cDay : this.calServ.get().getClasses()) {
+					System.out.println("DIAAA" + cDay.getDay());
+					System.out.println("Nombre: " + cDay.getStudentName());
+					System.out.println("Hora inicio " + cDay.getStartHour());
+					System.out.println("Hora fin " + cDay.getEndHour());
+				
+			
+		}
+		
+
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 package app.service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import app.model.DayStudent;
 import app.model.Class_Calendar;
+import app.model.Class_Day;
+import app.model.Class_Student;
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Measurement;
@@ -154,7 +157,52 @@ public class DataService {
 		this.userDAO.save(alu2);
 		this.userDAO.save(inst1);
 		
-		System.out.println(calDAO.getAll().get(0).getClassDay(LocalDate.now()).getDay());
+//		List<DayStudent> classes1 = new ArrayList<DayStudent>();
+//		List<DayStudent> classes2 = new ArrayList<DayStudent>();
+//		classes1.add(new DayStudent("TUESDAY","08:00","09:00"));
+//		classes1.add(new DayStudent("FRIDAY","08:00","09:00"));
+//		classes2.add(new DayStudent("TUESDAY","10:00","11:00"));
+//		this.saveDays(classes1, "Carlito");
+//		this.saveDays(classes2, "Roberto");
+//		System.out.println(calDAO.getAll().get(0).getClassDay(LocalDate.now()).getDay());
 		
+	}
+	
+	
+	private void saveDays(List<DayStudent> days,String name){
+		Class_Calendar calendar = this.calDAO.getById((long) 1);
+		LocalDate startDate = LocalDate.now();
+	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1));
+	    int agregados=0;
+		for(DayStudent day : days){
+		    for(int i = 0 ; i < numOfDaysBetween ;i++){
+		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
+		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));
+		    			agregados ++;
+//		    		}
+//		    		else{
+//		    		for(Class_Student classS : calendar.getClassDay(startDate.plusDays(i)).getStudent_classes()){
+//		    			if(classS.getStartHour().equals(day.getStartHour())){
+//		    				System.out.println("############# MISMAHORA");
+//		    				if(!classS.getStudentName().contains(name)){
+//			    				System.out.println("############# "+ name);
+//
+//			    				classS.setStudentName(classS.getStudentName() + " , " + name);
+//			    				agregados++;
+//		    				}
+//		    			}
+//		    			else{
+//		    				System.out.println("************* MISMAHORA");
+//		    				agregados++;
+//			    			calendar.addClass(startDate.plusDays(i), new Class_Student(day.getStartHour(),day.getEndHour(),name));
+//		    			}
+//		    		}
+//		    		}
+		    	}
+		    }
+		}
+		System.out.println("Cantidad agregados " + agregados);
+		this.calDAO.update(calendar);
+
 	}
 }

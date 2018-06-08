@@ -62,10 +62,7 @@ public class ValidatorTestCase {
 		this.student.setWeigth(-20f);
 
 		ArgumentsValidator.validateStudent(student);
-	}
-	
-
-	
+	}	
 	
 
 }

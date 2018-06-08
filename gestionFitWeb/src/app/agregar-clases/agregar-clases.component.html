@@ -34,7 +34,8 @@
       <input type="date" class="form-control" id="inputDate">
     </div>
 -->
-    <button type="submit" [disabled]="(!form.valid)" class="btn btn-success">{{'Agregar' | translate}}</button>
+<p *ngIf="!puedeGuardar" style="color: red">Su mes todavia esta en vigencia</p>
+    <button type="submit" [disabled]="(!form.valid) || !puedeGuardar" class="btn btn-success">{{'Agregar' | translate}}</button>
     <button class="btn btn-danger" routerLink="/alumnos">{{'Cancelar' | translate }}</button>
   </form>
   
