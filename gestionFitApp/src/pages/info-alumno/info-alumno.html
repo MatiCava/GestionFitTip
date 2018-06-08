@@ -43,4 +43,20 @@
 	  </div>
 	</ion-list>
 </div>
+<div style="padding-bottom: 50px;padding-top: 250px">
+	<h2>Mis clases</h2>
+	<div *ngIf="!tieneClasses">
+		<h3>No tiene ninguna clase asignada</h3>
+	</div>
+	<ion-grid *ngIf="tieneClasses" style="height: 700px;">
+		<ion-row>
+			<ion-col><p style="font-size: 12px;font-weight: bold;text-align: center">Clases</p></ion-col>
+			<ion-col><p style="font-size: 12px;font-weight: bold;text-align: center">Dias</p></ion-col>
+		</ion-row>
+		<ion-row *ngFor="let class of classes">
+			<ion-col><p style="font-size: 12px;font-weight: bold;text-align: center"> {{class.startHour}} - {{class.endHour}}  </p></ion-col>
+			<ion-col><p style="font-size: 12px;font-weight: bold;text-align: center"> {{class.day | date:'dd/MM/yyyy'}} </p></ion-col>
+		</ion-row>
+	</ion-grid>
+</div>
 </ion-content>

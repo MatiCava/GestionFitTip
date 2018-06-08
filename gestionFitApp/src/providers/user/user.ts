@@ -41,6 +41,11 @@ export class UserProvider {
   	return this.http.get(this.apiUrl+"user/"+id+"/table", this.httpOptions);
   }
 
+  getClasses(id):Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+
+    return this.http.get(this.apiUrl + "calendar/classes/" + id, this.httpOptions);
+  }
 
   getRutines(id):Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};

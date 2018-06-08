@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.exception.NotFoundException;
 import app.model.Class_Calendar;
+import app.model.Class_Day;
 import app.model.DayStudent;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
@@ -59,7 +60,11 @@ public class UserController {
 
 	}
 	
-	
+	@GetMapping(value = "/calendar/classes/{id}", produces = "application/json")
+	public List<Class_Day> getClasses(@PathVariable("id") Long idUser) throws Exception {
+		User user = this.userServ.getById(idUser);
+		return this.calServ.getClasses(user);
+	}
 
 	
 	@GetMapping(value = "/alumnos", produces = "application/json")   

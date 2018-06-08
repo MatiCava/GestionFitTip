@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component,OnInit, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
 import { User_Student } from '../../model/user_student'
@@ -14,8 +14,10 @@ import { InfoRutinaPage } from '../info-rutina/info-rutina';
   templateUrl: 'info-alumno.html',
   providers:[UserProvider]
 })
-export class InfoAlumnoPage {
+export class InfoAlumnoPage implements OnInit{
 
+  classes: any = [];
+  tieneClasses = false;
   id: any;
   user:any;
   @Input() set nUser(nUser){
@@ -30,6 +32,14 @@ export class InfoAlumnoPage {
   constructor(public navCtrl: NavController,private viewCtrl: ViewController, public navParams: NavParams, private userServ: UserProvider) {
   	this.id = this.navParams.get("id");
     this.user={};
+  }
+
+  ngOnInit(){
+    this.userServ.getClasses(this.id).subscribe(
+      res => {this.classes = res; console.log(this.classes);},
+      error => console.log(error)
+    );
+    this.tieneClasses = this.classes.length != 0;
   }
 
   ionViewDidLoad() {
@@ -48,7 +58,6 @@ export class InfoAlumnoPage {
   sinRutinas(){
     return this.user.routines.length == 0;
   }
-
 
   abrirInfo(idRoutine){
    this.navCtrl.push(InfoRutinaPage,{id:idRoutine}); 

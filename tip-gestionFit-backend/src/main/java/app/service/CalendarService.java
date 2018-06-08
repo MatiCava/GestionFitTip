@@ -3,6 +3,7 @@ package app.service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import app.model.Class_Calendar;
 import app.model.Class_Day;
 import app.model.Class_Student;
 import app.model.DayStudent;
+import app.model.User;
 import app.persistence.CalendarDAO;
 
 @Service
@@ -112,6 +114,13 @@ public class CalendarService {
 
 
 		
+	}
+
+	public List<Class_Day> getClasses(User user) {
+		Class_Calendar calendar =  this.get();
+		List<Class_Day> classes =  calendar.getClasses();
+		List<Class_Day> classesUser = classes.stream().filter(day -> day.getStudentName() == user.getNameAndSurname()).collect(Collectors.toList());
+		return classesUser;
 	}
 
 }

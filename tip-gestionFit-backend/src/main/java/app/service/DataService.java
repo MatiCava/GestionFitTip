@@ -1,6 +1,7 @@
 package app.service;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -156,6 +157,10 @@ public class DataService {
 		this.userDAO.save(alu1);
 		this.userDAO.save(alu2);
 		this.userDAO.save(inst1);
+		
+		Class_Day day1 = new Class_Day(LocalDate.now());
+		Class_Day day2 = new Class_Day(LocalDate.of(2018,Month.JUNE,29));
+		
 		
 //		List<DayStudent> classes1 = new ArrayList<DayStudent>();
 //		List<DayStudent> classes2 = new ArrayList<DayStudent>();
