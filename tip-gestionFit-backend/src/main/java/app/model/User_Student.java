@@ -1,5 +1,6 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -47,12 +48,15 @@ public class User_Student extends User {
 	private Date paymentDate;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date lessonsExpires;
+	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	private List<DayStudent> classDays;
 	
 
 	public User_Student() {
 		super();
 		this.measurements = new MeasuringTable();
 		this.routines = new HashSet<Routine>();
+		this.classDays = new ArrayList<DayStudent>();
 		this.setRole("STUDENT");
 
 
@@ -262,6 +266,21 @@ public class User_Student extends User {
 
 	public void setLessonsExpires(Date lessonsExpires) {
 		this.lessonsExpires = lessonsExpires;
+	}
+
+
+	public List<DayStudent> getClassDays() {
+		return classDays;
+	}
+
+
+	public void setClassDays(List<DayStudent> classDays) {
+		this.classDays = classDays;
+	}
+
+
+	public void setRoutines(Set<Routine> routines) {
+		this.routines = routines;
 	}
 	
 	

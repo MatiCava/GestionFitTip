@@ -34,8 +34,23 @@
               $('#sidebar, #content').toggleClass('active');
             }
             */
+             $('.single-checkbox').on('change', function() {
+  console.log("ALGOOO");
+    if($('.single-checkbox:checked').length > 2) {
+        this.checked = false;
+        
+    }
+ });
           });
         </script>
+
+<script type="text/javascript">
+$("input:checkbox").click(function(){
+    if ($("input:checkbox:checked").length > 3){
+      return false;
+   }
+});
+    </script>
 
 
 </body>

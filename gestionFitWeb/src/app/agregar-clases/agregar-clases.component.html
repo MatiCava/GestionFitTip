@@ -1,8 +1,31 @@
 <div class="form-group container" style="padding-top: 20px;">
+  <div class="row">
+  <div class="col-md" *ngFor="let dia of dias" style="border: 1px solid black">
+  <div class="form-check">
+    <span >
+    {{dia.day}}
+    <br>
+    <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)" [disabled]="limit(dia)">
+  </span>
+</div>
+  </div>
+</div>
+
+  <div *ngIf="diasElegidos.length > 0">
+    <div *ngFor="let diaElegido of diasElegidos">
+      {{diaElegido.day}}
+    <select class="custom-select" [(ngModel)]="diaElegido.startHour" (change)="horaSeleccionada($event.target.value,diaElegido)">
+      <option *ngFor="let hora of horas">{{hora}}</option>
+    </select>
+
+  </div>
+  </div>
+  <br>
+
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
-      <label class="form-control" for="inputClases">Ingrese la cantidad de clases a agregar</label>
-      <input  type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="4" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
+      <label class="form-control" for="inputClases">Cantidad de clases</label>
+      <input disabled  type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="0" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
       <small id="errorClases" *ngIf="form.controls['clases'].invalid && form.controls['clases'].dirty" class="form-text text-muted" style="color: red">Debe ingresar un numero de clases a asignar</small>
     </div>
     <!--
@@ -23,5 +46,9 @@
     type="ball-pulse">
   </ngx-spinner>
 
-
 </div>
+
+
+
+
+

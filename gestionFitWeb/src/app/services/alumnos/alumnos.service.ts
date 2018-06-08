@@ -17,6 +17,12 @@ export class AlumnosService {
   }
 
 
+  getCalendar(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+
+    return this.http.get(this.apiUrl+"calendar", this.httpOptions);
+
+  }
 
   getUsersStudents(): Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
@@ -67,10 +73,10 @@ export class AlumnosService {
     return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines, this.httpOptions);
   }
 
-  addLessons(id,lessons){
+  addLessons(id,lessons,diasElegidos){
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
 
-    return this.http.put(this.apiUrl + "addLessons/" + id + "/" + lessons,{},this.httpOptions);
+    return this.http.put(this.apiUrl + "addLessons/" + id + "/" + lessons,diasElegidos,this.httpOptions);
   }
 
   sendPromo(promo){

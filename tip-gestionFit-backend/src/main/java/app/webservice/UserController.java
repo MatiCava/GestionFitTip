@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.exception.NotFoundException;
+import app.model.Class_Calendar;
+import app.model.DayStudent;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Promo;
 import app.model.Routine;
 import app.model.User;
 import app.model.User_Student;
+import app.service.CalendarService;
 import app.service.EmailService;
 import app.service.UserService;
 
@@ -38,6 +41,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userServ = new UserService();
+	
+	@Autowired
+	private CalendarService calServ = new CalendarService();
 
 	
 	
@@ -47,6 +53,14 @@ public class UserController {
 
 	}
 	
+	@GetMapping(value = "/calendar", produces = "application/json")   
+	public Class_Calendar getCalendar() throws Exception{
+		return this.calServ.get();
+
+	}
+	
+	
+
 	
 	@GetMapping(value = "/alumnos", produces = "application/json")   
 	public List<User_Student> getAlumnos() {
@@ -116,8 +130,11 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/addLessons/{idStudent}/{nLessons}", produces = "application/json")
-	public ResponseEntity<Void> addLessonsToStudent(@PathVariable("idStudent") long id, @PathVariable("nLessons") int numLessons ) throws Exception{
+	public ResponseEntity<Void> addLessonsToStudent(@PathVariable("idStudent") long id, @PathVariable("nLessons") int numLessons,@RequestBody List<DayStudent> days) throws Exception{
 		this.userServ.addLessons(id,numLessons);
+		this.userServ.addDays(id,days);
+		
+		this.calServ.addDays(days,this.userServ.getById(id).getNameAndSurname());
 		this.emailServ.sendEmailToUser(this.userServ.getById(id), EmailService.PAID);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		

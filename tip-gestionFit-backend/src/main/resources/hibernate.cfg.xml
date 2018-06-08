@@ -38,7 +38,7 @@
 		
 		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-		
+		<mapping class="app.model.DayStudent" />
 		<mapping class="app.model.Exercise" />
 		<mapping class="app.model.Measure" />
 		<mapping class="app.model.Measurement" />
@@ -49,6 +49,10 @@
 		<mapping class="app.model.Exercise_Type" />
 		<mapping class="app.model.Routine_Type" />
 		<mapping class="app.model.Routine" />
+		<mapping class="app.model.Class_Student" />
+		<mapping class="app.model.Class_Day" />
+		<mapping class="app.model.Class_Calendar" />
+		
 		
 		
 	</session-factory>
