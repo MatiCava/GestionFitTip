@@ -61,11 +61,11 @@
       <form [formGroup]="form">
         <div class="form-group">
           <label class="form-control" for="inputClases">Cantidad de clases</label>
-          <input  type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="0" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
+          <input disabled type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="0" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
           <small id="errorClases" *ngIf="form.controls['clases'].invalid && form.controls['clases'].dirty" class="form-text text-muted" style="color: red">Debe ingresar un numero de clases a asignar</small>
         </div>
         <p *ngIf="!puedeGuardar" style="color: red">Su mes todavia esta en vigencia</p>
-          <button (click)="guardarClases()" [disabled]="(!form.valid) || !puedeGuardar" class="btn btn-success">{{'Agregar'}}</button>
+          <button (click)="guardarClases()" [disabled]="(!form.valid) || !puedeGuardar || !validHours()" class="btn btn-success">{{'Agregar'}}</button>
       </form>
       
       <div *ngIf="errorRegister" class="alert alert-danger" role="alert">

@@ -43,7 +43,7 @@ export class AppComponent implements OnInit{
   usuarioEncontrado=false;
 
   form: FormGroup = this.formBuilder.group({
-    clases : new FormControl({value:0,disabled:true},Validators.compose([
+    clases : new FormControl(0,Validators.compose([
       Validators.required,Validators.min(1)
     ]))
   });
@@ -103,7 +103,7 @@ export class AppComponent implements OnInit{
   }
 
   buscarUsuario(){
-    this.userServ.getUser(this.registerForm.controls.mail).subscribe(
+    this.userServ.getUser(this.registerForm.controls.mail.value).subscribe(
       res=>{this.setHorariosElegidos(res);this.userRegister = res;this.usuarioEncontrado = true;},
       error=>console.log(error));
   }
@@ -124,6 +124,16 @@ export class AppComponent implements OnInit{
 
   }
 
+  validHours(){
+    let valid = true;
+    for(let dia of this.diasElegidos){
+      valid = valid && dia.startHour != ""&& dia.endHour != "";
+    }
+    console.log(valid);
+    return valid;
+  }
+
+
   horaSeleccionada(hora,day){
     day.endHour = this.horas[this.horas.indexOf(hora)+1] ;
     console.log(this.diasElegidos);
@@ -131,7 +141,7 @@ export class AppComponent implements OnInit{
 
   guardarClases(){
     this.spinner.show();
-    this.userServ.addLessons(this.userRegister.id,this.form.controls.clases.value,this.diasElegidos).subscribe(
+    this.userServ.addLessons(this.registerForm.controls.mail.value,this.form.controls.clases.value,this.diasElegidos).subscribe(
       res => {console.log("GUARDADO");this.handleSuccessAlert("Clases agregadas");this.usuarioEncontrado=false; this.spinner.hide();},
       error => {console.log(error);this.handleErrorRegister(error);this.spinner.hide();}
     )
