@@ -88,7 +88,7 @@ public class CalendarService {
 	public List<Class_Day> getClasses(User user) {
 		Class_Calendar calendar =  this.get();
 		List<Class_Day> classes =  calendar.getClasses();
-		List<Class_Day> classesUser = classes.stream().filter(day -> day.getStudentName() == user.getNameAndSurname()).collect(Collectors.toList());
+		List<Class_Day> classesUser = classes.stream().filter(day -> day.getStudentName().contains(user.getNameAndSurname())).collect(Collectors.toList());
 		return classesUser;
 	}
 

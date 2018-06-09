@@ -39,7 +39,7 @@ export class InfoAlumnoPage implements OnInit{
       res => {this.classes = res; console.log(this.classes);},
       error => console.log(error)
     );
-    this.tieneClasses = this.classes.length != 0;
+    this.tieneClasses = this.classes.length == 0;
   }
 
   ionViewDidLoad() {
