@@ -3,7 +3,7 @@ import { Routine, Routine_Type } from './../model/routine';
 import { RoutineService } from './../services/routine/routine.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup,FormBuilder,FormControl, Validators} from '@angular/forms';
+import { FormGroup,FormBuilder,FormControl, Validators, AbstractControl} from '@angular/forms';
 import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -26,8 +26,9 @@ export class EditarRutinaComponent implements OnInit {
     type: new FormControl('', Validators.compose([
       Validators.required
     ])),
-    exercises: new FormControl('', Validators.compose([
-      Validators.required
+    exercises: new FormControl([], Validators.compose([
+      Validators.required,
+      this.minLengthArray(1)
     ])),
     isTemplate: new FormControl(),
     creationDate: new FormControl()
@@ -52,6 +53,15 @@ export class EditarRutinaComponent implements OnInit {
 
   }
 
+  minLengthArray(min: number) {
+    return (c: AbstractControl): {[key: string]: any} => {
+        if (c.value.length >= min)
+            return null;
+
+        return { 'minLengthArray': {valid: false }};
+    }
+}
+
   ngOnInit() {
     this.getRutina();
     this.traerTipos();
@@ -70,6 +80,10 @@ export class EditarRutinaComponent implements OnInit {
       result => {console.log(result);this.rutinasType= result;},
       error => console.log(error)
     )
+  }
+
+  isValidEx(indx){
+    return this.ejerciciosEdit.toArray()[indx] != null && this.ejerciciosEdit.toArray()[indx].form.valid
   }
 
   getRutina(){
@@ -102,7 +116,10 @@ export class EditarRutinaComponent implements OnInit {
     }
     ejercicio.id = null;
     ejercicio.isTemplate = false;
-    this.form.controls.exercises.value.push(ejercicio);
+    console.log(this.form.controls.exercises.value);
+    let newEx = this.form.controls.exercises.value;
+    newEx.push(ejercicio);
+    this.form.controls.exercises.setValue(newEx);
 
   }
 
@@ -121,13 +138,17 @@ export class EditarRutinaComponent implements OnInit {
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.form.controls.exercises.value.push(this.ejerciciosEdit.toArray()[id].form.value);
+    let newEx = this.form.controls.exercises.value;
+    newEx.push(this.ejerciciosEdit.toArray()[id].form.value);
+    this.form.controls.exercises.setValue(newEx);
   }
 
     agregarEjercicioNuevo(){
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;
     }
-    this.form.controls.exercises.value.push(this.ejercicioComponent.form.value);
+    let newEx = this.form.controls.exercises.value;
+    newEx.push(this.ejercicioComponent.form.value);
+    this.form.controls.exercises.setValue(newEx);
   }
 }

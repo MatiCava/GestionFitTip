@@ -61,7 +61,7 @@
                     </div>
                     <div class="collapse" id="ejercicio{{i}}">
                         <app-nuevo-ejercicio-asignar #edit [ejercicioAEditar]="exercise"></app-nuevo-ejercicio-asignar>
-                        <button class="btn btn-primary" data-toggle="collapse" attr.data-target="#ejercicio{{i}}" (click)="agregarEjercicioEditado(i)" >Agregar</button>
+                        <button class="btn btn-primary" data-toggle="collapse" [disabled]="!isValidEx(i)" attr.data-target="#ejercicio{{i}}" (click)="agregarEjercicioEditado(i)" >Agregar</button>
                     </div>
                 </li>
             </ul>

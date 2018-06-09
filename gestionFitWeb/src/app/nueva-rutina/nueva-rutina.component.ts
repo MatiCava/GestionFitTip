@@ -105,6 +105,10 @@ export class NuevaRutinaComponent implements OnInit {
     
   }
 
+  isValidEx(indx){
+    return this.ejerciciosEdit.toArray()[indx] != null && this.ejerciciosEdit.toArray()[indx].form.valid
+  }
+
   agregarEjercicioEditado(id){
     if(!this.tieneEjercicios){
       this.tieneEjercicios=true;

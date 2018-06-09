@@ -60,6 +60,10 @@ export class NuevaRutinaAsignarComponent implements OnInit {
     }
 }
 
+isValidEx(indx){
+  return this.ejerciciosEdit.toArray()[indx] != null && this.ejerciciosEdit.toArray()[indx].form.valid
+}
+
   ngOnInit() {
     console.log(this.rutinaAEditar);
     if(this.rutinaAEditar != null){

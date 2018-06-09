@@ -14,7 +14,7 @@
     <div class="form-group">
       <label class="form-control" for="inputDescription">{{'Ingrese una descripcion para el ejercicio' | translate}}</label>
       <textarea class="form-control" aria-describedby="errorDescription" id="inputDescription" formControlName="description" placeholder="Descripcion" rows="3"></textarea>
-      <small id="errorDescription" *ngIf="form.controls.description.invalid && form.controls.description.dirty"></small>
+      <small id="errorDescription" *ngIf="form.controls.description.invalid && form.controls.description.dirty" style="color: red">Requiere descripcion</small>
     </div>
   </form>
   <div *ngIf="!isAsignar">

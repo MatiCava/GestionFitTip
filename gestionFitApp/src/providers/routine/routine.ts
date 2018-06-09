@@ -8,8 +8,8 @@ import { Exercise } from '../../model/exercise'
 @Injectable()
 export class RoutineProvider {
 
-	//apiUrl : String="https://gestionfit-backend.herokuapp.com/api/"
-  apiUrl : String="http://localhost:8080/api/";
+	apiUrl : String="https://gestionfit-backend.herokuapp.com/api/"
+  //apiUrl : String="http://localhost:8080/api/";
 
   constructor(public http: HttpClient) {
     console.log('Hello RoutineProvider Provider');

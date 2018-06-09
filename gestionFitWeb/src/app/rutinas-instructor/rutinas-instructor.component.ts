@@ -94,4 +94,8 @@ export class RutinasInstructorComponent implements OnInit{
   volverAtras(){
     this.router.navigate(['/alumnos']);
   }
+
+  isValidRoutine(indx){
+    return this.rutinasEdits.toArray()[indx] != null && this.rutinasEdits.toArray()[indx].form.valid
+  }
 }

@@ -54,7 +54,7 @@
             <div class="collapse" id="rutina{{i}}">
           
           <app-nueva-rutina-asignar #edit [rutinaAEditar]="rutina"></app-nueva-rutina-asignar>
-          <button class="btn btn-primary" data-toggle="collapse" attr.data-target="#rutina{{i}}" (click)="agregarRutinaEditada(i)" >Agregar</button>
+          <button class="btn btn-primary" data-toggle="collapse" [disabled]="!isValidRoutine(i)" attr.data-target="#rutina{{i}}" (click)="agregarRutinaEditada(i)" >Agregar</button>
         </div>
       </li>
     
