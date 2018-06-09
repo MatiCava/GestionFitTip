@@ -35,11 +35,8 @@ export class InfoAlumnoPage implements OnInit{
   }
 
   ngOnInit(){
-    this.userServ.getClasses(this.id).subscribe(
-      res => {this.classes = res; console.log(this.classes);},
-      error => console.log(error)
-    );
-    this.tieneClasses = this.classes.length == 0;
+   
+    this.tieneClasses = this.user.classDays != null && this.user.classDays.length > 0;
   }
 
   ionViewDidLoad() {

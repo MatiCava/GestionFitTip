@@ -101,6 +101,16 @@ public class UserController {
 		return user;
 	}
 	
+	@GetMapping(value= "/userDesktop/{mail}",produces= "application/json")
+	public User getUserByEmail(@PathVariable("mail") String idUser){
+		User user = this.userServ.getByMail(idUser);
+		if(user == null) {
+			throw new NotFoundException("Usuario no encontrado");
+		}
+		
+		return user;
+	}
+	
 	@GetMapping(value="/user/{id}/rutinas",produces= "application/json")
 	public Set<Routine> getRutines(@PathVariable("id") Long idUser) {
 		Set<Routine> rutines = this.userServ.getStudentRutines(idUser);
@@ -146,9 +156,11 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/addLessonsDesktop/{mail}/{nLessons}", produces = "application/json")
-	public ResponseEntity<User> addLessonsToStudentDesktop(@PathVariable("mail") String mail, @PathVariable("nLessons") int numLessons ) throws Exception{
+	public ResponseEntity<User> addLessonsToStudentDesktop(@PathVariable("mail") String mail, @PathVariable("nLessons") int numLessons ,@RequestBody List<DayStudent> days) throws Exception{
 		User user = this.userServ.getByMail(mail);
 		this.userServ.addLessons(user.getId(),numLessons);
+		this.userServ.addDays(user.id,days);
+		this.calServ.addDays(days,user.getNameAndSurname());
 		this.emailServ.sendEmailToUser(this.userServ.getByMail(mail), EmailService.PAID);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		

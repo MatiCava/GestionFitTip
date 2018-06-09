@@ -15,7 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AgregarClasesComponent implements OnInit {
 
   form: FormGroup = this.formBuilder.group({
-    clases : new FormControl({value:0,disabled:true},Validators.compose([
+    clases : new FormControl(0,Validators.compose([
       Validators.required,Validators.min(1)
     ]))
   });
@@ -78,10 +78,17 @@ export class AgregarClasesComponent implements OnInit {
     this.routerServ.navigate(["/alumnos"]);
   }
 
+  validHours(){
+    let valid = true;
+    for(let dia of this.diasElegidos){
+      valid = valid && dia.startHour != ""&& dia.endHour != "";
+    }
+    console.log(valid);
+    return valid;
+  }
+
 
   check(day){
-    console.log(this.dias);
-    console.log(day.checked);
     if(!day.checked){
       this.elegidos -= 1;
       this.diasElegidos.splice(this.diasElegidos.indexOf(day),1);
@@ -98,8 +105,11 @@ export class AgregarClasesComponent implements OnInit {
       this.form.controls.clases.setValue(4);
     }
     if(this.elegidos == 2){
+
       this.form.controls.clases.setValue(8);
     }
+
+
   }
 
   limit(day){

@@ -53,9 +53,9 @@
 			<ion-col><p style="font-size: 20px;font-weight: bold;text-align: center">Clases</p></ion-col>
 			<ion-col><p style="font-size: 20px;font-weight: bold;text-align: center">Dias</p></ion-col>
 		</ion-row>
-		<ion-row *ngFor="let class of classes">
+		<ion-row *ngFor="let class of user.classDays">
 			<ion-col><p style="font-size: 20px;text-align: center"> {{class.startHour}} - {{class.endHour}}  </p></ion-col>
-			<ion-col><p style="font-size: 20px;text-align: center"> {{class.day | date:'dd/MM/yyyy'}} </p></ion-col>
+			<ion-col><p style="font-size: 20px;text-align: center"> {{class.day | translate}} </p></ion-col>
 		</ion-row>
 	</ion-grid>
 </div>

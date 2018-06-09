@@ -22,8 +22,12 @@ export class UserService {
     return this.http.post<Response>(this.apiUrl + "addRfid/" + mail + "/" + rfid,{});
   }
 
-  addLessons(mail, lessons): Observable<Response>{
-    return this.http.put<Response>(this.apiUrl + "addLessonsDesktop/" + mail + "/" + lessons, {});
+  addLessons(mail, lessons, classes): Observable<Response>{
+    return this.http.put<Response>(this.apiUrl + "addLessonsDesktop/" + mail + "/" + lessons, classes);
+  }
+
+  getUser(mail):Observable<any>{
+    return this.http.get(this.apiUrl + "userDesktop/" + mail);
   }
 
 }

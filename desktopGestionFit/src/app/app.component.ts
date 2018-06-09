@@ -39,12 +39,40 @@ export class AppComponent implements OnInit{
   errorRegisterMessage = '';
   successAlert = false;
   successAlertMessage = '';
+  userRegister:any;
+  usuarioEncontrado=false;
+
+  form: FormGroup = this.formBuilder.group({
+    clases : new FormControl({value:0,disabled:true},Validators.compose([
+      Validators.required,Validators.min(1)
+    ]))
+  });
+
+  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false},
+  {day:"TUESDAY",startHour:"",endHour:"",checked:false},
+  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false},
+  {day:"THURSDAY",startHour:"",endHour:"",checked:false},
+  {day:"FRIDAY",startHour:"",endHour:"",checked:false},
+  {day:"SATURDAY",startHour:"",endHour:"",checked:false}];
+  diasElegidos = [];
+  horas = [];
+  puedeGuardar = true;
+  elegidos = 0;
+
 
   constructor(private formBuilder: FormBuilder, private userServ: UserService, private spinner: NgxSpinnerService){
     this.user = {nameAndSurname:"",photo:"http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png",rfid:"",remainingLessons:0};
   }
 
   ngOnInit(){
+    for(let i = 8;i<22;i++){
+      if(i<10){
+        this.horas.push('0'+i+':00');
+      }
+      else{
+        this.horas.push(i+':00');
+      }
+    }
     this.rfidInput.nativeElement.focus();
   }
 
@@ -74,20 +102,76 @@ export class AppComponent implements OnInit{
     this.focused = false;
   }
 
+  buscarUsuario(){
+    this.userServ.getUser(this.registerForm.controls.mail).subscribe(
+      res=>{this.setHorariosElegidos(res);this.userRegister = res;this.usuarioEncontrado = true;},
+      error=>console.log(error));
+  }
+
+  setHorariosElegidos(user){
+    console.log(user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime());
+    this.form.controls.clases.setValue(user.remainingLessons);
+    this.puedeGuardar = user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime(); 
+    this.diasElegidos = user.classDays;
+    for(let day of this.diasElegidos){
+      for(let dia of this.dias){
+        if(dia.day === day.day){
+          dia.checked = true;
+          this.elegidos ++;
+        }
+      }
+    }
+
+  }
+
+  horaSeleccionada(hora,day){
+    day.endHour = this.horas[this.horas.indexOf(hora)+1] ;
+    console.log(this.diasElegidos);
+  }
+
+  guardarClases(){
+    this.spinner.show();
+    this.userServ.addLessons(this.userRegister.id,this.form.controls.clases.value,this.diasElegidos).subscribe(
+      res => {console.log("GUARDADO");this.handleSuccessAlert("Clases agregadas");this.usuarioEncontrado=false; this.spinner.hide();},
+      error => {console.log(error);this.handleErrorRegister(error);this.spinner.hide();}
+    )
+  }
+
+
+
+  check(day){
+    console.log(this.dias);
+    console.log(day.checked);
+    if(!day.checked){
+      this.elegidos -= 1;
+      this.diasElegidos.splice(this.diasElegidos.indexOf(day),1);
+
+    }else{
+      this.elegidos += 1;
+      this.diasElegidos.push(day);
+
+    }
+    if(this.elegidos == 0){
+      this.form.controls.clases.setValue(0);
+    }
+    if(this.elegidos == 1){
+      this.form.controls.clases.setValue(4);
+    }
+    if(this.elegidos == 2){
+      this.form.controls.clases.setValue(8);
+    }
+  }
+
+  limit(day){
+    return (this.elegidos >= 2 && !day.checked);
+  }
+
   clearForm(){
     this.registerForm.reset();
     this.rfidInputRegister.nativeElement.focus();
     this.registerBool = false;
   }
 
-  addLessons(){
-    this.spinner.show();
-    this.userServ.addLessons(this.registerForm.controls.mail.value, this.registerForm.controls.lessons.value).subscribe(
-      res => {console.log(res); this.registerForm.controls.lessons.setValue(null);
-         this.handleSuccessAlert("Clases agregadas");this.spinner.hide()},
-      error=> {this.handleErrorRegister(error);this.spinner.hide()}
-    );
-  }
 
   //this.registerForm.controls.mail.setValue(""); this.registerForm.controls.rfid.setValue(""); this.rfidInputRegister.nativeElement.focus();
   saveRfid(){

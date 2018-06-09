@@ -5,38 +5,69 @@
   <img width="150" alt="Logo GestionFit" src="assets/icon.png">
 <div class="row" style="padding-bottom: 30px;padding-left: 20px;padding-right: 20px">
   <div class="col-md-8">
-  <form *ngIf="!registerBool" (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
-    <div class="form-group">
-      <label for="rfidInput">Rfid</label>
-      <input type="text" class="form-control" id="rfidInput" aria-describedby="rfidHelp" placeholder="00000000" #rfidInput (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
-      <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
-    </div>
-    <button class="btn btn-primary" type="submit">Ingresar</button>
-    <div *ngIf="errorAssist" class="alert alert-danger" role="alert">
-      {{errorAssistMessage}}
-      <button type="button" class="close" (click)="errorAssist = false" data-dismiss="alert" aria-label="Close">
+    <form *ngIf="!registerBool" (ngSubmit)="onSubmit()" [formGroup]="rfidForm">
+      <div class="form-group">
+        <label for="rfidInput">Rfid</label>
+        <input type="text" class="form-control" id="rfidInput" aria-describedby="rfidHelp" placeholder="00000000" #rfidInput (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
+        <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
+      </div>
+      <button class="btn btn-primary" type="submit">Ingresar</button>
+      <div *ngIf="errorAssist" class="alert alert-danger" role="alert">
+        {{errorAssistMessage}}
+        <button type="button" class="close" (click)="errorAssist = false" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  </form>
-
-  <form *ngIf="registerBool" [formGroup]="registerForm" (ngSubmit)="saveRfid()">
-    <div class="form-group">
-      <label for="mailInput">Registre un llavero/tarjeta a un alumno y/o agregue clases al momento del pago</label>
-      <input type="text" class="form-control" id="mailInput" aria-describedby="mailHelper" placeholder="carlos@gmail.com" formControlName="mail" [class.invalid]="registerForm.controls['mail'].invalid">
-      <small id="mailHelper" *ngIf="registerForm.controls['mail'].invalid"></small>
+        </button>
+      </div>
+    </form>
+    <div *ngIf="registerBool">
+      <form  [formGroup]="registerForm" (ngSubmit)="saveRfid()">
+        <div class="form-group">
+          <label for="mailInput">Registre un llavero/tarjeta a un alumno y/o agregue clases al momento del pago</label>
+          <input type="text" class="form-control" id="mailInput" aria-describedby="mailHelper" placeholder="carlos@gmail.com" formControlName="mail" [class.invalid]="registerForm.controls['mail'].invalid">
+          <small id="mailHelper" *ngIf="registerForm.controls['mail'].invalid"></small>
      
-      <label for="rfidInput2">Rfid</label>
-      <input type="text" class="form-control" id="rfidInput2" aria-describedby="rfidHelper" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
-      <small id="rfidHelper" *ngIf="focused">Puede pasar el llavero/tarjeta ahora</small>
+          <label for="rfidInput2">Rfid</label>
+          <input type="text" class="form-control" id="rfidInput2" aria-describedby="rfidHelper" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
+          <small id="rfidHelper" *ngIf="focused">Puede pasar el llavero/tarjeta ahora</small>
+          <br>
+          <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
+        </div>
+      </form>
       <br>
-      <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
-      <br>
-      <label for="lessonsInput">Agrega clases <strong>(* requiere campo mail completo)</strong></label>
-      <input type="number" class="form-control" id="lessonsInput" placeholder="5" formControlName="lessons">
-      <br>
+      <label>Agrega clases <strong>(* requiere campo mail completo)</strong></label>
+      <button class="btn btn-primary" (click)="buscarUsuario()">Buscar</button>
+      <div class="row" *ngIf="usuarioEncontrado">
+        <div class="col-md" *ngFor="let dia of dias" style="border: 1px solid black">
+          <div class="form-check">
+            <span >
+            {{dia.day}}
+            <br>
+            <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)" [disabled]="limit(dia)">
+            </span>
+          </div>
+        </div>
+      </div>
       
-      <button class="btn btn-primary" (click)="addLessons()" data-toggle="modal" data-target="#modalClases">Agregar clases</button>
+      <div *ngIf="diasElegidos.length > 0">
+        <div *ngFor="let diaElegido of diasElegidos">
+          {{diaElegido.day}}
+          <select class="custom-select" [(ngModel)]="diaElegido.startHour" (change)="horaSeleccionada($event.target.value,diaElegido)">
+            <option *ngFor="let hora of horas">{{hora}}</option>
+          </select>
+        </div>
+      </div>
+        <br>
+      
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label class="form-control" for="inputClases">Cantidad de clases</label>
+          <input  type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="0" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
+          <small id="errorClases" *ngIf="form.controls['clases'].invalid && form.controls['clases'].dirty" class="form-text text-muted" style="color: red">Debe ingresar un numero de clases a asignar</small>
+        </div>
+        <p *ngIf="!puedeGuardar" style="color: red">Su mes todavia esta en vigencia</p>
+          <button (click)="guardarClases()" [disabled]="(!form.valid) || !puedeGuardar" class="btn btn-success">{{'Agregar'}}</button>
+      </form>
+      
       <div *ngIf="errorRegister" class="alert alert-danger" role="alert">
         {{errorRegisterMessage}}
         <button type="button" class="close" (click)="errorRegister = false" data-dismiss="alert" aria-label="Close">
@@ -50,11 +81,11 @@
         </button>
       </div>
     </div>
-  </form>
+  
   <br>
   <label>Primera vez en el gimnasio?</label>
   <input type="checkbox" [(ngModel)]="registerBool">
-</div>
+  </div>
 
   <div class="col-md-3">
   <div class="card" style="width: 18rem;padding-top: 30px">
@@ -79,46 +110,7 @@
   loadingText="Cargando..."
   type="ball-pulse">
 </ngx-spinner>
-<!--
-  <div ng-hide="errorRegister" class="modal fade" id="modalClases" tabindex="-1" role="dialog" aria-labelledby="modalClasesTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalClasesTitle">Confirmacion</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Ha agregado clases</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div ng-hide="errorRegister" class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalRegistrarTitle">Confirmacion</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Ya ha registrado su rfid, desea cerrar y agregar clases o ingresar?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" (click)="clearForm()" class="btn btn-primary" data-dismiss="modal">Ingresar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
--->
 
 </div>
 

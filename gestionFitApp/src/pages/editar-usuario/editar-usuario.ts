@@ -5,13 +5,6 @@ import { UserProvider } from '../../providers/user/user';
 import { LoginProvider } from '../../providers/login/login';
 import { error } from 'util';
 
-/**
- * Generated class for the EditarUsuarioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage({name:"editarUsuario"})
 @Component({
   selector: 'page-editar-usuario',
@@ -67,7 +60,8 @@ export class EditarUsuarioPage {
     ])),
     role: new FormControl(),
     routines: new FormControl(),
-    measurements: new FormControl()
+    measurements: new FormControl(),
+    classDays: new FormControl()
   })
 
   loading:Loading;

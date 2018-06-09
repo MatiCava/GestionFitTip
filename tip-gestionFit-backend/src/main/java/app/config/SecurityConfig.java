@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	whitelist.add("/api/assist");
     	whitelist.add("/api/addRfid");
     	whitelist.add("/api/addLessonsDesktop");
+    	whitelist.add("/api/userDesktop");
     	
     	
         http.cors().and()

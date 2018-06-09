@@ -158,13 +158,13 @@ public class DataService {
 		this.userDAO.save(alu2);
 		this.userDAO.save(inst1);
 		
-		Class_Day day1s = new Class_Day(LocalDate.of(2018,Month.JUNE,24), "12:00", "15:00", "Roberto Robertson");
-		Class_Day day2s = new Class_Day(LocalDate.of(2018,Month.JUNE,29), "09:30", "12:30", "Roberto Robertson");
-		
-		List<Class_Day> classesS = new ArrayList<Class_Day>();
-		classesS.add(day1s);
-		classesS.add(day2s);
-		this.addClass(classesS);
+//		Class_Day day1s = new Class_Day(LocalDate.of(2018,Month.JUNE,24), "12:00", "15:00", "Roberto Robertson");
+//		Class_Day day2s = new Class_Day(LocalDate.of(2018,Month.JUNE,29), "09:30", "12:30", "Roberto Robertson");
+//		
+//		List<Class_Day> classesS = new ArrayList<Class_Day>();
+//		classesS.add(day1s);
+//		classesS.add(day2s);
+//		this.addClass(classesS);
 		
 //		List<DayStudent> classes1 = new ArrayList<DayStudent>();
 //		List<DayStudent> classes2 = new ArrayList<DayStudent>();
