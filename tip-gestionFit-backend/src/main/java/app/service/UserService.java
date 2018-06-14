@@ -22,6 +22,7 @@ import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;
 import app.model.User;
+import app.model.User_Instructor;
 import app.model.User_Student;
 import app.persistence.UserDAO;
 
@@ -57,8 +58,25 @@ public class UserService {
 	}
 	
 	@Transactional
+	public long saveInstructor(User_Instructor user){
+		ArgumentsValidator.validateInstructor(user);
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
+		user.setRole("INISTRUCTOR");
+
+		return this.userDAO.save(user);
+	}
+	
+	@Transactional
 	public void updateStudent(User_Student newUser){
 		ArgumentsValidator.validateStudent(newUser);
+		
+		this.userDAO.update(newUser);
+	}
+	
+	@Transactional
+	public void updateInstructor(User_Instructor newUser){
+		ArgumentsValidator.validateInstructor(newUser);
 		
 		this.userDAO.update(newUser);
 	}
@@ -80,7 +98,12 @@ public class UserService {
 	
 	@Transactional
 	public List<User_Student> getAllStudents(){
-		return this.userDAO.getAllUserRole("STUDENT");
+		return this.userDAO.getAllStudents();
+	}
+	
+	@Transactional
+	public List<User_Instructor> getAllInstructors(){
+		return this.userDAO.getAllInstructors();
 	}
 	
 	@Transactional
@@ -175,12 +198,24 @@ public class UserService {
 	public Boolean checkEmail(String email) {
 		return this.userDAO.checkEmail(email);
 	}
-
+	
+	@Transactional
 	public void addDays(long id,List<DayStudent> days) {
 		User_Student user = (User_Student) this.userDAO.getById(id);
 		if(days != user.getClassDays()){
 			user.setClassDays(days);
 			this.updateStudent(user);
+		}
+
+		
+	}
+	
+	@Transactional
+	public void addDaysInstructor(long id,List<DayStudent> days) {
+		User_Instructor user = (User_Instructor) this.userDAO.getById(id);
+		if(days != user.getClasses()){
+			user.setClasses(days);
+			this.updateInstructor(user);
 		}
 
 		

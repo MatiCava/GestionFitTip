@@ -19,7 +19,6 @@ import org.junit.Test;
 
 import app.model.Class_Calendar;
 import app.model.Class_Day;
-import app.model.Class_Student;
 import app.model.DayStudent;
 import app.model.User_Student;
 import app.service.CalendarService;

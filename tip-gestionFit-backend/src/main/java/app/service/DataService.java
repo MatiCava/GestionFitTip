@@ -1,7 +1,6 @@
 package app.service;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,15 +10,15 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import app.model.DayStudent;
 import app.model.Class_Calendar;
 import app.model.Class_Day;
-import app.model.Class_Student;
+import app.model.DayStudent;
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Measurement;
 import app.model.Routine;
 import app.model.Routine_Type;
+import app.model.User_Admin;
 import app.model.User_Instructor;
 import app.model.User_Student;
 import app.persistence.CalendarDAO;
@@ -45,7 +44,8 @@ public class DataService {
 		
 		calDAO.save(new Class_Calendar());
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
-
+		User_Admin admin= new User_Admin("lovemylife",encoder.encode("1234"),"LoveMyLife","lovemylife@gmail.com");
+		
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
 		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","gastonveliez95@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
@@ -157,24 +157,8 @@ public class DataService {
 		this.userDAO.save(alu1);
 		this.userDAO.save(alu2);
 		this.userDAO.save(inst1);
-		
-//		Class_Day day1s = new Class_Day(LocalDate.of(2018,Month.JUNE,24), "12:00", "15:00", "Roberto Robertson");
-//		Class_Day day2s = new Class_Day(LocalDate.of(2018,Month.JUNE,29), "09:30", "12:30", "Roberto Robertson");
-//		
-//		List<Class_Day> classesS = new ArrayList<Class_Day>();
-//		classesS.add(day1s);
-//		classesS.add(day2s);
-//		this.addClass(classesS);
-		
-//		List<DayStudent> classes1 = new ArrayList<DayStudent>();
-//		List<DayStudent> classes2 = new ArrayList<DayStudent>();
-//		classes1.add(new DayStudent("TUESDAY","08:00","09:00"));
-//		classes1.add(new DayStudent("FRIDAY","08:00","09:00"));
-//		classes2.add(new DayStudent("TUESDAY","10:00","11:00"));
-//		this.saveDays(classes1, "Carlito");
-//		this.saveDays(classes2, "Roberto");
-//		System.out.println(calDAO.getAll().get(0).getClassDay(LocalDate.now()).getDay());
-		
+		this.userDAO.save(admin);
+			
 	}
 	
 	

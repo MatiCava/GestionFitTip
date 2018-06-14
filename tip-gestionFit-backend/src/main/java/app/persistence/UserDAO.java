@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import app.model.User;
+import app.model.User_Instructor;
 import app.model.User_Student;
 
 @Repository
@@ -20,14 +21,35 @@ public class UserDAO extends GenericDAO<User> {
 	
 	
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	public List<User_Student> getAllUserRole(Object objt){
+	public List<User_Student> getAllStudents(){
 		List<User_Student> result = null;
 		Session session =getSessionFactory().openSession();
 		try {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("role", objt));
+			Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("role", "STUDENT"));
 			result = (List<User_Student>) criteria.add(criterion).list();
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return result;
+	}
+	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public List<User_Instructor> getAllInstructors(){
+		List<User_Instructor> result = null;
+		Session session =getSessionFactory().openSession();
+		try {
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			Criterion criterion = Restrictions.and(Restrictions.ge("id", 0L),Restrictions.eq("role", "INSTRUCTOR"));
+			result = (List<User_Instructor>) criteria.add(criterion).list();
 		}
 		catch(Exception e) {
 			throw new RuntimeException(e);

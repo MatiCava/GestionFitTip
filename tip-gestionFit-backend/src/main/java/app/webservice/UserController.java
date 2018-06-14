@@ -26,6 +26,7 @@ import app.model.MeasuringTable;
 import app.model.Promo;
 import app.model.Routine;
 import app.model.User;
+import app.model.User_Instructor;
 import app.model.User_Student;
 import app.service.CalendarService;
 import app.service.EmailService;
@@ -72,6 +73,33 @@ public class UserController {
 		return this.userServ.getAllStudents();
 
 	}
+	
+	@PutMapping(value = "/instructor/addDays/{idInstructor}", produces = "application/json")
+	public ResponseEntity<Void> addDaysToInstructor(@PathVariable("idInstructor") long id,@RequestBody List<DayStudent> days) throws Exception{
+		this.userServ.addDaysInstructor(id,days);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(value = "/instructores", produces = "application/json")   
+	public List<User_Instructor> getInstructors() {
+		return this.userServ.getAllInstructors();
+
+	}
+	
+	@PostMapping(value = "/instructor", produces = "application/json")   
+	public ResponseEntity<Void> createInstructor(@RequestBody User_Instructor user) throws Exception {
+			this.userServ.saveInstructor(user);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	@PutMapping(value = "/instructor", produces = "application/json")   
+	public ResponseEntity<Void> updateInstructor(@RequestBody User_Instructor user) throws Exception {
+			this.userServ.updateInstructor(user);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	
 	
 	@PutMapping(value = "/user/{id}/nuevaMedicion",produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)

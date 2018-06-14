@@ -1,16 +1,11 @@
 package model;
 
-import static org.junit.Assert.assertEquals;
-
-import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import app.model.Class_Calendar;
-import app.model.Class_Student;
 import app.model.User_Student;
 import app.service.ArgumentsValidator;
 
