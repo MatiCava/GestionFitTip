@@ -40,6 +40,8 @@ export class NuevaRutinaAsignarComponent implements OnInit {
   errorArgumentos = false;
   isTemplate = false;
   searchText:any;
+  ejercicioAgregado=false;
+
 
   constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService) {
     
@@ -111,6 +113,8 @@ isValidEx(indx){
     let newEx = this.form.controls.exercises.value;
     newEx.push(ejercicio);
     this.form.controls.exercises.setValue(newEx);
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
   eliminarEjercicio(ejercicio){
@@ -127,6 +131,8 @@ isValidEx(indx){
     let newEx = this.form.controls.exercises.value;
     newEx.push(this.ejerciciosEdit.toArray()[id].form.value);
     this.form.controls.exercises.setValue(newEx);
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
     agregarEjercicioNuevo(){
@@ -136,7 +142,9 @@ isValidEx(indx){
     let newEx = this.form.controls.exercises.value;
     newEx.push(this.ejercicioComponent.form.value);
     this.form.controls.exercises.setValue(newEx);
- 
+    this.ejercicioComponent.form.reset();
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
 

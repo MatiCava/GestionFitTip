@@ -68,7 +68,13 @@
     <app-nueva-rutina-asignar></app-nueva-rutina-asignar>
     <button class="btn btn-primary" [disabled]="!rutinaComponent.form.valid" (click)="agregarRutinaNueva()" style="margin-top:30px">Agregar nueva rutina</button>
   </div>
-
+  <br>
+  <div class="alert alert-success alert-dismissible fade show" *ngIf="rutinaAgregada" role="alert">
+      <strong>{{'Rutina agregada' | translate}}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
   <div class="flex" style="padding-top: 25px;padding-bottom: 25px">
       <button class="btn btn-success" (click)="guardarRutinasAlumno()"> {{'Guardar' | translate}} </button>
       <button class="btn btn-danger" (click)="volverAtras()"> {{'Cancelar' | translate}} </button>

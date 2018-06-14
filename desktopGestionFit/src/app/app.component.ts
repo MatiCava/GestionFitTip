@@ -4,6 +4,8 @@ import { UserService } from './services/user.service';
 import { error } from 'protractor';
 import { HttpResponse } from 'selenium-webdriver/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-root',
@@ -60,7 +62,10 @@ export class AppComponent implements OnInit{
   elegidos = 0;
 
 
-  constructor(private formBuilder: FormBuilder, private userServ: UserService, private spinner: NgxSpinnerService){
+  constructor(private formBuilder: FormBuilder,private translate: TranslateService,
+     private userServ: UserService, private spinner: NgxSpinnerService){
+    this.translate.setDefaultLang('es');
+    this.translate.use('es');
     this.user = {nameAndSurname:"",photo:"http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png",rfid:"",remainingLessons:0};
   }
 

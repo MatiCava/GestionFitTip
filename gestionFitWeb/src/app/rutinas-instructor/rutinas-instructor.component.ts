@@ -24,7 +24,7 @@ export class RutinasInstructorComponent implements OnInit{
   tieneRutinas:boolean = false;
   nuevaRutina:boolean= false;
   searchText:any;
-  
+  rutinaAgregada=false;
 
   constructor(private translateService: TranslateService, private routineProvider: RoutineService, private userService: AlumnosService, private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) { }
 
@@ -67,6 +67,8 @@ export class RutinasInstructorComponent implements OnInit{
     rutina.id = null;
     rutina.isTemplate = false;
     this.rutinaAlumno.push(rutina);
+    this.rutinaAgregada = true;
+    setTimeout(() => {this.rutinaAgregada = false; } , 2000);
   }
 
 
@@ -76,10 +78,15 @@ export class RutinasInstructorComponent implements OnInit{
       this.tieneRutinas=true;
     }
     this.rutinaAlumno.push(this.rutinaComponent.form.value);
+    this.rutinaComponent.form.reset();
+    this.rutinaAgregada = true;
+    setTimeout(() => {this.rutinaAgregada = false; } , 2000);
   }
 
   agregarRutinaEditada(id){
     this.rutinaAlumno.push(this.rutinasEdits.toArray()[id].form.value);
+    this.rutinaAgregada = true;
+    setTimeout(() => {this.rutinaAgregada = false; } , 2000);
 
   }
 
@@ -88,7 +95,7 @@ export class RutinasInstructorComponent implements OnInit{
   	this.routineProvider.getRutinesTemplates().subscribe(
   						result => {this.rutinas = result;this.spinner.hide();},
   						error => {console.log(error);this.spinner.hide();},
-  						)
+  						);
   }
 
   volverAtras(){

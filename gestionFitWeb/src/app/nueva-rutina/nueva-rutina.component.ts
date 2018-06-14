@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NuevoEjercicioAsignarComponent } from '../nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 import { NuevoEjercicioComponent } from '../nuevo-ejercicio/nuevo-ejercicio.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nueva-rutina',
@@ -45,6 +46,7 @@ export class NuevaRutinaComponent implements OnInit {
   isTemplate = true;
   searchText:any;
   nuevoEjercicio:boolean=false;
+  ejercicioAgregado=false;
 
   constructor(private translateService: TranslateService, private formBuilder: FormBuilder, private routineServ: RoutineService, private router: Router, private spinner: NgxSpinnerService) {
     this.newRoutine = {name:"",isTemplate:true, creationDate:new Date().getTime(), type:"", exercises:[]};
@@ -97,6 +99,8 @@ export class NuevaRutinaComponent implements OnInit {
     ejercicio.isTemplate = false;
     this.newRoutine.exercises.push(ejercicio);
     this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
   eliminarEjercicio(ejercicio){
@@ -115,6 +119,8 @@ export class NuevaRutinaComponent implements OnInit {
     }
     this.newRoutine.exercises.push(this.ejerciciosEdit.toArray()[id].form.value);
     this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
   agregarEjercicioNuevo(){
@@ -123,6 +129,9 @@ export class NuevaRutinaComponent implements OnInit {
     }
     this.newRoutine.exercises.push(this.ejercicioComponent.form.value);
     this.form.controls.exercises.setValue(this.newRoutine.exercises);
+    this.ejercicioComponent.form.reset();
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
 

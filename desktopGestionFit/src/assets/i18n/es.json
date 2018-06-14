@@ -1,0 +1,27 @@
+
+{
+  "Chest": "Pecho",
+  "Arm": "Brazo",
+  "Waist":"Cintura",
+  "Abdomen": "Abdomen",
+  "Glute": "Glúteo",
+  "Thigh": "Muslo",
+  "Calf muscle": "Pantorrilla",
+  "Strength": "Fuerza",
+  "Resistance": "Resistencia",
+  "Strength_Resistance": "Resistencia y fuerza",
+  "Muscular_Definition": "Definicion muscular",
+  "Explosive_Force": "Fuerza explosiva",
+  "Upper_Body": "Parte superior",
+  "Lower_Body": "Parte inferior",
+  "Arms": "Brazos",
+  "Warm_Up": "Entrada en calor",
+  "Password": "Contraseña",
+  "MONDAY": "Lunes",
+  "TUESDAY": "Martes",
+  "WEDNESDAY": "Miercoles",
+  "THURSDAY": "Jueves",
+  "FRIDAY": "Viernes",
+  "SATURDAY": "Sabado"
+  
+}

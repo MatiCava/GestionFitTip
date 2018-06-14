@@ -9,9 +9,9 @@
       <div class="form-group">
         <label for="rfidInput">Rfid</label>
         <input type="text" class="form-control" id="rfidInput" aria-describedby="rfidHelp" placeholder="00000000" #rfidInput (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
-        <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">Ya puede pasar su llevero/tarjeta</small>
+        <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">{{'Ya puede pasar su llevero/tarjeta}'| translate}</small>
       </div>
-      <button class="btn btn-primary" type="submit">Ingresar</button>
+      <button class="btn btn-primary" type="submit">{{'Ingresar'|translate}}</button>
       <div *ngIf="errorAssist" class="alert alert-danger" role="alert">
         {{errorAssistMessage}}
         <button type="button" class="close" (click)="errorAssist = false" data-dismiss="alert" aria-label="Close">
@@ -35,12 +35,12 @@
       </form>
       <br>
       <label>Agrega clases <strong>(* requiere campo mail completo)</strong></label>
-      <button class="btn btn-primary" (click)="buscarUsuario()">Buscar</button>
+      <button class="btn btn-primary" (click)="buscarUsuario()">{{'Buscar'|translate}}</button>
       <div class="row" *ngIf="usuarioEncontrado">
         <div class="col-md" *ngFor="let dia of dias" style="border: 1px solid black">
           <div class="form-check">
             <span >
-            {{dia.day}}
+            {{dia.day | translate}}
             <br>
             <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)" [disabled]="limit(dia)">
             </span>
@@ -50,7 +50,7 @@
       
       <div *ngIf="diasElegidos.length > 0">
         <div *ngFor="let diaElegido of diasElegidos">
-          {{diaElegido.day}}
+          {{diaElegido.day | translate}}
           <select class="custom-select" [(ngModel)]="diaElegido.startHour" (change)="horaSeleccionada($event.target.value,diaElegido)">
             <option *ngFor="let hora of horas">{{hora}}</option>
           </select>

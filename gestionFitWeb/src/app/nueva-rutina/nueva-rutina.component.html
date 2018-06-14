@@ -1,15 +1,16 @@
 <div class="container" style="padding-top: 35px;">
     <form [formGroup]="form">
         <div class="form-group">
-            <label class="form-control" for="inputNombre">{{'Ingrese un nombre para la rutina' | translate}}</label>
+            <label for="inputNombre">{{'Ingrese un nombre para la rutina' | translate}}</label>
             <input type="text" class="form-control" id="inputNombre" aria-describedby="errorNombre" formControlName="name" placeholder="{{'Nombre' | translate}}">
-            <small id="errorNombre" *ngIf="form.controls.name.invalid && form.controls.name.dirty" style="color:red">La rutina debe tener un nombre</small>
+            <small id="errorNombre" *ngIf="form.controls.name.invalid" style="color:red">La rutina debe tener un nombre</small>
         </div>
         <div class="form-group">
-            <select formControlName="type" class="form-control">
+            <label for="inputTipo">{{'Seleccione un tipo'| translate}}</label>
+            <select id="inputTipo" formControlName="type" class="form-control" aria-describedby="errorTipo">
                 <option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </option>
             </select>
-            <p *ngIf="form.controls.type.invalid" style="color:red">Debe seleccionar un tipo</p>
+            <small id="errorTipo" *ngIf="form.controls.type.invalid" style="color:red">Debe seleccionar un tipo</small>
         </div>
     </form>
         <div class="form-group" >
@@ -35,6 +36,8 @@
       <label class="form-check-label" for="nuevoEj">
         Crear nuevo ejercicio personalizado
       </label>
+
+
       
     </div>
         <div class="form-group" *ngIf="!nuevoEjercicio">
@@ -68,12 +71,20 @@
             <br>
             <pagination-controls class="my-pagination" autoHide="true" previousLabel="{{'Anterior' | translate}}" nextLabel="{{'Siguiente' | translate}}" (pageChange)="p = $event"></pagination-controls>
         </div>
+        
         <div *ngIf="nuevoEjercicio">
+
             <h1 style="text-align: center">{{'Nuevo ejercicio personalizado' | translate}}</h1>
             <app-nuevo-ejercicio-asignar></app-nuevo-ejercicio-asignar>
             <button class="btn btn-primary" [disabled]="!ejercicioComponent.form.valid" (click)="agregarEjercicioNuevo()">Agregar nuevo ejercicio</button>
 
         </div>
+        <div class="alert alert-success alert-dismissible fade show" *ngIf="ejercicioAgregado" role="alert">
+                <strong>{{'Ejercicio agregado' | translate}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         <div *ngIf=!isAsignar>
         
         <div class="alert alert-danger" role="alert" style="font-family: 'Poppins',sans-serif;font-size: 20px" *ngIf="errorArgumentos" >{{'Error al guardar la rutina. Compruebe que los datos sean correctos' | translate}}</div>

@@ -23,7 +23,6 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "@fortawesome/fontawesome": "^1.1.5",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^3.0.1",
     "@types/dhtmlxscheduler": "^4.3.36",

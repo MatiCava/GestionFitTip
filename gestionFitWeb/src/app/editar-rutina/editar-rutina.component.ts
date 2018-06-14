@@ -45,7 +45,7 @@ export class EditarRutinaComponent implements OnInit {
   tieneEjercicios = false;
   errorArgumentos = false;
   searchText:any;
-
+  ejercicioAgregado=false;
 
   constructor(private formBuilder: FormBuilder, private translateService: TranslateService, private routineServ: RoutineService,  private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -120,7 +120,8 @@ export class EditarRutinaComponent implements OnInit {
     let newEx = this.form.controls.exercises.value;
     newEx.push(ejercicio);
     this.form.controls.exercises.setValue(newEx);
-
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
   eliminarEjercicio(ejercicio){
@@ -141,6 +142,8 @@ export class EditarRutinaComponent implements OnInit {
     let newEx = this.form.controls.exercises.value;
     newEx.push(this.ejerciciosEdit.toArray()[id].form.value);
     this.form.controls.exercises.setValue(newEx);
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 
     agregarEjercicioNuevo(){
@@ -150,5 +153,8 @@ export class EditarRutinaComponent implements OnInit {
     let newEx = this.form.controls.exercises.value;
     newEx.push(this.ejercicioComponent.form.value);
     this.form.controls.exercises.setValue(newEx);
+    this.ejercicioComponent.form.reset();
+    this.ejercicioAgregado = true;
+    setTimeout(() => {this.ejercicioAgregado = false; }, 2000);
   }
 }
