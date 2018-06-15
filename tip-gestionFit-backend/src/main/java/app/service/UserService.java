@@ -211,7 +211,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void addDaysInstructor(long id,List<DayStudent> days) {
+	public void addDaysInstructor(long id,Set<DayStudent> days) {
 		User_Instructor user = (User_Instructor) this.userDAO.getById(id);
 		if(days != user.getClasses()){
 			user.setClasses(days);

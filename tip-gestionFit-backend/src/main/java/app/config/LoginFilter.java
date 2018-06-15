@@ -19,6 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import app.model.User;
 import app.persistence.UserDAO;
 
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
@@ -58,7 +59,8 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
     	// si la autenticacion fue exitosa  agregamos el token a la respuesta
     	
     	UserDetails user = (UserDetails) auth.getPrincipal();
-    	long id = this.userDAO.getByUsername(user.getUsername()).getId();
-        JwtUtil.addAuthentication(res,user,id);
+    	User userDB = this.userDAO.getByUsername(user.getUsername());
+    	long id = userDB.getId();
+        JwtUtil.addAuthentication(res,user,id,userDB.getRole());
     }
 }

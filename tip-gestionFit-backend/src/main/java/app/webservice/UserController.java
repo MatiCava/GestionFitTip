@@ -75,7 +75,7 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/instructor/addDays/{idInstructor}", produces = "application/json")
-	public ResponseEntity<Void> addDaysToInstructor(@PathVariable("idInstructor") long id,@RequestBody List<DayStudent> days) throws Exception{
+	public ResponseEntity<Void> addDaysToInstructor(@PathVariable("idInstructor") long id,@RequestBody Set<DayStudent> days) throws Exception{
 		this.userServ.addDaysInstructor(id,days);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		

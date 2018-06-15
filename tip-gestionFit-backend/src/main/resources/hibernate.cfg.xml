@@ -46,10 +46,10 @@
 		<mapping class="app.model.User" />
 		<mapping class="app.model.User_Student" />
 		<mapping class="app.model.User_Instructor" />
+		<mapping class="app.model.User_Admin"/>
 		<mapping class="app.model.Exercise_Type" />
 		<mapping class="app.model.Routine_Type" />
 		<mapping class="app.model.Routine" />
-		<mapping class="app.model.Class_Student" />
 		<mapping class="app.model.Class_Day" />
 		<mapping class="app.model.Class_Calendar" />
 		

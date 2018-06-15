@@ -26,7 +26,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil {
 
     // metodo para crear el JWT y enviarlo al cliente en el header de la respuesta
-    static void addAuthentication(HttpServletResponse res,UserDetails userContext, long id) throws IOException {
+    static void addAuthentication(HttpServletResponse res,UserDetails userContext, long id,String role) throws IOException {
     	
     	 if ((userContext.getUsername()) == "") 
              throw new IllegalArgumentException("Cannot create JWT Token without username");
@@ -56,7 +56,7 @@ public class JwtUtil {
       //agregamos al encabezado y al cuerpo de la respuesta el token 
         res.addHeader("Authorization", token);
     	PrintWriter writer = res.getWriter();
-		writer.write("{\"token\":\""+ "Bearer " + token + "\""+ ",\"id\":\""+ id + "\""+ "}");
+		writer.write("{\"token\":\""+ "Bearer " + token + "\""+ ",\"id\":\""+ id + "\""+ ",\"role\":\""+ role + "\""+ "}");
         writer.close();
     }
 
