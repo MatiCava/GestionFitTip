@@ -41,6 +41,7 @@ import { CalendarioGeneralComponent } from './calendario-general/calendario-gene
 import { InstructoresComponent } from './instructores/instructores.component';
 import { AgregarClasesInstructorComponent } from './agregar-clases-instructor/agregar-clases-instructor.component';
 import { InfoInstructorComponent } from './info-instructor/info-instructor.component';
+import { NuevoInstructorComponent } from './nuevo-instructor/nuevo-instructor.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -73,7 +74,8 @@ const appRoutes: Routes = [
   { path: 'calendario-general',component: CalendarioGeneralComponent},
   { path: 'instructores', component: InstructoresComponent },
   { path: 'instructor/info/:id', component: InfoInstructorComponent},
-  { path: 'instructor/clases/agregar/:id', component: AgregarClasesInstructorComponent}
+  { path: 'instructor/clases/agregar/:id', component: AgregarClasesInstructorComponent},
+  { path: 'instructor/nuevo', component: NuevoInstructorComponent}
 ];
 
 @NgModule({
@@ -101,7 +103,8 @@ const appRoutes: Routes = [
     CalendarioGeneralComponent,
     InstructoresComponent,
     AgregarClasesInstructorComponent,
-    InfoInstructorComponent
+    InfoInstructorComponent,
+    NuevoInstructorComponent
     
     
 

@@ -97,4 +97,9 @@ export class AlumnosService {
     return this.http.put(this.apiUrl + "instructor/addDays/" + id, dias, this.httpOptions);
   }
 
+  addNewInstructor(instructor) {
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+    return this.http.post(this.apiUrl + "instructor", instructor, this.httpOptions);
+  }
+
 }

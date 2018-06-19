@@ -62,7 +62,7 @@ public class UserService {
 		ArgumentsValidator.validateInstructor(user);
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(user.getPassword()));
-		user.setRole("INISTRUCTOR");
+		user.setRole("INSTRUCTOR");
 
 		return this.userDAO.save(user);
 	}

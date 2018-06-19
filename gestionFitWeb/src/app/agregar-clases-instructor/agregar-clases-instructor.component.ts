@@ -42,7 +42,7 @@ export class AgregarClasesInstructorComponent implements OnInit {
   }
 
   setHorariosElegidos(user){
-    this.diasElegidos = user.classDays;
+    this.diasElegidos = user.classes;
     for(let day of this.diasElegidos){
       for(let dia of this.dias){
         if(dia.day === day.day){
@@ -78,6 +78,10 @@ export class AgregarClasesInstructorComponent implements OnInit {
     }
     console.log(valid);
     return valid;
+  }
+
+  check(dia){
+    this.diasElegidos.push(dia);
   }
 
 
