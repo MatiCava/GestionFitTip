@@ -13,13 +13,18 @@ import app.model.Class_Calendar;
 import app.model.Class_Day;
 import app.model.DayStudent;
 import app.model.User;
+import app.model.User_Instructor;
 import app.persistence.CalendarDAO;
+import app.persistence.UserDAO;
 
 @Service
 public class CalendarService {
 	
 	@Autowired
 	private CalendarDAO calendarDAO;
+	
+	@Autowired
+	private UserDAO userDAO;
 	
 	public CalendarService(){
 		this.calendarDAO = new CalendarDAO();
@@ -68,6 +73,7 @@ public class CalendarService {
 	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1));
 	    int agregados=0;
 		for(DayStudent day : days){
+			User_Instructor instructor = this.userDAO.getInstructorForDay(day);
 		    for(int i = 0 ; i < numOfDaysBetween ;i++){
 		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
 		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));

@@ -20,7 +20,12 @@ export class AgregarClasesComponent implements OnInit {
     ]))
   });
 
-  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false},{day:"TUESDAY",startHour:"",endHour:"",checked:false},{day:"WEDNESDAY",startHour:"",endHour:"",checked:false},{day:"THURSDAY",startHour:"",endHour:"",checked:false},{day:"FRIDAY",startHour:"",endHour:"",checked:false},{day:"SATURDAY",startHour:"",endHour:"",checked:false}];
+  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false},
+  {day:"TUESDAY",startHour:"",endHour:"",checked:false},
+  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false},
+  {day:"THURSDAY",startHour:"",endHour:"",checked:false},
+  {day:"FRIDAY",startHour:"",endHour:"",checked:false},
+  {day:"SATURDAY",startHour:"",endHour:"",checked:false}];
   diasElegidos = [];
   idUser:any;
 
@@ -28,7 +33,8 @@ export class AgregarClasesComponent implements OnInit {
   puedeGuardar = true;
   elegidos = 0;
 
-  constructor(private userServ : AlumnosService, private routerServ: Router, private formBuilder : FormBuilder,private route: ActivatedRoute, private spinner: NgxSpinnerService) {
+  constructor(private userServ : AlumnosService, private routerServ: Router,
+     private formBuilder : FormBuilder,private route: ActivatedRoute, private spinner: NgxSpinnerService) {
     this.idUser = this.route.snapshot.paramMap.get("idUser");
    }
 

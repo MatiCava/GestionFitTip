@@ -1,0 +1,17 @@
+.active-cyan-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #1565C0;
+    box-shadow: 0 1px 0 0  #1565C0;
+}
+.active-cyan input[type=text] {
+    border-bottom: 1px solid #1565C0;
+    box-shadow: 0 1px 0 0 #1565C0;
+}
+.active-cyan .fa, .active-cyan-2 .fa {
+    color: #1565C0;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #1565C0;
+    border-radius: 5px;
+    text-align: left;
+}

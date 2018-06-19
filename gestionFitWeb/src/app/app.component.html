@@ -17,6 +17,9 @@
         <li>
             <a [routerLink]="" (click)="calendario()" ><p>{{'Calendario' | translate}} <i class="fas fa-calendar-alt"></i></p></a>
         </li>
+        <li *ngIf="isAdmin()">
+            <a [routerLink]="" (click)="instructores()"><p>{{'instructores' | translate}} <i class="fas fa-users"></i></p></a>
+        </li>
 
         <li>
             <a [routerLink]="" (click)="alumnos()"><p>{{'Alumnos' | translate}} <i class="fas fa-users"></i></p></a>

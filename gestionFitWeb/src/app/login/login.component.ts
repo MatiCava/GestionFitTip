@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       result => {
         localStorage.setItem("token", result.body.token);
         localStorage.setItem("id",result.body.id);
+        localStorage.setItem("rol",result.body.role);
         this.routerServ.navigate(['/alumnos']);
         this.spinner.hide();
       },
