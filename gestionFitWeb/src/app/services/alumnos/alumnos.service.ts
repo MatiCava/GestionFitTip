@@ -7,7 +7,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class AlumnosService {
 
   apiUrl : String="http://localhost:8080/api/";
-  // apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  //apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
 
   httpOptions: any;
 
@@ -29,6 +29,13 @@ export class AlumnosService {
 
 
   	return this.http.get(this.apiUrl+"alumnos", this.httpOptions);
+  }
+
+  getUsersInstructors(): Observable<any>{
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+
+
+  	return this.http.get(this.apiUrl+"instructores", this.httpOptions);
   }
 
   addNewUserStudent(newUser): Observable<any>{
@@ -83,6 +90,16 @@ export class AlumnosService {
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
     console.log(promo);
     return this.http.post(this.apiUrl + "promo", promo, this.httpOptions);
+  }
+
+  addLessonsInstructor(id, dias) {
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+    return this.http.put(this.apiUrl + "instructor/addDays/" + id, dias, this.httpOptions);
+  }
+
+  addNewInstructor(instructor) {
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+    return this.http.post(this.apiUrl + "instructor", instructor, this.httpOptions);
   }
 
 }

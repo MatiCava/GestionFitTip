@@ -1,0 +1,25 @@
+<div class="container" style="font-family: 'Noto Sans', sans-serif;padding-top: 30px">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <p>{{'Usuario' | translate}}: <strong>{{instructor.username}}</strong></p>	
+    </li>
+    <li class="list-group-item">
+      <p> Mail: <strong>{{instructor.mail}}</strong> </p>
+    </li>
+    <li class="list-group-item">
+      <p> {{'Nombre' | translate}}: <strong>{{instructor.nameAndSurname}}</strong> </p>
+    </li>
+  </ul>
+  <div style="padding-top: 25px;padding-bottom: 25px;">
+    <button class="btn btn-primary" (click)="volver()">{{'Atras' | translate}}</button>
+  </div>
+
+  <ngx-spinner  
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#1565C0"
+  loadingText="Cargando..."
+  type="ball-pulse">
+  </ngx-spinner>
+
+</div>

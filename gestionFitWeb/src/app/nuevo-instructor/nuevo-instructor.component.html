@@ -1,0 +1,23 @@
+<div class="container">
+  <h2 style="margin-top: 10px">Nuevo instructor</h2>
+  <form [formGroup]="instructor" >
+    <div class="form-group">
+      <label for="inputNombre">{{'Nombre completo' | translate}}:</label>
+      <input type="text" id="inputNombre" class="form-control" formControlName="nameAndSurname" placeholder="{{'Ingrese un nombre'|translate}}">
+    </div>
+    <div class="form-group">
+      <label for="inputUsuario">{{'Usuario' | translate}}:</label>
+      <input type="text" id="inputUsuario" class="form-control" formControlName="username" placeholder="{{'Ingrese un nombre de usuario'|translate}}">
+    </div>
+    <div class="form-group">
+      <label for="inputPass">{{'Contraseña' | translate}}:</label>
+      <input type="password" id="inputPass" class="form-control" formControlName="password" placeholder="{{'Ingrese una contraseña'|translate}}">
+    </div>
+    <div class="form-group">
+      <label for="inputMail">{{'Email' | translate}}:</label>
+      <input type="email" id="inputMail" class="form-control" formControlName="mail" placeholder="{{'Ingrese un mail de contacto'|translate}}">
+    </div>
+    <button class="btn btn-success" [disabled]="instructor.invalid" (click)="saveInstructor()">{{'Guardar'|translate}}</button>
+    <button class="btn btn-danger" routerLink="/instructores">{{'Cancelar'|translate}}</button>
+  </form>
+</div>

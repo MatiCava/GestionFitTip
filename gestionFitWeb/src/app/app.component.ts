@@ -44,6 +44,14 @@ export class AppComponent implements OnInit{
     this.translateService.use(lang);
   }
 
+  isAdmin() {
+    return localStorage.getItem('rol') === 'ADMIN';
+  }
+
+  instructores(){
+    this.routerService.navigate(['/instructores']);
+  }
+
 
 
   alumnos() {

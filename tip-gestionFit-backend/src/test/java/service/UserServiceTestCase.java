@@ -106,30 +106,6 @@ public class UserServiceTestCase {
 	}
 	
 	
-	@Test
-	public void testDummy() {
-		Class_Calendar calendar= new Class_Calendar();
-		this.calServ.save(calendar);
-		List<DayStudent> classes1 = new ArrayList<DayStudent>();
-		List<DayStudent> classes2 = new ArrayList<DayStudent>();
-		classes1.add(new DayStudent("TUESDAY","08:00","09:00"));
-		classes1.add(new DayStudent("FRIDAY","08:00","09:00"));
-		classes2.add(new DayStudent("TUESDAY","10:00","11:00"));
-		this.calServ.addDays(classes1, "Carlito");
-		this.calServ.addDays(classes2, "Roberto");
-		for(Class_Day cDay : this.calServ.get().getClasses()) {
-					System.out.println("DIAAA" + cDay.getDay());
-					System.out.println("Nombre: " + cDay.getStudentName());
-					System.out.println("Hora inicio " + cDay.getStartHour());
-					System.out.println("Hora fin " + cDay.getEndHour());
-				
-			
-		}
-		
-
-	}
-	
-	
 	
 	
 

@@ -40,6 +40,10 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { CalendarioGeneralComponent } from './calendario-general/calendario-general.component';
 import { ChartsModule } from 'ng2-charts';
 
+import { InstructoresComponent } from './instructores/instructores.component';
+import { AgregarClasesInstructorComponent } from './agregar-clases-instructor/agregar-clases-instructor.component';
+import { InfoInstructorComponent } from './info-instructor/info-instructor.component';
+import { NuevoInstructorComponent } from './nuevo-instructor/nuevo-instructor.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -69,7 +73,11 @@ const appRoutes: Routes = [
   { path: 'ejercicio/edit/:id', component: EditarEjercicioComponent },
   { path: 'ejercicios/nuevo' , component: NuevoEjercicioComponent },
   { path: 'alumno/clases/agregar/:idUser', component: AgregarClasesComponent},
-  { path: 'calendario-general',component: CalendarioGeneralComponent}
+  { path: 'calendario-general',component: CalendarioGeneralComponent},
+  { path: 'instructores', component: InstructoresComponent },
+  { path: 'instructor/info/:id', component: InfoInstructorComponent},
+  { path: 'instructor/clases/agregar/:id', component: AgregarClasesInstructorComponent},
+  { path: 'instructor/nuevo', component: NuevoInstructorComponent}
 ];
 
 @NgModule({
@@ -94,7 +102,11 @@ const appRoutes: Routes = [
     NuevaRutinaAsignarComponent,
     NuevoEjercicioAsignarComponent,
     CalendarioComponent,
-    CalendarioGeneralComponent
+    CalendarioGeneralComponent,
+    InstructoresComponent,
+    AgregarClasesInstructorComponent,
+    InfoInstructorComponent,
+    NuevoInstructorComponent
     
     
 

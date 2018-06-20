@@ -8,6 +8,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import app.model.DayStudent;
 import app.model.User;
 import app.model.User_Instructor;
 import app.model.User_Student;
@@ -179,6 +180,25 @@ public class UserDAO extends GenericDAO<User> {
 		}
 		finally {
 			if(session != null) {
+				session.close();
+			}
+		}
+		return result;
+	}
+
+
+	public User_Instructor getInstructorForDay(DayStudent day) {
+		Session session = getSessionFactory().openSession();
+		User_Instructor result = null;
+
+		try {
+
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		finally {
+			if(session!= null) {
 				session.close();
 			}
 		}
