@@ -27,6 +27,7 @@
 		<property name="connection.password">f46b0e60741d7bbbccdfe31799b1c7be295f19c9988f141709c5bab41313e7db</property>
         
         -->
+            <property name="hibernate.connection.pool_size">20</property>
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
@@ -38,8 +39,11 @@
 		
 		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 
+
 		<mapping class="app.model.DaysAssisted" />
+		<mapping class="app.model.StartEndHour" />
 		<mapping class="app.model.DayStudent" />
+		<mapping class="app.model.DayInstructor" />
 		<mapping class="app.model.Exercise" />
 		<mapping class="app.model.Measure" />
 		<mapping class="app.model.Measurement" />

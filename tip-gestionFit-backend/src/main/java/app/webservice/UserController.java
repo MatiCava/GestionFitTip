@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import app.exception.NotFoundException;
 import app.model.Class_Calendar;
 import app.model.Class_Day;
+import app.model.DayInstructor;
 import app.model.DayStudent;
 import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
@@ -75,7 +76,7 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/instructor/addDays/{idInstructor}", produces = "application/json")
-	public ResponseEntity<Void> addDaysToInstructor(@PathVariable("idInstructor") long id,@RequestBody Set<DayStudent> days) throws Exception{
+	public ResponseEntity<Void> addDaysToInstructor(@PathVariable("idInstructor") long id,@RequestBody Set<DayInstructor> days) throws Exception{
 		this.userServ.addDaysInstructor(id,days);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
