@@ -12,6 +12,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class InfoAlumnoComponent implements OnInit {
   id: any;
+  asistencia;
+  inasistencia;
+  logs:any[];
+  public pieChartLabels:string[] = ['Asistencia', 'Inasistencia'];
+  public pieChartData:number[] = [];
+  public pieChartType:string = 'pie';
   private alumno;
 
   constructor(private translateService: TranslateService, private userServ: AlumnosService, private route: ActivatedRoute, private routerServ: Router, private spinner: NgxSpinnerService) {
@@ -20,6 +26,7 @@ export class InfoAlumnoComponent implements OnInit {
   }
   ngOnInit() {
     this.getInfoAlumno();
+    this.setCharData();
   }
 
 
@@ -29,6 +36,24 @@ export class InfoAlumnoComponent implements OnInit {
     this.userServ.getUser(this.id).subscribe(
       user => {this.alumno = user;this.spinner.hide();},
       err => {console.log(err); this.spinner.hide();});
+
+      this.asistencia = this.alumno.assistance;
+      this.inasistencia = 100 - this.alumno.assistance;
+      this.logs = this.alumno.daysAssisted;
+      console.log(this.alumno.daysAssisted);
+      console.log(this.alumno.assistance);
+  }
+
+  setCharData(){
+    this.pieChartData = [this.asistencia, this.inasistencia];
+  }
+
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+ 
+  public chartHovered(e:any):void {
+    console.log(e);
   }
 
   volver() {

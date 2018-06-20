@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import app.exception.ExpiredLessonsException;
 import app.exception.InsufficientLessonsException;
@@ -44,12 +46,17 @@ public class User_Student extends User {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private Set<Routine> routines;
 	private int remainingLessons;
+	private int totalClasses;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date paymentDate;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date lessonsExpires;
 	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
 	private List<DayStudent> classDays;
+	private int assistance;
+	@ElementCollection
+	@JsonIgnore
+	private List<Date> daysAssisted;
 	
 
 	public User_Student() {
@@ -58,11 +65,14 @@ public class User_Student extends User {
 		this.routines = new HashSet<Routine>();
 		this.classDays = new ArrayList<DayStudent>();
 		this.setRole("STUDENT");
-
+		this.daysAssisted = new ArrayList<Date>();
+		this.assistance = 0;
 
 	}
 
 	
+	
+
 	public User_Student(String photoProfile,String user, String pass, String name,String email,String pat,
 			String obs,String obj,Date birth,String tel,
 			float wS) {
@@ -82,8 +92,36 @@ public class User_Student extends User {
 		this.routines = new HashSet<Routine>();
 		this.telephone = tel;
 		this.weigth = wS;
+		this.totalClasses = 0;
 		this.setRole("STUDENT");
+		this.daysAssisted = new ArrayList<Date>();
+		this.assistance = 0;
 	}
+	
+	public void addNewLog() {
+		Date newLog = new Date();
+		this.daysAssisted.add(newLog);
+	}
+	
+	public int getAssistance() {
+		return assistance;
+	}
+
+
+	public void setAssistance(int assistance) {
+		this.assistance = assistance;
+	}
+
+
+	public List<Date> getDaysAssisted() {
+		return daysAssisted;
+	}
+
+
+	public void setDaysAssisted(List<Date> daysAssisted) {
+		this.daysAssisted = daysAssisted;
+	}
+
 
 
 	public void addRoutine(List<Routine> routines) {
@@ -249,6 +287,16 @@ public class User_Student extends User {
 	}
 
 
+	public int getTotalClasses() {
+		return totalClasses;
+	}
+
+
+	public void setTotalClasses(int totalClasses) {
+		this.totalClasses = totalClasses;
+	}
+
+
 	public Date getPaymentDate() {
 		return paymentDate;
 	}
@@ -282,6 +330,21 @@ public class User_Student extends User {
 	public void setRoutines(Set<Routine> routines) {
 		this.routines = routines;
 	}
+
+
+	public int getPromedioAssistance() {
+		
+		return 0;
+	}
+
+
+	public void calculateAssitance() {
+		int newAssistance = (this.getDaysAssisted().size() * 100) / this.totalClasses;
+		this.setAssistance(newAssistance);
+	}
+
+
+	
 	
 	
 	
