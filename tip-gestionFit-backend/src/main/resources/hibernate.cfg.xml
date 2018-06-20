@@ -38,6 +38,7 @@
 		
 		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 
+		<mapping class="app.model.DaysAssisted" />
 		<mapping class="app.model.DayStudent" />
 		<mapping class="app.model.Exercise" />
 		<mapping class="app.model.Measure" />

@@ -54,9 +54,8 @@ public class User_Student extends User {
 	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
 	private List<DayStudent> classDays;
 	private int assistance;
-	@ElementCollection
-	@JsonIgnore
-	private List<Date> daysAssisted;
+	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	private Set<DaysAssisted> daysAssisted;
 	
 
 	public User_Student() {
@@ -65,7 +64,7 @@ public class User_Student extends User {
 		this.routines = new HashSet<Routine>();
 		this.classDays = new ArrayList<DayStudent>();
 		this.setRole("STUDENT");
-		this.daysAssisted = new ArrayList<Date>();
+		this.daysAssisted = new HashSet<DaysAssisted>();
 		this.assistance = 0;
 
 	}
@@ -94,13 +93,14 @@ public class User_Student extends User {
 		this.weigth = wS;
 		this.totalClasses = 0;
 		this.setRole("STUDENT");
-		this.daysAssisted = new ArrayList<Date>();
+		this.daysAssisted = new HashSet<DaysAssisted>();
 		this.assistance = 0;
 	}
 	
 	public void addNewLog() {
 		Date newLog = new Date();
-		this.daysAssisted.add(newLog);
+		DaysAssisted newDayA = new DaysAssisted(this.getNameAndSurname(), newLog);
+		this.daysAssisted.add(newDayA);
 	}
 	
 	public int getAssistance() {
@@ -113,12 +113,12 @@ public class User_Student extends User {
 	}
 
 
-	public List<Date> getDaysAssisted() {
+	public Set<DaysAssisted> getDaysAssisted() {
 		return daysAssisted;
 	}
 
 
-	public void setDaysAssisted(List<Date> daysAssisted) {
+	public void setDaysAssisted(Set<DaysAssisted> daysAssisted) {
 		this.daysAssisted = daysAssisted;
 	}
 
