@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import app.exception.ExpiredLessonsException;
 import app.exception.InsufficientLessonsException;
 import app.exception.UserNotFoundException;
+import app.model.DayInstructor;
 import app.model.DayStudent;
 import app.model.Measurement;
 import app.model.MeasurementsAdapter;
@@ -211,7 +212,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public void addDaysInstructor(long id,Set<DayStudent> days) {
+	public void addDaysInstructor(long id,Set<DayInstructor> days) {
 		User_Instructor user = (User_Instructor) this.userDAO.getById(id);
 		if(days != user.getClasses()){
 			user.setClasses(days);

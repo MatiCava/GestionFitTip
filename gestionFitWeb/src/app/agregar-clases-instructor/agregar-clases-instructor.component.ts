@@ -10,12 +10,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AgregarClasesInstructorComponent implements OnInit {
 
-  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false},
-  {day:"TUESDAY",startHour:"",endHour:"",checked:false},
-  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false},
-  {day:"THURSDAY",startHour:"",endHour:"",checked:false},
-  {day:"FRIDAY",startHour:"",endHour:"",checked:false},
-  {day:"SATURDAY",startHour:"",endHour:"",checked:false}];
+  dias=[{day:"MONDAY",startEndHours: [],checked:false},
+  {day:"TUESDAY",startEndHours: [],checked:false},
+  {day:"WEDNESDAY",startEndHours: [],checked:false},
+  {day:"THURSDAY",startEndHours: [],checked:false},
+  {day:"FRIDAY",startEndHours: [],checked:false},
+  {day:"SATURDAY",startEndHours: [],checked:false}];
   diasElegidos = [];
   idUser:any;
 
@@ -74,14 +74,33 @@ export class AgregarClasesInstructorComponent implements OnInit {
   validHours(){
     let valid = true;
     for(let dia of this.diasElegidos){
-      valid = valid && dia.startHour != ""&& dia.endHour != "";
+      for(let hours of dia.startEndHours){
+        valid = valid && (hours.startHour != "") && (hours.endHour != "") && (hours.endHour > hours.startHour);
+        valid = valid && this.validHour(hours, dia.startEndHours);
+      }
     }
-    console.log(valid);
+    return valid;
+  }
+
+  validHour(actual,hours){
+    let valid = true;
+    for(let hour of hours){
+      if(actual != hour){
+      valid = valid && !(hour.endHour > actual.startHour && actual.startHour >= hour.startHour)
+       && !(hour.endHour > actual.endHour && actual.endHour >= hour.startHour)
+      }
+    }
     return valid;
   }
 
   check(dia){
-    this.diasElegidos.push(dia);
+    if(this.diasElegidos.includes(dia)){
+      dia.startEndHours = [];
+      this.diasElegidos.splice(this.diasElegidos.indexOf(dia), 1);
+    } else {
+      dia.startEndHours.push({startHour:"",endHour:""});
+      this.diasElegidos.push(dia);
+    }
   }
 
 

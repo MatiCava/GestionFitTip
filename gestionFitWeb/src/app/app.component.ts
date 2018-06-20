@@ -49,6 +49,7 @@ export class AppComponent implements OnInit{
   }
 
   instructores(){
+    this.cerrarSidebar();
     this.routerService.navigate(['/instructores']);
   }
 

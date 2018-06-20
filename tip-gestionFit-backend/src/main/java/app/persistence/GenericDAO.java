@@ -36,6 +36,7 @@ public class GenericDAO<T> {
 		  jdbcUrlSettings.put("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
 		  jdbcUrlSettings.put("hibernate.connection.username", System.getenv("JDBC_DATABASE_USERNAME"));
 		  jdbcUrlSettings.put("hibernate.connection.password", System.getenv("JDBC_DATABASE_PASSWORD"));
+		  jdbcUrlSettings.put("hibernate.hbm2dll.auto", "create-drop");
 		}
 
 

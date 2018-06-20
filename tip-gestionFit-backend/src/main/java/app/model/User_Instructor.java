@@ -12,26 +12,26 @@ import javax.persistence.OneToMany;
 public class User_Instructor extends User {
 	
 	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
-	private Set<DayStudent> classes;
+	private Set<DayInstructor> classes;
 	
 	public User_Instructor() {
 		super();
-		this.classes = new HashSet<DayStudent>();
+		this.classes = new HashSet<DayInstructor>();
 		this.setRole("INSTRUCTOR");
 
 	}
 
 	public User_Instructor(String user, String pass, String name,String email) {
 		super(user, pass, name, email);
-		this.classes = new HashSet<DayStudent>();
+		this.classes = new HashSet<DayInstructor>();
 		this.setRole("INSTRUCTOR");
 	}
 
-	public Set<DayStudent> getClasses() {
+	public Set<DayInstructor> getClasses() {
 		return classes;
 	}
 
-	public void setClasses(Set<DayStudent> classes) {
+	public void setClasses(Set<DayInstructor> classes) {
 		this.classes = classes;
 	}
 	

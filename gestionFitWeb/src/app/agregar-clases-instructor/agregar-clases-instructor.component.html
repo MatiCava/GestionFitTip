@@ -5,7 +5,7 @@
     <span >
     {{dia.day |translate}}
     <br>
-    <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)" [disabled]="limit(dia)">
+    <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)">
   </span>
 </div>
   </div>
@@ -13,12 +13,18 @@
 
   <div *ngIf="diasElegidos.length > 0">
     <div *ngFor="let diaElegido of diasElegidos">
-      {{diaElegido.day |translate}}
-    <select class="custom-select" [(ngModel)]="diaElegido.startHour" (change)="horaSeleccionada($event.target.value,diaElegido)">
-      <option *ngFor="let hora of horas">{{hora}}</option>
-    </select>
-
-  </div>
+      <h3>{{diaElegido.day |translate}}</h3>
+      <br>
+      <button class="btn btn-primary" (click)="diaElegido.startEndHours.push({startHour:'',endHour:''})">{{'Nuevo horario' | translate}}</button>
+      <br>
+      <div class="form-group" *ngFor="let schedule of diaElegido.startEndHours;let i = index">
+        <label for="start{{i}}">{{'Inicio' | translate}}</label>
+        <input id="start{{i}}" class="form-control" type="number" min="8" max="21" [(ngModel)]="schedule.startHour">
+        <label for="end{{i}}">{{'Fin' | translate}}</label>
+        <input id="end{{i}}" class="form-control" type="number" [min]="schedule.startHour" max="22" [(ngModel)]="schedule.endHour">
+        
+      </div>
+    </div>
   </div>
   <br>
     <button (click)="onSubmit()" [disabled]=" !validHours()" class="btn btn-success">{{'Agregar' | translate}}</button>
