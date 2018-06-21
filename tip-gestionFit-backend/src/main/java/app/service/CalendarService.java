@@ -3,6 +3,7 @@ package app.service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class CalendarService {
 	}
 
 	@Transactional
-	public void addDays(List<DayStudent> days,String name) {
+	public void addDays(List<DayStudent> days,String name, long id) {
 		Class_Calendar calendar = this.getById((long) 1);
 		LocalDate startDate = LocalDate.now();
 	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1));
@@ -76,7 +77,7 @@ public class CalendarService {
 			User_Instructor instructor = this.userDAO.getInstructorForDay(day);
 		    for(int i = 0 ; i < numOfDaysBetween ;i++){
 		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
-		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));
+		    			calendar.addClass(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name,id);
 		    			agregados ++;
 
 		    	}
@@ -91,11 +92,21 @@ public class CalendarService {
 		
 	}
 
-	public List<Class_Day> getClasses(User user) {
+	@Transactional
+	public Set<Class_Day> getClasses(User user) {
 		Class_Calendar calendar =  this.get();
-		List<Class_Day> classes =  calendar.getClasses();
-		List<Class_Day> classesUser = classes.stream().filter(day -> day.getStudentName().contains(user.getNameAndSurname())).collect(Collectors.toList());
+		Set<Class_Day> classes =  calendar.getClasses();
+		Set<Class_Day> classesUser = (Set<Class_Day>) classes.stream().filter(day -> day.hasStudent(user.id)).collect(Collectors.toList());
 		return classesUser;
+	}
+
+	@Transactional
+	public void markAssist(Long id) {
+		Class_Calendar calendar =  this.get();
+		calendar.markAssist(id);
+		this.update(calendar);
+		
+		
 	}
 
 }

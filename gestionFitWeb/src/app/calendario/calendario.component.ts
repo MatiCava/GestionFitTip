@@ -109,10 +109,26 @@ export class CalendarioComponent implements OnInit {
 
   handleEvents(calendar){
     console.log(calendar);
-    for(let day of calendar.classes){
+    for(const day of calendar.classes){
+        let total = 0;
+        let assisted = 0;
+        let names = "";
+        for(const student of day.students){
+            if(names === ""){
+                names += student.studentName;
+            } else {
+                names += " , " + student.studentName;
+            }
+            total++;
+            if(student.assisted){
+                assisted++;
+            }
+        }
+
+        names += ", Asistencia: " + (assisted * 100 / total) + "%";
 
       this.formatedEvs.push({id:this.idx,start_date: day.day + " " + day.startHour,
-      end_date: day.day + " " + day.endHour,text:day.studentName})
+      end_date: day.day + " " + day.endHour,text:names})
 
 
     }

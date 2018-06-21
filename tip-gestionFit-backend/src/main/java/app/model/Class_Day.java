@@ -1,11 +1,16 @@
 package app.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,23 +24,34 @@ public class Class_Day {
 	private LocalDate day;
 	private String startHour;
 	private String endHour;
-	private String studentName;
+	@OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<StudentAssist> students;
 //	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 //	private Set<Class_Student> student_classes = new HashSet<Class_Student>();
 	
 	public Class_Day(){
-		
+		this.students= new HashSet<StudentAssist>();		
 	}
 	
 	public Class_Day(LocalDate date){
 		this.day = date;
+		this.students= new HashSet<StudentAssist>();
+
 	}
 	
-	public Class_Day(LocalDate date,String start,String end,String name) {
+	public Class_Day(LocalDate date,String start,String end) {
 		this.day = date;
 		this.startHour = start;
 		this.endHour = end;
-		this.studentName = name;
+		this.students= new HashSet<StudentAssist>();
+	}
+	
+	public Class_Day(LocalDate date,String start,String end, String name, long id) {
+		this.day = date;
+		this.startHour = start;
+		this.endHour = end;
+		this.students= new HashSet<StudentAssist>();
+		this.students.add(new StudentAssist(name,id));
 	}
 	
 //	public Class_Day(LocalDate date,Set<Class_Student> classes){
@@ -67,13 +83,38 @@ public class Class_Day {
 		this.endHour = endHour;
 	}
 
-	public String getStudentName() {
-		return studentName;
+	public Set<StudentAssist> getStudents() {
+		return students;
 	}
 
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+	public void setStudents(Set<StudentAssist> students) {
+		this.students = students;
 	}
+
+	public boolean hasStudent(Long id) {
+		for(StudentAssist stu : this.students) {
+			if(stu.getStudentId() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addStudent(String name, long id) {
+		this.students.add(new StudentAssist(name,id));
+		
+	}
+
+	public void assisted(Long id) {
+		for(StudentAssist stu : this.students) {
+			if(stu.getStudentId() ==id) {
+				stu.setAssisted(true);
+			}
+		}
+		
+	}
+
+
 	
 	
 

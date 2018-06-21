@@ -162,49 +162,49 @@ public class DataService {
 	}
 	
 	
-	private void addClass(List<Class_Day> classes){
-		Class_Calendar calendar = this.calDAO.getById((long) 1);
-		for(Class_Day clase : classes){
-			calendar.addClass(clase);
-		}
-		this.calDAO.update(calendar);
-	}
-	
-	
-	private void saveDays(List<DayStudent> days,String name){
-		Class_Calendar calendar = this.calDAO.getById((long) 1);
-		LocalDate startDate = LocalDate.now();
-	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1));
-	    int agregados=0;
-		for(DayStudent day : days){
-		    for(int i = 0 ; i < numOfDaysBetween ;i++){
-		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
-		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));
-		    			agregados ++;
-//		    		}
-//		    		else{
-//		    		for(Class_Student classS : calendar.getClassDay(startDate.plusDays(i)).getStudent_classes()){
-//		    			if(classS.getStartHour().equals(day.getStartHour())){
-//		    				System.out.println("############# MISMAHORA");
-//		    				if(!classS.getStudentName().contains(name)){
-//			    				System.out.println("############# "+ name);
+//	private void addClass(List<Class_Day> classes){
+//		Class_Calendar calendar = this.calDAO.getById((long) 1);
+//		for(Class_Day clase : classes){
+//			calendar.addClass(clase);
+//		}
+//		this.calDAO.update(calendar);
+//	}
+//	
+//	
+//	private void saveDays(List<DayStudent> days,String name){
+//		Class_Calendar calendar = this.calDAO.getById((long) 1);
+//		LocalDate startDate = LocalDate.now();
+//	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1));
+//	    int agregados=0;
+//		for(DayStudent day : days){
+//		    for(int i = 0 ; i < numOfDaysBetween ;i++){
+//		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
+//		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));
+//		    			agregados ++;
+////		    		}
+////		    		else{
+////		    		for(Class_Student classS : calendar.getClassDay(startDate.plusDays(i)).getStudent_classes()){
+////		    			if(classS.getStartHour().equals(day.getStartHour())){
+////		    				System.out.println("############# MISMAHORA");
+////		    				if(!classS.getStudentName().contains(name)){
+////			    				System.out.println("############# "+ name);
+////
+////			    				classS.setStudentName(classS.getStudentName() + " , " + name);
+////			    				agregados++;
+////		    				}
+////		    			}
+////		    			else{
+////		    				System.out.println("************* MISMAHORA");
+////		    				agregados++;
+////			    			calendar.addClass(startDate.plusDays(i), new Class_Student(day.getStartHour(),day.getEndHour(),name));
+////		    			}
+////		    		}
+////		    		}
+//		    	}
+//		    }
+//		}
+//		System.out.println("Cantidad agregados " + agregados);
+//		this.calDAO.update(calendar);
 //
-//			    				classS.setStudentName(classS.getStudentName() + " , " + name);
-//			    				agregados++;
-//		    				}
-//		    			}
-//		    			else{
-//		    				System.out.println("************* MISMAHORA");
-//		    				agregados++;
-//			    			calendar.addClass(startDate.plusDays(i), new Class_Student(day.getStartHour(),day.getEndHour(),name));
-//		    			}
-//		    		}
-//		    		}
-		    	}
-		    }
-		}
-		System.out.println("Cantidad agregados " + agregados);
-		this.calDAO.update(calendar);
-
-	}
+//	}
 }

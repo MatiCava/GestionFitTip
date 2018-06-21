@@ -63,7 +63,7 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/calendar/classes/{id}", produces = "application/json")
-	public List<Class_Day> getClasses(@PathVariable("id") Long idUser) throws Exception {
+	public Set<Class_Day> getClasses(@PathVariable("id") Long idUser) throws Exception {
 		User user = this.userServ.getById(idUser);
 		return this.calServ.getClasses(user);
 	}
@@ -178,7 +178,7 @@ public class UserController {
 		this.userServ.addLessons(id,numLessons);
 		this.userServ.addDays(id,days);
 		
-		this.calServ.addDays(days,this.userServ.getById(id).getNameAndSurname());
+		this.calServ.addDays(days,this.userServ.getById(id).getNameAndSurname(),id);
 		this.emailServ.sendEmailToUser(this.userServ.getById(id), EmailService.PAID);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
@@ -189,7 +189,7 @@ public class UserController {
 		User user = this.userServ.getByMail(mail);
 		this.userServ.addLessons(user.getId(),numLessons);
 		this.userServ.addDays(user.id,days);
-		this.calServ.addDays(days,user.getNameAndSurname());
+		this.calServ.addDays(days,user.getNameAndSurname(),user.id);
 		this.emailServ.sendEmailToUser(this.userServ.getByMail(mail), EmailService.PAID);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
@@ -200,6 +200,8 @@ public class UserController {
 		User_Student user;
 		this.userServ.studentAssist(id);
 		user = (User_Student) this.userServ.getByRfid(id);
+		this.calServ.markAssist(user.id);
+
 
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
