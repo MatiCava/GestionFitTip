@@ -155,6 +155,11 @@ public class UserController {
 		return table;
 	}
 	
+	@GetMapping(value="/studentPromedio/{id}", produces= "application/json")
+	public int getPromedioStudent(@PathVariable("id") Long id){
+		return this.userServ.getPromedioAsistencia(id);
+	}
+	
 	@PutMapping(value = "/user/{id}",produces = "application/json")
 	public ResponseEntity<Void> updateUser(@PathVariable("id") Long idUser,@RequestBody User_Student user){
 		User existingUser = this.userServ.getById(idUser);

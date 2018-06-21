@@ -38,6 +38,8 @@ import { NuevaRutinaAsignarComponent } from './nueva-rutina-asignar/nueva-rutina
 import { NuevoEjercicioAsignarComponent } from './nuevo-ejercicio-asignar/nuevo-ejercicio-asignar.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { CalendarioGeneralComponent } from './calendario-general/calendario-general.component';
+import { ChartsModule } from 'ng2-charts';
+
 import { InstructoresComponent } from './instructores/instructores.component';
 import { AgregarClasesInstructorComponent } from './agregar-clases-instructor/agregar-clases-instructor.component';
 import { InfoInstructorComponent } from './info-instructor/info-instructor.component';
@@ -131,7 +133,8 @@ const appRoutes: Routes = [
     NgxPaginationModule,
     NgxInputFileUploadModule,
     HttpModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ChartsModule
   ],
   entryComponents: [],
   exports: [RouterModule],

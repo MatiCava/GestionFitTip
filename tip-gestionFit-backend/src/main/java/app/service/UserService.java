@@ -158,6 +158,9 @@ public class UserService {
 		}
 		int newRLessons = user.getRemainingLessons() + numLessons;
 		user.setRemainingLessons(newRLessons);
+		int totalClasses = user.getTotalClasses() + numLessons;
+		user.setTotalClasses(totalClasses);
+		user.calculateAssitance();
 		
 		//Fecha de pago
 		user.setPaymentDate(new Date());
@@ -182,6 +185,8 @@ public class UserService {
 			throw new UserNotFoundException("Usuario no encontrado");
 		}
 		user.substractRemainingLessons();
+		user.addNewLog();
+		user.calculateAssitance();
 		this.updateStudent(user);
 	}
 
@@ -220,6 +225,11 @@ public class UserService {
 		}
 
 		
+	}
+
+	public int getPromedioAsistencia(Long id) {
+		User_Student user = (User_Student) this.userDAO.getById(id);
+		return user.getAssistance();
 	}
 
 
