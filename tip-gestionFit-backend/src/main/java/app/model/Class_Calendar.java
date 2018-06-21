@@ -88,9 +88,11 @@ public class Class_Calendar {
 	}
 
 	public void markAssist(Long id) {
+		LocalDate today = LocalDate.now();
+		System.out.println("HOOOOOY " + today);
 		for(Class_Day cd : this.classes) {
-			if(cd.getDay().isEqual(LocalDate.now()) 
-			  && !cd.hasStudent(id)) {
+			if(cd.getDay().getMonth() == today.getMonth() && cd.getDay().getDayOfMonth() == today.getDayOfMonth() 
+			  && cd.hasStudent(id)) {
 				cd.assisted(id);
 				return;
 			}

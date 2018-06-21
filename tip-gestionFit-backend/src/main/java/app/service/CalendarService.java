@@ -12,10 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import app.model.Class_Calendar;
 import app.model.Class_Day;
+import app.model.DayInstructor;
 import app.model.DayStudent;
 import app.model.User;
 import app.model.User_Instructor;
 import app.persistence.CalendarDAO;
+import app.persistence.DayInstructorDAO;
 import app.persistence.UserDAO;
 
 @Service
@@ -23,6 +25,9 @@ public class CalendarService {
 	
 	@Autowired
 	private CalendarDAO calendarDAO;
+	
+	@Autowired
+	private DayInstructorDAO dayInstDAO;
 	
 	@Autowired
 	private UserDAO userDAO;
@@ -75,6 +80,7 @@ public class CalendarService {
 	    int agregados=0;
 		for(DayStudent day : days){
 			User_Instructor instructor = this.userDAO.getInstructorForDay(day);
+			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + instructor.getNameAndSurname());
 		    for(int i = 0 ; i < numOfDaysBetween ;i++){
 		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
 		    			calendar.addClass(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name,id);
@@ -96,7 +102,7 @@ public class CalendarService {
 	public Set<Class_Day> getClasses(User user) {
 		Class_Calendar calendar =  this.get();
 		Set<Class_Day> classes =  calendar.getClasses();
-		Set<Class_Day> classesUser = (Set<Class_Day>) classes.stream().filter(day -> day.hasStudent(user.id)).collect(Collectors.toList());
+		Set<Class_Day> classesUser = classes.stream().filter(day -> day.hasStudent(user.id)).collect(Collectors.toSet());
 		return classesUser;
 	}
 
@@ -107,6 +113,11 @@ public class CalendarService {
 		this.update(calendar);
 		
 		
+	}
+	
+	@Transactional
+	public List<DayInstructor> getInstructorDays(){
+		return this.dayInstDAO.getAll();
 	}
 
 }
