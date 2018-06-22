@@ -19,7 +19,6 @@ export class AgregarClasesInstructorComponent implements OnInit {
   diasElegidos = [];
   idUser:any;
 
-  horas = [];
   puedeGuardar = true;
   elegidos = 0;
 
@@ -29,20 +28,12 @@ export class AgregarClasesInstructorComponent implements OnInit {
    }
 
   ngOnInit() {
-    for(let i = 8;i<22;i++){
-      if(i<10){
-        this.horas.push('0'+i+':00');
-      }
-      else{
-        this.horas.push(i+':00');
-      }
-    }
     this.userServ.getUser(this.idUser).subscribe(res => this.setHorariosElegidos(res) ,error => console.log(error));
     
   }
 
   setHorariosElegidos(user){
-    this.diasElegidos = user.classes;
+    this.diasElegidos = (user.classes);
     for(let day of this.diasElegidos){
       for(let dia of this.dias){
         if(dia.day === day.day){
@@ -54,10 +45,7 @@ export class AgregarClasesInstructorComponent implements OnInit {
 
   }
 
-  horaSeleccionada(hora,day){
-    day.endHour = this.horas[this.horas.indexOf(hora)+1] ;
-    console.log(this.diasElegidos);
-  }
+
 
   onSubmit(){
     this.spinner.show();
@@ -66,6 +54,8 @@ export class AgregarClasesInstructorComponent implements OnInit {
       error => {console.log(error);this.spinner.hide();}
     )
   }
+
+
 
   cancel(){
     this.routerServ.navigate(["/instructores"]);
@@ -98,7 +88,7 @@ export class AgregarClasesInstructorComponent implements OnInit {
       dia.startEndHours = [];
       this.diasElegidos.splice(this.diasElegidos.indexOf(dia), 1);
     } else {
-      dia.startEndHours.push({startHour:"",endHour:""});
+      dia.startEndHours.push({startHour:0,endHour:0});
       this.diasElegidos.push(dia);
     }
   }

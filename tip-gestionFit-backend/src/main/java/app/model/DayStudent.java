@@ -12,14 +12,14 @@ public class DayStudent {
 	public Long id;
 
 	private String day;
-	private String startHour;
-	private String endHour;
+	private int startHour;
+	private int endHour;
 	
 	public DayStudent(){
 		
 	}
 	
-	public DayStudent(String dayD,String start,String end) {
+	public DayStudent(String dayD,int start,int end) {
 		this.day = dayD;
 		this.startHour = start;
 		this.endHour = end;
@@ -33,19 +33,19 @@ public class DayStudent {
 		this.day = day;
 	}
 
-	public String getStartHour() {
+	public int getStartHour() {
 		return startHour;
 	}
 
-	public void setStartHour(String start) {
+	public void setStartHour(int start) {
 		this.startHour = start;
 	}
 
-	public String getEndHour() {
+	public int getEndHour() {
 		return endHour;
 	}
 
-	public void setEndHour(String end) {
+	public void setEndHour(int end) {
 		this.endHour = end;
 	}
 	

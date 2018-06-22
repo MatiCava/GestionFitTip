@@ -196,8 +196,8 @@ public class UserDAO extends GenericDAO<User> {
 
 		try {
 			String date = day.getDay();
-			String start = day.getStartHour().substring(0, 2);
-			String end = day.getEndHour().substring(0, 2);
+			int start = day.getStartHour();
+			int end = day.getEndHour();
 			result = (User_Instructor) session.createCriteria(User.class)
 			.createAlias("classes", "class")
 			.add(Restrictions.eq("class.day", date))

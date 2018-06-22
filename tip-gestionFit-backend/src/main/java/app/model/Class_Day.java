@@ -22,12 +22,11 @@ public class Class_Day {
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate day;
-	private String startHour;
-	private String endHour;
+	private int startHour;
+	private int endHour;
 	@OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<StudentAssist> students;
-//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-//	private Set<Class_Student> student_classes = new HashSet<Class_Student>();
+
 	
 	public Class_Day(){
 		this.students= new HashSet<StudentAssist>();		
@@ -39,14 +38,14 @@ public class Class_Day {
 
 	}
 	
-	public Class_Day(LocalDate date,String start,String end) {
+	public Class_Day(LocalDate date,int start,int end) {
 		this.day = date;
 		this.startHour = start;
 		this.endHour = end;
 		this.students= new HashSet<StudentAssist>();
 	}
 	
-	public Class_Day(LocalDate date,String start,String end, String name, long id) {
+	public Class_Day(LocalDate date,int start,int end, String name, long id) {
 		this.day = date;
 		this.startHour = start;
 		this.endHour = end;
@@ -54,10 +53,6 @@ public class Class_Day {
 		this.students.add(new StudentAssist(name,id));
 	}
 	
-//	public Class_Day(LocalDate date,Set<Class_Student> classes){
-//		this.day = date;
-//		this.student_classes = classes;
-//	}
 
 	public LocalDate getDay() {
 		return day;
@@ -67,19 +62,19 @@ public class Class_Day {
 		this.day = day;
 	}
 
-	public String getStartHour() {
+	public int getStartHour() {
 		return startHour;
 	}
 
-	public void setStartHour(String startHour) {
+	public void setStartHour(int startHour) {
 		this.startHour = startHour;
 	}
 
-	public String getEndHour() {
+	public int getEndHour() {
 		return endHour;
 	}
 
-	public void setEndHour(String endHour) {
+	public void setEndHour(int endHour) {
 		this.endHour = endHour;
 	}
 

@@ -55,7 +55,7 @@ export class AgregarClasesComponent implements OnInit {
     console.log(user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime());
     this.form.controls.clases.setValue(user.remainingLessons);
     this.puedeGuardar = user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime(); 
-    this.diasElegidos = user.classDays;
+    this.diasElegidos = this.changeHoursFormat(user.classDays);
     for(let day of this.diasElegidos){
       for(let dia of this.dias){
         if(dia.day === day.day){
@@ -67,17 +67,40 @@ export class AgregarClasesComponent implements OnInit {
 
   }
 
+  changeHoursFormat(days){
+    for(let day of days){
+      if(day.startHour < 10){
+        day.startHour = "0" + day.startHour + ":00";
+      } else {
+        day.startHour += ":00";
+      }
+      if(day.endHour < 10){
+        day.endHour = "0" + day.endHour + ":00";
+      } else {
+        day.endHour += ":00";
+      }
+    }
+    return days;
+  }
+
   horaSeleccionada(hora,day){
     day.endHour = this.horas[this.horas.indexOf(hora)+1] ;
-    console.log(this.diasElegidos);
   }
 
   onSubmit(){
     this.spinner.show();
+    this.setHorariosAInteger();
     this.userServ.addLessons(this.idUser,this.form.controls.clases.value,this.diasElegidos).subscribe(
       res => {this.routerServ.navigate(["/alumnos"]); this.spinner.hide();},
       error => {console.log(error);this.spinner.hide();}
     )
+  }
+
+  setHorariosAInteger(){
+    for(let dia of this.diasElegidos){
+      dia.startHour = Number(dia.startHour.substring(0,2));
+      dia.endHour = Number(dia.endHour.substring(0,2));
+    }
   }
 
   cancel(){

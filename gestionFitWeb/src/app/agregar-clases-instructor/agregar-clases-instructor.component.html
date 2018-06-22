@@ -15,7 +15,7 @@
     <div *ngFor="let diaElegido of diasElegidos">
       <h3>{{diaElegido.day |translate}}</h3>
       <br>
-      <button class="btn btn-primary" (click)="diaElegido.startEndHours.push({startHour:'',endHour:''})">{{'Nuevo horario' | translate}}</button>
+      <button class="btn btn-primary" (click)="diaElegido.startEndHours.push({startHour:0,endHour:0})">{{'Nuevo horario' | translate}}</button>
       <br>
       <div class="form-group" *ngFor="let schedule of diaElegido.startEndHours;let i = index">
         <label for="start{{i}}">{{'Inicio' | translate}}</label>

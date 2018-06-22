@@ -80,7 +80,7 @@ public class CalendarService {
 	    int agregados=0;
 		for(DayStudent day : days){
 			User_Instructor instructor = this.userDAO.getInstructorForDay(day);
-			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + instructor.getNameAndSurname());
+//			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + instructor.getNameAndSurname());
 		    for(int i = 0 ; i < numOfDaysBetween ;i++){
 		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
 		    			calendar.addClass(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name,id);
