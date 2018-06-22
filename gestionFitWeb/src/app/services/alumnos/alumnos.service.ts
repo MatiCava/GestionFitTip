@@ -80,26 +80,31 @@ export class AlumnosService {
     return this.http.put(this.apiUrl+"user/"+id+"/nuevasRutinas",rutines, this.httpOptions);
   }
 
-  addLessons(id,lessons,diasElegidos){
+  addLessons(id,lessons,diasElegidos):Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
 
     return this.http.put(this.apiUrl + "addLessons/" + id + "/" + lessons,diasElegidos,this.httpOptions);
   }
 
-  sendPromo(promo){
+  sendPromo(promo):Observable<any>{
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
     console.log(promo);
     return this.http.post(this.apiUrl + "promo", promo, this.httpOptions);
   }
 
-  addLessonsInstructor(id, dias) {
+  addLessonsInstructor(id, dias):Observable<any> {
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
     return this.http.put(this.apiUrl + "instructor/addDays/" + id, dias, this.httpOptions);
   }
 
-  addNewInstructor(instructor) {
+  addNewInstructor(instructor):Observable<any> {
     this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
     return this.http.post(this.apiUrl + "instructor", instructor, this.httpOptions);
+  }
+
+  getInstructorDays():Observable<any> {
+    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
+    return this.http.get(this.apiUrl + "instructorDays", this.httpOptions);
   }
 
 }

@@ -104,6 +104,7 @@ export class CalendarioComponent implements OnInit {
     scheduler.config.displayed_event_color = "red";
     this.applyLang();
     scheduler.init(this.schedulerContainer.nativeElement, new Date());
+    scheduler.clearAll();
     this.userServ.getCalendar().subscribe(res => this.handleEvents(res),error=> console.log(error));
   }
 

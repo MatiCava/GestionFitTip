@@ -18,6 +18,7 @@ export class AgregarClasesInstructorComponent implements OnInit {
   {day:"SATURDAY",startEndHours: [],checked:false}];
   diasElegidos = [];
   idUser:any;
+  diasOcupados:any[] = [];
 
   puedeGuardar = true;
   elegidos = 0;
@@ -29,7 +30,10 @@ export class AgregarClasesInstructorComponent implements OnInit {
 
   ngOnInit() {
     this.userServ.getUser(this.idUser).subscribe(res => this.setHorariosElegidos(res) ,error => console.log(error));
-    
+    this.userServ.getInstructorDays().subscribe(
+      res => {this.diasOcupados = res;console.log(res);},
+      error => console.log(error)
+    );
   }
 
   setHorariosElegidos(user){

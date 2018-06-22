@@ -20,14 +20,15 @@ export class AgregarClasesComponent implements OnInit {
     ]))
   });
 
-  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false},
-  {day:"TUESDAY",startHour:"",endHour:"",checked:false},
-  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false},
-  {day:"THURSDAY",startHour:"",endHour:"",checked:false},
-  {day:"FRIDAY",startHour:"",endHour:"",checked:false},
-  {day:"SATURDAY",startHour:"",endHour:"",checked:false}];
+  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"TUESDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"THURSDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"FRIDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"SATURDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]}];
   diasElegidos = [];
   idUser:any;
+  diasDisponibles= [];
 
   horas = [];
   puedeGuardar = true;
@@ -48,7 +49,38 @@ export class AgregarClasesComponent implements OnInit {
       }
     }
     this.userServ.getUser(this.idUser).subscribe(res => this.setHorariosElegidos(res) ,error => console.log(error));
-    
+    this.userServ.getInstructorDays().subscribe(
+      res => {this.diasDisponibles = res;console.log(res);this.bloquearNoDisponibles()},
+      error => console.log(error)
+    );
+  }
+
+  bloquearNoDisponibles(){
+
+    for(let dia of this.diasDisponibles){
+      let diaNombre = dia.day;
+      for(let diaCheck of this.dias){
+        if(diaCheck.day === diaNombre){
+          diaCheck.available = true;
+          let horas = [];
+          for(let hora of dia.startEndHours){
+            let horaString = [];
+            for(let i = hora.startHour; i < hora.endHour;i++){
+              if(i < 10){
+                horaString.push("0" + i + ":00");
+              } else {
+                horaString.push(i + ":00");
+              }
+            }
+            horas.push(horaString);
+          }
+          console.log(horas);
+          diaCheck.availableHours=(horas);
+
+        }
+      }
+    }
+
   }
 
   setHorariosElegidos(user){
@@ -124,6 +156,7 @@ export class AgregarClasesComponent implements OnInit {
 
     }else{
       this.elegidos += 1;
+      console.log(day);
       this.diasElegidos.push(day);
 
     }
@@ -144,5 +177,6 @@ export class AgregarClasesComponent implements OnInit {
   limit(day){
     return (this.elegidos >= 2 && !day.checked);
   }
+
 
 }
