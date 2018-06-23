@@ -3,18 +3,18 @@
     <div class="form-group">
       <label for="inputNombre">{{'Ingrese un nombre para el ejercicio' | translate}}</label>
       <input type="text" class="form-control" id="inputNombre" aria-describedby="errorNombre" formControlName="name" placeholder="{{'Nombre' | translate}}">
-      <small id="errorNombre" *ngIf="form.controls.name.invalid" style="color:red">El ejercicio debe tener un nombre valido</small>
+      <small id="errorNombre" *ngIf="form.controls.name.invalid" style="color:red">{{'El ejercicio debe tener un nombre valido' | translate}}</small>
     </div>
     <div class="form-group">
       <select formControlName="type" class="form-control" aria-describedby="errorTipo">
           <option *ngFor="let typeE of exercisesType" [value]="typeE"> {{typeE | translate}} </option>
       </select>
-      <small id="errorTipo" *ngIf="form.controls.type.invalid" style="color:red">Debe seleccionar un tipo</small>
+      <small id="errorTipo" *ngIf="form.controls.type.invalid" style="color:red">{{'Debe seleccionar un tipo' | translate}}</small>
     </div>
     <div class="form-group">
       <label for="inputDescription">{{'Ingrese una descripcion para el ejercicio' | translate}}</label>
       <textarea class="form-control" aria-describedby="errorDescription" id="inputDescription" formControlName="description" placeholder="Descripcion" rows="3"></textarea>
-      <small id="errorDescription" *ngIf="form.controls.description.invalid" style="color: red">Requiere descripcion</small>
+      <small id="errorDescription" *ngIf="form.controls.description.invalid" style="color: red">{{'Requiere descripcion' | translate}}</small>
     </div>
   </form>
   <div *ngIf="!isAsignar">

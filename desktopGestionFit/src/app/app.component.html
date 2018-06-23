@@ -22,19 +22,19 @@
     <div *ngIf="registerBool">
       <form  [formGroup]="registerForm" (ngSubmit)="saveRfid()">
         <div class="form-group">
-          <label for="mailInput">Registre un llavero/tarjeta a un alumno y/o agregue clases al momento del pago</label>
+          <label for="mailInput">{{'Registre un llavero/tarjeta a un alumno y/o agregue clases al momento del pago' | translate}}</label>
           <input type="text" class="form-control" id="mailInput" aria-describedby="mailHelper" placeholder="carlos@gmail.com" formControlName="mail" [class.invalid]="registerForm.controls['mail'].invalid">
           <small id="mailHelper" *ngIf="registerForm.controls['mail'].invalid"></small>
      
           <label for="rfidInput2">Rfid</label>
           <input type="text" class="form-control" id="rfidInput2" aria-describedby="rfidHelper" placeholder="00000000" #rfidInputRegister (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
-          <small id="rfidHelper" *ngIf="focused">Puede pasar el llavero/tarjeta ahora</small>
+          <small id="rfidHelper" *ngIf="focused">{{'Puede pasar el llavero/tarjeta ahora' | translate}}</small>
           <br>
-          <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modalRegistrar">Registrarse</button>
+          <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modalRegistrar">{{'Registrarse' | translate}}</button>
         </div>
       </form>
       <br>
-      <label>Agrega clases <strong>(* requiere campo mail completo)</strong></label>
+      <label>{{'Agrega clases' | translate}} <strong>{{'(* requiere campo mail completo)' | translate}}</strong></label>
       <button class="btn btn-primary" (click)="buscarUsuario()">{{'Buscar'|translate}}</button>
       <div class="row" *ngIf="usuarioEncontrado">
         <div class="col-md" *ngFor="let dia of dias" style="border: 1px solid black">
@@ -65,11 +65,11 @@
       
       <form [formGroup]="form">
         <div class="form-group">
-          <label class="form-control" for="inputClases">Cantidad de clases</label>
+          <label class="form-control" for="inputClases">{{'Cantidad de clases' | translate}}</label>
           <input disabled type="number" class="form-control" id="inputClases" aria-describedby="errorClases" placeholder="0" min="1" formControlName="clases" [class.invalid]="form.controls['clases'].invalid && form.controls['clases'].dirty">
           <small id="errorClases" *ngIf="form.controls['clases'].invalid && form.controls['clases'].dirty" class="form-text text-muted" style="color: red">Debe ingresar un numero de clases a asignar</small>
         </div>
-        <p *ngIf="!puedeGuardar" style="color: red">Su mes todavia esta en vigencia</p>
+        <p *ngIf="!puedeGuardar" style="color: red">{{'Su mes todavia esta en vigencia' | translate}}</p>
           <button (click)="guardarClases()" [disabled]="(!form.valid) || !puedeGuardar || !validHours()" class="btn btn-success">{{'Agregar'}}</button>
       </form>
       
@@ -89,7 +89,7 @@
     </div>
   
   <br>
-  <label>Primera vez en el gimnasio?</label>
+  <label>{{'Primera vez en el gimnasio?' | translate}}</label>
   <input type="checkbox" [(ngModel)]="registerBool">
   </div>
 
@@ -97,12 +97,12 @@
   <div class="card" style="width: 18rem;padding-top: 30px">
     <img class="card-img-top" [src]="user.photo" alt="Imagen usuario">
     <div class="card-body">
-      <h5 class="card-title">Nombre: {{user.nameAndSurname}}</h5>
+      <h5 class="card-title">{{'Nombre' | translate}}: {{user.nameAndSurname}}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Clases restantes: {{user.remainingLessons }}</li>
-      <li class="list-group-item">Fecha de pago: {{user.paymentDate | date: 'dd/MM/yyyy'}}</li>
-      <li class="list-group-item">Fecha de vencimiento: {{user.lessonsExpires | date: 'dd/MM/yyyy'}}</li>
+      <li class="list-group-item">{{'Clases restantes' | translate}}: {{user.remainingLessons }}</li>
+      <li class="list-group-item">{{'Fecha de pago' | translate}}: {{user.paymentDate | date: 'dd/MM/yyyy'}}</li>
+      <li class="list-group-item">{{'Fecha de vencimiento' | translate}}: {{user.lessonsExpires | date: 'dd/MM/yyyy'}}</li>
     </ul>
   </div>
   </div>
