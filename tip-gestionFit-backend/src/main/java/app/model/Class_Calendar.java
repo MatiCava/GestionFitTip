@@ -73,10 +73,10 @@ public class Class_Calendar {
 		this.classes = classes;
 	}
 
-	public void addClass(LocalDate plusDays, String startHour, String endHour, String name, long id) {
+	public void addClass(LocalDate plusDays,int startHour, int endHour, String name, long id) {
 		for(Class_Day cd : this.classes) {
 			if(cd.getDay().isEqual(plusDays) 
-			  && cd.getStartHour().equals(startHour) 
+			  && cd.getStartHour() == (startHour) 
 			  && !cd.hasStudent(id)) {
 				cd.addStudent(name,id);
 				return;
@@ -88,9 +88,11 @@ public class Class_Calendar {
 	}
 
 	public void markAssist(Long id) {
+		LocalDate today = LocalDate.now();
+		System.out.println("HOOOOOY " + today);
 		for(Class_Day cd : this.classes) {
-			if(cd.getDay().isEqual(LocalDate.now()) 
-			  && !cd.hasStudent(id)) {
+			if(cd.getDay().getMonth() == today.getMonth() && cd.getDay().getDayOfMonth() == today.getDayOfMonth() 
+			  && cd.hasStudent(id)) {
 				cd.assisted(id);
 				return;
 			}

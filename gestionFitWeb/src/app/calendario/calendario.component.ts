@@ -104,6 +104,7 @@ export class CalendarioComponent implements OnInit {
     scheduler.config.displayed_event_color = "red";
     this.applyLang();
     scheduler.init(this.schedulerContainer.nativeElement, new Date());
+    scheduler.clearAll();
     this.userServ.getCalendar().subscribe(res => this.handleEvents(res),error=> console.log(error));
   }
 
@@ -127,8 +128,8 @@ export class CalendarioComponent implements OnInit {
 
         names += ", Asistencia: " + (assisted * 100 / total) + "%";
 
-      this.formatedEvs.push({id:this.idx,start_date: day.day + " " + day.startHour,
-      end_date: day.day + " " + day.endHour,text:names})
+      this.formatedEvs.push({id:this.idx,start_date: day.day + " " + day.startHour + ":00",
+      end_date: day.day + " " + day.endHour + ":00",text:names})
 
 
     }

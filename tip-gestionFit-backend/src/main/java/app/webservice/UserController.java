@@ -220,6 +220,11 @@ public class UserController {
 		
 	}
 	
+	@GetMapping(value="/instructorDays",produces = "application/json")
+	public List<DayInstructor> getInstructorDays() {
+		return this.calServ.getInstructorDays();
+	}
+	
 	@PostMapping(value = "/promo",produces="application/json")
 	public ResponseEntity<Void> promoStudents(@RequestBody Promo promo) throws Exception{
 		List<User_Student> students =  this.getAlumnos();

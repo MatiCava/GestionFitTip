@@ -11,26 +11,26 @@ public class StartEndHour {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
-	private String startHour;
-	private String endHour;
+	private int startHour;
+	private int endHour;
 	
 	public StartEndHour() {
 		
 	}
 
-	public String getStartHour() {
+	public int getStartHour() {
 		return startHour;
 	}
 
-	public void setStartHour(String start) {
+	public void setStartHour(int start) {
 		this.startHour = start;
 	}
 
-	public String getEndHour() {
+	public int getEndHour() {
 		return endHour;
 	}
 
-	public void setEndHour(String end) {
+	public void setEndHour(int end) {
 		this.endHour = end;
 	}
 	

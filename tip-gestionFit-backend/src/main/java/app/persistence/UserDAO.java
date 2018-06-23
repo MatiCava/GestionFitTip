@@ -2,6 +2,8 @@ package app.persistence;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -187,11 +189,19 @@ public class UserDAO extends GenericDAO<User> {
 	}
 
 
+	@SuppressWarnings("deprecation")
 	public User_Instructor getInstructorForDay(DayStudent day) {
 		Session session = getSessionFactory().openSession();
 		User_Instructor result = null;
 
 		try {
+			String date = day.getDay();
+			int start = day.getStartHour();
+			int end = day.getEndHour();
+			result = (User_Instructor) session.createCriteria(User.class)
+			.createAlias("classes", "class")
+			.add(Restrictions.eq("class.day", date))
+			.uniqueResult();
 
 		}
 		catch(Exception e) {
