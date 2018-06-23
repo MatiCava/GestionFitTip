@@ -4,7 +4,7 @@
       <label for="inputNombre">{{'Ingrese un nombre para el ejercicio' | translate}}</label>
       <input type="text" class="form-control" id="inputNombre" aria-describedby="errorNombre" formControlName="name" placeholder="{{'Nombre' | translate}}">
       <small id="errorNombre" *ngIf="form.controls.name.invalid" style="color:red">{{'El ejercicio debe tener un nombre de al menos 4 caracteres' | translate}}</small>
-    </div>
+ </div>
     <div class="form-group">
       <select formControlName="type" class="form-control" aria-describedby="errorTipo">
           <option *ngFor="let typeE of exercisesType" [value]="typeE"> {{typeE | translate}} </option>

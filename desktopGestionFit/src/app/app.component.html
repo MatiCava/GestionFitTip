@@ -72,6 +72,7 @@
         <p *ngIf="!puedeGuardar" style="color: red">{{'Su mes todavia esta en vigencia' | translate}}</p>
           <button (click)="guardarClases()" [disabled]="(!form.valid) || !puedeGuardar || !validHours()" class="btn btn-success">{{'Agregar'}}</button>
       </form>
+      </div>  
       
       <div *ngIf="errorRegister" class="alert alert-danger" role="alert">
         {{errorRegisterMessage}}
@@ -85,7 +86,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    </div>
+    
     </div>
   
   <br>
