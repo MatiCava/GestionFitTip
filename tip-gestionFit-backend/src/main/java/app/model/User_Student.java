@@ -99,10 +99,29 @@ public class User_Student extends User {
 	
 	public void addNewLog() {
 		Date newLog = new Date();
+        Calendar c = Calendar.getInstance(); 
+        c.setTime(newLog); 
+        c.add(Calendar.MONTH, -1);
+        Date dtLimit = c.getTime();
+        this.clearLogs(dtLimit);
 		DaysAssisted newDayA = new DaysAssisted(this.getNameAndSurname(), newLog);
 		this.daysAssisted.add(newDayA);
 	}
 	
+	private void clearLogs(Date dtLimit) {
+		int count = 0;
+		for(DaysAssisted dayA : this.daysAssisted){
+			if(dayA.getDay().before(dtLimit)){
+				this.daysAssisted.remove(dayA);
+				count++;
+			}
+		}
+		this.totalClasses = this.totalClasses - count;
+	}
+
+
+
+
 	public int getAssistance() {
 		return assistance;
 	}
