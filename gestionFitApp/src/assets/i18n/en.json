@@ -72,7 +72,14 @@
   "WEDNESDAY": "Wednesday",
   "THURSDAY": "Thursday",
   "FRIDAY": "Friday",
-  "SATURDAY": "Saturday"
+  "SATURDAY": "Saturday",
+  "Asistencia": "Assistance",
+  "Mis clases": "My classes",
+  "No tiene ninguna clase asignada": "You dont have any class assigned",
+  "Clases": "Classes",
+  "Dias": "Days",
+  "El nombre de usuario ya existe. Elija otro.": "Username already exist. Choose another.",
+  "La direccion de mail ya existe. Elija otro.": "This mail already exist. Choose another."
   
 
 

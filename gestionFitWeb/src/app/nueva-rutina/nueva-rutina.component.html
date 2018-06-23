@@ -3,14 +3,14 @@
         <div class="form-group">
             <label for="inputNombre">{{'Ingrese un nombre para la rutina' | translate}}</label>
             <input type="text" class="form-control" id="inputNombre" aria-describedby="errorNombre" formControlName="name" placeholder="{{'Nombre' | translate}}">
-            <small id="errorNombre" *ngIf="form.controls.name.invalid" style="color:red">La rutina debe tener un nombre</small>
+            <small id="errorNombre" *ngIf="form.controls.name.invalid" style="color:red">{{'La rutina debe tener un nombre' | translate}}</small>
         </div>
         <div class="form-group">
             <label for="inputTipo">{{'Seleccione un tipo'| translate}}</label>
             <select id="inputTipo" formControlName="type" class="form-control" aria-describedby="errorTipo">
                 <option *ngFor="let typeR of rutinasType" [value]="typeR"> {{typeR | translate}} </option>
             </select>
-            <small id="errorTipo" *ngIf="form.controls.type.invalid" style="color:red">Debe seleccionar un tipo</small>
+            <small id="errorTipo" *ngIf="form.controls.type.invalid" style="color:red">{{'Debe seleccionar un tipo' | translate}}</small>
         </div>
     </form>
         <div class="form-group" >
@@ -28,13 +28,13 @@
           <div class="form-check">
       <input class="form-check-input" type="radio" [(ngModel)]="nuevoEjercicio" name="optionsEj" id="asignarEj" [value]="false" checked>
       <label class="form-check-label" for="asignarEj">
-        Asignar ejercicio generico
+        {{'Asignar ejercicio generico' | translate}}
       </label>
       </div>
       <div class="form-check">
       <input class="form-check-input" type="radio"  [(ngModel)]="nuevoEjercicio" name="optionsEj" id="nuevoEj" [value]="true">
       <label class="form-check-label" for="nuevoEj">
-        Crear nuevo ejercicio personalizado
+        {{'Crear nuevo ejercicio personalizado' | translate}}
       </label>
 
 
@@ -56,7 +56,7 @@
                             <span><a [routerLink]="" (click)="agregarEjercicio(exercise)"><i class="fas fa-plus"></i> {{'Agregar'|translate}}</a></span>
                         </div>
                         <div class="col-md-3">
-                            <a data-toggle="collapse" href="#ejercicio{{i}}" role="button" aria-expanded="false">Editar</a>
+                            <a data-toggle="collapse" href="#ejercicio{{i}}" role="button" aria-expanded="false">{{'Editar' | translate}}</a>
                         </div>
                     </div>
                     <div class="row" style="text-align: center">
@@ -76,7 +76,7 @@
 
             <h1 style="text-align: center">{{'Nuevo ejercicio personalizado' | translate}}</h1>
             <app-nuevo-ejercicio-asignar></app-nuevo-ejercicio-asignar>
-            <button class="btn btn-primary" [disabled]="!ejercicioComponent.form.valid" (click)="agregarEjercicioNuevo()">Agregar nuevo ejercicio</button>
+            <button class="btn btn-primary" [disabled]="!ejercicioComponent.form.valid" (click)="agregarEjercicioNuevo()">{{'Agregar nuevo ejercicio' | translate}}</button>
 
         </div>
         <div class="alert alert-success alert-dismissible fade show" *ngIf="ejercicioAgregado" role="alert">

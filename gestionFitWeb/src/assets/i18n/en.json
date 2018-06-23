@@ -90,6 +90,23 @@
   "WEDNESDAY": "Wednesday",
   "THURSDAY": "Thursday",
   "FRIDAY": "Friday",
-  "SATURDAY": "Saturday"
+  "SATURDAY": "Saturday",
+  "Dias asistidos y % asistencia": "Days assisted and assistance %",
+  "El alumno no asistio a ninguna clase": "The student didnt attend to any class",
+  "No disponible": "Not available",
+  "Cantidad de clases": "Number of classes",
+  "Su mes todavia esta en vigencia": "Your month is still valid",
+  "La rutina debe tener un nombre": "The routine should have a name",
+  "Debe seleccionar un tipo": "You must select a type",
+  "Asignar ejercicio generico": "Assign generic exercise",
+  "Crear nuevo ejercicio personalizado": "Create new custom exercise",
+  "Editar": "Edit",
+  "Agregar nuevo ejercicio": "Add new exercise",
+  "El ejercicio debe tener un nombre valido": "The exercise should have a valid name",
+  "Requiere descripcion": "Requires description",
+  "Nuevo instructor": "New instructor",
+  "El usuario no posee rutinas asignadas": "The user doesnt have routines assigned",
+  "Asignar rutina generica": "Assign generic routine",
+  "Crear nueva rutina personalizada": "Create new custom routine"
 
 }

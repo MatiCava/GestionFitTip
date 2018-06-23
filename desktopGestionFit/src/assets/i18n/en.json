@@ -90,6 +90,17 @@
   "WEDNESDAY": "Wednesday",
   "THURSDAY": "Thursday",
   "FRIDAY": "Friday",
-  "SATURDAY": "Saturday"
+  "SATURDAY": "Saturday",
+  "Registre un llavero/tarjeta a un alumno y/o agregue clases al momento del pago": "Register a keychain/card to a student and/or add classes",
+  "Puede pasar el llavero/tarjeta ahora": "You can pass the keychain/card now",
+  "Agrega clases": "Add classes",
+  "(* requiere campo mail completo)": "(* requires full mail)",
+  "Cantidad de clases": "Number of classes",
+  "Su mes todavia esta en vigencia": "Your month is still valid",
+  "Primera vez en el gimnasio?": "First time in the gym?",
+  "Clases restantes": "Remaining classes",
+  "Fecha de pago": "Payment date",
+  "Fecha de vencimiento": "Due date"
+
 
 }

@@ -7,7 +7,7 @@
 					<ion-label color="{{ form.controls.username.errors && form.controls.username.dirty ? 'danger' : 'primary' }}" floating>{{'Usuario' | translate}}*</ion-label>
 					<ion-input type="text" formControlName="username"  #textInput (input)="textInput.value.length > 4 && checkUsername(textInput.value)"></ion-input>
 				</ion-item>
-				<p style="color: red" *ngIf="usuarioExistente"> El nombre de usuario ya existe. Elija otro. </p> 
+				<p style="color: red" *ngIf="usuarioExistente"> {{'El nombre de usuario ya existe. Elija otro.' | translate}} </p> 
 				<p style="color: red" *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched"> {{'Usuario'  | translate}} {{'requerido' | translate}} </p>
 				<p style="color: red" *ngIf="form.controls['username'].hasError('minlength') && (form.controls['username'].touched || form.controls['username'].dirty)"> {{'Debe tener al menos 4 caracteres' | translate}} </p>
 			
@@ -15,7 +15,7 @@
 					<ion-label color="{{ form.controls.mail.errors && form.controls.mail.dirty ? 'danger' : 'primary' }}" floating>Mail*</ion-label>
 					<ion-input type="email" formControlName="mail" #emailInput (input)="emailInput.value.length > 4 && checkEmail(emailInput.value)"></ion-input>
 				</ion-item>
-				<p style="color: red" *ngIf="emailExistente"> La direccion de mail ya existe. Elija otro. </p> 
+				<p style="color: red" *ngIf="emailExistente"> {{'La direccion de mail ya existe. Elija otro.' | translate}} </p> 
 				<p style="color: red" *ngIf="form.controls['mail'].hasError('required') && form.controls['mail'].touched"> Mail {{'requerido' | translate}} </p>
 				<p style="color: red" *ngIf="form.controls['mail'].hasError('pattern') && (form.controls['mail'].touched || form.controls['mail'].dirty)"> {{'Debe ser un mail valido' | translate}} </p>
 				

@@ -45,7 +45,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Dias asistidos y % asistencia</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">{{'Dias asistidos y % asistencia' | translate}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -61,7 +61,7 @@
                     [colors]="colors"></canvas>
           </div>
           <br>
-          <div *ngIf="!tieneClases">El alumno no asistio a ninguna clase</div>
+          <div *ngIf="!tieneClases">{{'El alumno no asistio a ninguna clase' | translate}}</div>
           <ul class="list-group" *ngIf="tieneClases">
             <li class="list-group-item" *ngFor="let log of logs" style="font-size: 25px;font-family: Poppins, sans-serif;">
               {{log.day | date: 'dd/MM/yyyy'}}
