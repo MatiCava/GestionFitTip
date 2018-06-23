@@ -1,10 +1,9 @@
-import { Component,OnInit, Input } from '@angular/core';
+import { Component,OnInit, Input, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
 import { User_Student } from '../../model/user_student'
 import { InfoRutinaPage } from '../info-rutina/info-rutina';
-
-
+import { Chart } from 'chart.js';
 
 @IonicPage({
 	name: 'infoAlumno'
@@ -16,12 +15,19 @@ import { InfoRutinaPage } from '../info-rutina/info-rutina';
 })
 export class InfoAlumnoPage implements OnInit{
 
+  @ViewChild('pieCanvas') pieCanvas;
+
   classes: any = [];
   tieneClasses = false;
   id: any;
   user:any;
+  asistencia:any;
+  inasistencia:any;
+  pieChart: any;
   @Input() set nUser(nUser){
     this.user = nUser;
+    this.asistencia = this.user.assistance;
+    this.inasistencia = 100 - this.user.assistance;
   }
 
   get nUser(){
@@ -35,8 +41,9 @@ export class InfoAlumnoPage implements OnInit{
   }
 
   ngOnInit(){
-   
+    console.log(this.user.assistance);
     this.tieneClasses = this.user.classDays != null && this.user.classDays.length > 0;
+    this.pieChart = this.getPieChart();
   }
 
   ionViewDidLoad() {
@@ -66,5 +73,19 @@ export class InfoAlumnoPage implements OnInit{
     this.navCtrl.push("editarUsuario");
   }
 
+  getPieChart(){
+    let data = {
+      labels: ["Asistencia", "Inasistencia"],
+      datasets: [
+        {
+          type:'pie',
+          data: [this.asistencia, this.inasistencia],
+          backgroundColor: ["#FF6384", "#36A2EB"],
+          hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+        }]
+    };
+ 
+    return this.pieCanvas.nativeElement, data;
+  }
 
 }

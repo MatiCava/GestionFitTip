@@ -160,7 +160,6 @@ public class UserService {
 		user.setRemainingLessons(newRLessons);
 		int totalClasses = user.getTotalClasses() + numLessons;
 		user.setTotalClasses(totalClasses);
-		user.calculateAssitance();
 		
 		//Fecha de pago
 		user.setPaymentDate(new Date());
@@ -173,6 +172,8 @@ public class UserService {
         dt = c.getTime();
         
         user.setLessonsExpires(dt);
+		user.calculateAssitance();
+        
 		this.updateStudent(user);
 	}
 	

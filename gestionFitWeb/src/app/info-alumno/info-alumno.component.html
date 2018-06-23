@@ -61,9 +61,10 @@
                     [colors]="colors"></canvas>
           </div>
           <br>
-          <ul class="list-group">
+          <div *ngIf="!tieneClases">El alumno no asistio a ninguna clase</div>
+          <ul class="list-group" *ngIf="tieneClases">
             <li class="list-group-item" *ngFor="let log of logs" style="font-size: 25px;font-family: Poppins, sans-serif;">
-              {{log.toString() | date: 'dd/MM/yyyy'}}
+              {{log.day | date: 'dd/MM/yyyy'}}
             </li>
           </ul>
         </div>

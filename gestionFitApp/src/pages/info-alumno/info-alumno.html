@@ -25,7 +25,10 @@
 	  </ion-col>
 	  <ion-col>
 		<p> {{'Patologias' | translate}}:</p><p>{{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
-	  </ion-col>
+		</ion-col>
+		<ion-col>
+			<p> Asistencia:</p><p>{{user.assistance}}%</p>
+		</ion-col>
 	</ion-row>
 	</ion-grid>
 </div>
@@ -43,6 +46,9 @@
 	  </div>
 	</ion-list>
 </div>
+
+<canvas #pieCanvas></canvas>
+
 <div style="height: 450px">
 	<h2>Mis clases</h2>
 	<div *ngIf="!tieneClasses">

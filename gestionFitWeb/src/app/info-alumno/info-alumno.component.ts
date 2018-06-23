@@ -15,6 +15,7 @@ export class InfoAlumnoComponent implements OnInit {
   asistencia;
   inasistencia;
   logs:any[];
+  tieneClases:boolean = false;
   public pieChartLabels:string[] = ['Asistencia', 'Inasistencia'];
   public pieChartData:number[] = [0,100];
   public pieChartType:string = 'pie';
@@ -58,6 +59,7 @@ export class InfoAlumnoComponent implements OnInit {
         console.log(this.alumno.daysAssisted);
         console.log(this.alumno.assistance);
         this.setCharData();
+        this.tieneClases = this.logs.length > 0;
       },
       err => {console.log(err); this.spinner.hide();});
 

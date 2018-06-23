@@ -339,8 +339,35 @@ public class User_Student extends User {
 
 
 	public void calculateAssitance() {
-		int newAssistance = (this.getDaysAssisted().size() * 100) / this.totalClasses;
+		int newAssistance = (this.getLastMonth(this.lessonsExpires).size() * 100) / this.totalClasses;
 		this.setAssistance(newAssistance);
+	}
+
+
+
+
+	private Set<DaysAssisted> getLastMonth(Date lessonsExpires) {
+
+        Calendar c = Calendar.getInstance(); 
+        c.setTime(lessonsExpires); 
+        c.add(Calendar.MONTH, -1);
+        Date limiteMin = c.getTime();
+		
+        Set<DaysAssisted> lastMonth = new HashSet<DaysAssisted>();
+        
+        for(DaysAssisted dayA : this.daysAssisted){
+//        	int posDay = dayA.getDay().compareTo(limiteMin);
+//        	if(posDay == 0 || posDay > 1){
+//        		System.out.println(posDay == 0 || posDay > 1);
+//        		lastMonth.add(dayA);
+//        	}
+        	if(dayA.getDay().equals(limiteMin) || dayA.getDay().after(limiteMin)){
+        		lastMonth.add(dayA);
+        	}
+        }
+        
+        return lastMonth;
+	
 	}
 
 
