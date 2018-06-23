@@ -26,6 +26,7 @@ public class Class_Day {
 	private int endHour;
 	@OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<StudentAssist> students;
+	private String instructorName;
 
 	
 	public Class_Day(){
@@ -38,19 +39,21 @@ public class Class_Day {
 
 	}
 	
-	public Class_Day(LocalDate date,int start,int end) {
+	public Class_Day(LocalDate date,int start,int end, String instName) {
 		this.day = date;
 		this.startHour = start;
 		this.endHour = end;
 		this.students= new HashSet<StudentAssist>();
+		this.instructorName = instName;
 	}
 	
-	public Class_Day(LocalDate date,int start,int end, String name, long id) {
+	public Class_Day(LocalDate date,int start,int end, String name, long id, String instName) {
 		this.day = date;
 		this.startHour = start;
 		this.endHour = end;
 		this.students= new HashSet<StudentAssist>();
 		this.students.add(new StudentAssist(name,id));
+		this.instructorName = instName;
 	}
 	
 
@@ -109,27 +112,16 @@ public class Class_Day {
 		
 	}
 
+	public String getInstructorName() {
+		return instructorName;
+	}
+
+	public void setInstructorName(String instructorName) {
+		this.instructorName = instructorName;
+	}
+
 
 	
-	
-
-//	public Set<Class_Student> getStudent_classes() {
-//		return student_classes;
-//	}
-//
-//	public void setStudent_classes(Set<Class_Student> student_classes) {
-//		this.student_classes = student_classes;
-//	}
-//
-//	public void add(Class_Student classS) {
-//		this.student_classes.add(classS);
-//		
-//	}
-//
-//	public Class_Student get(int i) {
-//		
-//		return (Class_Student) this.student_classes.toArray()[i];
-//	}
 	
 	
 

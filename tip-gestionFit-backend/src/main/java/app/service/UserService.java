@@ -228,6 +228,7 @@ public class UserService {
 		
 	}
 
+	@Transactional
 	public int getPromedioAsistencia(Long id) {
 		User_Student user = (User_Student) this.userDAO.getById(id);
 		return user.getAssistance();

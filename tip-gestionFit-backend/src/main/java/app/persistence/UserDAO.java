@@ -2,8 +2,6 @@ package app.persistence;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -201,6 +199,8 @@ public class UserDAO extends GenericDAO<User> {
 			result = (User_Instructor) session.createCriteria(User.class)
 			.createAlias("classes", "class")
 			.add(Restrictions.eq("class.day", date))
+			.createAlias("class.startEndHours","hour")
+			.add(Restrictions.and(Restrictions.le("hour.startHour", start),Restrictions.ge("hour.endHour", end)))
 			.uniqueResult();
 
 		}

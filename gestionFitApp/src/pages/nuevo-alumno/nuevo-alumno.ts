@@ -22,6 +22,8 @@ export class NuevoAlumnoPage {
     usuarioExistente:any;
     emailExistente:any;
 
+    //storage = firebase.storage();
+
     form:FormGroup = this.formBuilder.group({
       username: new FormControl('',Validators.compose([
         Validators.minLength(4),

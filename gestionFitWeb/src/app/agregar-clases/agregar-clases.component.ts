@@ -38,7 +38,7 @@ export class AgregarClasesComponent implements OnInit {
      private formBuilder : FormBuilder,private route: ActivatedRoute, private spinner: NgxSpinnerService) {
     this.idUser = this.route.snapshot.paramMap.get("idUser");
    }
-
+ 
   ngOnInit() {
     for(let i = 8;i<22;i++){
       if(i<10){

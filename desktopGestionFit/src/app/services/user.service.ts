@@ -30,4 +30,8 @@ export class UserService {
     return this.http.get(this.apiUrl + "userDesktop/" + mail);
   }
 
+  getInstructorDays():Observable<any> {
+    return this.http.get(this.apiUrl + "daysInstructor");
+  }
+
 }

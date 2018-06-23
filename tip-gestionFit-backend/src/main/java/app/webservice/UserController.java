@@ -220,7 +220,7 @@ public class UserController {
 		
 	}
 	
-	@GetMapping(value="/instructorDays",produces = "application/json")
+	@GetMapping(value="/daysInstructor",produces = "application/json")
 	public List<DayInstructor> getInstructorDays() {
 		return this.calServ.getInstructorDays();
 	}

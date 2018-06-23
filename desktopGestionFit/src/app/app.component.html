@@ -40,21 +40,26 @@
         <div class="col-md" *ngFor="let dia of dias" style="border: 1px solid black">
           <div class="form-check">
             <span >
-            {{dia.day | translate}}
-            <br>
-            <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)" [disabled]="limit(dia)">
-            </span>
-          </div>
+            <p [style.color]="dia.available ? 'green':'red'">{{dia.day |translate}}</p>
+            <input class="single-checkbox" type="checkbox" [(ngModel)]="dia.checked" (change)="check(dia)" [disabled]="(!dia.available) || limit(dia)">
+          </span>
+        </div>
         </div>
       </div>
       
       <div *ngIf="diasElegidos.length > 0">
         <div *ngFor="let diaElegido of diasElegidos">
-          {{diaElegido.day | translate}}
-          <select class="custom-select" [(ngModel)]="diaElegido.startHour" (change)="horaSeleccionada($event.target.value,diaElegido)">
-            <option *ngFor="let hora of horas">{{hora}}</option>
-          </select>
+        <p> {{diaElegido.day |translate}} </p>
+        <div *ngIf="diaElegido.availableHours == undefined && diaElegido.startHour != ''">
+            <p> {{diaElegido.startHour}} a {{diaElegido.endHour}}</p>
         </div>
+        
+        <span *ngFor="let horasDisp of diaElegido.availableHours">
+        <select class="custom-select" [(ngModel)]="diaElegido.startHour" (change)="horaSeleccionada($event.target.value,diaElegido)">
+            <option *ngFor="let hora of horasDisp">{{hora}}</option>      
+        </select>
+      </span>
+    
       </div>
         <br>
       
@@ -81,6 +86,7 @@
         </button>
       </div>
     </div>
+    </div>
   
   <br>
   <label>Primera vez en el gimnasio?</label>
@@ -100,7 +106,6 @@
     </ul>
   </div>
   </div>
-
 </div>
 
   <ngx-spinner

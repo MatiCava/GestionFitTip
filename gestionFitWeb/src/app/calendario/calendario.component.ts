@@ -114,8 +114,9 @@ export class CalendarioComponent implements OnInit {
         let total = 0;
         let assisted = 0;
         let names = "";
+        names += "Instructor: " + day.instructorName + " - Alumnos: ";
         for(const student of day.students){
-            if(names === ""){
+            if(total === 0){
                 names += student.studentName;
             } else {
                 names += " , " + student.studentName;
@@ -129,7 +130,7 @@ export class CalendarioComponent implements OnInit {
         names += ", Asistencia: " + (assisted * 100 / total) + "%";
 
       this.formatedEvs.push({id:this.idx,start_date: day.day + " " + day.startHour + ":00",
-      end_date: day.day + " " + day.endHour + ":00",text:names})
+      end_date: day.day + " " + day.endHour + ":00",text:names,instructor:day.instructorName});
 
 
     }

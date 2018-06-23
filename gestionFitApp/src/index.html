@@ -19,6 +19,19 @@
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyACu6JrqAzmschsfJ1oVrSW5dMIUND2XLA",
+    authDomain: "gestionfit-71e88.firebaseapp.com",
+    databaseURL: "https://gestionfit-71e88.firebaseio.com",
+    projectId: "gestionfit-71e88",
+    storageBucket: "gestionfit-71e88.appspot.com",
+    messagingSenderId: "782187224498"
+  };
+  firebase.initializeApp(config);
+</script>
 
   <!-- un-comment this code to enable service worker
   <script>

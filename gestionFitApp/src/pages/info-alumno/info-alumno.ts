@@ -24,10 +24,13 @@ export class InfoAlumnoPage implements OnInit{
   asistencia:any;
   inasistencia:any;
   pieChart: any;
+  
   @Input() set nUser(nUser){
     this.user = nUser;
     this.asistencia = this.user.assistance;
+    console.log(nUser);
     this.inasistencia = 100 - this.user.assistance;
+    this.getPieChart();
   }
 
   get nUser(){
@@ -41,9 +44,8 @@ export class InfoAlumnoPage implements OnInit{
   }
 
   ngOnInit(){
-    console.log(this.user.assistance);
     this.tieneClasses = this.user.classDays != null && this.user.classDays.length > 0;
-    this.pieChart = this.getPieChart();
+    
   }
 
   ionViewDidLoad() {
@@ -75,17 +77,20 @@ export class InfoAlumnoPage implements OnInit{
 
   getPieChart(){
     let data = {
-      labels: ["Asistencia", "Inasistencia"],
-      datasets: [
-        {
-          type:'pie',
-          data: [this.asistencia, this.inasistencia],
-          backgroundColor: ["#FF6384", "#36A2EB"],
-          hoverBackgroundColor: ["#FF6384", "#36A2EB"]
-        }]
-    };
+      type: 'pie',
+      data: {
+        datasets: [{
+            data: [this.asistencia,this.inasistencia]
+        }],
+    
+        labels: [
+            'Asistencia',
+            'Inasistencia'
+        ]
+   }};
+    
  
-    return this.pieCanvas.nativeElement, data;
+    this.pieChart = new Chart(this.pieCanvas.nativeElement, data);
   }
 
 }

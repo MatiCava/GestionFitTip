@@ -50,16 +50,19 @@ export class AppComponent implements OnInit{
     ]))
   });
 
-  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false},
-  {day:"TUESDAY",startHour:"",endHour:"",checked:false},
-  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false},
-  {day:"THURSDAY",startHour:"",endHour:"",checked:false},
-  {day:"FRIDAY",startHour:"",endHour:"",checked:false},
-  {day:"SATURDAY",startHour:"",endHour:"",checked:false}];
+  dias=[{day:"MONDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"TUESDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"WEDNESDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"THURSDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"FRIDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]},
+  {day:"SATURDAY",startHour:"",endHour:"",checked:false,available:false,availableHours:[]}];
+
   diasElegidos = [];
   horas = [];
   puedeGuardar = true;
   elegidos = 0;
+  diasDisponibles= [];
+
 
 
   constructor(private formBuilder: FormBuilder,private translate: TranslateService,
@@ -111,13 +114,45 @@ export class AppComponent implements OnInit{
     this.userServ.getUser(this.registerForm.controls.mail.value).subscribe(
       res=>{this.setHorariosElegidos(res);this.userRegister = res;this.usuarioEncontrado = true;},
       error=>console.log(error));
+      this.userServ.getInstructorDays().subscribe(
+        res => {this.diasDisponibles = res;console.log(res);this.bloquearNoDisponibles()},
+        error => console.log(error)
+      );
+  }
+
+  bloquearNoDisponibles(){
+
+    for(let dia of this.diasDisponibles){
+      let diaNombre = dia.day;
+      for(let diaCheck of this.dias){
+        if(diaCheck.day === diaNombre){
+          diaCheck.available = true;
+          let horas = [];
+          for(let hora of dia.startEndHours){
+            let horaString = [];
+            for(let i = hora.startHour; i < hora.endHour;i++){
+              if(i < 10){
+                horaString.push("0" + i + ":00");
+              } else {
+                horaString.push(i + ":00");
+              }
+            }
+            horas.push(horaString);
+          }
+          console.log(horas);
+          diaCheck.availableHours=(horas);
+
+        }
+      }
+    }
+
   }
 
   setHorariosElegidos(user){
     console.log(user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime());
     this.form.controls.clases.setValue(user.remainingLessons);
     this.puedeGuardar = user.remainingLessons === 0 || new Date().getTime() > new Date(user.lessonsExpires).getTime(); 
-    this.diasElegidos = user.classDays;
+    this.diasElegidos = this.changeHoursFormat(user.classDays);
     for(let day of this.diasElegidos){
       for(let dia of this.dias){
         if(dia.day === day.day){
@@ -127,6 +162,22 @@ export class AppComponent implements OnInit{
       }
     }
 
+  }
+
+  changeHoursFormat(days){
+    for(let day of days){
+      if(day.startHour < 10){
+        day.startHour = "0" + day.startHour + ":00";
+      } else {
+        day.startHour += ":00";
+      }
+      if(day.endHour < 10){
+        day.endHour = "0" + day.endHour + ":00";
+      } else {
+        day.endHour += ":00";
+      }
+    }
+    return days;
   }
 
   validHours(){
@@ -146,10 +197,18 @@ export class AppComponent implements OnInit{
 
   guardarClases(){
     this.spinner.show();
+    this.setHorariosAInteger();
     this.userServ.addLessons(this.registerForm.controls.mail.value,this.form.controls.clases.value,this.diasElegidos).subscribe(
       res => {console.log("GUARDADO");this.handleSuccessAlert("Clases agregadas");this.usuarioEncontrado=false; this.spinner.hide();},
       error => {console.log(error);this.handleErrorRegister(error);this.spinner.hide();}
     )
+  }
+
+  setHorariosAInteger(){
+    for(let dia of this.diasElegidos){
+      dia.startHour = Number(dia.startHour.substring(0,2));
+      dia.endHour = Number(dia.endHour.substring(0,2));
+    }
   }
 
 

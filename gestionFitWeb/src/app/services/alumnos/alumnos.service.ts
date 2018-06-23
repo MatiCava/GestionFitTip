@@ -103,8 +103,7 @@ export class AlumnosService {
   }
 
   getInstructorDays():Observable<any> {
-    this.httpOptions = {headers: new HttpHeaders({"Authorization": localStorage.getItem("token")})};
-    return this.http.get(this.apiUrl + "instructorDays", this.httpOptions);
+    return this.http.get(this.apiUrl + "daysInstructor");
   }
 
 }
