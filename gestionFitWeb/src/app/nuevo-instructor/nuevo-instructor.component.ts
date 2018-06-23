@@ -48,6 +48,7 @@ export class NuevoInstructorComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
 }

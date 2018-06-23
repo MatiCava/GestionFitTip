@@ -18,16 +18,21 @@
       <button class="btn btn-primary" (click)="diaElegido.startEndHours.push({startHour:0,endHour:0})">{{'Nuevo horario' | translate}}</button>
       <br>
       <div class="form-group" *ngFor="let schedule of diaElegido.startEndHours;let i = index">
+        <div>
         <label for="start{{i}}">{{'Inicio' | translate}}</label>
-        <input id="start{{i}}" class="form-control" type="number" min="8" max="21" [(ngModel)]="schedule.startHour">
+        <input id="start{{i}}" class="form-control"  type="number" min="8" max="21" [(ngModel)]="schedule.startHour">
+        <small id="errorStart{{i}}" *ngIf="hourInvalid(schedule.startHour,diaElegido.day)" style="color: red">{{'Horario ocupado' | translate}}</small>
+      </div>
+      <div>
         <label for="end{{i}}">{{'Fin' | translate}}</label>
         <input id="end{{i}}" class="form-control" type="number" [min]="schedule.startHour" max="22" [(ngModel)]="schedule.endHour">
-        
+        <small id="errorEnd{{i}}" *ngIf="hourInvalid(schedule.endHour,diaElegido.day)" style="color: red">{{'Horario ocupado' | translate}}</small>
+      </div>
       </div>
     </div>
   </div>
   <br>
-    <button (click)="onSubmit()" [disabled]=" !validHours()" class="btn btn-success">{{'Agregar' | translate}}</button>
+    <button (click)="onSubmit()" [disabled]="occupedHours() || !validHours()" class="btn btn-success">{{'Agregar' | translate}}</button>
     <button class="btn btn-danger" routerLink="/instructores">{{'Cancelar' | translate }}</button>
   
   <ngx-spinner  

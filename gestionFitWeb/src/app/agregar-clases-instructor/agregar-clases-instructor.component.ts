@@ -73,7 +73,30 @@ export class AgregarClasesInstructorComponent implements OnInit {
         valid = valid && this.validHour(hours, dia.startEndHours);
       }
     }
-    return valid;
+    return valid && this.diasElegidos.length > 0;
+  }
+
+  hourInvalid(hour,day){
+    let invalid = false;
+    for(let occupedDay of this.diasOcupados){
+      if(occupedDay.day === day){
+        for(let occupedHour of occupedDay.startEndHours){
+          invalid = invalid || (hour >= occupedHour.startHour && hour <= occupedHour.endHour);
+        }
+      }
+      
+    }
+    return invalid;
+  }
+
+  occupedHours(){
+    let occuped = false;
+    for(let dia of this.diasElegidos){
+      for(let hour of dia.startEndHours){
+        occuped = occuped || (this.hourInvalid(hour.startHour,dia.day) || this.hourInvalid(hour.endHour,dia.day));
+      }
+    }
+    return occuped;
   }
 
   validHour(actual,hours){

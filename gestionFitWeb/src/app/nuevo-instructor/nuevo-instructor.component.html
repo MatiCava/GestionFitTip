@@ -3,20 +3,25 @@
   <form [formGroup]="instructor" >
     <div class="form-group">
       <label for="inputNombre">{{'Nombre completo' | translate}}:</label>
-      <input type="text" id="inputNombre" class="form-control" formControlName="nameAndSurname" placeholder="{{'Ingrese un nombre'|translate}}">
+      <input type="text" id="inputNombre" class="form-control" aria-describedby="errorNombre" formControlName="nameAndSurname" placeholder="{{'Ingrese un nombre'|translate}}">
+      <small id="errorNombre" style="color:red" *ngIf="instructor.controls['nameAndSurname'].dirty && instructor.controls['nameAndSurname'].invalid">{{'Debe contener al menos 6 caracteres'|translate}}</small>
     </div>
     <div class="form-group">
       <label for="inputUsuario">{{'Usuario' | translate}}:</label>
       <input type="text" id="inputUsuario" class="form-control" formControlName="username" placeholder="{{'Ingrese un nombre de usuario'|translate}}">
+      <small id="errorUsuario" style="color:red" *ngIf="instructor.controls['username'].dirty && instructor.controls['username'].invalid">{{'Debe contener al menos 4 caracteres'|translate}}</small>
     </div>
     <div class="form-group">
       <label for="inputPass">{{'Contraseña' | translate}}:</label>
       <input type="password" id="inputPass" class="form-control" formControlName="password" placeholder="{{'Ingrese una contraseña'|translate}}">
+      <small id="errorContra" style="color:red" *ngIf="instructor.controls['password'].dirty && instructor.controls['password'].invalid">{{'Debe contener al menos 4 caracteres'|translate}}</small>
     </div>
     <div class="form-group">
       <label for="inputMail">{{'Email' | translate}}:</label>
       <input type="email" id="inputMail" class="form-control" formControlName="mail" placeholder="{{'Ingrese un mail de contacto'|translate}}">
+      <small id="errorMail" style="color:red" *ngIf="instructor.controls['mail'].dirty && instructor.controls['mail'].invalid">{{'Debe tener un formato valido de email'|translate}}</small>
     </div>
+
     <button class="btn btn-success" [disabled]="instructor.invalid" (click)="saveInstructor()">{{'Guardar'|translate}}</button>
     <button class="btn btn-danger" routerLink="/instructores">{{'Cancelar'|translate}}</button>
   </form>
