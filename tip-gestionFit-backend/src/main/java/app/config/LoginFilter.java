@@ -41,6 +41,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         // mapeamos con la clase Credentials para tener ahi los datos
         Credentials user = new ObjectMapper().readValue(body, Credentials.class);
 
+        System.out.println("USEEEEEEEEEEER " + user.getEmail());
 
 
         return getAuthenticationManager().authenticate(

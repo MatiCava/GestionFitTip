@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import app.model.Class_Calendar;
 import app.model.DayInstructor;
@@ -22,13 +24,30 @@ import app.model.StartEndHour;
 import app.model.User_Admin;
 import app.model.User_Instructor;
 import app.model.User_Student;
+import app.persistence.UserDAO;
 
+
+@Service
 public class DataService {
 	
-	RoutineService routineServ = new RoutineService();
-	UserService userServ = new UserService();
-	ExerciseService exerServ = new ExerciseService();
-	CalendarService calServ = new CalendarService();
+	@Autowired
+	RoutineService routineServ;
+	@Autowired
+	UserDAO userDAO ;
+	@Autowired
+	UserService userServ;
+	@Autowired
+	ExerciseService exerServ;
+	@Autowired
+	CalendarService calServ;
+	
+	public DataService(){
+		this.routineServ = new RoutineService();
+		this.userDAO = new UserDAO();
+		this.exerServ = new ExerciseService();
+		this.calServ = new CalendarService();
+		this.userServ = new UserService();
+	}
 
 	
 	public void createInitialData() {
@@ -58,7 +77,7 @@ public class DataService {
 		User_Student alu8 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
 		
-		this.userServ.saveStudent(alu3);
+		this.userDAO.save(alu3);
 		User_Instructor inst1 = new User_Instructor("instructor1",encoder.encode("1234"),"Fernando Fernandez", "ff@gmail.com");
 		User_Instructor inst2 = new User_Instructor("instructor2",encoder.encode("1234"),"Zaira Ferreira", "zfpilates@gmail.com");
 
@@ -174,11 +193,11 @@ public class DataService {
 		Set<DayInstructor> classes = new HashSet<>();
 		classes.add(dayI1);
 		
-		this.userServ.saveStudent(alu1);
-		this.userServ.saveStudent(alu2);
-		this.userServ.saveInstructor(inst1);
-		this.userServ.saveInstructor(inst2);
-		this.userServ.saveAdmin(admin);
+		this.userDAO.save(alu1);
+		this.userDAO.save(alu2);
+		this.userDAO.save(inst1);
+		this.userDAO.save(inst2);
+		this.userDAO.save(admin);
 		
 
 		

@@ -1,15 +1,21 @@
-<ion-content style="margin-top: 30px" padding>
-	
+<div class="bg">
+		<video autoplay muted loop id="myVideo">
+			<source src="../../assets/GestionFitBack2.mp4" type="video/mp4">
+		</video>
+		</div>
+<!--<ion-content style="margin-top: 30px" padding>-->
+		<div class="loginSection">
+
 	<ion-list>
 		<form (ngSubmit)="onSubmit()" [formGroup]="credentials">
-	  <ion-item>
-	    <ion-label fixed>{{'Usuario' | translate}} </ion-label>
-	    <ion-input type="text" formControlName="email" [class.invalid]="credentials.controls['email'].invalid && credentials.controls['email'].dirty"></ion-input>
+	  <ion-item class="item">
+	    <ion-label class="label" fixed>{{'Usuario' | translate}} </ion-label>
+	    <ion-input class="label" type="text" formControlName="email" [class.invalid]="credentials.controls['email'].invalid && credentials.controls['email'].dirty"></ion-input>
 	  </ion-item>
 	
 	  <ion-item>
-	    <ion-label fixed>{{'Contraseña' | translate}}</ion-label>
-	    <ion-input type="password" formControlName="password" [class.invalid]="credentials.controls['email'].invalid && credentials.controls['email'].dirty"></ion-input>
+	    <ion-label class="label" fixed>{{'Contraseña' | translate}}</ion-label>
+	    <ion-input class="label" type="password" formControlName="password" [class.invalid]="credentials.controls['email'].invalid && credentials.controls['email'].dirty"></ion-input>
 		</ion-item>
 		<ion-item *ngIf="errorLogin">
 			<div ><p style="font-family: 'Poppins',sans-serif;color: red;font-size: 20px;">Usuario y/o contraseña incorrectos</p></div>
@@ -26,4 +32,5 @@
 		
 	
 	</ion-list>
-</ion-content>
+	</div>
+<!--</ion-content>-->
