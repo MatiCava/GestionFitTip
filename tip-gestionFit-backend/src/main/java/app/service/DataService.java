@@ -1,66 +1,76 @@
 package app.service;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import app.model.Class_Calendar;
-import app.model.Class_Day;
+import app.model.DayInstructor;
 import app.model.DayStudent;
 import app.model.Exercise;
 import app.model.Exercise_Type;
 import app.model.Measurement;
 import app.model.Routine;
 import app.model.Routine_Type;
+import app.model.StartEndHour;
 import app.model.User_Admin;
 import app.model.User_Instructor;
 import app.model.User_Student;
-import app.persistence.CalendarDAO;
-import app.persistence.ExerciseDAO;
-import app.persistence.MeasureDAO;
-import app.persistence.MeasuringTableDAO;
-import app.persistence.RoutineDAO;
-import app.persistence.UserDAO;
-import app.persistence.UserScheduleDAO;
 
 public class DataService {
-
-	UserDAO userDAO = new UserDAO();
-	RoutineDAO routineDAO = new RoutineDAO();
-	ExerciseDAO exerDAO = new ExerciseDAO();
-	MeasuringTableDAO tableDAO = new MeasuringTableDAO();
-	MeasureDAO measureDAO = new MeasureDAO();
-	CalendarDAO calDAO = new CalendarDAO();
-	UserScheduleDAO scheDAO = new UserScheduleDAO();
+	
+	RoutineService routineServ = new RoutineService();
+	UserService userServ = new UserService();
+	ExerciseService exerServ = new ExerciseService();
+	CalendarService calServ = new CalendarService();
 
 	
 	public void createInitialData() {
 		
-		calDAO.save(new Class_Calendar());
+		calServ.save(new Class_Calendar());
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		
 		User_Admin admin= new User_Admin("lovemylife",encoder.encode("1234"),"LoveMyLife","lovemylife@gmail.com");
 		
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
+		
 		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","gastonveliez95@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		alu1.setRemainingLessons(4);
 		User_Student alu2 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu3 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno3",encoder.encode("123"),"Carlos Perez","Carlito@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu4 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu5 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu6 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu7 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu8 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		
+		this.userServ.saveStudent(alu3);
 		User_Instructor inst1 = new User_Instructor("instructor1",encoder.encode("1234"),"Fernando Fernandez", "ff@gmail.com");
+		User_Instructor inst2 = new User_Instructor("instructor2",encoder.encode("1234"),"Zaira Ferreira", "zfpilates@gmail.com");
+
 		
 		Exercise ex1 = new Exercise("Biceps", "3 series de 15 repeticiones", Exercise_Type.Arms);
 		Exercise ex2 = new Exercise("Gemelos", "3 series de 15 repeticiones", Exercise_Type.Lower_Body);
 		Exercise ex3 = new Exercise("Pectorales", "3 series de 15 repeticiones", Exercise_Type.Upper_Body);
 		Exercise ex4 = new Exercise("Bicicleta fija", "10 minutos", Exercise_Type.Warm_Up);
-		this.exerDAO.save(ex1);
-		this.exerDAO.save(ex2);
-		this.exerDAO.save(ex3);
-		this.exerDAO.save(ex4);
+		this.exerServ.save(ex1);
+		this.exerServ.save(ex2);
+		this.exerServ.save(ex3);
+		this.exerServ.save(ex4);
 		
 		Measurement med1 = new Measurement(date,70,130);
 		Measurement med2 = new Measurement(date,70,130);
@@ -136,75 +146,55 @@ public class DataService {
 		rutina.addExercise(ex1);
 		rutina.addExercise(ex2);
 		rutina.addExercise(ex3);
-		this.measureDAO.save(alu1.getMeasurements().measures.get(0));
-		this.measureDAO.save(alu1.getMeasurements().measures.get(1));
-		this.measureDAO.save(alu1.getMeasurements().measures.get(2));
-		this.measureDAO.save(alu1.getMeasurements().measures.get(3));
-		this.measureDAO.save(alu1.getMeasurements().measures.get(4));
-		this.measureDAO.save(alu1.getMeasurements().measures.get(5));
-		this.measureDAO.save(alu1.getMeasurements().measures.get(6));
-		this.routineDAO.save(rutina);
-		this.routineDAO.save(rutina2);
-		this.routineDAO.save(rutina3);
-		this.routineDAO.save(rutina4);
-		this.routineDAO.save(rutina5);
-		this.tableDAO.save(alu1.getMeasurements());
+		rutina2.addExercise(ex4);
+		rutina3.addExercise(ex3);
+		rutina4.addExercise(ex2);
+		rutina5.addExercise(ex1);
+
+		
+		this.routineServ.save(rutina);
+		this.routineServ.save(rutina2);
+		this.routineServ.save(rutina3);
+		this.routineServ.save(rutina4);
+		this.routineServ.save(rutina5);
 		List<Routine> routines = new ArrayList<Routine>();
 		rutina.id = null;
 		rutina.isTemplate = false;
 		routines.add(rutina);
 		alu1.addRoutine(routines);
-		this.userDAO.save(alu1);
-		this.userDAO.save(alu2);
-		this.userDAO.save(inst1);
-		this.userDAO.save(admin);
+		
+		DayInstructor dayI1 = new DayInstructor();
+		StartEndHour sten= new StartEndHour();
+		sten.setStartHour(9);
+		sten.setEndHour(16);
+		Set<StartEndHour> stens= new HashSet<>();
+		stens.add(sten);
+		dayI1.setStartEndHours(stens);
+		dayI1.setDay("TUESDAY");
+		Set<DayInstructor> classes = new HashSet<>();
+		classes.add(dayI1);
+		
+		this.userServ.saveStudent(alu1);
+		this.userServ.saveStudent(alu2);
+		this.userServ.saveInstructor(inst1);
+		this.userServ.saveInstructor(inst2);
+		this.userServ.saveAdmin(admin);
+		
+
+		
+		DayStudent day1 = new DayStudent("TUESDAY",10,11);
+		
+		List<DayStudent> days = new ArrayList<DayStudent>();
+		
+		days.add(day1);
+		
+		this.userServ.addDays(alu1.id, days);
+		this.userServ.addDaysInstructor(inst1.id, classes);
+
+		
+		this.calServ.addDays(days, alu1.getNameAndSurname(), alu1.id);
 			
 	}
 	
 	
-//	private void addClass(List<Class_Day> classes){
-//		Class_Calendar calendar = this.calDAO.getById((long) 1);
-//		for(Class_Day clase : classes){
-//			calendar.addClass(clase);
-//		}
-//		this.calDAO.update(calendar);
-//	}
-//	
-//	
-//	private void saveDays(List<DayStudent> days,String name){
-//		Class_Calendar calendar = this.calDAO.getById((long) 1);
-//		LocalDate startDate = LocalDate.now();
-//	    long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, startDate.plusMonths(1));
-//	    int agregados=0;
-//		for(DayStudent day : days){
-//		    for(int i = 0 ; i < numOfDaysBetween ;i++){
-//		    	if(startDate.plusDays(i).getDayOfWeek().name().equals(day.getDay()) ){
-//		    			calendar.addClass(new Class_Day(startDate.plusDays(i),day.getStartHour(),day.getEndHour(),name));
-//		    			agregados ++;
-////		    		}
-////		    		else{
-////		    		for(Class_Student classS : calendar.getClassDay(startDate.plusDays(i)).getStudent_classes()){
-////		    			if(classS.getStartHour().equals(day.getStartHour())){
-////		    				System.out.println("############# MISMAHORA");
-////		    				if(!classS.getStudentName().contains(name)){
-////			    				System.out.println("############# "+ name);
-////
-////			    				classS.setStudentName(classS.getStudentName() + " , " + name);
-////			    				agregados++;
-////		    				}
-////		    			}
-////		    			else{
-////		    				System.out.println("************* MISMAHORA");
-////		    				agregados++;
-////			    			calendar.addClass(startDate.plusDays(i), new Class_Student(day.getStartHour(),day.getEndHour(),name));
-////		    			}
-////		    		}
-////		    		}
-//		    	}
-//		    }
-//		}
-//		System.out.println("Cantidad agregados " + agregados);
-//		this.calDAO.update(calendar);
-//
-//	}
 }

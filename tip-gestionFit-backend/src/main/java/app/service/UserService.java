@@ -23,6 +23,7 @@ import app.model.MeasurementsAdapter;
 import app.model.MeasuringTable;
 import app.model.Routine;
 import app.model.User;
+import app.model.User_Admin;
 import app.model.User_Instructor;
 import app.model.User_Student;
 import app.persistence.UserDAO;
@@ -142,10 +143,12 @@ public class UserService {
 		return user;
 	}
 
+	@Transactional
 	public MeasuringTable getStudentTable(Long idUser) {
 		return this.userDAO.getStudent(idUser).getMeasurements();
 	}
 	
+	@Transactional
 	public Set<Routine> getStudentRutines(Long idUser){
 		return this.userDAO.getStudent(idUser).getRoutines();
 	}
@@ -232,6 +235,17 @@ public class UserService {
 	public int getPromedioAsistencia(Long id) {
 		User_Student user = (User_Student) this.userDAO.getById(id);
 		return user.getAssistance();
+	}
+
+	@Transactional
+	public long saveAdmin(User_Admin admin) {
+		ArgumentsValidator.validateInstructor(admin);
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		admin.setPassword(encoder.encode(admin.getPassword()));
+		admin.setRole("ADMIN");
+
+		return this.userDAO.save(admin);
+		
 	}
 
 

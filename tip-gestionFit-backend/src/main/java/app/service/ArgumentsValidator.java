@@ -52,7 +52,7 @@ public class ArgumentsValidator {
 	
 	public static void isInvalidDescription(String description) {
 		isNullOrEmptyString(description);
-		if(description.length() < 14 || description.length() > 60)
+		if(description.length() < 5 || description.length() > 60)
 			throw new InvalidModelObjectException("Not a valid description");
 
 	}
@@ -87,7 +87,7 @@ public class ArgumentsValidator {
 	}
 
 	public static void validateInstructor(User user) {
-		User_Instructor newUser = (User_Instructor) user;
+		User newUser = user;
 		isInvalidFullName(newUser.getNameAndSurname());
 		isNotAValidMailAddress(newUser.getMail());
 		isNullOrEmptyString(newUser.getUsername(),newUser.getPassword());
