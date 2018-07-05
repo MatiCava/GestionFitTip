@@ -166,18 +166,15 @@ export class NuevoAlumnoPage {
       
       this.camera.getPicture(options).then((imageData) => {
   
-       let base64Image = 'data:image/jpeg;base64,' + imageData;
-       const filePath = 'profile/' + new Date() ;       
-       const customMetadata = {app: 'Carpnd'};
+       let base64Image =  'data:image/jpg;base64,' +imageData;
+       const filePath = 'profile/' + new Date() + ".jpg" ;       
        this.path = filePath;
        const ref = this.storage.ref(filePath);
-       this.task = this.storage.upload(filePath,
-       base64Image, { customMetadata });
-          
+       this.task = this.storage.ref(filePath).putString(base64Image, 'data_url');
+       this.presentSpinner();
      this.percentage = this.task.percentageChanges();
-     this.percentage.subscribe(res=> {this.filePorcentage = res;console.log(res);},error => console.log(error));
+     this.percentage.subscribe(res=> {this.filePorcentage = res;this.loading.setContent('Progreso: ' + res);console.log(res);},error => console.log(error));
 
-     this.presentSpinner();
      this.task.snapshotChanges().subscribe(res => res.ref.getDownloadURL().then(url =>{console.log(url);this.imageUrl = url;if(this.imageUrl != ""){this.alumno.photo = this.imageUrl;this.continuarRegistro()}}));
 
   
