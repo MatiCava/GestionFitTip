@@ -27,7 +27,7 @@ export class InfoAlumnoPage implements OnInit{
   
   @Input() set nUser(nUser){
     this.user = nUser;
-    this.asistencia = (this.user.assistance * 100 / this.user.totalClasses);
+    this.asistencia = (this.user.assistance);
     console.log(nUser);
     this.inasistencia = 100 - this.user.assistance;
     this.getPieChart();
