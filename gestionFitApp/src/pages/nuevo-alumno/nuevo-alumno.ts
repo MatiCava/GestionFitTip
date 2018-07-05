@@ -5,6 +5,8 @@ import { User_Student,User_Role } from '../../model/user_student';
 import { Camera,CameraOptions } from '@ionic-native/camera'; 
 import { LoginProvider } from '../../providers/login/login';
 import { UserProvider } from '../../providers/user/user';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage(
 	{name:"nuevoAlumno"}
@@ -21,8 +23,14 @@ export class NuevoAlumnoPage {
 
     usuarioExistente:any;
     emailExistente:any;
+    task: AngularFireUploadTask;
+    percentage: Observable<any>;
+    snapshot: Observable<any>;
+    downloadUrl: Observable<any>;
+    filePorcentage = 0;
+    imageUrl:string = "";
+    path:any;
 
-    //storage = firebase.storage();
 
     form:FormGroup = this.formBuilder.group({
       username: new FormControl('',Validators.compose([
@@ -65,10 +73,10 @@ export class NuevoAlumnoPage {
     loading:Loading;
   
   
-    alumno = {photo:"",username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
+    alumno = {photo:'',username:"", password:"", nameAndSurname:"", mail:"",role:0, pathologies:"", observations:"", objective:"", birthday:{}, telephone:"", weigth:{}, routines:[],measures:{}};
     
   
-    constructor(private camera: Camera,private formBuilder: FormBuilder
+    constructor(private camera: Camera,private formBuilder: FormBuilder, private storage : AngularFireStorage
       ,private alertCtrl:AlertController, public navCtrl: NavController, public navParams: NavParams, public serviceLogin: LoginProvider,private userServ: UserProvider, public loadingCtrl: LoadingController) {
       this.usuarioExistente = false;
       this.emailExistente = false;
@@ -133,6 +141,8 @@ export class NuevoAlumnoPage {
                 confirmacion.present();
                 er => {
                   console.log(er);
+                  this.storage.storage.ref(this.path).delete().then(val => console.log(val)).catch(err => console.log(err));
+
                 }
             });
     }
@@ -157,14 +167,30 @@ export class NuevoAlumnoPage {
       this.camera.getPicture(options).then((imageData) => {
   
        let base64Image = 'data:image/jpeg;base64,' + imageData;
-       this.alumno.photo = base64Image;
-       this.slides.lockSwipes(false);
-       this.slides.slideNext();
-       this.slides.lockSwipes(true);
+       const filePath = 'profile/' + new Date() ;       
+       const customMetadata = {app: 'Carpnd'};
+       this.path = filePath;
+       const ref = this.storage.ref(filePath);
+       this.task = this.storage.upload(filePath,
+       base64Image, { customMetadata });
+          
+     this.percentage = this.task.percentageChanges();
+     this.percentage.subscribe(res=> {this.filePorcentage = res;console.log(res);},error => console.log(error));
+
+     this.presentSpinner();
+     this.task.snapshotChanges().subscribe(res => res.ref.getDownloadURL().then(url =>{console.log(url);this.imageUrl = url;if(this.imageUrl != ""){this.alumno.photo = this.imageUrl;this.continuarRegistro()}}));
+
   
       }, (err) => {
         console.log(err);
       });
+    }
+
+    continuarRegistro(){
+      this.loading.dismiss();
+      this.slides.lockSwipes(false);
+      this.slides.slideNext();
+      this.slides.lockSwipes(true);
     }
   
   }

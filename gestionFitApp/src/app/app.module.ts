@@ -29,6 +29,11 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InstagramProvider } from '../providers/instagram/instagram';
 import { Globalization } from '@ionic-native/globalization';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { environment } from '../enviroments/enviroment';
+
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,6 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     InfoAlumnoPageModule,
