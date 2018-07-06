@@ -32,10 +32,10 @@
 	</ion-row>
 	</ion-grid>
 </div>
-	<div style="margin-top:20px;padding-top: 250px;">
+	<div style="margin-top:300px;">
 		<h2>{{'Mis rutinas' | translate}}</h2>
 	<ion-list>
-	  <ion-item *ngFor="let rutina of user.routines" style="padding-bottom: 90px">
+	  <ion-item *ngFor="let rutina of user.routines">
 		{{rutina.name}} 
 		<a (click)="abrirInfo(rutina.id)" item-right><ion-icon name="information-circle"></ion-icon></a>
 	  </ion-item>
@@ -47,22 +47,24 @@
 	</ion-list>
 </div>
 
-<canvas style="margin-top: 20px;" #pieCanvas></canvas>
-
-<div style="height: 450px;margin-top:20px;">
-	<h2>{{'Mis clases' | translate}}</h2>
-	<div *ngIf="!tieneClasses">
-		<h3>{{'No tiene ninguna clase asignada' | translate}}</h3>
+<div style="margin-top:30px;">
+		<h2>{{'Mis clases' | translate}}</h2>
+		<div *ngIf="!tieneClasses">
+			<h3>{{'No tiene ninguna clase asignada' | translate}}</h3>
+		</div>
+		<ion-grid *ngIf="tieneClasses">
+			<ion-row>
+				<ion-col><p style="font-size: 20px;font-weight: bold;text-align: center">{{'Clases' | translate}}</p></ion-col>
+				<ion-col><p style="font-size: 20px;font-weight: bold;text-align: center">{{'Dias' | translate}}</p></ion-col>
+			</ion-row>
+			<ion-row *ngFor="let class of user.classDays">
+				<ion-col><p style="font-size: 20px;text-align: center"> {{class.startHour}} - {{class.endHour}}  </p></ion-col>
+				<ion-col><p style="font-size: 20px;text-align: center"> {{class.day | translate}} </p></ion-col>
+			</ion-row>
+		</ion-grid>
 	</div>
-	<ion-grid *ngIf="tieneClasses" style="height: 700px;">
-		<ion-row>
-			<ion-col><p style="font-size: 20px;font-weight: bold;text-align: center">{{'Clases' | translate}}</p></ion-col>
-			<ion-col><p style="font-size: 20px;font-weight: bold;text-align: center">{{'Dias' | translate}}</p></ion-col>
-		</ion-row>
-		<ion-row *ngFor="let class of user.classDays">
-			<ion-col><p style="font-size: 20px;text-align: center"> {{class.startHour}} - {{class.endHour}}  </p></ion-col>
-			<ion-col><p style="font-size: 20px;text-align: center"> {{class.day | translate}} </p></ion-col>
-		</ion-row>
-	</ion-grid>
-</div>
+
+<canvas style="margin-top: 40px;padding-bottom: 30px" #pieCanvas></canvas>
+
+
 </ion-content>
