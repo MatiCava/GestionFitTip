@@ -158,7 +158,7 @@ export class NuevoAlumnoPage {
   
     tomarFoto(){
       const options: CameraOptions = {
-        quality: 100,
+        quality: 70,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
@@ -173,7 +173,11 @@ export class NuevoAlumnoPage {
        this.task = this.storage.ref(filePath).putString(base64Image, 'data_url');
        this.presentSpinner();
      this.percentage = this.task.percentageChanges();
-     this.percentage.subscribe(res=> {this.filePorcentage = res;this.loading.setContent('Progreso: ' + res);console.log(res);},error => console.log(error));
+     this.percentage.subscribe(
+       res=> {this.filePorcentage = res;
+        this.loading.setContent('Progreso: ' + Math.round(res));
+        console.log(res);
+      },error => console.log(error));
 
      this.task.snapshotChanges().subscribe(res => res.ref.getDownloadURL().then(url =>{console.log(url);this.imageUrl = url;if(this.imageUrl != ""){this.alumno.photo = this.imageUrl;this.continuarRegistro()}}));
 

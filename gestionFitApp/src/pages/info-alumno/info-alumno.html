@@ -21,10 +21,10 @@
 		<p> {{'Peso' | translate}}: </p><p> {{user.weigth.toString().replace('.',',')}} kg.</p>
 	  </ion-col>
 	  <ion-col>
-		<p> {{'Objetivo' | translate}}:</p><p> {{user.objective}}</p><p *ngIf="user.objective == ''" > {{'No definido' | translate}}</p>
+		<p> {{'Objetivo' | translate}}:</p><p> {{user.objective}}</p>
 	  </ion-col>
-	  <ion-col>
-		<p> {{'Patologias' | translate}}:</p><p>{{user.pathologies}}</p><p *ngIf="user.pathologies == ''" > {{'No definido' | translate}}</p>
+	  <ion-col *ngIf="user.pathologies != ''">
+		<p> {{'Patologias' | translate}}:</p><p>{{user.pathologies}}</p>
 		</ion-col>
 		<ion-col>
 			<p> {{'Asistencia' | translate}}:</p><p>{{asistencia}}%</p>
@@ -32,7 +32,7 @@
 	</ion-row>
 	</ion-grid>
 </div>
-	<div style="padding-bottom: 50px;padding-top: 250px">
+	<div style="margin-top:20px;padding-top: 250px;">
 		<h2>{{'Mis rutinas' | translate}}</h2>
 	<ion-list>
 	  <ion-item *ngFor="let rutina of user.routines" style="padding-bottom: 90px">
@@ -47,9 +47,9 @@
 	</ion-list>
 </div>
 
-<canvas #pieCanvas></canvas>
+<canvas style="margin-top: 20px;" #pieCanvas></canvas>
 
-<div style="height: 450px">
+<div style="height: 450px;margin-top:20px;">
 	<h2>{{'Mis clases' | translate}}</h2>
 	<div *ngIf="!tieneClasses">
 		<h3>{{'No tiene ninguna clase asignada' | translate}}</h3>
