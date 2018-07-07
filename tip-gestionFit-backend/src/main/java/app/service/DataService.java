@@ -81,14 +81,25 @@ public class DataService {
 		User_Instructor inst2 = new User_Instructor("instructor2",encoder.encode("1234"),"Zaira Ferreira", "zfpilates@gmail.com");
 
 		
-		Exercise ex1 = new Exercise("Biceps", "3 series de 15 repeticiones", Exercise_Type.Arms);
-		Exercise ex2 = new Exercise("Gemelos", "3 series de 15 repeticiones", Exercise_Type.Lower_Body);
-		Exercise ex3 = new Exercise("Pectorales", "3 series de 15 repeticiones", Exercise_Type.Upper_Body);
+		Exercise ex1 = new Exercise("Curl de biceps con mancuernas", "3(series)x10(repeticiones)x15(Pausa)", Exercise_Type.Arms);
+		Exercise ex2 = new Exercise("Sentadillas sostenidas", "4(series)x10(repeticiones)x15(pausa)", Exercise_Type.Lower_Body);
+		Exercise ex3 = new Exercise("Traccion de pecho con sogas", "4(series)x10(repeticiones)x15(pausa)", Exercise_Type.Upper_Body);
 		Exercise ex4 = new Exercise("Bicicleta fija", "10 minutos", Exercise_Type.Warm_Up);
+		Exercise ex5 = new Exercise("Pies a la barra posicion V", "6(series)x10(repeticiones)x10(pausa)", Exercise_Type.Warm_Up);
+		Exercise ex6 = new Exercise("Mov. articulares de brazos", "5 minutos", Exercise_Type.Warm_Up);
+		Exercise ex7 = new Exercise("Traccion de biceps con sogas", "4(series)x10(repeticiones)x15(pausa)", Exercise_Type.Arms);
+		Exercise ex8 = new Exercise("Estocadas", "4(series)x5(repeticiones)x20(pausa) cada pierna", Exercise_Type.Lower_Body);
+		Exercise ex9 = new Exercise("Espinales en barrel", "3(series)x10(repeticiones)x15(pausa)", Exercise_Type.Upper_Body);
+
 		this.exerServ.save(ex1);
 		this.exerServ.save(ex2);
 		this.exerServ.save(ex3);
 		this.exerServ.save(ex4);
+		this.exerServ.save(ex5);
+		this.exerServ.save(ex6);
+		this.exerServ.save(ex7);
+		this.exerServ.save(ex8);
+		this.exerServ.save(ex9);
 		
 		Measurement med1 = new Measurement(date,70,130);
 		Measurement med2 = new Measurement(date,70,130);
@@ -146,11 +157,11 @@ public class DataService {
 		alu1.addMeasurements(measures);
 		alu1.addMeasurements(measures2);
 		alu1.addMeasurements(measures3);
-		Routine rutina = new Routine("Rutina de fuerza para brazos",Routine_Type.Strength);
-		Routine rutina2 = new Routine("Rutina de fuerza explosiva", Routine_Type.Explosive_Force);
-		Routine rutina3 = new Routine("Rutina de def muscular casi sin peso", Routine_Type.Muscular_Definition);
-		Routine rutina4 = new Routine("Rutina de resistencia casi todo aerobico", Routine_Type.Resistance);
-		Routine rutina5 = new Routine("Rutina de fuerza y resistencia mezcla balanceado", Routine_Type.Strength_Resistance);
+		Routine rutina = new Routine("Rutina de fuerza (tren superior+zona media)",Routine_Type.Strength);
+		Routine rutina2 = new Routine("Rutina de alta intensidad", Routine_Type.Explosive_Force);
+		Routine rutina3 = new Routine("Rutina para principiantes", Routine_Type.Muscular_Definition);
+		Routine rutina4 = new Routine("Rutina cardio ", Routine_Type.Resistance);
+		Routine rutina5 = new Routine("Rutina alumnos avanzados", Routine_Type.Strength_Resistance);
 		ex4.id=null;
 		ex4.isTemplate = false;
 		ex1.id=null;
@@ -159,13 +170,33 @@ public class DataService {
 		ex2.isTemplate = false;
 		ex3.id=null;
 		ex3.isTemplate = false;
+		ex4.id=null;
+		ex4.isTemplate = false;
+		ex5.id=null;
+		ex5.isTemplate = false;
+		ex6.id=null;
+		ex6.isTemplate = false;
+		ex7.id=null;
+		ex7.isTemplate = false;
+		ex8.id=null;
+		ex8.isTemplate = false;
+		ex9.id=null;
+		ex9.isTemplate = false;
 
 		rutina.addExercise(ex4);
 		rutina.addExercise(ex1);
 		rutina.addExercise(ex2);
 		rutina.addExercise(ex3);
+		
 		rutina2.addExercise(ex4);
+		
+		rutina3.addExercise(ex5);
+		rutina3.addExercise(ex6);
+		rutina3.addExercise(ex8);
+		rutina3.addExercise(ex7);
+		rutina3.addExercise(ex2);
 		rutina3.addExercise(ex3);
+		
 		rutina4.addExercise(ex2);
 		rutina5.addExercise(ex1);
 
@@ -192,6 +223,29 @@ public class DataService {
 		Set<DayInstructor> classes = new HashSet<>();
 		classes.add(dayI1);
 		
+		DayInstructor dayI2 = new DayInstructor();
+		StartEndHour sten2= new StartEndHour();
+		sten2.setStartHour(13);
+		sten2.setEndHour(20);
+		Set<StartEndHour> stens2= new HashSet<>();
+		stens2.add(sten2);
+		dayI2.setStartEndHours(stens2);
+		dayI2.setDay("TUESDAY");
+
+		DayInstructor dayI3 = new DayInstructor();
+		StartEndHour sten3= new StartEndHour();
+		sten3.setStartHour(13);
+		sten3.setEndHour(20);
+		Set<StartEndHour> stens3= new HashSet<>();
+		stens3.add(sten3);
+		dayI3.setStartEndHours(stens3);
+		dayI3.setDay("FRIDAY");
+		
+		Set<DayInstructor> classes2 = new HashSet<>();
+		classes2.add(dayI2);
+		classes2.add(dayI3);
+		
+		
 		this.userDAO.save(alu1);
 		this.userDAO.save(alu2);
 		this.userDAO.save(alu3);
@@ -209,11 +263,23 @@ public class DataService {
 		
 		days.add(day1);
 		
+		DayStudent day2 = new DayStudent("TUESDAY",16,17);
+		DayStudent day3 = new DayStudent("FRIDAY",16,17);
+		
+		List<DayStudent> days2 = new ArrayList<DayStudent>();
+		
+		days2.add(day2);
+		days2.add(day3);
+		
 		this.userServ.addDays(alu1.id, days);
+		this.userServ.addDays(alu2.id, days2);
+
 		this.userServ.addDaysInstructor(inst2.id, classes);
+		this.userServ.addDaysInstructor(inst1.id, classes2);
 
 		
 		this.calServ.addDays(days, alu1.getNameAndSurname(), alu1.id);
+		this.calServ.addDays(days2, alu2.getNameAndSurname(), alu2.id);
 			
 	}
 	
