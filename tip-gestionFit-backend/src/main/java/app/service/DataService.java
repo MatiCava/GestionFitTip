@@ -59,17 +59,17 @@ public class DataService {
 		
 		Date date = new GregorianCalendar(2018, 04, 01).getTime();
 		
-		User_Student alu1 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno1",encoder.encode("1234"),"Roberto Robertson","gastonveliez95@gmail.com","","","Bajar de peso",
-				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu1 = new User_Student("https://www.unilad.co.uk/wp-content/uploads/2017/11/Toni-Kelly-top-img.jpg","alumno1",encoder.encode("1234"),"Roberta Robertson","rr@gmail.com","","","Bajar de peso",
+				new GregorianCalendar(1990, 5,8).getTime(),"42658715",55f);
 		alu1.setRemainingLessons(4);
-		User_Student alu2 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
-				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
-		User_Student alu3 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno3",encoder.encode("123"),"Carlos Perez","Carlito@gmail.com","","","Bajar de peso",
-				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
-		User_Student alu4 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
-				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
-		User_Student alu5 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
-				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
+		User_Student alu2 = new User_Student("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/4O5xXKj/very-beautiful-and-nice-girl-in-glasses-makes-selfie-near-the-office-woman-smiling-and-photographed-themselves-on-the-phone-she-is-happy_hdhani5__F0000.png","alumno2",encoder.encode("1234"),"Carla Perez","carlita@gmail.com","Escoliosis","","Ganar masa muscular",
+				new GregorianCalendar(1985, 9,25).getTime(),"42856456",48.3f);
+		User_Student alu3 = new User_Student("https://i2-prod.mirror.co.uk/incoming/article11864893.ece/ALTERNATES/s615b/Woman-smiles-with-best-pal-in-black-belt-in-chilling-final-selfie-before-using-same-accessory-to.jpg","alumno3",encoder.encode("1234"),"Rocio Dominguez","rodom@gmail.com","","Dolores lumbares y cervicales","Bajar de peso",
+				new GregorianCalendar(1992, 10,13).getTime(),"42729279",61f);
+		User_Student alu4 = new User_Student("https://s.aolcdn.com/hss/storage/midas/9d116765fc78dccb4b3a67c7f4f4a9c1/203812133/Screen+Shot+2016-05-12+at+3.49.43+PM.png","alumno4",encoder.encode("1234"),"Sofia Galarza","soso@gmail.com","","","Mantener peso actual",
+				new GregorianCalendar(1983, 8,17).getTime(),"15967842",57f);
+		User_Student alu5 = new User_Student("https://metrouk2.files.wordpress.com/2015/08/cmrxjeoweaadolv.jpg","alumno5",encoder.encode("1234"),"Jorge Paoli","elSampa@gmail.com","","","Fortalecer brazos",
+				new GregorianCalendar(1990, 2,7).getTime(),"42726985",80.2f);
 		User_Student alu6 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
 		User_Student alu7 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
@@ -77,7 +77,6 @@ public class DataService {
 		User_Student alu8 = new User_Student("https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8_400x400.png","alumno2",encoder.encode("123"),"Carlos Perez","maticava96@gmail.com","","","Bajar de peso",
 				new GregorianCalendar(1990, 5,8).getTime(),"42856456",80.2f);
 		
-		this.userDAO.save(alu3);
 		User_Instructor inst1 = new User_Instructor("instructor1",encoder.encode("1234"),"Fernando Fernandez", "ff@gmail.com");
 		User_Instructor inst2 = new User_Instructor("instructor2",encoder.encode("1234"),"Zaira Ferreira", "zfpilates@gmail.com");
 
@@ -189,26 +188,29 @@ public class DataService {
 		Set<StartEndHour> stens= new HashSet<>();
 		stens.add(sten);
 		dayI1.setStartEndHours(stens);
-		dayI1.setDay("TUESDAY");
+		dayI1.setDay("SATURDAY");
 		Set<DayInstructor> classes = new HashSet<>();
 		classes.add(dayI1);
 		
 		this.userDAO.save(alu1);
 		this.userDAO.save(alu2);
+		this.userDAO.save(alu3);
+		this.userDAO.save(alu4);
+		this.userDAO.save(alu5);
 		this.userDAO.save(inst1);
 		this.userDAO.save(inst2);
 		this.userDAO.save(admin);
 		
 
 		
-		DayStudent day1 = new DayStudent("TUESDAY",10,11);
+		DayStudent day1 = new DayStudent("SATURDAY",10,11);
 		
 		List<DayStudent> days = new ArrayList<DayStudent>();
 		
 		days.add(day1);
 		
 		this.userServ.addDays(alu1.id, days);
-		this.userServ.addDaysInstructor(inst1.id, classes);
+		this.userServ.addDaysInstructor(inst2.id, classes);
 
 		
 		this.calServ.addDays(days, alu1.getNameAndSurname(), alu1.id);

@@ -12,7 +12,6 @@ import app.model.Exercise_Type;
 import app.model.Routine;
 import app.model.Routine_Type;
 import app.model.User;
-import app.model.User_Instructor;
 import app.model.User_Student;
 
 public class ArgumentsValidator {
