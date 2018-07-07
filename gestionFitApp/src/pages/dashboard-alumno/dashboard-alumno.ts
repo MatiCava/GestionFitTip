@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController,Slides, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController,Slides, LoadingController, Loading, Refresher } from 'ionic-angular';
 import {UserProvider} from '../../providers/user/user';
 import { InfoRutinaPage } from '../info-rutina/info-rutina';
 import { LoginProvider } from '../../providers/login/login';
@@ -36,6 +36,12 @@ export class DashboardAlumnoPage implements OnInit{
     this.presentSpinner();
     
     this.loginServ.auth().subscribe(res => {this.getUser();},error=> {this.navCtrl.push('login')})
+  }
+
+  doRefresh(refresher: Refresher) {
+    this.userServ.getUser(this.id).subscribe(
+      alumno => {this.user = alumno;this.loading.dismiss();refresher.complete();},
+  		error => {console.log(error);refresher.cancel();})
   }
 
   ionViewDidEnter(){

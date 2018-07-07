@@ -1,3 +1,11 @@
+<ion-content>
+<ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content pullingIcon="arrow-dropdown"
+    pullingText="Pull to refresh"
+    refreshingSpinner="circles"
+    refreshingText="Actualizando...">
+  </ion-refresher-content>
+</ion-refresher>
 <ion-row style="padding-top: 35px;">
 <ion-col class="colTab" ><a (click)="goToSlide(0)"> <ion-label color="{{ inSlide(0) ? 'danger' : 'primary' }}">{{'Mediciones' | translate}} <i class="fas fa-clipboard"></i></ion-label></a></ion-col> 
 <ion-col class="colTab"><a (click)="goToSlide(1)" > <ion-label color="{{ inSlide(1) ? 'danger' : 'primary' }}">{{'Mi perfil' | translate}} <i class="fas fa-address-card"></i></ion-label></a></ion-col>
@@ -14,4 +22,6 @@
       <instagram-feed></instagram-feed>
     </ion-slide>
 </ion-slides>
+</ion-content>
+
 

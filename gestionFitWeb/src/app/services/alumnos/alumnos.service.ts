@@ -6,8 +6,8 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class AlumnosService {
 
-  apiUrl : String="http://localhost:8080/api/";
-  //apiUrl : String="http://gestionfit-backend.herokuapp.com/api/";
+  //apiUrl : String="http://localhost:8080/api/";
+  apiUrl : String="https://gestionfit-backend.herokuapp.com/api/";
 
   httpOptions: any;
 

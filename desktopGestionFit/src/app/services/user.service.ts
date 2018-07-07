@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
-
-  apiUrl: String = 'http://localhost:8080/api/';
+  apiUrl : String="https://gestionfit-backend.herokuapp.com/api/";
+  //apiUrl: String = 'http://localhost:8080/api/';
 
   httpOptions: any;
 
