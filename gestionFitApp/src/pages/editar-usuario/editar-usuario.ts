@@ -100,7 +100,7 @@ export class EditarUsuarioPage {
   }
 
   volverAtras(){
-    this.navCtrl.push("dashboard",{id:this.form.value.id});
+    this.navCtrl.push("dashboard",{id:localStorage.getItem('id')});
   }
 
  

@@ -22,6 +22,7 @@ export class DashboardAlumnoPage implements OnInit{
 	id:any;
   public user;
   loading: Loading;
+  loadingIcon = "fas fa-sync";
 
 
 
@@ -38,10 +39,11 @@ export class DashboardAlumnoPage implements OnInit{
     this.loginServ.auth().subscribe(res => {this.getUser();},error=> {this.navCtrl.push('login')})
   }
 
-  doRefresh(refresher: Refresher) {
+  doRefresh() {
+    this.loadingIcon = "fas fa-sync fa-spin"
     this.userServ.getUser(this.id).subscribe(
-      alumno => {this.user = alumno;this.loading.dismiss();refresher.complete();},
-  		error => {console.log(error);refresher.cancel();})
+      alumno => {this.user = alumno;this.loadingIcon="fas fa-sync"},
+  		error => {console.log(error);})
   }
 
   ionViewDidEnter(){

@@ -8,21 +8,16 @@
 		<ion-item>
 			<p>{{'Tipo' | translate}}: <strong>{{rutina.type | translate}}</strong></p>
 		</ion-item>
-		<ion-grid>
-			<ion-row>
-				<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{'Nombre' | translate}}</p></ion-col>
-				<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{'Descripcion' | translate}}</p></ion-col>
-				<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{'Tipo' | translate}}</p></ion-col>
-				<ion-col style="border:0.5px solid black"></ion-col>
-			</ion-row>
-			<ion-row *ngFor="let exercise of rutina.exercises">
-					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.name}}</p></ion-col>
-					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.description}}</p></ion-col>
-					<ion-col style="border:0.5px solid black"><p style="text-align: center;font-size: 12px;">{{exercise.type | translate}}</p></ion-col>
-					<ion-col style="border:0.5px solid black"><ion-checkbox *ngIf="enCurso()" [(ngModel)]="exercise.checked" (click)="checkFinalizo()"></ion-checkbox></ion-col>
+		<ion-list>
+
+			<ion-item *ngFor="let exercise of rutina.exercises">
+					<p style="text-align: center;font-size: 12px;">{{'Nombre' | translate}} : {{exercise.name}}</p>
+					<p style="text-align: center;font-size: 12px;">{{'Descripcion' | translate}} : {{exercise.description}}</p>
+					<p style="text-align: center;font-size: 12px;">{{'Tipo' | translate}} : {{exercise.type | translate}}</p>
+					<ion-checkbox *ngIf="enCurso()" [(ngModel)]="exercise.checked" (click)="checkFinalizo()"></ion-checkbox>
 				
-			</ion-row>
-		</ion-grid>
+			</ion-item>
+		</ion-list>
 			<div style="padding-top: 20px;padding-bottom: 100px">
 					<h2 *ngIf="terminada()">{{'Rutina finalizada' | translate}}!</h2>
 					<button *ngIf="!enCurso()" ion-button (click)="comenzar()">{{'Comenzar' | translate}}</button>
