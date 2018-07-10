@@ -31,6 +31,8 @@ export class InfoAlumnoPage implements OnInit{
     console.log(nUser);
     this.inasistencia = 100 - this.user.assistance;
     this.getPieChart();
+    this.tieneClasses = this.user.classDays != null && this.user.classDays.length > 0;
+
   }
 
   get nUser(){
@@ -44,7 +46,6 @@ export class InfoAlumnoPage implements OnInit{
   }
 
   ngOnInit(){
-    this.tieneClasses = this.user.classDays != null && this.user.classDays.length > 0;
     
   }
 

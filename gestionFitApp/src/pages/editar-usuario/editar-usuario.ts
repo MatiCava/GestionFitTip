@@ -14,6 +14,7 @@ import { error } from 'util';
 export class EditarUsuarioPage {
   usuarioExistente:any;
   emailExistente:any;
+  classDays = [];
 
   form:FormGroup = this.formBuilder.group({
     id: new FormControl(),
@@ -61,7 +62,11 @@ export class EditarUsuarioPage {
     role: new FormControl(),
     routines: new FormControl(),
     measurements: new FormControl(),
-    classDays: new FormControl()
+    classDays: new FormControl(),
+    totalClasses: new FormControl(),
+    assistance: new FormControl(),
+    daysAssisted: new FormControl(),
+    promedioAssistance: new FormControl()
   })
 
   loading:Loading;
@@ -78,7 +83,7 @@ export class EditarUsuarioPage {
 
   ionViewDidLoad() {
     this.userServ.getUser(localStorage.getItem('id')).subscribe(
-      res => {console.log(res);this.form.setValue(res)},
+      res => {console.log(res);this.form.setValue(res);this.classDays= res.classDays},
       error => console.log(error)
     );
   }
@@ -108,6 +113,8 @@ export class EditarUsuarioPage {
   guardarAlumno(){
     //this.crearAlumno();
     this.presentSpinner();
+    this.form.value.classDays = this.classDays;
+    console.log(this.form.value);
     this.userServ.updateStudent(this.form.value,this.form.value.id).subscribe(
     () => { 
               let confirmacion = this.alertCtrl.create({

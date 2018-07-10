@@ -9,7 +9,7 @@
       <div class="form-group">
         <label for="rfidInput">Rfid</label>
         <input type="text" class="form-control" id="rfidInput" aria-describedby="rfidHelp" placeholder="00000000" #rfidInput (focus)="onFocus()" (blur)="onBlur()"  formControlName="rfid">
-        <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">{{'Ya puede pasar su llevero/tarjeta}'| translate}</small>
+        <small id="rfidHelp" class="form-text text-muted" *ngIf="focused">{{'Ya puede pasar su llevero/tarjeta'}}| translate}}</small>
       </div>
       <button class="btn btn-primary" type="submit">{{'Ingresar'|translate}}</button>
       <div *ngIf="errorAssist" class="alert alert-danger" role="alert">
